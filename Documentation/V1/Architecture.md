@@ -1,19 +1,18 @@
-
 # Architecture.md
 
-# System Architecture, Cloud Infrastructure & File Structure
+## System Architecture, Cloud Infrastructure & File Structure
 
 ---
 
-# 1. High-Level System Architecture
+## 1. High-Level System Architecture
 
 The platform follows a **cloud-native**, **modular monolith** architecture with a clear migration path toward microservices. It is designed for high availability, security, maintainability, and scalability while supporting both external client-facing applications and internal engineering operations.
 
 ---
 
-## 1.1 Technology Stack Layers
+### 1.1 Technology Stack Layers
 
-### Presentation Layer
+#### Presentation Layer
 
 Responsible for delivering the user interface to both clients and administrators.
 
@@ -35,7 +34,7 @@ Features:
 
 ---
 
-### API Gateway & Routing Layer
+#### API Gateway & Routing Layer
 
 Acts as the unified entry point for all incoming requests.
 
@@ -58,9 +57,9 @@ Responsibilities:
 
 ---
 
-### Backend Services Layer
+#### Backend Services Layer
 
-#### Core Business Service
+##### Core Business Service
 
 Responsible for:
 
@@ -79,7 +78,7 @@ Technology
 
 ---
 
-#### AI & MLOps Service
+##### AI & MLOps Service
 
 Responsible for:
 
@@ -100,11 +99,11 @@ Technology
 
 ---
 
-### Data & Storage Layer
+#### Data & Storage Layer
 
 Persistent storage infrastructure.
 
-#### PostgreSQL
+##### PostgreSQL
 
 Stores:
 
@@ -117,7 +116,7 @@ Stores:
 
 ---
 
-#### Redis
+##### Redis
 
 Used for:
 
@@ -128,7 +127,7 @@ Used for:
 
 ---
 
-#### Amazon S3
+##### Amazon S3
 
 Stores:
 
@@ -141,13 +140,13 @@ Stores:
 
 ---
 
-# 2. Cloud Infrastructure & MLOps Architecture
+## 2. Cloud Infrastructure & MLOps Architecture
 
 ---
 
-## 2.1 AWS Infrastructure
+### 2.1 AWS Infrastructure
 
-### Compute Layer
+#### Compute Layer
 
 Service:
 
@@ -162,7 +161,7 @@ Responsibilities:
 
 ---
 
-### Database Layer
+#### Database Layer
 
 Service:
 
@@ -177,7 +176,7 @@ Configuration
 
 ---
 
-### Object Storage
+#### Object Storage
 
 Service:
 
@@ -192,7 +191,7 @@ Features
 
 ---
 
-### CDN
+#### CDN
 
 Service
 
@@ -206,7 +205,7 @@ Provides
 
 ---
 
-### Monitoring
+#### Monitoring
 
 Services
 
@@ -223,11 +222,11 @@ Monitors
 
 ---
 
-# 2.2 MLOps Infrastructure
+## 2.2 MLOps Infrastructure
 
 ---
 
-## Model Hosting
+### Model Hosting
 
 Inference APIs deployed using:
 
@@ -243,7 +242,7 @@ Supports:
 
 ---
 
-## CI/CD Pipeline
+### CI/CD Pipeline
 
 Deployment Pipeline
 
@@ -265,7 +264,7 @@ AWS ECS Deployment
 
 ---
 
-## Data Processing Pipeline
+### Data Processing Pipeline
 
 ```text
 Raw Dataset
@@ -294,11 +293,11 @@ Deployment
 
 ---
 
-# 3. API Architecture & Design Specifications
+## 3. API Architecture & Design Specifications
 
 ---
 
-## 3.1 API Standards
+### 3.1 API Standards
 
 Every API request must include:
 
@@ -309,7 +308,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-### Response Format
+#### Response Format
 
 ```json
 {
@@ -321,7 +320,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-### Error Format
+#### Error Format
 
 ```json
 {
@@ -335,19 +334,19 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# 3.2 Core API Modules
+## 3.2 Core API Modules
 
 | API Module     | Endpoint             | Responsibility    | Access                 |
 | -------------- | -------------------- | ----------------- | ---------------------- |
-| Authentication | `/api/v1/auth`     | Login & Identity  | Public / Authenticated |
-| Client Intake  | `/api/v1/intake`   | Lead Capture      | Client / Operations    |
-| Projects       | `/api/v1/projects` | Project Lifecycle | Authenticated          |
-| Invoices       | `/api/v1/invoices` | Billing & GST     | Operations / CEO       |
-| MLOps          | `/api/v1/mlops`    | AI Jobs           | Architect / System     |
+| Authentication | `/api/v1/auth`       | Login & Identity  | Public / Authenticated |
+| Client Intake  | `/api/v1/intake`     | Lead Capture      | Client / Operations    |
+| Projects       | `/api/v1/projects`   | Project Lifecycle | Authenticated          |
+| Invoices       | `/api/v1/invoices`   | Billing & GST     | Operations / CEO       |
+| MLOps          | `/api/v1/mlops`      | AI Jobs           | Architect / System     |
 
 ---
 
-# 4. Repository Structure
+## 4. Repository Structure
 
 The project is maintained as a **monorepo**, enabling centralized dependency management, shared libraries, and unified CI/CD workflows.
 
@@ -402,13 +401,13 @@ startup-platform/
 
 ---
 
-# 5. Security & Environment Isolation
+## 5. Security & Environment Isolation
 
 ---
 
-## 5.1 Environment Strategy
+### 5.1 Environment Strategy
 
-### Development
+#### Development
 
 Environment
 
@@ -424,7 +423,7 @@ Purpose
 
 ---
 
-### Staging
+#### Staging
 
 Environment
 
@@ -438,7 +437,7 @@ Purpose
 
 ---
 
-### Production
+#### Production
 
 Environment
 
@@ -454,9 +453,9 @@ Characteristics
 
 ---
 
-# 5.2 Network Security
+## 5.2 Network Security
 
-## Infrastructure Security
+### Infrastructure Security
 
 - Private VPC
 - Private Subnets
@@ -467,7 +466,7 @@ Database servers are never exposed directly to the public Internet.
 
 ---
 
-## Storage Security
+### Storage Security
 
 Amazon S3 uses:
 
@@ -479,7 +478,7 @@ Amazon S3 uses:
 
 ---
 
-## Authentication
+### Authentication
 
 - JWT Access Tokens
 - Refresh Tokens
@@ -489,7 +488,7 @@ Amazon S3 uses:
 
 ---
 
-## Compliance Engine
+### Compliance Engine
 
 Every student and researcher submission passes through the **UGC Compliance Engine** before reaching production workflows.
 
@@ -514,7 +513,7 @@ Created     Review Required
 
 ---
 
-# 6. High-Level Deployment Architecture
+## 6. High-Level Deployment Architecture
 
 ```text
                   Internet
@@ -545,7 +544,7 @@ Created     Review Required
 
 ---
 
-# 7. Design Principles
+## 7. Design Principles
 
 - Cloud-Native Architecture
 - Modular Monolith
@@ -562,13 +561,13 @@ Created     Review Required
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                                   |
 | ----------------------- | ----------------------------------------------------------------------- |
-| **Document Name** | System Architecture & Cloud Infrastructure                              |
-| **Version**       | 1.0                                                                     |
-| **Status**        | Draft                                                                   |
-| **Primary Owner** | Om (CEO & Infrastructure)                                               |
-| **Contributors**  | Somnath (Backend & DevOps), Falguni (Frontend & QA), Divya (Operations) |
-| **Last Updated**  | August 2026                                                             |
+| **Document Name**       | System Architecture & Cloud Infrastructure                              |
+| **Version**             | 1.0                                                                     |
+| **Status**              | Draft                                                                   |
+| **Primary Owner**       | Om (CEO & Infrastructure)                                               |
+| **Contributors**        | Somnath (Backend & DevOps), Falguni (Frontend & QA), Divya (Operations) |
+| **Last Updated**        | August 2026                                                             |

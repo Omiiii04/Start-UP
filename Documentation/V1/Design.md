@@ -1,11 +1,10 @@
-
 # Design.md
 
-# UI/UX Design System, Visual Guidelines & Component Specifications
+## UI/UX Design System, Visual Guidelines & Component Specifications
 
 ---
 
-# 1. Design Philosophy & UX Principles
+## 1. Design Philosophy & UX Principles
 
 The Client Portal and Internal Operations Platform are designed around three fundamental principles:
 
@@ -17,9 +16,9 @@ The interface is tailored to two primary user groups while maintaining a consist
 
 ---
 
-## Primary User Personas
+### Primary User Personas
 
-### Students & Academic Researchers
+#### Students & Academic Researchers
 
 Primary Goals:
 
@@ -38,7 +37,7 @@ Design Priorities:
 
 ---
 
-### SME Executives & Commercial Clients
+#### SME Executives & Commercial Clients
 
 Primary Goals:
 
@@ -57,7 +56,7 @@ Design Priorities:
 
 ---
 
-## Design Philosophy
+### Design Philosophy
 
 ```text
                      DESIGN PHILOSOPHY
@@ -76,29 +75,29 @@ Design Priorities:
 
 ---
 
-# 2. Color System
+## 2. Color System
 
 The design language emphasizes engineering precision through a modern neutral palette with blue accent colors.
 
 ---
 
-## Primary Color Tokens
+### Primary Color Tokens
 
 | Design Token            | Hex Value   | Purpose                                         |
 | ----------------------- | ----------- | ----------------------------------------------- |
-| `--color-primary-900` | `#0F172A` | Primary Background (Dark), Primary Text (Light) |
-| `--color-primary-800` | `#1E293B` | Cards & Containers                              |
-| `--color-brand-500`   | `#3B82F6` | Primary Brand Color, CTA Buttons                |
-| `--color-accent-400`  | `#06B6D4` | Secondary Accent                                |
-| `--color-neutral-100` | `#F8FAFC` | Background (Light Mode)                         |
-| `--color-neutral-300` | `#CBD5E1` | Borders & Dividers                              |
-| `--color-success-500` | `#10B981` | Success States                                  |
-| `--color-warning-500` | `#F59E0B` | Warning States                                  |
-| `--color-error-500`   | `#EF4444` | Error States                                    |
+| `--color-primary-900`   | `#0F172A`   | Primary Background (Dark), Primary Text (Light) |
+| `--color-primary-800`   | `#1E293B`   | Cards & Containers                              |
+| `--color-brand-500`     | `#3B82F6`   | Primary Brand Color, CTA Buttons                |
+| `--color-accent-400`    | `#06B6D4`   | Secondary Accent                                |
+| `--color-neutral-100`   | `#F8FAFC`   | Background (Light Mode)                         |
+| `--color-neutral-300`   | `#CBD5E1`   | Borders & Dividers                              |
+| `--color-success-500`   | `#10B981`   | Success States                                  |
+| `--color-warning-500`   | `#F59E0B`   | Warning States                                  |
+| `--color-error-500`     | `#EF4444`   | Error States                                    |
 
 ---
 
-## Semantic Color Usage
+### Semantic Color Usage
 
 | State           | Color        |
 | --------------- | ------------ |
@@ -111,15 +110,15 @@ The design language emphasizes engineering precision through a modern neutral pa
 
 ---
 
-# 3. Typography System
+## 3. Typography System
 
 Typography prioritizes readability, consistency, and accessibility.
 
 ---
 
-## Font Families
+### Font Families
 
-### Primary UI Font
+#### Primary UI Font
 
 ```text
 Inter
@@ -132,7 +131,7 @@ sans-serif
 
 ---
 
-### Monospace Font
+#### Monospace Font
 
 ```text
 JetBrains Mono
@@ -143,7 +142,7 @@ monospace
 
 ---
 
-## Type Scale
+### Type Scale
 
 | Style      | Size | Weight | Line Height | Usage                 |
 | ---------- | ---- | ------ | ----------- | --------------------- |
@@ -158,25 +157,25 @@ monospace
 
 ---
 
-# 4. Layout System
+## 4. Layout System
 
 The application follows a responsive **12-column grid system**.
 
 ---
 
-## Responsive Breakpoints
+### Responsive Breakpoints
 
 | Prefix  | Width    | Devices    | Layout          |
 | ------- | -------- | ---------- | --------------- |
-| `sm`  | ≥640px  | Mobile     | Single Column   |
-| `md`  | ≥768px  | Tablets    | Two Column      |
-| `lg`  | ≥1024px | Laptops    | 12 Column Grid  |
-| `xl`  | ≥1280px | Desktop    | Centered Layout |
-| `2xl` | ≥1536px | Ultra-wide | Expanded Layout |
+| `sm`    | ≥640px   | Mobile     | Single Column   |
+| `md`    | ≥768px   | Tablets    | Two Column      |
+| `lg`    | ≥1024px  | Laptops    | 12 Column Grid  |
+| `xl`    | ≥1280px  | Desktop    | Centered Layout |
+| `2xl`   | ≥1536px  | Ultra-wide | Expanded Layout |
 
 ---
 
-## Layout Principles
+### Layout Principles
 
 - Maximum Content Width: **1440px**
 - Responsive Containers
@@ -187,17 +186,17 @@ The application follows a responsive **12-column grid system**.
 
 ---
 
-# 5. Component Library
+## 5. Component Library
 
 ---
 
-## 5.1 Project Lifecycle Stepper
+### 5.1 Project Lifecycle Stepper
 
 Purpose
 
 Visual representation of the organization's **15-step project workflow**.
 
-### States
+#### States
 
 | State     | Appearance                 |
 | --------- | -------------------------- |
@@ -207,7 +206,7 @@ Visual representation of the organization's **15-step project workflow**.
 
 ---
 
-### Workflow Visualization
+#### Workflow Visualization
 
 ```text
 ●──●──●──●──●──○──○──○──○──○──○──○──○──○──○
@@ -217,7 +216,7 @@ Completed      Active         Upcoming
 
 ---
 
-## 5.2 Form Components
+### 5.2 Form Components
 
 Features
 
@@ -229,7 +228,7 @@ Features
 
 ---
 
-### Validation Rules
+#### Validation Rules
 
 Validation occurs:
 
@@ -244,7 +243,7 @@ Error Styling
 
 ---
 
-### Student Intake
+#### Student Intake
 
 Additional Requirements
 
@@ -254,7 +253,7 @@ Additional Requirements
 
 ---
 
-## 5.3 Milestone & Invoice Table
+### 5.3 Milestone & Invoice Table
 
 Displays:
 
@@ -266,7 +265,7 @@ Displays:
 
 ---
 
-### Primary Actions
+#### Primary Actions
 
 Primary Button
 
@@ -282,9 +281,9 @@ Download Invoice PDF
 
 ---
 
-## 5.4 Buttons
+### 5.4 Buttons
 
-### Primary
+#### Primary
 
 - Filled
 - Brand Blue
@@ -299,7 +298,7 @@ Used For
 
 ---
 
-### Secondary
+#### Secondary
 
 - Outline
 - Neutral Border
@@ -312,7 +311,7 @@ Used For
 
 ---
 
-### Danger
+#### Danger
 
 - Red
 
@@ -324,13 +323,13 @@ Used For
 
 ---
 
-# 6. Accessibility Standards
+## 6. Accessibility Standards
 
 All UI components must satisfy **WCAG 2.1 AA** requirements.
 
 ---
 
-## Color Contrast
+### Color Contrast
 
 Minimum ratio
 
@@ -340,7 +339,7 @@ Minimum ratio
 
 ---
 
-## Keyboard Navigation
+### Keyboard Navigation
 
 Every interactive element must support:
 
@@ -356,7 +355,7 @@ ring-2 ring-brand-500
 
 ---
 
-## Screen Reader Support
+### Screen Reader Support
 
 Every non-text element must include:
 
@@ -367,7 +366,7 @@ Every non-text element must include:
 
 ---
 
-## Forms
+### Forms
 
 Every input requires:
 
@@ -378,7 +377,7 @@ Every input requires:
 
 ---
 
-# 7. Iconography
+## 7. Iconography
 
 Preferred Library
 
@@ -393,13 +392,13 @@ Guidelines
 
 ---
 
-# 8. Motion & Animation
+## 8. Motion & Animation
 
 Animations should enhance usability without distracting users.
 
 ---
 
-## Transition Duration
+### Transition Duration
 
 ```text
 150ms–300ms
@@ -407,7 +406,7 @@ Animations should enhance usability without distracting users.
 
 ---
 
-## Allowed Animations
+### Allowed Animations
 
 - Fade
 - Slide
@@ -417,7 +416,7 @@ Animations should enhance usability without distracting users.
 
 ---
 
-## Avoid
+### Avoid
 
 - Excessive Motion
 - Continuous Flashing
@@ -426,7 +425,7 @@ Animations should enhance usability without distracting users.
 
 ---
 
-# 9. Design Quality Checklist
+## 9. Design Quality Checklist
 
 Every interface must satisfy the following before release.
 
@@ -443,7 +442,7 @@ Every interface must satisfy the following before release.
 
 ---
 
-# 10. Design Principles
+## 10. Design Principles
 
 Every interface should embody the following principles:
 
@@ -460,27 +459,27 @@ Every interface should embody the following principles:
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Falguni**
 Lead Full-Stack Engineer & QA (UI/UX Lead)
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Divya**
 Head of Operations & Marketing
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                             |
 | ----------------------- | ----------------------------------------------------------------- |
-| **Document Name** | UI/UX Design System, Visual Guidelines & Component Specifications |
-| **Version**       | 1.0                                                               |
-| **Status**        | Draft                                                             |
-| **Primary Owner** | Falguni                                                           |
-| **Reviewer**      | Divya                                                             |
-| **Last Updated**  | August 2026                                                       |
+| **Document Name**       | UI/UX Design System, Visual Guidelines & Component Specifications |
+| **Version**             | 1.0                                                               |
+| **Status**              | Draft                                                             |
+| **Primary Owner**       | Falguni                                                           |
+| **Reviewer**            | Divya                                                             |
+| **Last Updated**        | August 2026                                                       |

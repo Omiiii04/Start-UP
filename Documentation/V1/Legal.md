@@ -1,11 +1,10 @@
-
 # Legal.md
 
-# Master Services Agreement (MSA), Terms of Service, Privacy Policy & Intellectual Property Framework
+## Master Services Agreement (MSA), Terms of Service, Privacy Policy & Intellectual Property Framework
 
 ---
 
-# 1. Executive Overview
+## 1. Executive Overview
 
 This document establishes the legal framework governing all engagements between the company and its clients. It defines contractual obligations, payment terms, intellectual property ownership, confidentiality requirements, privacy commitments, acceptable use policies, dispute resolution mechanisms, and statutory compliance requirements.
 
@@ -28,13 +27,13 @@ Unless otherwise agreed in writing, every commercial engagement shall be governe
 
 ---
 
-# 2. Master Services Agreement (MSA)
+## 2. Master Services Agreement (MSA)
 
 The Master Services Agreement (MSA) defines the overarching legal relationship between the company and the client.
 
 ---
 
-## 2.1 Scope of Services
+### 2.1 Scope of Services
 
 Services are provided exclusively under individually executed Statements of Work (SOW).
 
@@ -64,7 +63,7 @@ Unless explicitly stated otherwise, the provisions of the MSA prevail.
 
 ---
 
-## 2.2 Commercial Terms
+### 2.2 Commercial Terms
 
 - All quotations are issued in Indian Rupees (INR).
 - Applicable GST is charged separately unless otherwise stated.
@@ -81,7 +80,7 @@ Failure to clear outstanding invoices may result in:
 
 ---
 
-## 2.3 Confidentiality
+### 2.3 Confidentiality
 
 Both parties agree to protect confidential information exchanged during the engagement.
 
@@ -100,7 +99,7 @@ Confidentiality obligations survive for **three (3) years** following terminatio
 
 ---
 
-# 3. Statement of Work (SOW)
+## 3. Statement of Work (SOW)
 
 Every project shall include a Statement of Work defining:
 
@@ -118,7 +117,7 @@ Any work outside the approved SOW shall require a formal **Change Order** before
 
 ---
 
-# 4. Intellectual Property Framework
+## 4. Intellectual Property Framework
 
 The company distinguishes between **Background IP** and **Foreground IP**.
 
@@ -130,7 +129,7 @@ The company distinguishes between **Background IP** and **Foreground IP**.
 
 ---
 
-## 4.1 Background Intellectual Property
+### 4.1 Background Intellectual Property
 
 Background IP includes:
 
@@ -148,7 +147,7 @@ Clients receive a perpetual, non-exclusive, royalty-free license to use embedded
 
 ---
 
-## 4.2 Foreground Intellectual Property
+### 4.2 Foreground Intellectual Property
 
 Foreground IP includes:
 
@@ -167,7 +166,7 @@ Ownership transfers to the client only after:
 
 ---
 
-# 5. Academic Integrity & UGC Compliance
+## 5. Academic Integrity & UGC Compliance
 
 The company strictly complies with the **University Grants Commission (Promotion of Academic Integrity and Prevention of Plagiarism in Higher Educational Institutions) Regulations, 2018**.
 
@@ -195,7 +194,7 @@ Every academic client must acknowledge the Academic Integrity Declaration before
 
 ---
 
-# 6. Terms of Service
+## 6. Terms of Service
 
 By using the company's services, clients agree to:
 
@@ -216,11 +215,11 @@ The company reserves the right to suspend services in cases involving:
 
 ---
 
-# 7. Privacy Policy
+## 7. Privacy Policy
 
 The company collects only the information necessary to deliver contracted services.
 
-## Data Collected
+### Data Collected
 
 - Name
 - Email
@@ -234,7 +233,7 @@ The company collects only the information necessary to deliver contracted servic
 
 ---
 
-## Data Protection
+### Data Protection
 
 Security controls include:
 
@@ -246,7 +245,7 @@ Security controls include:
 
 ---
 
-## Third-Party Services
+### Third-Party Services
 
 The company may use trusted third-party providers, including:
 
@@ -261,7 +260,7 @@ Payment information is processed directly by PCI-DSS compliant payment gateways 
 
 ---
 
-# 8. Limitation of Liability
+## 8. Limitation of Liability
 
 To the maximum extent permitted by law:
 
@@ -277,7 +276,7 @@ The company is not responsible for losses resulting from:
 
 ---
 
-# 9. Warranty & Support
+## 9. Warranty & Support
 
 Unless otherwise specified:
 
@@ -294,7 +293,7 @@ Warranty excludes:
 
 ---
 
-# 10. Termination
+## 10. Termination
 
 Either party may terminate the agreement if:
 
@@ -311,7 +310,7 @@ Upon termination:
 
 ---
 
-# 11. Governing Law & Dispute Resolution
+## 11. Governing Law & Dispute Resolution
 
 This agreement shall be governed by the laws of the **Republic of India**.
 
@@ -324,7 +323,7 @@ The parties shall first attempt to resolve disputes through good-faith negotiati
 
 ---
 
-# 12. Force Majeure
+## 12. Force Majeure
 
 Neither party shall be liable for delays caused by events beyond reasonable control, including:
 
@@ -340,7 +339,7 @@ Affected obligations shall resume once the force majeure event has ended.
 
 ---
 
-# 13. Amendments
+## 13. Amendments
 
 Any modification to:
 
@@ -353,32 +352,32 @@ must be approved in writing by both parties.
 
 ---
 
-# 14. Document Governance
+## 14. Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Om**
 Founder & Chief Executive Officer
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Divya**
 Head of Operations, Management & Marketing
 
-### External Review
+#### External Review
 
 Annual legal review by qualified corporate legal counsel.
 
 ---
 
-# Document Information
+## Document Information
 
 | Property                  | Value                                                                                               |
 | ------------------------- | --------------------------------------------------------------------------------------------------- |
-| **Document Name**   | Master Services Agreement (MSA), Terms of Service, Privacy Policy & Intellectual Property Framework |
-| **Version**         | 1.0                                                                                                 |
-| **Status**          | Draft                                                                                               |
-| **Primary Owner**   | Om                                                                                                  |
-| **Reviewer**        | Divya                                                                                               |
-| **External Review** | Annual                                                                                              |
-| **Last Updated**    | August 2026                                                                                         |
+| **Document Name**         | Master Services Agreement (MSA), Terms of Service, Privacy Policy & Intellectual Property Framework |
+| **Version**               | 1.0                                                                                                 |
+| **Status**                | Draft                                                                                               |
+| **Primary Owner**         | Om                                                                                                  |
+| **Reviewer**              | Divya                                                                                               |
+| **External Review**       | Annual                                                                                              |
+| **Last Updated**          | August 2026                                                                                         |

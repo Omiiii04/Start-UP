@@ -1,11 +1,10 @@
-
 # Roadmap.md
 
-# Multi-Year Corporate Growth Targets, Strategic Milestones & Scaling Horizon
+## Multi-Year Corporate Growth Targets, Strategic Milestones & Scaling Horizon
 
 ---
 
-# 1. Executive Summary & Vision Horizon
+## 1. Executive Summary & Vision Horizon
 
 This document defines the company's long-term strategic roadmap across the first five years of operation. It establishes measurable business objectives, operational milestones, financial targets, market expansion plans, and organizational growth strategies.
 
@@ -22,17 +21,17 @@ The goal is to evolve from a technology consulting startup into a leading AI, so
 
 ---
 
-# 2. Year 1 — Foundation, Campus Presence & Initial Market Validation
+## 2. Year 1 — Foundation, Campus Presence & Initial Market Validation
 
-## Strategic Focus
+### Strategic Focus
 
 Build the legal, operational, and technical foundation required to launch the company successfully while acquiring the first wave of customers.
 
 ---
 
-## Objectives
+### Objectives
 
-### Business Formation
+#### Business Formation
 
 - Register the company as a Private Limited Company.
 - Complete GST registration.
@@ -41,7 +40,7 @@ Build the legal, operational, and technical foundation required to launch the co
 
 ---
 
-### Platform Development
+#### Platform Development
 
 Launch:
 
@@ -54,7 +53,7 @@ Launch:
 
 ---
 
-### Market Entry
+#### Market Entry
 
 Focus areas:
 
@@ -66,7 +65,7 @@ Focus areas:
 
 ---
 
-### Marketing
+#### Marketing
 
 Activities include:
 
@@ -79,7 +78,7 @@ Activities include:
 
 ---
 
-### Delivery Targets
+#### Delivery Targets
 
 Complete:
 
@@ -95,26 +94,26 @@ Maintain:
 
 ---
 
-### Financial Targets
+#### Financial Targets
 
 | KPI                   | Target       |
 | --------------------- | ------------ |
-| Annual Revenue        | ₹15,00,000+ |
+| Annual Revenue        | ₹15,00,000+  |
 | Client Satisfaction   | 95%+         |
 | Positive Testimonials | 100%         |
 | Payment Default       | <2%          |
 
 ---
 
-# 3. Year 2 — Process Optimization & Business Stability
+## 3. Year 2 — Process Optimization & Business Stability
 
-## Strategic Focus
+### Strategic Focus
 
 Strengthen internal systems, automate operations, improve project delivery efficiency, and establish recurring revenue streams.
 
 ---
 
-## Objectives
+### Objectives
 
 - Improve internal tooling
 - Automate CRM workflows
@@ -125,7 +124,7 @@ Strengthen internal systems, automate operations, improve project delivery effic
 
 ---
 
-## Operational Goals
+### Operational Goals
 
 - Reduce project delivery time
 - Increase automation
@@ -135,7 +134,7 @@ Strengthen internal systems, automate operations, improve project delivery effic
 
 ---
 
-## Financial Goals
+### Financial Goals
 
 - ₹30,00,000+ Annual Revenue
 - 30% recurring clients
@@ -143,17 +142,17 @@ Strengthen internal systems, automate operations, improve project delivery effic
 
 ---
 
-# 4. Year 3 — Regional Expansion & B2B Growth
+## 4. Year 3 — Regional Expansion & B2B Growth
 
-## Strategic Focus
+### Strategic Focus
 
 Shift from primarily student-focused engagements toward commercial software engineering and recurring enterprise consulting.
 
 ---
 
-## Objectives
+### Objectives
 
-### SME Expansion
+#### SME Expansion
 
 Target:
 
@@ -165,7 +164,7 @@ Target:
 
 ---
 
-### Team Growth
+#### Team Growth
 
 Expand to include:
 
@@ -177,7 +176,7 @@ Expand to include:
 
 ---
 
-### Service Expansion
+#### Service Expansion
 
 Introduce:
 
@@ -189,26 +188,26 @@ Introduce:
 
 ---
 
-### Financial Targets
+#### Financial Targets
 
 | KPI                       | Target       |
 | ------------------------- | ------------ |
 | Active SME Clients        | 15+          |
-| Monthly Recurring Revenue | ₹5,00,000+  |
-| Annual Recurring Revenue  | ₹60,00,000+ |
+| Monthly Recurring Revenue | ₹5,00,000+   |
+| Annual Recurring Revenue  | ₹60,00,000+  |
 | Team Size                 | 10+          |
 
 ---
 
-# 5. Year 4 — Productization & Operational Scale
+## 5. Year 4 — Productization & Operational Scale
 
-## Strategic Focus
+### Strategic Focus
 
 Transition from purely service-based revenue into a hybrid services + products business model.
 
 ---
 
-## Objectives
+### Objectives
 
 Develop:
 
@@ -219,7 +218,7 @@ Develop:
 
 ---
 
-### Platform Goals
+#### Platform Goals
 
 Launch proprietary solutions including:
 
@@ -231,7 +230,7 @@ Launch proprietary solutions including:
 
 ---
 
-### Operational Goals
+#### Operational Goals
 
 - Improve profit margins
 - Increase recurring revenue
@@ -240,25 +239,25 @@ Launch proprietary solutions including:
 
 ---
 
-### Financial Targets
+#### Financial Targets
 
 | KPI               | Target               |
 | ----------------- | -------------------- |
 | Product Revenue   | 20% of Total Revenue |
-| Annual Revenue    | ₹1.5 Crore+         |
+| Annual Revenue    | ₹1.5 Crore+          |
 | Recurring Revenue | 40%                  |
 
 ---
 
-# 6. Year 5 — Multi-City Expansion & Enterprise Leadership
+## 6. Year 5 — Multi-City Expansion & Enterprise Leadership
 
-## Strategic Focus
+### Strategic Focus
 
 Become a recognized regional technology consulting company with specialized engineering divisions and enterprise-grade capabilities.
 
 ---
 
-## Geographic Expansion
+### Geographic Expansion
 
 Establish operations in:
 
@@ -271,9 +270,9 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-## Specialized Engineering Divisions
+### Specialized Engineering Divisions
 
-### Artificial Intelligence
+#### Artificial Intelligence
 
 - LLM Engineering
 - AI Agents
@@ -283,7 +282,7 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-### Cloud & Infrastructure
+#### Cloud & Infrastructure
 
 - Kubernetes
 - Multi-cloud
@@ -293,7 +292,7 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-### Embedded & IoT
+#### Embedded & IoT
 
 - Embedded Systems
 - Industrial Automation
@@ -302,7 +301,7 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-### HealthTech
+#### HealthTech
 
 - Healthcare Software
 - Medical Data Systems
@@ -311,7 +310,7 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-### Enterprise Software
+#### Enterprise Software
 
 - ERP
 - CRM
@@ -320,34 +319,34 @@ Additional expansion opportunities will be evaluated based on business growth an
 
 ---
 
-## Financial Targets
+### Financial Targets
 
 | KPI                | Target       |
 | ------------------ | ------------ |
-| Annual Revenue     | ₹2.5 Crore+ |
+| Annual Revenue     | ₹2.5 Crore+  |
 | Enterprise Clients | 25+          |
 | Team Size          | 25+          |
 | Cities Served      | 4+           |
 
 ---
 
-# 7. Strategic Milestone Summary
+## 7. Strategic Milestone Summary
 
 | Horizon          | Primary Focus             | Timeline      | Success Criteria                                                             |
 | ---------------- | ------------------------- | ------------- | ---------------------------------------------------------------------------- |
-| **Year 1** | Foundation & Market Entry | Months 1–12  | Company incorporation, portal launch, ₹15L revenue, 100+ completed projects |
-| **Year 2** | Process Optimization      | Months 13–24 | Operational automation, recurring clients, ₹30L revenue                     |
-| **Year 3** | Regional SME Expansion    | Months 25–36 | 15+ SME retainers, 10+ employee team, ₹60L ARR                              |
-| **Year 4** | Product Development       | Months 37–48 | SaaS launch, hybrid revenue model, ₹1.5Cr annual revenue                    |
-| **Year 5** | Enterprise Leadership     | Months 49–60 | Multi-city expansion, enterprise clients, ₹2.5Cr+ annual revenue            |
+| **Year 1**       | Foundation & Market Entry | Months 1–12   | Company incorporation, portal launch, ₹15L revenue, 100+ completed projects  |
+| **Year 2**       | Process Optimization      | Months 13–24  | Operational automation, recurring clients, ₹30L revenue                      |
+| **Year 3**       | Regional SME Expansion    | Months 25–36  | 15+ SME retainers, 10+ employee team, ₹60L ARR                               |
+| **Year 4**       | Product Development       | Months 37–48  | SaaS launch, hybrid revenue model, ₹1.5Cr annual revenue                     |
+| **Year 5**       | Enterprise Leadership     | Months 49–60  | Multi-city expansion, enterprise clients, ₹2.5Cr+ annual revenue             |
 
 ---
 
-# 8. Strategic Success Metrics
+## 8. Strategic Success Metrics
 
 The following organizational metrics will be reviewed quarterly:
 
-## Business
+### Business
 
 - Revenue Growth
 - Profit Margin
@@ -356,7 +355,7 @@ The following organizational metrics will be reviewed quarterly:
 
 ---
 
-## Operations
+### Operations
 
 - Project Delivery Time
 - On-Time Delivery Rate
@@ -365,7 +364,7 @@ The following organizational metrics will be reviewed quarterly:
 
 ---
 
-## Engineering
+### Engineering
 
 - Code Coverage
 - Deployment Frequency
@@ -375,7 +374,7 @@ The following organizational metrics will be reviewed quarterly:
 
 ---
 
-## Customer Experience
+### Customer Experience
 
 - Client Satisfaction Score
 - Net Promoter Score (NPS)
@@ -384,7 +383,7 @@ The following organizational metrics will be reviewed quarterly:
 
 ---
 
-# 9. Roadmap Governance
+## 9. Roadmap Governance
 
 Leadership reviews should occur twice each year to evaluate:
 
@@ -400,23 +399,23 @@ Major roadmap changes require approval from executive leadership.
 
 ---
 
-# 10. Document Governance
+## 10. Document Governance
 
-## Primary Owner
+### Primary Owner
 
 **Om**
 Founder & Chief Executive Officer
 
 ---
 
-## Secondary Reviewer
+### Secondary Reviewer
 
 **Divya**
 Head of Operations, Management & Marketing
 
 ---
 
-## Review Frequency
+### Review Frequency
 
 - Bi-Annual Strategic Review
 - Annual Roadmap Revision
@@ -424,14 +423,14 @@ Head of Operations, Management & Marketing
 
 ---
 
-# Document Information
+## Document Information
 
 | Property                     | Value                                                                       |
 | ---------------------------- | --------------------------------------------------------------------------- |
-| **Document Name**      | Multi-Year Corporate Growth Targets, Strategic Milestones & Scaling Horizon |
-| **Version**            | 1.0                                                                         |
-| **Status**             | Draft                                                                       |
-| **Primary Owner**      | Om                                                                          |
-| **Secondary Reviewer** | Divya                                                                       |
-| **Review Frequency**   | Bi-Annual                                                                   |
-| **Last Updated**       | August 2026                                                                 |
+| **Document Name**            | Multi-Year Corporate Growth Targets, Strategic Milestones & Scaling Horizon |
+| **Version**                  | 1.0                                                                         |
+| **Status**                   | Draft                                                                       |
+| **Primary Owner**            | Om                                                                          |
+| **Secondary Reviewer**       | Divya                                                                       |
+| **Review Frequency**         | Bi-Annual                                                                   |
+| **Last Updated**             | August 2026                                                                 |

@@ -1,11 +1,10 @@
-
 # QA.md
 
-# Quality Assurance Framework, Automated Testing Protocols & Verification Strategy
+## Quality Assurance Framework, Automated Testing Protocols & Verification Strategy
 
 ---
 
-# 1. Executive Summary & Quality Philosophy
+## 1. Executive Summary & Quality Philosophy
 
 Quality Assurance (QA) is a core engineering function responsible for ensuring that every software deliverable meets defined functional, security, performance, and usability standards before reaching the client.
 
@@ -24,7 +23,7 @@ All production releases must successfully pass the quality gates defined in this
 
 ---
 
-# 2. QA Strategy & Testing Pyramid
+## 2. QA Strategy & Testing Pyramid
 
 The engineering team follows a layered testing strategy that detects issues as early as possible during development.
 
@@ -43,15 +42,15 @@ Every software release should progressively pass each layer before deployment.
 
 ---
 
-# 3. Testing Levels
+## 3. Testing Levels
 
-## 3.1 Static Analysis & Code Quality
+### 3.1 Static Analysis & Code Quality
 
 Purpose:
 
 Identify issues before code execution.
 
-### Automated Checks
+#### Automated Checks
 
 - ESLint
 - Prettier
@@ -61,7 +60,7 @@ Identify issues before code execution.
 - Secret Detection
 - Dependency Audit
 
-### Verification
+#### Verification
 
 - Coding standards
 - Formatting consistency
@@ -72,13 +71,13 @@ Identify issues before code execution.
 
 ---
 
-## 3.2 Unit Testing
+### 3.2 Unit Testing
 
 Purpose:
 
 Verify individual functions, utilities, services, and components.
 
-### Frontend
+#### Frontend
 
 Recommended Tools
 
@@ -96,7 +95,7 @@ Coverage
 
 ---
 
-### Backend
+#### Backend
 
 Recommended Tools
 
@@ -113,23 +112,23 @@ Coverage
 
 ---
 
-### Coverage Target
+#### Coverage Target
 
 | Metric            | Target |
 | ----------------- | ------ |
-| Line Coverage     | ≥ 80% |
-| Branch Coverage   | ≥ 80% |
-| Function Coverage | ≥ 80% |
+| Line Coverage     | ≥ 80%  |
+| Branch Coverage   | ≥ 80%  |
+| Function Coverage | ≥ 80%  |
 
 ---
 
-## 3.3 Integration Testing
+### 3.3 Integration Testing
 
 Purpose
 
 Ensure independent modules work correctly together.
 
-### Scope
+#### Scope
 
 - REST APIs
 - Authentication
@@ -142,7 +141,7 @@ Ensure independent modules work correctly together.
 
 ---
 
-## 3.4 End-to-End Testing
+### 3.4 End-to-End Testing
 
 Purpose
 
@@ -154,7 +153,7 @@ Recommended Tool
 
 ---
 
-### Critical User Journeys
+#### Critical User Journeys
 
 - User Registration
 - Login
@@ -167,7 +166,7 @@ Recommended Tool
 
 ---
 
-## 3.5 Manual Testing
+### 3.5 Manual Testing
 
 Automated testing does not replace manual verification.
 
@@ -182,9 +181,9 @@ Manual QA includes:
 
 ---
 
-# 4. Test Environment Strategy
+## 4. Test Environment Strategy
 
-## Local Development
+### Local Development
 
 Purpose
 
@@ -200,7 +199,7 @@ Components
 
 ---
 
-## Staging
+### Staging
 
 Purpose
 
@@ -215,7 +214,7 @@ Characteristics
 
 ---
 
-## Production
+### Production
 
 Purpose
 
@@ -225,18 +224,18 @@ Only fully verified builds are deployed.
 
 ---
 
-# 5. Defect Severity Matrix
+## 5. Defect Severity Matrix
 
 | Priority                 | Description                                                    | Target Resolution | Release Impact            |
 | ------------------------ | -------------------------------------------------------------- | ----------------- | ------------------------- |
-| **P1 – Blocker**  | System crash, security issue, payment failure, data corruption | < 4 Hours         | Release Blocked           |
-| **P2 – Critical** | Major feature unavailable                                      | < 24 Hours        | Staging Blocked           |
-| **P3 – Major**    | Partial functionality broken                                   | < 48 Hours        | May Proceed with Approval |
-| **P4 – Minor**    | Cosmetic issue or typo                                         | < 72 Hours        | Non-blocking              |
+| **P1 – Blocker**         | System crash, security issue, payment failure, data corruption | < 4 Hours         | Release Blocked           |
+| **P2 – Critical**        | Major feature unavailable                                      | < 24 Hours        | Staging Blocked           |
+| **P3 – Major**           | Partial functionality broken                                   | < 48 Hours        | May Proceed with Approval |
+| **P4 – Minor**           | Cosmetic issue or typo                                         | < 72 Hours        | Non-blocking              |
 
 ---
 
-# 6. Bug Lifecycle
+## 6. Bug Lifecycle
 
 ```text
 Bug Reported
@@ -262,11 +261,11 @@ Closed
 
 ---
 
-# 7. CI/CD Quality Gates
+## 7. CI/CD Quality Gates
 
 Every Pull Request automatically triggers the quality pipeline.
 
-## Pipeline Workflow
+### Pipeline Workflow
 
 ```text
 Pull Request
@@ -295,7 +294,7 @@ Deploy to Staging
 
 ---
 
-## Mandatory Quality Gates
+### Mandatory Quality Gates
 
 The build fails if:
 
@@ -309,11 +308,11 @@ The build fails if:
 
 ---
 
-# 8. Client Acceptance Testing (CAT)
+## 8. Client Acceptance Testing (CAT)
 
 Before production release, every deliverable undergoes formal Client Acceptance Testing.
 
-## Acceptance Checklist
+### Acceptance Checklist
 
 - Functional Requirements Complete
 - UI Approved
@@ -324,7 +323,7 @@ Before production release, every deliverable undergoes formal Client Acceptance 
 
 ---
 
-## Acceptance Deliverables
+### Acceptance Deliverables
 
 - QA Verification Certificate
 - Client Sign-off
@@ -332,7 +331,7 @@ Before production release, every deliverable undergoes formal Client Acceptance 
 
 ---
 
-# 9. Regression Testing
+## 9. Regression Testing
 
 Regression testing is mandatory after:
 
@@ -345,7 +344,7 @@ Regression testing is mandatory after:
 
 ---
 
-# 10. Performance Testing
+## 10. Performance Testing
 
 Performance benchmarks:
 
@@ -359,7 +358,7 @@ Performance benchmarks:
 
 ---
 
-# 11. Security Testing
+## 11. Security Testing
 
 The QA process verifies:
 
@@ -374,7 +373,7 @@ The QA process verifies:
 
 ---
 
-# 12. Accessibility Testing
+## 12. Accessibility Testing
 
 The application should comply with **WCAG 2.1 AA**.
 
@@ -389,7 +388,7 @@ Verification includes:
 
 ---
 
-# 13. Release Readiness Checklist
+## 13. Release Readiness Checklist
 
 Before production deployment, verify:
 
@@ -403,22 +402,22 @@ Before production deployment, verify:
 
 ---
 
-# 14. QA Metrics & KPIs
+## 14. QA Metrics & KPIs
 
 The QA team tracks the following metrics:
 
 | KPI                            | Target     |
 | ------------------------------ | ---------- |
-| Automated Test Coverage        | ≥ 80%     |
+| Automated Test Coverage        | ≥ 80%      |
 | Critical Defects in Production | 0          |
-| Regression Success Rate        | ≥ 95%     |
-| Build Success Rate             | ≥ 95%     |
-| Client Acceptance Pass Rate    | ≥ 95%     |
+| Regression Success Rate        | ≥ 95%      |
+| Build Success Rate             | ≥ 95%      |
+| Client Acceptance Pass Rate    | ≥ 95%      |
 | Mean Time to Resolve (MTTR)    | < 24 Hours |
 
 ---
 
-# 15. Continuous Improvement
+## 15. Continuous Improvement
 
 The QA process is reviewed after every major release to improve:
 
@@ -434,28 +433,28 @@ Lessons learned are incorporated into future development cycles.
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Falguni**
 Lead Full-Stack Engineer & Quality Assurance
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Somnath**
 Co-Founder & Lead Systems Engineer
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                   | Value                                                                            |
 | -------------------------- | -------------------------------------------------------------------------------- |
-| **Document Name**    | Quality Assurance Framework, Automated Testing Protocols & Verification Strategy |
-| **Version**          | 1.0                                                                              |
-| **Status**           | Draft                                                                            |
-| **Primary Owner**    | Falguni                                                                          |
-| **Reviewer**         | Somnath                                                                          |
-| **Review Frequency** | Every Sprint                                                                     |
-| **Last Updated**     | August 2026                                                                      |
+| **Document Name**          | Quality Assurance Framework, Automated Testing Protocols & Verification Strategy |
+| **Version**                | 1.0                                                                              |
+| **Status**                 | Draft                                                                            |
+| **Primary Owner**          | Falguni                                                                          |
+| **Reviewer**               | Somnath                                                                          |
+| **Review Frequency**       | Every Sprint                                                                     |
+| **Last Updated**           | August 2026                                                                      |

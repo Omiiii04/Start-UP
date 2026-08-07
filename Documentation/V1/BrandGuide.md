@@ -1,11 +1,10 @@
-
 # BrandGuide.md
 
-# Brand Identity System, Visual Guidelines & Marketing Collateral
+## Brand Identity System, Visual Guidelines & Marketing Collateral
 
 ---
 
-# 1. Executive Overview
+## 1. Executive Overview
 
 This document defines the company's brand identity, visual language, communication standards, and marketing guidelines to ensure a consistent and professional presence across every customer touchpoint.
 
@@ -31,7 +30,7 @@ These guidelines apply to:
 
 ---
 
-# 2. Brand Philosophy
+## 2. Brand Philosophy
 
 The company brand is built upon three core pillars.
 
@@ -52,21 +51,21 @@ The company brand is built upon three core pillars.
 
 ---
 
-# 3. Brand Positioning
+## 3. Brand Positioning
 
-## Mission
+### Mission
 
 Deliver enterprise-grade software engineering, AI solutions, cloud infrastructure, and technical consulting through transparent processes, high-quality engineering, and long-term client partnerships.
 
 ---
 
-## Vision
+### Vision
 
 Become one of India's most trusted technology consulting firms specializing in software engineering, AI, cloud infrastructure, and engineering innovation.
 
 ---
 
-## Brand Values
+### Brand Values
 
 - Professionalism
 - Integrity
@@ -79,7 +78,7 @@ Become one of India's most trusted technology consulting firms specializing in s
 
 ---
 
-# 4. Company Naming Guidelines
+## 4. Company Naming Guidelines
 
 Until the official company name is finalized, all documentation should use the placeholder:
 
@@ -89,7 +88,7 @@ Until the official company name is finalized, all documentation should use the p
 
 ---
 
-## Temporary Wordmark
+### Temporary Wordmark
 
 Characteristics:
 
@@ -101,7 +100,7 @@ Characteristics:
 
 ---
 
-## Logo Direction
+### Logo Direction
 
 Preferred visual concepts include:
 
@@ -121,26 +120,26 @@ Avoid:
 
 ---
 
-# 5. Color System
+## 5. Color System
 
-## Primary Brand Colors
+### Primary Brand Colors
 
 | Token              | Color   | Hex         |
 | ------------------ | ------- | ----------- |
-| Primary Dark       | Slate   | `#0F172A` |
-| Secondary Dark     | Slate   | `#1E293B` |
-| Brand Blue         | Blue    | `#3B82F6` |
-| Accent Cyan        | Cyan    | `#06B6D4` |
-| Neutral Background | Slate   | `#F8FAFC` |
-| Success            | Emerald | `#10B981` |
-| Warning            | Amber   | `#F59E0B` |
-| Error              | Rose    | `#EF4444` |
+| Primary Dark       | Slate   | `#0F172A`   |
+| Secondary Dark     | Slate   | `#1E293B`   |
+| Brand Blue         | Blue    | `#3B82F6`   |
+| Accent Cyan        | Cyan    | `#06B6D4`   |
+| Neutral Background | Slate   | `#F8FAFC`   |
+| Success            | Emerald | `#10B981`   |
+| Warning            | Amber   | `#F59E0B`   |
+| Error              | Rose    | `#EF4444`   |
 
 ---
 
-## Color Usage
+### Color Usage
 
-### Brand Blue
+#### Brand Blue
 
 Used for:
 
@@ -152,7 +151,7 @@ Used for:
 
 ---
 
-### Primary Dark
+#### Primary Dark
 
 Used for:
 
@@ -164,7 +163,7 @@ Used for:
 
 ---
 
-### Success Green
+#### Success Green
 
 Used for:
 
@@ -175,7 +174,7 @@ Used for:
 
 ---
 
-### Warning
+#### Warning
 
 Used for:
 
@@ -185,7 +184,7 @@ Used for:
 
 ---
 
-### Error
+#### Error
 
 Used for:
 
@@ -195,9 +194,9 @@ Used for:
 
 ---
 
-# 6. Typography
+## 6. Typography
 
-## Primary Typeface
+### Primary Typeface
 
 **Inter**
 
@@ -210,7 +209,7 @@ Weights:
 
 ---
 
-## Monospace Typeface
+### Monospace Typeface
 
 **JetBrains Mono**
 
@@ -223,7 +222,7 @@ Used for:
 
 ---
 
-## Typography Scale
+### Typography Scale
 
 | Element | Size | Weight   |
 | ------- | ---- | -------- |
@@ -237,15 +236,15 @@ Used for:
 
 ---
 
-# 7. Logo Guidelines
+## 7. Logo Guidelines
 
-## Minimum Clear Space
+### Minimum Clear Space
 
 Maintain clear space equal to the height of the logo icon on all sides.
 
 ---
 
-## Minimum Size
+### Minimum Size
 
 Digital
 
@@ -257,7 +256,7 @@ Print
 
 ---
 
-## Approved Variants
+### Approved Variants
 
 - Full Color
 - Dark Version
@@ -266,7 +265,7 @@ Print
 
 ---
 
-## Prohibited Usage
+### Prohibited Usage
 
 Do not:
 
@@ -279,7 +278,7 @@ Do not:
 
 ---
 
-# 8. Iconography
+## 8. Iconography
 
 Icons should be:
 
@@ -298,7 +297,7 @@ Alternative:
 
 ---
 
-# 9. Photography & Graphics
+## 9. Photography & Graphics
 
 Preferred imagery:
 
@@ -317,21 +316,21 @@ Avoid:
 
 ---
 
-# 10. Communication Style
+## 10. Communication Style
 
 Every communication should reflect the company's identity.
 
 ---
 
-## Tone of Voice
+### Tone of Voice
 
-### Professional
+#### Professional
 
 Communicate with confidence and technical accuracy.
 
 ---
 
-### Transparent
+#### Transparent
 
 Be clear about:
 
@@ -342,13 +341,13 @@ Be clear about:
 
 ---
 
-### Educational
+#### Educational
 
 Guide clients with explanations rather than jargon where appropriate.
 
 ---
 
-### Reliable
+#### Reliable
 
 Avoid exaggerated claims.
 
@@ -356,7 +355,7 @@ Only promise what can be delivered.
 
 ---
 
-# 11. Approved Messaging
+## 11. Approved Messaging
 
 Preferred language includes:
 
@@ -372,7 +371,7 @@ Preferred language includes:
 
 ---
 
-## Avoid
+### Avoid
 
 Do not use phrases suggesting:
 
@@ -386,9 +385,9 @@ Maintain compliance with UGC academic integrity standards.
 
 ---
 
-# 12. Marketing Materials
+## 12. Marketing Materials
 
-## Website
+### Website
 
 Primary goals:
 
@@ -399,7 +398,7 @@ Primary goals:
 
 ---
 
-## Business Cards
+### Business Cards
 
 Include:
 
@@ -413,7 +412,7 @@ Include:
 
 ---
 
-## Proposal Documents
+### Proposal Documents
 
 Structure:
 
@@ -428,7 +427,7 @@ Structure:
 
 ---
 
-## Presentations
+### Presentations
 
 Visual principles:
 
@@ -440,7 +439,7 @@ Visual principles:
 
 ---
 
-# 13. Social Media Guidelines
+## 13. Social Media Guidelines
 
 Content categories:
 
@@ -454,7 +453,7 @@ Content categories:
 
 ---
 
-## Posting Principles
+### Posting Principles
 
 Every post should provide at least one of:
 
@@ -465,7 +464,7 @@ Every post should provide at least one of:
 
 ---
 
-# 14. Campus Outreach Guidelines
+## 14. Campus Outreach Guidelines
 
 Marketing toward educational institutions should emphasize:
 
@@ -480,7 +479,7 @@ Every campus marketing asset should include an academic integrity notice stating
 
 ---
 
-# 15. Sales & Proposal Branding
+## 15. Sales & Proposal Branding
 
 Sales documents should include:
 
@@ -497,7 +496,7 @@ Visual consistency should follow the official color palette and typography defin
 
 ---
 
-# 16. Digital Asset Standards
+## 16. Digital Asset Standards
 
 Maintain a centralized repository containing:
 
@@ -514,7 +513,7 @@ Version control should be maintained for all official brand assets.
 
 ---
 
-# 17. Brand Governance
+## 17. Brand Governance
 
 Any modification to the visual identity requires approval from:
 
@@ -526,28 +525,28 @@ Major branding updates should be documented and communicated across the organiza
 
 ---
 
-# Document Governance
+## Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Divya**
 Head of Operations, Management & Marketing
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Falguni**
 Lead Full-Stack Engineer & Quality Assurance
 
 ---
 
-# Document Information
+## Document Information
 
 | Property                   | Value                                                           |
 | -------------------------- | --------------------------------------------------------------- |
-| **Document Name**    | Brand Identity System, Visual Guidelines & Marketing Collateral |
-| **Version**          | 1.0                                                             |
-| **Status**           | Draft                                                           |
-| **Primary Owner**    | Divya                                                           |
-| **Reviewer**         | Falguni                                                         |
-| **Review Frequency** | Annually                                                        |
-| **Last Updated**     | August 2026                                                     |
+| **Document Name**          | Brand Identity System, Visual Guidelines & Marketing Collateral |
+| **Version**                | 1.0                                                             |
+| **Status**                 | Draft                                                           |
+| **Primary Owner**          | Divya                                                           |
+| **Reviewer**               | Falguni                                                         |
+| **Review Frequency**       | Annually                                                        |
+| **Last Updated**           | August 2026                                                     |

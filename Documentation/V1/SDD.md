@@ -1,13 +1,12 @@
-
 # SDD.md
 
-# Software Design Document (SDD)
+## Software Design Document (SDD)
 
 ---
 
-# 1. System Architecture & Component Strategy
+## 1. System Architecture & Component Strategy
 
-## 1.1 Architecture Overview
+### 1.1 Architecture Overview
 
 The Client Portal and Internal Operations Platform is designed as a **decoupled, modular monolith** with a clear evolution path toward a **microservices architecture**. The platform supports:
 
@@ -31,7 +30,7 @@ The storage layer combines:
 
 ---
 
-## High-Level Architecture
+### High-Level Architecture
 
 ```text
                      +---------------------------+
@@ -68,9 +67,9 @@ The storage layer combines:
 
 ---
 
-## 1.2 System Component Breakdown
+### 1.2 System Component Breakdown
 
-### Client Presentation Layer
+#### Client Presentation Layer
 
 Provides a responsive web interface allowing clients to:
 
@@ -82,7 +81,7 @@ Provides a responsive web interface allowing clients to:
 
 ---
 
-### Operations & Engineering Dashboard
+#### Operations & Engineering Dashboard
 
 Internal administrative interface used by:
 
@@ -102,7 +101,7 @@ Features include:
 
 ---
 
-### API Gateway & Middleware Layer
+#### API Gateway & Middleware Layer
 
 Responsible for:
 
@@ -117,9 +116,9 @@ Responsible for:
 
 ---
 
-## Core Application Modules
+### Core Application Modules
 
-### Intake & CRM Module
+#### Intake & CRM Module
 
 **Owner:** Divya
 
@@ -133,7 +132,7 @@ Responsibilities:
 
 ---
 
-### Architecture & Sprint Engine
+#### Architecture & Sprint Engine
 
 **Owners:** Om & Somnath
 
@@ -147,7 +146,7 @@ Responsibilities:
 
 ---
 
-### QA & Build Pipeline
+#### QA & Build Pipeline
 
 **Owner:** Falguni
 
@@ -161,7 +160,7 @@ Responsibilities:
 
 ---
 
-### Invoicing & Payments Engine
+#### Invoicing & Payments Engine
 
 Responsibilities:
 
@@ -173,7 +172,7 @@ Responsibilities:
 
 ---
 
-### UGC Mentorship Guardrail Engine
+#### UGC Mentorship Guardrail Engine
 
 Responsible for:
 
@@ -184,11 +183,11 @@ Responsible for:
 
 ---
 
-# 2. Data Models & Database Schema
+## 2. Data Models & Database Schema
 
 ---
 
-## Database Technology
+### Database Technology
 
 - PostgreSQL 16+
 - UUID Primary Keys
@@ -198,26 +197,26 @@ Responsible for:
 
 ---
 
-# 2.1 Schema Entities
+## 2.1 Schema Entities
 
 ---
 
-## users
+### users
 
 Stores every authenticated platform user.
 
 | Column                     | Type         | Constraints   | Description           |
 | -------------------------- | ------------ | ------------- | --------------------- |
-| `user_id`                | UUID         | PK            | Unique User ID        |
-| `email`                  | VARCHAR(255) | UNIQUE        | Login Email           |
-| `password_hash`          | VARCHAR(255) | NOT NULL      | Argon2id Hash         |
-| `full_name`              | VARCHAR(100) | NOT NULL      | User Name             |
-| `role`                   | ENUM         | NOT NULL      | User Role             |
-| `client_category`        | ENUM         | Nullable      | Student / SME etc.    |
-| `institution_or_company` | VARCHAR(255) | Nullable      | Institution / Company |
-| `created_at`             | TIMESTAMPTZ  | DEFAULT NOW() | Registration Time     |
+| `user_id`                  | UUID         | PK            | Unique User ID        |
+| `email`                    | VARCHAR(255) | UNIQUE        | Login Email           |
+| `password_hash`            | VARCHAR(255) | NOT NULL      | Argon2id Hash         |
+| `full_name`                | VARCHAR(100) | NOT NULL      | User Name             |
+| `role`                     | ENUM         | NOT NULL      | User Role             |
+| `client_category`          | ENUM         | Nullable      | Student / SME etc.    |
+| `institution_or_company`   | VARCHAR(255) | Nullable      | Institution / Company |
+| `created_at`               | TIMESTAMPTZ  | DEFAULT NOW() | Registration Time     |
 
-### User Roles
+#### User Roles
 
 ```text
 client
@@ -229,14 +228,14 @@ admin_ops
 
 ---
 
-## projects
+### projects
 
 Stores all client projects.
 
 | Column            | Type         | Description           |
 | ----------------- | ------------ | --------------------- |
 | project_id        | UUID         | Primary Key           |
-| client_id         | UUID         | FK → Users           |
+| client_id         | UUID         | FK → Users            |
 | title             | VARCHAR(255) | Project Name          |
 | service_tier      | ENUM         | Service Category      |
 | workflow_step     | INTEGER      | Current Workflow Step |
@@ -247,7 +246,7 @@ Stores all client projects.
 | staging_url       | TEXT         | Client Preview        |
 | created_at        | TIMESTAMP    | Submission Date       |
 
-### Service Tiers
+#### Service Tiers
 
 ```text
 micro_debug
@@ -261,7 +260,7 @@ enterprise_ai
 
 ---
 
-## milestones
+### milestones
 
 Tracks payment milestones.
 
@@ -275,7 +274,7 @@ Tracks payment milestones.
 | status         | ENUM      |
 | signoff_date   | TIMESTAMP |
 
-### Status
+#### Status
 
 ```text
 pending
@@ -289,7 +288,7 @@ released
 
 ---
 
-## invoices
+### invoices
 
 Stores GST invoices.
 
@@ -308,7 +307,7 @@ Stores GST invoices.
 
 ---
 
-# Entity Relationship Diagram
+## Entity Relationship Diagram
 
 ```text
 Users
@@ -328,11 +327,11 @@ Users
 
 ---
 
-# 3. Detailed Component Specifications
+## 3. Detailed Component Specifications
 
 ---
 
-## 3.1 UGC Compliance & Mentorship Screener
+### 3.1 UGC Compliance & Mentorship Screener
 
 **Technical Owner**
 
@@ -340,13 +339,13 @@ Om
 
 ---
 
-### Objective
+#### Objective
 
 Ensure all student and researcher engagements comply with UGC regulations before quotation generation.
 
 ---
 
-### Processing Logic
+#### Processing Logic
 
 ```text
 Requirement Submitted
@@ -371,7 +370,7 @@ Notify Operations
 
 ---
 
-### Restricted Keywords
+#### Restricted Keywords
 
 Examples:
 
@@ -383,7 +382,7 @@ Examples:
 
 ---
 
-### Allowed Alternatives
+#### Allowed Alternatives
 
 - Code Review
 - Mentorship
@@ -394,7 +393,7 @@ Examples:
 
 ---
 
-## 3.2 Automated Invoicing Engine
+### 3.2 Automated Invoicing Engine
 
 **Owners**
 
@@ -403,13 +402,13 @@ Examples:
 
 ---
 
-### Objective
+#### Objective
 
 Automatically generate GST-compliant invoices.
 
 ---
 
-### Tax Logic
+#### Tax Logic
 
 ```text
 Customer State
@@ -430,7 +429,7 @@ SGST 9%
 
 ---
 
-### SAC Mapping
+#### SAC Mapping
 
 | Service              | SAC    |
 | -------------------- | ------ |
@@ -439,9 +438,9 @@ SGST 9%
 
 ---
 
-# 4. Data Flow & Execution Sequence
+## 4. Data Flow & Execution Sequence
 
-## Client Onboarding Workflow
+### Client Onboarding Workflow
 
 ```text
 Client
@@ -478,11 +477,11 @@ Development
 
 ---
 
-# 5. Interface & API Specifications
+## 5. Interface & API Specifications
 
 ---
 
-## API Design Principles
+### API Design Principles
 
 - RESTful
 - JSON
@@ -493,18 +492,18 @@ Development
 
 ---
 
-## POST `/api/v1/intake/submit`
+### POST `/api/v1/intake/submit`
 
-### Description
+#### Description
 
 Submit a new project request.
 
-### Authorization
+#### Authorization
 
 - Public
 - Authenticated Client
 
-### Request
+#### Request
 
 ```json
 {
@@ -517,7 +516,7 @@ Submit a new project request.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -530,14 +529,14 @@ Submit a new project request.
 
 ---
 
-## POST `/api/v1/invoices/generate`
+### POST `/api/v1/invoices/generate`
 
-### Authorization
+#### Authorization
 
 - admin_ops
 - admin_ceo
 
-### Request
+#### Request
 
 ```json
 {
@@ -548,7 +547,7 @@ Submit a new project request.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -564,11 +563,11 @@ Submit a new project request.
 
 ---
 
-# 6. Security, Authentication & Access Control
+## 6. Security, Authentication & Access Control
 
 ---
 
-## 6.1 RBAC Matrix
+### 6.1 RBAC Matrix
 
 | Module              |    Client    | Divya | Engineering |  Om  |
 | ------------------- | :----------: | :---: | :---------: | :--: |
@@ -581,16 +580,16 @@ Submit a new project request.
 
 ---
 
-## 6.2 Security Controls
+### 6.2 Security Controls
 
-### Encryption
+#### Encryption
 
 - TLS 1.3
 - AES-256
 
 ---
 
-### Authentication
+#### Authentication
 
 - JWT Access Token (15 Minutes)
 - Refresh Token
@@ -600,7 +599,7 @@ Submit a new project request.
 
 ---
 
-### Database Security
+#### Database Security
 
 - Parameterized Queries
 - ORM-Based Access
@@ -610,7 +609,7 @@ Submit a new project request.
 
 ---
 
-# Design Principles
+## Design Principles
 
 - Modular Monolith
 - Domain-Driven Design (DDD)

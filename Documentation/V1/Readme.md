@@ -1,4 +1,3 @@
-
 # Technology Services & AI Engineering Consultancy
 
 ## Overview
@@ -9,15 +8,15 @@ Our engineering philosophy prioritizes **architecture-first development, legal i
 
 ---
 
-# Core Mission & Compliance Principles
+## Core Mission & Compliance Principles
 
-## Mission
+### Mission
 
 To bridge the gap between academic research, early-stage product prototyping, and enterprise-grade technology execution by offering structured, affordable, and highly reliable software engineering services.
 
 ---
 
-## UGC & Academic Integrity Compliance
+### UGC & Academic Integrity Compliance
 
 In strict adherence to the **University Grants Commission (Promotion of Academic Integrity and Prevention of Plagiarism in Higher Educational Institutions) Regulations, 2018**, this entity does **not** provide:
 
@@ -37,13 +36,13 @@ Our engagements with students and researchers are strictly limited to:
 
 ---
 
-# Executive & Technical Leadership
+## Executive & Technical Leadership
 
-## Om
+### Om
 
 **Founder & Chief Executive Officer (CEO)**
 
-### Responsibilities
+#### Responsibilities
 
 - Overall company vision
 - AI/ML architecture
@@ -54,11 +53,11 @@ Our engagements with students and researchers are strictly limited to:
 
 ---
 
-## Somnath
+### Somnath
 
 **Co-Founder & Lead Software Engineer**
 
-### Responsibilities
+#### Responsibilities
 
 - Full-stack application development
 - Backend systems architecture
@@ -68,11 +67,11 @@ Our engagements with students and researchers are strictly limited to:
 
 ---
 
-## Falguni
+### Falguni
 
 **Lead Full-Stack Engineer & Quality Assurance**
 
-### Responsibilities
+#### Responsibilities
 
 - Frontend application development
 - Backend implementation
@@ -82,11 +81,11 @@ Our engagements with students and researchers are strictly limited to:
 
 ---
 
-## Divya
+### Divya
 
 **Head of Operations, Management & Marketing**
 
-### Responsibilities
+#### Responsibilities
 
 - Client communication
 - Project management
@@ -98,38 +97,38 @@ Our engagements with students and researchers are strictly limited to:
 
 ---
 
-# Repository & Documentation Architecture
+## Repository & Documentation Architecture
 
 This repository serves as the **single source of truth** for engineering practices, legal documentation, business operations, and project delivery workflows.
 
 | File                       | Purpose                                                  | Primary Owner     |
 | -------------------------- | -------------------------------------------------------- | ----------------- |
-| `README.md`              | Repository overview, leadership matrix, project guidance | Om                |
-| `BusinessPlan.md`        | Business strategy, revenue model, target market          | Om / Divya        |
-| `SRS.md`                 | Software Requirements Specification                      | Om / Somnath      |
-| `SDD.md`                 | Software Design Document                                 | Somnath / Falguni |
-| `Architecture.md`        | Architecture, APIs, cloud infrastructure                 | Om                |
-| `ProjectRequirements.md` | Functional & non-functional requirements                 | Divya             |
-| `Roles.md`               | RACI matrix and governance                               | Divya             |
-| `Rules.md`               | Engineering standards and Git workflow                   | Somnath / Falguni |
-| `Phases.md`              | Development roadmap and milestones                       | Divya / Om        |
-| `Design.md`              | UI/UX design system                                      | Falguni           |
-| `Memory.md`              | Technical knowledge base and AI context                  | Om                |
-| `Workflow.md`            | Complete 15-step project lifecycle                       | Divya             |
-| `SOP.md`                 | Standard Operating Procedures                            | Divya             |
-| `Pricing.md`             | Pricing structure and payment policies                   | Divya / Om        |
-| `TechStack.md`           | Approved technologies and tools                          | Somnath / Om      |
-| `RiskManagement.md`      | Risk analysis and mitigation                             | Divya / Om        |
-| `QA.md`                  | Testing strategy and deployment validation               | Falguni           |
-| `Legal.md`               | MSA, SOW, NDA, IP agreements                             | Om / Divya        |
-| `BrandGuide.md`          | Branding, colors, logo, communication guidelines         | Divya             |
-| `Roadmap.md`             | 1-Year, 3-Year and 5-Year roadmap                        | Om                |
+| `README.md`                | Repository overview, leadership matrix, project guidance | Om                |
+| `BusinessPlan.md`          | Business strategy, revenue model, target market          | Om / Divya        |
+| `SRS.md`                   | Software Requirements Specification                      | Om / Somnath      |
+| `SDD.md`                   | Software Design Document                                 | Somnath / Falguni |
+| `Architecture.md`          | Architecture, APIs, cloud infrastructure                 | Om                |
+| `ProjectRequirements.md`   | Functional & non-functional requirements                 | Divya             |
+| `Roles.md`                 | RACI matrix and governance                               | Divya             |
+| `Rules.md`                 | Engineering standards and Git workflow                   | Somnath / Falguni |
+| `Phases.md`                | Development roadmap and milestones                       | Divya / Om        |
+| `Design.md`                | UI/UX design system                                      | Falguni           |
+| `Memory.md`                | Technical knowledge base and AI context                  | Om                |
+| `Workflow.md`              | Complete 15-step project lifecycle                       | Divya             |
+| `SOP.md`                   | Standard Operating Procedures                            | Divya             |
+| `Pricing.md`               | Pricing structure and payment policies                   | Divya / Om        |
+| `TechStack.md`             | Approved technologies and tools                          | Somnath / Om      |
+| `RiskManagement.md`        | Risk analysis and mitigation                             | Divya / Om        |
+| `QA.md`                    | Testing strategy and deployment validation               | Falguni           |
+| `Legal.md`                 | MSA, SOW, NDA, IP agreements                             | Om / Divya        |
+| `BrandGuide.md`            | Branding, colors, logo, communication guidelines         | Divya             |
+| `Roadmap.md`               | 1-Year, 3-Year and 5-Year roadmap                        | Om                |
 
 ---
 
-# Onboarding & Development Setup
+## Onboarding & Development Setup
 
-## Prerequisites
+### Prerequisites
 
 - Git 2.x+
 - Node.js v20.x LTS
@@ -139,28 +138,28 @@ This repository serves as the **single source of truth** for engineering practic
 
 ---
 
-## Local Environment Setup
+### Local Environment Setup
 
-### 1. Clone the Repository
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-org/platform-core.git
 cd platform-core
 ```
 
-### 2. Copy Environment Variables
+#### 2. Copy Environment Variables
 
 ```bash
 cp .env.example .env.local
 ```
 
-### 3. Install Dependencies
+#### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Verify Code Quality
+#### 4. Verify Code Quality
 
 ```bash
 npm run lint
@@ -168,17 +167,17 @@ npm run lint
 
 ---
 
-# Service Spectrum & Contact Points
+## Service Spectrum & Contact Points
 
 | Department                                  | Contact                                     |
 | ------------------------------------------- | ------------------------------------------- |
-| Client Inquiries & Project Quotations       | **Operations Desk (Divya)**           |
-| Technical Feasibility & System Architecture | **Engineering Office (Om / Somnath)** |
-| Quality Assurance & Verification            | **QA Department (Falguni)**           |
+| Client Inquiries & Project Quotations       | **Operations Desk (Divya)**                 |
+| Technical Feasibility & System Architecture | **Engineering Office (Om / Somnath)**       |
+| Quality Assurance & Verification            | **QA Department (Falguni)**                 |
 
 ---
 
-# Engineering Principles
+## Engineering Principles
 
 - Architecture-first development
 - Security by design
@@ -193,7 +192,7 @@ npm run lint
 
 ---
 
-# Professional Disclaimer
+## Professional Disclaimer
 
 This organization provides **technology consulting, software engineering, AI/ML development, cloud infrastructure, MLOps services, and technical mentorship**.
 

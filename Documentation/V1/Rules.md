@@ -1,11 +1,10 @@
-
 # Rules.md
 
-# Engineering Standards, Coding Guidelines, Communication Protocols & Operational Rules
+## Engineering Standards, Coding Guidelines, Communication Protocols & Operational Rules
 
 ---
 
-# 1. Executive Overview & Enforceability
+## 1. Executive Overview & Enforceability
 
 This document establishes the mandatory engineering standards, coding conventions, version control workflows, security policies, communication protocols, and compliance requirements that govern all software development and operational activities within the organization.
 
@@ -13,15 +12,15 @@ These standards are **mandatory** for every project. Any code, documentation, or
 
 ---
 
-# 2. Engineering & Coding Standards
+## 2. Engineering & Coding Standards
 
 ---
 
-## 2.1 Approved Technology Stack
+### 2.1 Approved Technology Stack
 
 All development shall utilize the organization's approved technology stack.
 
-### Frontend
+#### Frontend
 
 - React
 - TypeScript
@@ -32,7 +31,7 @@ All development shall utilize the organization's approved technology stack.
 
 ---
 
-### Backend
+#### Backend
 
 - Node.js
 - Express.js
@@ -42,14 +41,14 @@ All development shall utilize the organization's approved technology stack.
 
 ---
 
-### Database
+#### Database
 
 - PostgreSQL
 - Redis
 
 ---
 
-### DevOps & Cloud
+#### DevOps & Cloud
 
 - Docker
 - AWS ECS
@@ -61,36 +60,36 @@ All development shall utilize the organization's approved technology stack.
 
 ---
 
-# 2.2 Naming Conventions
+## 2.2 Naming Conventions
 
 ---
 
-## TypeScript / JavaScript
+### TypeScript / JavaScript
 
 | Item       | Convention           | Example                 |
 | ---------- | -------------------- | ----------------------- |
-| Variables  | `camelCase`        | `calculateGstAmount`  |
-| Functions  | `camelCase`        | `createInvoice()`     |
-| Components | `PascalCase`       | `InvoiceTable`        |
-| Interfaces | `PascalCase`       | `ProjectDetails`      |
-| Constants  | `UPPER_SNAKE_CASE` | `MAX_FILE_SIZE_BYTES` |
+| Variables  | `camelCase`          | `calculateGstAmount`    |
+| Functions  | `camelCase`          | `createInvoice()`       |
+| Components | `PascalCase`         | `InvoiceTable`          |
+| Interfaces | `PascalCase`         | `ProjectDetails`        |
+| Constants  | `UPPER_SNAKE_CASE`   | `MAX_FILE_SIZE_BYTES`   |
 
 ---
 
-## Python
+### Python
 
 | Item      | Convention           | Example                 |
 | --------- | -------------------- | ----------------------- |
-| Variables | `snake_case`       | `project_status`      |
-| Functions | `snake_case`       | `process_dataset()`   |
-| Classes   | `PascalCase`       | `PipelineRunner`      |
-| Constants | `UPPER_SNAKE_CASE` | `DEFAULT_TIMEOUT_SEC` |
+| Variables | `snake_case`         | `project_status`        |
+| Functions | `snake_case`         | `process_dataset()`     |
+| Classes   | `PascalCase`         | `PipelineRunner`        |
+| Constants | `UPPER_SNAKE_CASE`   | `DEFAULT_TIMEOUT_SEC`   |
 
 ---
 
-## Database
+### Database
 
-### Tables
+#### Tables
 
 Use plural `snake_case`.
 
@@ -103,7 +102,7 @@ milestones
 invoices
 ```
 
-### Columns
+#### Columns
 
 Use singular `snake_case`.
 
@@ -121,9 +120,9 @@ workflow_step
 
 ---
 
-# 2.3 Code Formatting Standards
+## 2.3 Code Formatting Standards
 
-## JavaScript / TypeScript
+### JavaScript / TypeScript
 
 Mandatory Tools
 
@@ -140,7 +139,7 @@ npm run format
 
 ---
 
-## Python
+### Python
 
 Mandatory Tools
 
@@ -156,7 +155,7 @@ Every commit must satisfy:
 
 ---
 
-## Documentation Standards
+### Documentation Standards
 
 Code should be **self-documenting** wherever possible.
 
@@ -175,22 +174,22 @@ API documentation shall use:
 
 ---
 
-# 3. Version Control & Git Workflow
+## 3. Version Control & Git Workflow
 
 ---
 
-## 3.1 Branching Strategy
+### 3.1 Branching Strategy
 
 | Branch        | Purpose                   | Push Permission | Merge Requirement      |
 | ------------- | ------------------------- | --------------- | ---------------------- |
-| `main`      | Production                | Restricted      | Om or Somnath Approval |
-| `staging`   | QA & Client Demo          | Restricted      | QA Approval            |
-| `feature/*` | Feature Development       | Developers      | Pull Request           |
-| `hotfix/*`  | Critical Production Fixes | Restricted      | Emergency Approval     |
+| `main`        | Production                | Restricted      | Om or Somnath Approval |
+| `staging`     | QA & Client Demo          | Restricted      | QA Approval            |
+| `feature/*`   | Feature Development       | Developers      | Pull Request           |
+| `hotfix/*`    | Critical Production Fixes | Restricted      | Emergency Approval     |
 
 ---
 
-## Git Workflow
+### Git Workflow
 
 ```text
 feature/*
@@ -216,11 +215,11 @@ main
 
 ---
 
-## 3.2 Commit Message Standards
+### 3.2 Commit Message Standards
 
 The project follows the **Conventional Commits Specification**.
 
-### Types
+#### Types
 
 ```text
 feat:
@@ -240,7 +239,7 @@ chore:
 
 ---
 
-### Examples
+#### Examples
 
 ```text
 feat(auth): implement JWT refresh tokens
@@ -258,9 +257,9 @@ chore(deps): upgrade express
 
 ---
 
-## 3.3 Pull Request Policy
+### 3.3 Pull Request Policy
 
-### Mandatory Rules
+#### Mandatory Rules
 
 - Direct pushes to `main` are prohibited.
 - Direct pushes to `staging` are prohibited.
@@ -270,13 +269,13 @@ chore(deps): upgrade express
 
 ---
 
-# 4. Security & Credential Hygiene
+## 4. Security & Credential Hygiene
 
 ---
 
-## 4.1 Secret Management
+### 4.1 Secret Management
 
-### Never Commit
+#### Never Commit
 
 - API Keys
 - Database Passwords
@@ -286,7 +285,7 @@ chore(deps): upgrade express
 
 ---
 
-### Approved Storage
+#### Approved Storage
 
 - `.env.local`
 - AWS Secrets Manager
@@ -295,7 +294,7 @@ chore(deps): upgrade express
 
 ---
 
-### Incident Policy
+#### Incident Policy
 
 If credentials are accidentally committed:
 
@@ -306,9 +305,9 @@ If credentials are accidentally committed:
 
 ---
 
-# 4.2 Secure Development Standards
+## 4.2 Secure Development Standards
 
-## SQL Injection Prevention
+### SQL Injection Prevention
 
 Only use:
 
@@ -319,7 +318,7 @@ Never concatenate SQL strings.
 
 ---
 
-## Input Validation
+### Input Validation
 
 Every user input must be validated on:
 
@@ -335,7 +334,7 @@ Protection required against:
 
 ---
 
-## Secure File Access
+### Secure File Access
 
 Client assets stored in S3 must be accessed only through:
 
@@ -344,13 +343,13 @@ Client assets stored in S3 must be accessed only through:
 
 ---
 
-# 5. Client Communication & Operational Rules
+## 5. Client Communication & Operational Rules
 
 ---
 
-## 5.1 Communication Ownership
+### 5.1 Communication Ownership
 
-### Official Communication
+#### Official Communication
 
 Handled by:
 
@@ -360,7 +359,7 @@ Handled by:
 
 ---
 
-### Engineering Communication
+#### Engineering Communication
 
 Developers participate only in:
 
@@ -376,7 +375,7 @@ Commercial discussions remain the responsibility of:
 
 ---
 
-### Response SLA
+#### Response SLA
 
 | Activity                | SLA                |
 | ----------------------- | ------------------ |
@@ -387,11 +386,11 @@ Commercial discussions remain the responsibility of:
 
 ---
 
-# 5.2 Financial & Delivery Rules
+## 5.2 Financial & Delivery Rules
 
 ---
 
-## No Unfunded Work
+### No Unfunded Work
 
 Development begins **only after**:
 
@@ -401,7 +400,7 @@ Development begins **only after**:
 
 ---
 
-## Source Code Release
+### Source Code Release
 
 Source code is transferred only after:
 
@@ -411,7 +410,7 @@ Source code is transferred only after:
 
 ---
 
-## Scope Change Process
+### Scope Change Process
 
 Any request outside the approved Statement of Work (SOW) requires:
 
@@ -422,13 +421,13 @@ Any request outside the approved Statement of Work (SOW) requires:
 
 ---
 
-# 6. Academic Integrity & UGC Compliance
+## 6. Academic Integrity & UGC Compliance
 
 All academic engagements must comply with the **University Grants Commission (UGC) Regulations, 2018**.
 
 ---
 
-## Prohibited Services
+### Prohibited Services
 
 The organization does **not** provide:
 
@@ -441,7 +440,7 @@ The organization does **not** provide:
 
 ---
 
-## Permitted Services
+### Permitted Services
 
 The organization provides:
 
@@ -456,17 +455,17 @@ The organization provides:
 
 ---
 
-## Mandatory Academic Declaration
+### Mandatory Academic Declaration
 
 Before onboarding, every academic client must digitally acknowledge the organization's Academic Integrity Declaration.
 
 ---
 
-# 7. Audit & Compliance Protocols
+## 7. Audit & Compliance Protocols
 
 ---
 
-## Weekly Engineering Review
+### Weekly Engineering Review
 
 **Frequency**
 
@@ -486,7 +485,7 @@ Agenda
 
 ---
 
-## QA Release Audit
+### QA Release Audit
 
 Conducted before every milestone release.
 
@@ -503,7 +502,7 @@ Verification includes:
 
 ---
 
-## Financial & Tax Audit
+### Financial & Tax Audit
 
 **Frequency**
 
@@ -523,7 +522,7 @@ Verification includes:
 
 ---
 
-# 8. Engineering Principles
+## 8. Engineering Principles
 
 Every engineer follows these principles:
 
@@ -540,7 +539,7 @@ Every engineer follows these principles:
 
 ---
 
-# 9. Code Review Checklist
+## 9. Code Review Checklist
 
 Before approving a Pull Request, reviewers must verify:
 
@@ -557,7 +556,7 @@ Before approving a Pull Request, reviewers must verify:
 
 ---
 
-# 10. Merge Requirements
+## 10. Merge Requirements
 
 A Pull Request may be merged only when all of the following conditions are satisfied:
 
@@ -571,13 +570,13 @@ A Pull Request may be merged only when all of the following conditions are satis
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------- |
-| **Document Name** | Engineering Standards, Coding Guidelines, Communication Protocols & Operational Rules |
-| **Version**       | 1.0                                                                                   |
-| **Status**        | Draft                                                                                 |
-| **Primary Owner** | Somnath (Lead Systems Engineer)                                                       |
-| **Reviewers**     | Falguni, Om, Divya                                                                    |
-| **Last Updated**  | August 2026                                                                           |
+| **Document Name**       | Engineering Standards, Coding Guidelines, Communication Protocols & Operational Rules |
+| **Version**             | 1.0                                                                                   |
+| **Status**              | Draft                                                                                 |
+| **Primary Owner**       | Somnath (Lead Systems Engineer)                                                       |
+| **Reviewers**           | Falguni, Om, Divya                                                                    |
+| **Last Updated**        | August 2026                                                                           |

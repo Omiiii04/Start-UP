@@ -1,13 +1,12 @@
-
 # SRS.md
 
-# Software Requirements Specification (SRS)
+## Software Requirements Specification (SRS)
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
-## 1.1 Purpose
+### 1.1 Purpose
 
 This Software Requirements Specification (SRS) defines the functional and non-functional requirements for the proprietary **Client Portal** and **Internal Operations Management Platform**.
 
@@ -25,11 +24,11 @@ The system serves as the centralized digital platform supporting our Pune-based 
 
 ---
 
-## 1.2 Scope
+### 1.2 Scope
 
 The web-based platform serves two primary stakeholder groups.
 
-### External Clients
+#### External Clients
 
 Including:
 
@@ -49,38 +48,38 @@ These users can request:
 
 ---
 
-### Internal Operations Team
+#### Internal Operations Team
 
 The internal platform supports:
 
 | Team Member       | Responsibility                                 |
 | ----------------- | ---------------------------------------------- |
-| **Om**      | CEO, Architecture, AI/ML, Technical Approval   |
-| **Somnath** | Backend Development, DevOps                    |
-| **Falguni** | Frontend Engineering, QA                       |
-| **Divya**   | Operations, CRM, Billing, Client Communication |
+| **Om**            | CEO, Architecture, AI/ML, Technical Approval   |
+| **Somnath**       | Backend Development, DevOps                    |
+| **Falguni**       | Frontend Engineering, QA                       |
+| **Divya**         | Operations, CRM, Billing, Client Communication |
 
 The platform explicitly excludes any automated academic assignment writing, proxy project execution, or ghostwriting in compliance with **UGC 2018 Regulations**.
 
 ---
 
-## 1.3 Definitions, Acronyms & Abbreviations
+### 1.3 Definitions, Acronyms & Abbreviations
 
 | Acronym        | Meaning                                       |
 | -------------- | --------------------------------------------- |
-| **SRS**  | Software Requirements Specification           |
-| **UGC**  | University Grants Commission                  |
-| **SOW**  | Statement of Work                             |
-| **MSA**  | Master Services Agreement                     |
-| **RACI** | Responsible, Accountable, Consulted, Informed |
-| **RBAC** | Role-Based Access Control                     |
-| **MFA**  | Multi-Factor Authentication                   |
+| **SRS**        | Software Requirements Specification           |
+| **UGC**        | University Grants Commission                  |
+| **SOW**        | Statement of Work                             |
+| **MSA**        | Master Services Agreement                     |
+| **RACI**       | Responsible, Accountable, Consulted, Informed |
+| **RBAC**       | Role-Based Access Control                     |
+| **MFA**        | Multi-Factor Authentication                   |
 
 ---
 
-# 2. Overall Description
+## 2. Overall Description
 
-## 2.1 Product Perspective
+### 2.1 Product Perspective
 
 The application functions as a unified platform combining:
 
@@ -90,7 +89,7 @@ The application functions as a unified platform combining:
 - Engineering Dashboard
 - CRM
 
-### External Integrations
+#### External Integrations
 
 The platform communicates with:
 
@@ -104,21 +103,21 @@ The platform communicates with:
 
 ---
 
-## 2.2 User Classes & Personas
+### 2.2 User Classes & Personas
 
 | User Class                                     | Responsibilities                                                                                | Access                                |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **Client (Student / Researcher)**        | Submit consulting requests, monitor progress, download mentorship resources, milestone payments | Dashboard, File Vault, Chat, Invoices |
-| **Client (SME / Founder)**               | Request commercial software, approve contracts, review staging builds                           | Dashboard, Contracts, Payments        |
-| **Operations Manager (Divya)**           | CRM, quotations, client communication, GST invoicing                                            | Admin Portal, Billing, CRM            |
-| **Lead Architect & CEO (Om)**            | Feasibility analysis, architecture approvals, MLOps approvals                                   | Full System Access                    |
-| **Engineering Team (Somnath & Falguni)** | Sprint updates, deployment, QA verification                                                     | Engineering Dashboard, QA             |
+| **Client (Student / Researcher)**              | Submit consulting requests, monitor progress, download mentorship resources, milestone payments | Dashboard, File Vault, Chat, Invoices |
+| **Client (SME / Founder)**                     | Request commercial software, approve contracts, review staging builds                           | Dashboard, Contracts, Payments        |
+| **Operations Manager (Divya)**                 | CRM, quotations, client communication, GST invoicing                                            | Admin Portal, Billing, CRM            |
+| **Lead Architect & CEO (Om)**                  | Feasibility analysis, architecture approvals, MLOps approvals                                   | Full System Access                    |
+| **Engineering Team (Somnath & Falguni)**       | Sprint updates, deployment, QA verification                                                     | Engineering Dashboard, QA             |
 
 ---
 
-## 2.3 Operating Environment
+### 2.3 Operating Environment
 
-### Frontend
+#### Frontend
 
 - Chrome
 - Firefox
@@ -133,7 +132,7 @@ Supports:
 
 ---
 
-### Backend
+#### Backend
 
 Containerized services running on:
 
@@ -147,16 +146,16 @@ Hosted on:
 
 ---
 
-### Database
+#### Database
 
 - PostgreSQL
 - AWS S3 Object Storage
 
 ---
 
-## 2.4 Constraints
+### 2.4 Constraints
 
-### Regulatory
+#### Regulatory
 
 - UGC 2018 Anti-Plagiarism Compliance
 
@@ -168,32 +167,32 @@ The platform must **never**:
 
 ---
 
-### Financial
+#### Financial
 
 - Indian GST Compliance
 - SAC Codes (998314 / 998315)
 
 ---
 
-### Infrastructure
+#### Infrastructure
 
 Maintain lean infrastructure costs during early-stage operations.
 
 ---
 
-# 3. System Features & Functional Requirements
+## 3. System Features & Functional Requirements
 
 ---
 
-# 3.1 Client Intake & Requirement Submission
+## 3.1 Client Intake & Requirement Submission
 
-## Description
+### Description
 
 Allows prospective clients to submit project briefs, upload supporting documentation, and schedule technical discussions.
 
-### Functional Requirements
+#### Functional Requirements
 
-### FR-1.1
+#### FR-1.1
 
 The system shall provide an online intake form capturing:
 
@@ -212,7 +211,7 @@ Client Categories:
 
 ---
 
-### FR-1.2
+#### FR-1.2
 
 The system shall allow uploads of:
 
@@ -227,7 +226,7 @@ Maximum file size:
 
 ---
 
-### FR-1.3
+#### FR-1.3
 
 The platform shall automatically:
 
@@ -237,7 +236,7 @@ The platform shall automatically:
 
 ---
 
-### FR-1.4
+#### FR-1.4
 
 Incoming requests shall automatically route to:
 
@@ -253,9 +252,9 @@ Maximum review time:
 
 ---
 
-# 3.2 Quotation & Contract Management
+## 3.2 Quotation & Contract Management
 
-## Description
+### Description
 
 Generate quotations and legal documentation.
 
@@ -267,9 +266,9 @@ Supported Documents:
 
 ---
 
-### Functional Requirements
+#### Functional Requirements
 
-### FR-2.1
+#### FR-2.1
 
 Generate PDF quotations for:
 
@@ -280,19 +279,19 @@ Generate PDF quotations for:
 
 ---
 
-### FR-2.2
+#### FR-2.2
 
 Mandatory Payment Structures
 
 | Tier                       | Milestones                            |
 | -------------------------- | ------------------------------------- |
-| **Tier 1 (< ₹15K)** | 50% Advance / 50% Delivery            |
-| **Tier 2–3**        | 30% Advance / 40% Demo / 30% Delivery |
-| **Tier 4**           | 25% / 25% / 25% / 25%                 |
+| **Tier 1 (< ₹15K)**        | 50% Advance / 50% Delivery            |
+| **Tier 2–3**               | 30% Advance / 40% Demo / 30% Delivery |
+| **Tier 4**                 | 25% / 25% / 25% / 25%                 |
 
 ---
 
-### FR-2.3
+#### FR-2.3
 
 Support secure digital signatures by:
 
@@ -303,15 +302,15 @@ Before project initiation.
 
 ---
 
-# 3.3 Live Project Tracking & Sprint Dashboard
+## 3.3 Live Project Tracking & Sprint Dashboard
 
-## Description
+### Description
 
 Provides visibility across the complete project lifecycle.
 
-### Functional Requirements
+#### Functional Requirements
 
-### FR-3.1
+#### FR-3.1
 
 Display project stages including:
 
@@ -325,7 +324,7 @@ Display project stages including:
 
 ---
 
-### FR-3.2
+#### FR-3.2
 
 Engineering members shall upload:
 
@@ -336,7 +335,7 @@ Engineering members shall upload:
 
 ---
 
-### FR-3.3
+#### FR-3.3
 
 Restrict access to source code until final payment while allowing:
 
@@ -346,15 +345,15 @@ Restrict access to source code until final payment while allowing:
 
 ---
 
-# 3.4 Payment Processing & Invoicing
+## 3.4 Payment Processing & Invoicing
 
-## Description
+### Description
 
 Handles secure online payments and GST-compliant invoicing.
 
-### Functional Requirements
+#### Functional Requirements
 
-### FR-4.1
+#### FR-4.1
 
 Support:
 
@@ -372,7 +371,7 @@ Payment Methods:
 
 ---
 
-### FR-4.2
+#### FR-4.2
 
 Automatically apply:
 
@@ -385,7 +384,7 @@ Include SAC Codes:
 
 ---
 
-### FR-4.3
+#### FR-4.3
 
 Automatically:
 
@@ -398,15 +397,15 @@ After payment confirmation.
 
 ---
 
-# 3.5 Academic Integrity & UGC Verification
+## 3.5 Academic Integrity & UGC Verification
 
-## Description
+### Description
 
 Ensures all academic engagements comply with institutional policies.
 
-### Functional Requirements
+#### Functional Requirements
 
-### FR-5.1
+#### FR-5.1
 
 Require students and researchers to accept an Academic Integrity Declaration stating:
 
@@ -417,7 +416,7 @@ Require students and researchers to accept an Academic Integrity Declaration sta
 
 ---
 
-### FR-5.2
+#### FR-5.2
 
 Automatically reject requests containing keywords related to:
 
@@ -428,20 +427,20 @@ Automatically reject requests containing keywords related to:
 
 ---
 
-# 4. Non-Functional Requirements
+## 4. Non-Functional Requirements
 
 ---
 
-# 4.1 Security & Privacy
+## 4.1 Security & Privacy
 
-### NFR-1.1 — Encryption
+#### NFR-1.1 — Encryption
 
 - TLS 1.3 (In Transit)
 - AES-256 (At Rest)
 
 ---
 
-### NFR-1.2 — RBAC
+#### NFR-1.2 — RBAC
 
 Users may only access:
 
@@ -451,7 +450,7 @@ Users may only access:
 
 ---
 
-### NFR-1.3 — Authentication
+#### NFR-1.3 — Authentication
 
 Administrative users require:
 
@@ -459,9 +458,9 @@ Administrative users require:
 
 ---
 
-# 4.2 Performance & Reliability
+## 4.2 Performance & Reliability
 
-### NFR-2.1 — Response Time
+#### NFR-2.1 — Response Time
 
 Average page load:
 
@@ -469,7 +468,7 @@ Average page load:
 
 ---
 
-### NFR-2.2 — Availability
+#### NFR-2.2 — Availability
 
 Target uptime:
 
@@ -479,9 +478,9 @@ Excluding scheduled maintenance.
 
 ---
 
-# 4.3 Maintainability & Scalability
+## 4.3 Maintainability & Scalability
 
-### NFR-3.1 — Code Quality
+#### NFR-3.1 — Code Quality
 
 Backend services shall maintain:
 
@@ -489,17 +488,17 @@ Backend services shall maintain:
 
 ---
 
-### NFR-3.2 — Modular Architecture
+#### NFR-3.2 — Modular Architecture
 
 Services must be independently deployable and horizontally scalable to accommodate increasing demand.
 
 ---
 
-# 5. System Interfaces & External Integrations
+## 5. System Interfaces & External Integrations
 
 ---
 
-## 5.1 Payment Gateway
+### 5.1 Payment Gateway
 
 Supported Providers:
 
@@ -514,7 +513,7 @@ Features:
 
 ---
 
-## 5.2 Cloud Storage
+### 5.2 Cloud Storage
 
 AWS S3
 
@@ -527,7 +526,7 @@ Capabilities:
 
 ---
 
-## 5.3 Messaging & Notifications
+### 5.3 Messaging & Notifications
 
 Supported Services:
 
@@ -544,9 +543,9 @@ Used for:
 
 ---
 
-# Appendix
+## Appendix
 
-## Compliance Standards
+### Compliance Standards
 
 - UGC (Promotion of Academic Integrity and Prevention of Plagiarism in Higher Educational Institutions) Regulations, 2018
 - Indian GST Compliance
@@ -556,13 +555,13 @@ Used for:
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                               |
 | ----------------------- | ----------------------------------- |
-| **Document Name** | Software Requirements Specification |
-| **Version**       | 1.0                                 |
-| **Status**        | Draft                               |
-| **Owner**         | Om (CEO & Lead Architect)           |
-| **Reviewers**     | Somnath, Falguni, Divya             |
-| **Approval**      | Executive Leadership Team           |
+| **Document Name**       | Software Requirements Specification |
+| **Version**             | 1.0                                 |
+| **Status**              | Draft                               |
+| **Owner**               | Om (CEO & Lead Architect)           |
+| **Reviewers**           | Somnath, Falguni, Divya             |
+| **Approval**            | Executive Leadership Team           |

@@ -1,11 +1,10 @@
-
 # Memory.md
 
-# System Knowledge Base, AI Context Parameters & Architectural Decision Records
+## System Knowledge Base, AI Context Parameters & Architectural Decision Records
 
 ---
 
-# 1. Overview & Context Purpose
+## 1. Overview & Context Purpose
 
 This document serves as the centralized **System Knowledge Base**, **AI Context Store**, and **Architectural Decision Record (ADR)** repository for the organization.
 
@@ -23,15 +22,15 @@ Every automated system interacting with the company's infrastructure must follow
 
 ---
 
-# 2. Fundamental Business Constraints
+## 2. Fundamental Business Constraints
 
-## 2.1 UGC Academic Integrity Policy
+### 2.1 UGC Academic Integrity Policy
 
 The organization strictly complies with the **University Grants Commission (Promotion of Academic Integrity and Prevention of Plagiarism in Higher Educational Institutions) Regulations, 2018**.
 
 ---
 
-### Prohibited Requests
+#### Prohibited Requests
 
 Internal AI systems must reject or escalate requests involving:
 
@@ -45,7 +44,7 @@ Internal AI systems must reject or escalate requests involving:
 
 ---
 
-### Permitted Services
+#### Permitted Services
 
 AI systems may assist with:
 
@@ -62,7 +61,7 @@ AI systems may assist with:
 
 ---
 
-### Automated Handling
+#### Automated Handling
 
 If a prohibited request is detected:
 
@@ -87,15 +86,15 @@ The request must be routed to **Divya (Operations)** for review and restructurin
 
 ---
 
-# 2.2 Financial & Billing Parameters
+## 2.2 Financial & Billing Parameters
 
-## Base Currency
+### Base Currency
 
 **Indian Rupee (INR ₹)**
 
 ---
 
-## Standard Engagement Range
+### Standard Engagement Range
 
 ```text
 ₹2,000 → ₹100,000+
@@ -103,7 +102,7 @@ The request must be routed to **Divya (Operations)** for review and restructurin
 
 ---
 
-## GST Rules
+### GST Rules
 
 All domestic invoices include:
 
@@ -116,9 +115,9 @@ Applicable SAC Codes:
 
 ---
 
-## Milestone Structures
+### Milestone Structures
 
-### Tier 1
+#### Tier 1
 
 Projects below ₹15,000
 
@@ -129,7 +128,7 @@ Projects below ₹15,000
 
 ---
 
-### Tier 2 & Tier 3
+#### Tier 2 & Tier 3
 
 ₹15,000–₹60,000
 
@@ -143,7 +142,7 @@ Projects below ₹15,000
 
 ---
 
-### Tier 4
+#### Tier 4
 
 ₹60,000+
 
@@ -159,9 +158,9 @@ Projects below ₹15,000
 
 ---
 
-# 3. Organizational Context
+## 3. Organizational Context
 
-## Om
+### Om
 
 **Founder & CEO**
 
@@ -176,7 +175,7 @@ Responsibilities
 
 ---
 
-## Somnath
+### Somnath
 
 **Co-Founder & Lead Systems Engineer**
 
@@ -191,7 +190,7 @@ Responsibilities
 
 ---
 
-## Falguni
+### Falguni
 
 **Lead Full-Stack Engineer & QA**
 
@@ -206,7 +205,7 @@ Responsibilities
 
 ---
 
-## Divya
+### Divya
 
 **Head of Operations & Marketing**
 
@@ -222,27 +221,27 @@ Responsibilities
 
 ---
 
-# 4. Architectural Decision Records (ADR)
+## 4. Architectural Decision Records (ADR)
 
 Architectural Decision Records document important technical and organizational decisions made throughout the company's lifecycle.
 
 ---
 
-## ADR-001 — Corporate Structure
+### ADR-001 — Corporate Structure
 
-### Status
+#### Status
 
 Approved
 
 ---
 
-### Context
+#### Context
 
 Selection of an appropriate legal structure for a technology consulting business.
 
 ---
 
-### Decision
+#### Decision
 
 Operate as a:
 
@@ -250,7 +249,7 @@ Operate as a:
 
 ---
 
-### Rationale
+#### Rationale
 
 Provides:
 
@@ -262,21 +261,21 @@ Provides:
 
 ---
 
-## ADR-002 — System Architecture
+### ADR-002 — System Architecture
 
-### Status
+#### Status
 
 Approved
 
 ---
 
-### Context
+#### Context
 
 Selection of application architecture.
 
 ---
 
-### Decision
+#### Decision
 
 Adopt a **Modular Monolith** architecture with clearly separated service boundaries.
 
@@ -290,7 +289,7 @@ Technology Stack
 
 ---
 
-### Consequences
+#### Consequences
 
 Benefits
 
@@ -301,21 +300,21 @@ Benefits
 
 ---
 
-## ADR-003 — Intellectual Property
+### ADR-003 — Intellectual Property
 
-### Status
+#### Status
 
 Approved
 
 ---
 
-### Context
+#### Context
 
 Ownership of reusable engineering assets.
 
 ---
 
-### Decision
+#### Decision
 
 Separate:
 
@@ -324,9 +323,9 @@ Separate:
 
 ---
 
-### Ownership
+#### Ownership
 
-#### Client Owns
+##### Client Owns
 
 - Custom Business Logic
 - Client-Specific Deliverables
@@ -334,7 +333,7 @@ Separate:
 
 ---
 
-#### Company Retains
+##### Company Retains
 
 - Frameworks
 - Utility Libraries
@@ -344,13 +343,13 @@ Separate:
 
 ---
 
-# 5. AI Agent System Directives
+## 5. AI Agent System Directives
 
 Every internal AI system must follow the directives below.
 
 ---
 
-## Directive 1 — Identity
+### Directive 1 — Identity
 
 Operate as:
 
@@ -360,7 +359,7 @@ Never represent yourself as an academic assignment service.
 
 ---
 
-## Directive 2 — Compliance
+### Directive 2 — Compliance
 
 Always verify:
 
@@ -372,7 +371,7 @@ Reject prohibited requests.
 
 ---
 
-## Directive 3 — Pricing
+### Directive 3 — Pricing
 
 Whenever generating quotations:
 
@@ -382,7 +381,7 @@ Whenever generating quotations:
 
 ---
 
-## Directive 4 — Engineering Standards
+### Directive 4 — Engineering Standards
 
 Generated code must comply with:
 
@@ -394,7 +393,7 @@ Generated code must comply with:
 
 ---
 
-## Directive 5 — Intelligent Routing
+### Directive 5 — Intelligent Routing
 
 Automatically classify requests.
 
@@ -412,11 +411,11 @@ Automatically classify requests.
 
 ---
 
-# 6. Long-Term Business Memory
+## 6. Long-Term Business Memory
 
 The following organizational facts are considered persistent knowledge for internal systems.
 
-## Company Profile
+### Company Profile
 
 - Technology Services Consultancy
 - AI Engineering
@@ -427,7 +426,7 @@ The following organizational facts are considered persistent knowledge for inter
 
 ---
 
-## Core Values
+### Core Values
 
 - Technical Excellence
 - Transparency
@@ -439,9 +438,9 @@ The following organizational facts are considered persistent knowledge for inter
 
 ---
 
-## Approved Technology Stack
+### Approved Technology Stack
 
-### Frontend
+#### Frontend
 
 - React
 - TypeScript
@@ -450,7 +449,7 @@ The following organizational facts are considered persistent knowledge for inter
 
 ---
 
-### Backend
+#### Backend
 
 - Node.js
 - Express
@@ -459,14 +458,14 @@ The following organizational facts are considered persistent knowledge for inter
 
 ---
 
-### Database
+#### Database
 
 - PostgreSQL
 - Redis
 
 ---
 
-### Infrastructure
+#### Infrastructure
 
 - Docker
 - AWS
@@ -474,7 +473,7 @@ The following organizational facts are considered persistent knowledge for inter
 
 ---
 
-# 7. Decision-Making Principles
+## 7. Decision-Making Principles
 
 Every automated system should prioritize:
 
@@ -488,15 +487,15 @@ Every automated system should prioritize:
 
 ---
 
-# 8. Revision History
+## 8. Revision History
 
 | Version         | Date        | Summary                                                                     | Author   |
 | --------------- | ----------- | --------------------------------------------------------------------------- | -------- |
-| **1.0.0** | August 2026 | Initial memory system, ADRs, team roles, compliance policies, AI directives | Om (CEO) |
+| **1.0.0**       | August 2026 | Initial memory system, ADRs, team roles, compliance policies, AI directives | Om (CEO) |
 
 ---
 
-# 9. Future ADR Guidelines
+## 9. Future ADR Guidelines
 
 Every significant architectural or business decision should be documented using the following format.
 
@@ -520,27 +519,27 @@ Review Date
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Om**
 Founder & CEO
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Somnath**
 Lead Systems Engineer
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                     | Value                                                                         |
 | ---------------------------- | ----------------------------------------------------------------------------- |
-| **Document Name**      | System Knowledge Base, AI Context Parameters & Architectural Decision Records |
-| **Version**            | 1.0                                                                           |
-| **Status**             | Draft                                                                         |
-| **Primary Owner**      | Om (Founder & CEO)                                                            |
-| **Secondary Reviewer** | Somnath                                                                       |
-| **Last Updated**       | August 2026                                                                   |
+| **Document Name**            | System Knowledge Base, AI Context Parameters & Architectural Decision Records |
+| **Version**                  | 1.0                                                                           |
+| **Status**                   | Draft                                                                         |
+| **Primary Owner**            | Om (Founder & CEO)                                                            |
+| **Secondary Reviewer**       | Somnath                                                                       |
+| **Last Updated**             | August 2026                                                                   |

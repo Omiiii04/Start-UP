@@ -1,11 +1,10 @@
-
 # Workflow.md
 
-# End-to-End Project Lifecycle, Execution Workflow & Delivery Protocol
+## End-to-End Project Lifecycle, Execution Workflow & Delivery Protocol
 
 ---
 
-# 1. Executive Summary & Workflow Philosophy
+## 1. Executive Summary & Workflow Philosophy
 
 To ensure operational excellence, consistent software quality, transparent communication, and predictable project delivery, every client engagement follows a standardized **15-step project lifecycle**.
 
@@ -15,7 +14,7 @@ Every project must follow this workflow unless explicitly approved otherwise by 
 
 ---
 
-# 2. End-to-End 15-Step Project Lifecycle
+## 2. End-to-End 15-Step Project Lifecycle
 
 ```text
 Client Inquiry
@@ -68,46 +67,46 @@ Client Inquiry
 
 ---
 
-# 3. Detailed Workflow Steps
+## 3. Detailed Workflow Steps
 
 | Step         | Phase                          | Responsible Owner   | Primary Inputs                 | Deliverable                       |
 | ------------ | ------------------------------ | ------------------- | ------------------------------ | --------------------------------- |
-| **1**  | Requirement Submission         | Divya               | Client requirements, documents | Intake ID & acknowledgement       |
-| **2**  | Technical Feasibility Review   | Om & Somnath        | Requirement brief              | Approved / Rejected / Restructure |
-| **3**  | Requirement Discussion         | Divya & Om          | Discovery meeting              | Requirement clarification         |
-| **4**  | Scope Finalization             | Om & Somnath        | Meeting notes                  | Final scope document              |
-| **5**  | Quotation Generation           | Divya               | Pricing Matrix                 | Formal quotation                  |
-| **6**  | Agreement Sign-Off             | Om & Divya          | MSA & SOW                      | Signed legal agreement            |
-| **7**  | Advance Payment                | Divya               | Payment confirmation           | Invoice & receipt                 |
-| **8**  | Architecture & Sprint Planning | Om & Somnath        | Signed agreement               | Sprint backlog & architecture     |
-| **9**  | Sprint Development             | Somnath & Falguni   | Sprint backlog                 | Working application               |
-| **10** | QA & Progress Updates          | Falguni & Divya     | Test reports                   | QA approval & progress update     |
-| **11** | Client Demonstration           | Om, Somnath & Divya | Staging deployment             | Client approval                   |
-| **12** | Final Delivery                 | Om & Somnath        | Production build               | Delivery package                  |
-| **13** | Final Payment                  | Divya               | Final invoice                  | Payment confirmation              |
-| **14** | Source Code Handover           | Om & Somnath        | Repository, documentation      | Complete project transfer         |
-| **15** | Support & Project Closure      | Somnath & Falguni   | Support requests               | Project archive & testimonial     |
+| **1**        | Requirement Submission         | Divya               | Client requirements, documents | Intake ID & acknowledgement       |
+| **2**        | Technical Feasibility Review   | Om & Somnath        | Requirement brief              | Approved / Rejected / Restructure |
+| **3**        | Requirement Discussion         | Divya & Om          | Discovery meeting              | Requirement clarification         |
+| **4**        | Scope Finalization             | Om & Somnath        | Meeting notes                  | Final scope document              |
+| **5**        | Quotation Generation           | Divya               | Pricing Matrix                 | Formal quotation                  |
+| **6**        | Agreement Sign-Off             | Om & Divya          | MSA & SOW                      | Signed legal agreement            |
+| **7**        | Advance Payment                | Divya               | Payment confirmation           | Invoice & receipt                 |
+| **8**        | Architecture & Sprint Planning | Om & Somnath        | Signed agreement               | Sprint backlog & architecture     |
+| **9**        | Sprint Development             | Somnath & Falguni   | Sprint backlog                 | Working application               |
+| **10**       | QA & Progress Updates          | Falguni & Divya     | Test reports                   | QA approval & progress update     |
+| **11**       | Client Demonstration           | Om, Somnath & Divya | Staging deployment             | Client approval                   |
+| **12**       | Final Delivery                 | Om & Somnath        | Production build               | Delivery package                  |
+| **13**       | Final Payment                  | Divya               | Final invoice                  | Payment confirmation              |
+| **14**       | Source Code Handover           | Om & Somnath        | Repository, documentation      | Complete project transfer         |
+| **15**       | Support & Project Closure      | Somnath & Falguni   | Support requests               | Project archive & testimonial     |
 
 ---
 
-# 4. Detailed Step Specifications
+## 4. Detailed Step Specifications
 
 ---
 
-## Step 1 — Requirement Submission
+### Step 1 — Requirement Submission
 
-### Objective
+#### Objective
 
 Capture complete client requirements.
 
-### Activities
+#### Activities
 
 - Project inquiry
 - File uploads
 - Budget indication
 - Timeline expectations
 
-### Outputs
+#### Outputs
 
 - Intake Record
 - Tracking ID
@@ -115,9 +114,9 @@ Capture complete client requirements.
 
 ---
 
-## Step 2 — Technical Feasibility Review
+### Step 2 — Technical Feasibility Review
 
-### Objective
+#### Objective
 
 Evaluate:
 
@@ -126,7 +125,7 @@ Evaluate:
 - Timeline feasibility
 - UGC compliance
 
-### Possible Outcomes
+#### Possible Outcomes
 
 ```text
 APPROVED
@@ -138,9 +137,9 @@ REQUIRES RESTRUCTURING
 
 ---
 
-## Step 3 — Requirement Discussion
+### Step 3 — Requirement Discussion
 
-### Objective
+#### Objective
 
 Conduct a discovery session.
 
@@ -153,7 +152,7 @@ Topics include:
 
 ---
 
-## Step 4 — Scope Finalization
+### Step 4 — Scope Finalization
 
 Deliverables include:
 
@@ -170,7 +169,7 @@ Outputs
 
 ---
 
-## Step 5 — Quotation Generation
+### Step 5 — Quotation Generation
 
 Quotation includes:
 
@@ -187,7 +186,7 @@ Outputs
 
 ---
 
-## Step 6 — Agreement Sign-Off
+### Step 6 — Agreement Sign-Off
 
 Required Documents
 
@@ -198,7 +197,7 @@ Both parties must digitally approve the agreement before work begins.
 
 ---
 
-## Step 7 — Advance Payment
+### Step 7 — Advance Payment
 
 Payment verification through:
 
@@ -213,7 +212,7 @@ Outputs
 
 ---
 
-## Step 8 — Architecture & Sprint Planning
+### Step 8 — Architecture & Sprint Planning
 
 Activities
 
@@ -231,7 +230,7 @@ Outputs
 
 ---
 
-## Step 9 — Sprint Development
+### Step 9 — Sprint Development
 
 Development includes:
 
@@ -249,7 +248,7 @@ Outputs
 
 ---
 
-## Step 10 — QA & Progress Updates
+### Step 10 — QA & Progress Updates
 
 Activities
 
@@ -265,7 +264,7 @@ Outputs
 
 ---
 
-## Step 11 — Client Demonstration
+### Step 11 — Client Demonstration
 
 Demonstration includes:
 
@@ -280,7 +279,7 @@ Outputs
 
 ---
 
-## Step 12 — Final Delivery
+### Step 12 — Final Delivery
 
 Deliverables
 
@@ -295,7 +294,7 @@ Outputs
 
 ---
 
-## Step 13 — Final Payment
+### Step 13 — Final Payment
 
 Before project handover:
 
@@ -310,7 +309,7 @@ Outputs
 
 ---
 
-## Step 14 — Source Code Handover
+### Step 14 — Source Code Handover
 
 Client receives:
 
@@ -327,7 +326,7 @@ Outputs
 
 ---
 
-## Step 15 — Post-Delivery Support
+### Step 15 — Post-Delivery Support
 
 Standard Support Period
 
@@ -347,13 +346,13 @@ After completion:
 
 ---
 
-# 5. Workflow Phase Grouping
+## 5. Workflow Phase Grouping
 
 The complete workflow is divided into five operational phases.
 
 ---
 
-## Phase I — Client Onboarding
+### Phase I — Client Onboarding
 
 **Steps:** 1–3
 
@@ -363,14 +362,14 @@ Objectives
 - Verify feasibility
 - Ensure UGC compliance
 
-### Exit Criteria
+#### Exit Criteria
 
 - Requirement approved
 - Discovery complete
 
 ---
 
-## Phase II — Contract & Financial Authorization
+### Phase II — Contract & Financial Authorization
 
 **Steps:** 4–7
 
@@ -380,14 +379,14 @@ Objectives
 - Execute agreements
 - Secure advance payment
 
-### Exit Criteria
+#### Exit Criteria
 
 - Signed MSA & SOW
 - Advance payment received
 
 ---
 
-## Phase III — Engineering & Quality Assurance
+### Phase III — Engineering & Quality Assurance
 
 **Steps:** 8–10
 
@@ -397,14 +396,14 @@ Objectives
 - Execute testing
 - Maintain transparency
 
-### Exit Criteria
+#### Exit Criteria
 
 - QA passed
 - Staging deployment ready
 
 ---
 
-## Phase IV — Demonstration & Financial Closure
+### Phase IV — Demonstration & Financial Closure
 
 **Steps:** 11–13
 
@@ -414,14 +413,14 @@ Objectives
 - Obtain approval
 - Complete financial settlement
 
-### Exit Criteria
+#### Exit Criteria
 
 - Client approval
 - Final payment received
 
 ---
 
-## Phase V — Handover & Maintenance
+### Phase V — Handover & Maintenance
 
 **Steps:** 14–15
 
@@ -431,14 +430,14 @@ Objectives
 - Provide support
 - Close project
 
-### Exit Criteria
+#### Exit Criteria
 
 - Support period completed
 - Project archived
 
 ---
 
-# 6. Governance Gates
+## 6. Governance Gates
 
 Projects cannot proceed unless mandatory gates are satisfied.
 
@@ -453,13 +452,13 @@ Projects cannot proceed unless mandatory gates are satisfied.
 
 ---
 
-# 7. Change Request & Scope Creep Management
+## 7. Change Request & Scope Creep Management
 
 All scope modifications follow a formal Change Order process.
 
 ---
 
-## Step 1 — Change Request
+### Step 1 — Change Request
 
 Client submits a request for additional functionality.
 
@@ -467,7 +466,7 @@ Development pauses for the affected module until evaluation is complete.
 
 ---
 
-## Step 2 — Impact Assessment
+### Step 2 — Impact Assessment
 
 Engineering evaluates:
 
@@ -478,7 +477,7 @@ Engineering evaluates:
 
 ---
 
-## Step 3 — Change Order
+### Step 3 — Change Order
 
 Operations prepares:
 
@@ -488,7 +487,7 @@ Operations prepares:
 
 ---
 
-## Step 4 — Client Approval
+### Step 4 — Client Approval
 
 Development resumes only after:
 
@@ -498,7 +497,7 @@ Development resumes only after:
 
 ---
 
-# 8. Service Level Agreements (SLAs)
+## 8. Service Level Agreements (SLAs)
 
 | Activity                | SLA                    |
 | ----------------------- | ---------------------- |
@@ -511,7 +510,7 @@ Development resumes only after:
 
 ---
 
-# 9. Workflow Principles
+## 9. Workflow Principles
 
 Every project follows these principles:
 
@@ -528,27 +527,27 @@ Every project follows these principles:
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Divya**
 Head of Operations
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Om**
 Founder & CEO
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                                |
 | ----------------------- | -------------------------------------------------------------------- |
-| **Document Name** | End-to-End Project Lifecycle, Execution Workflow & Delivery Protocol |
-| **Version**       | 1.0                                                                  |
-| **Status**        | Draft                                                                |
-| **Primary Owner** | Divya                                                                |
-| **Reviewer**      | Om                                                                   |
-| **Last Updated**  | August 2026                                                          |
+| **Document Name**       | End-to-End Project Lifecycle, Execution Workflow & Delivery Protocol |
+| **Version**             | 1.0                                                                  |
+| **Status**              | Draft                                                                |
+| **Primary Owner**       | Divya                                                                |
+| **Reviewer**            | Om                                                                   |
+| **Last Updated**        | August 2026                                                          |

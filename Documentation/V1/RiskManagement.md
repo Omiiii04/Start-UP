@@ -1,11 +1,10 @@
-
 # RiskManagement.md
 
-# Operational Risk Matrix, Legal Compliance & Contingency Planning
+## Operational Risk Matrix, Legal Compliance & Contingency Planning
 
 ---
 
-# 1. Executive Summary & Risk Management Framework
+## 1. Executive Summary & Risk Management Framework
 
 Effective risk management is essential for maintaining operational continuity, protecting company assets, ensuring regulatory compliance, and sustaining long-term growth.
 
@@ -22,31 +21,31 @@ The objectives of this framework are to:
 
 ---
 
-# 2. Risk Assessment Methodology
+## 2. Risk Assessment Methodology
 
 Each identified risk is evaluated using two criteria:
 
-## Probability
+### Probability
 
 | Level            | Description         |
 | ---------------- | ------------------- |
-| **Low**    | Rare occurrence     |
-| **Medium** | Possible occurrence |
-| **High**   | Likely occurrence   |
+| **Low**          | Rare occurrence     |
+| **Medium**       | Possible occurrence |
+| **High**         | Likely occurrence   |
 
 ---
 
-## Impact
+### Impact
 
 | Level            | Description                |
 | ---------------- | -------------------------- |
-| **Low**    | Minimal operational impact |
-| **Medium** | Noticeable disruption      |
-| **High**   | Major business impact      |
+| **Low**          | Minimal operational impact |
+| **Medium**       | Noticeable disruption      |
+| **High**         | Major business impact      |
 
 ---
 
-## Risk Priority Matrix
+### Risk Priority Matrix
 
 | Probability | Impact | Risk Level |
 | ----------- | ------ | ---------- |
@@ -59,36 +58,36 @@ Each identified risk is evaluated using two criteria:
 
 ---
 
-# 3. Operational Risk Register
+## 3. Operational Risk Register
 
 | Risk ID        | Category                   | Probability | Impact   | Risk Level | Owner             |
 | -------------- | -------------------------- | ----------- | -------- | ---------- | ----------------- |
-| **R-01** | UGC Compliance Violation   | High        | High     | Critical   | Om & Divya        |
-| **R-02** | GST Non-Compliance         | Low         | Medium   | Medium     | Divya             |
-| **R-03** | Payment Default            | Medium      | High     | High       | Divya             |
-| **R-04** | Scope Creep                | High        | Medium   | High       | Om & Divya        |
-| **R-05** | Key Person Dependency      | Medium      | High     | High       | Om                |
-| **R-06** | Operational Bottleneck     | High        | Medium   | High       | Divya             |
-| **R-07** | Intellectual Property Loss | Low         | High     | High       | Om                |
-| **R-08** | Credential Leakage         | Low         | High     | High       | Somnath & Falguni |
-| **R-09** | Infrastructure Failure     | Medium      | High     | High       | Somnath           |
-| **R-10** | Data Loss                  | Low         | Critical | Critical   | Om & Somnath      |
+| **R-01**       | UGC Compliance Violation   | High        | High     | Critical   | Om & Divya        |
+| **R-02**       | GST Non-Compliance         | Low         | Medium   | Medium     | Divya             |
+| **R-03**       | Payment Default            | Medium      | High     | High       | Divya             |
+| **R-04**       | Scope Creep                | High        | Medium   | High       | Om & Divya        |
+| **R-05**       | Key Person Dependency      | Medium      | High     | High       | Om                |
+| **R-06**       | Operational Bottleneck     | High        | Medium   | High       | Divya             |
+| **R-07**       | Intellectual Property Loss | Low         | High     | High       | Om                |
+| **R-08**       | Credential Leakage         | Low         | High     | High       | Somnath & Falguni |
+| **R-09**       | Infrastructure Failure     | Medium      | High     | High       | Somnath           |
+| **R-10**       | Data Loss                  | Low         | Critical | Critical   | Om & Somnath      |
 
 ---
 
-# 4. Legal & Regulatory Risks
+## 4. Legal & Regulatory Risks
 
 ---
 
-## R-01 — Academic Integrity & UGC Compliance
+### R-01 — Academic Integrity & UGC Compliance
 
-### Risk Description
+#### Risk Description
 
 Projects involving ghostwriting, proxy coursework, thesis writing, or other prohibited academic work may expose the organization to legal, contractual, and reputational consequences.
 
 ---
 
-### Impact
+#### Impact
 
 - Regulatory violations
 - Reputation damage
@@ -97,7 +96,7 @@ Projects involving ghostwriting, proxy coursework, thesis writing, or other proh
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Reject prohibited requests.
 - Enforce mandatory academic integrity screening.
@@ -106,22 +105,22 @@ Projects involving ghostwriting, proxy coursework, thesis writing, or other proh
 
 ---
 
-### Risk Owner
+#### Risk Owner
 
 - Om
 - Divya
 
 ---
 
-## R-02 — GST & Tax Compliance
+### R-02 — GST & Tax Compliance
 
-### Risk Description
+#### Risk Description
 
 Incorrect tax calculations, improper invoicing, or delayed statutory filings.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Automated GST calculations
 - Invoice validation
@@ -130,25 +129,25 @@ Incorrect tax calculations, improper invoicing, or delayed statutory filings.
 
 ---
 
-### Owner
+#### Owner
 
 Divya
 
 ---
 
-# 5. Financial Risks
+## 5. Financial Risks
 
 ---
 
-## R-03 — Payment Default
+### R-03 — Payment Default
 
-### Risk Description
+#### Risk Description
 
 Clients fail to complete milestone payments after significant engineering work has been delivered.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Milestone-based billing
 - Advance payments
@@ -157,21 +156,21 @@ Clients fail to complete milestone payments after significant engineering work h
 
 ---
 
-### Owner
+#### Owner
 
 Divya
 
 ---
 
-## R-04 — Scope Creep
+### R-04 — Scope Creep
 
-### Risk Description
+#### Risk Description
 
 Clients request additional work beyond the agreed Statement of Work without corresponding adjustments to budget or timeline.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Signed SOW
 - Formal Change Orders
@@ -180,25 +179,25 @@ Clients request additional work beyond the agreed Statement of Work without corr
 
 ---
 
-### Owner
+#### Owner
 
 Om & Divya
 
 ---
 
-# 6. Operational Risks
+## 6. Operational Risks
 
 ---
 
-## R-05 — Key Person Dependency
+### R-05 — Key Person Dependency
 
-### Risk Description
+#### Risk Description
 
 Critical knowledge concentrated within a single team member may delay projects if that individual becomes unavailable.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Documentation-first culture
 - Cross-training
@@ -208,21 +207,21 @@ Critical knowledge concentrated within a single team member may delay projects i
 
 ---
 
-### Owner
+#### Owner
 
 Om
 
 ---
 
-## R-06 — Operations Overload
+### R-06 — Operations Overload
 
-### Risk Description
+#### Risk Description
 
 High inquiry volumes may overwhelm operations, leading to delayed communication and project administration.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - CRM automation
 - Workflow automation
@@ -231,25 +230,25 @@ High inquiry volumes may overwhelm operations, leading to delayed communication 
 
 ---
 
-### Owner
+#### Owner
 
 Divya
 
 ---
 
-# 7. Technical Risks
+## 7. Technical Risks
 
 ---
 
-## R-07 — Intellectual Property Loss
+### R-07 — Intellectual Property Loss
 
-### Risk Description
+#### Risk Description
 
 Loss of ownership over reusable internal frameworks, libraries, templates, or infrastructure assets.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Background IP clauses
 - MSA protection
@@ -258,15 +257,15 @@ Loss of ownership over reusable internal frameworks, libraries, templates, or in
 
 ---
 
-### Owner
+#### Owner
 
 Om
 
 ---
 
-## R-08 — Credential Exposure
+### R-08 — Credential Exposure
 
-### Risk Description
+#### Risk Description
 
 Accidental exposure of:
 
@@ -277,7 +276,7 @@ Accidental exposure of:
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Environment variables
 - AWS Secrets Manager
@@ -287,21 +286,21 @@ Accidental exposure of:
 
 ---
 
-### Owner
+#### Owner
 
 Somnath & Falguni
 
 ---
 
-## R-09 — Infrastructure Failure
+### R-09 — Infrastructure Failure
 
-### Risk Description
+#### Risk Description
 
 Cloud outages, server failures, or deployment issues affecting service availability.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Automated backups
 - Multi-AZ deployments
@@ -311,21 +310,21 @@ Cloud outages, server failures, or deployment issues affecting service availabil
 
 ---
 
-### Owner
+#### Owner
 
 Somnath
 
 ---
 
-## R-10 — Data Loss
+### R-10 — Data Loss
 
-### Risk Description
+#### Risk Description
 
 Loss of production databases, client files, or critical project documentation.
 
 ---
 
-### Mitigation
+#### Mitigation
 
 - Daily backups
 - Version control
@@ -335,19 +334,19 @@ Loss of production databases, client files, or critical project documentation.
 
 ---
 
-### Owner
+#### Owner
 
 Om & Somnath
 
 ---
 
-# 8. Information Security Controls
+## 8. Information Security Controls
 
 The organization follows security-first engineering principles.
 
 ---
 
-## Identity & Access
+### Identity & Access
 
 - Multi-Factor Authentication
 - Role-Based Access Control
@@ -356,7 +355,7 @@ The organization follows security-first engineering principles.
 
 ---
 
-## Infrastructure Security
+### Infrastructure Security
 
 - TLS 1.3
 - AES-256 Encryption
@@ -366,7 +365,7 @@ The organization follows security-first engineering principles.
 
 ---
 
-## Repository Security
+### Repository Security
 
 - Protected branches
 - Required code reviews
@@ -375,9 +374,9 @@ The organization follows security-first engineering principles.
 
 ---
 
-# 9. Business Continuity Plan
+## 9. Business Continuity Plan
 
-## Operational Continuity
+### Operational Continuity
 
 If a critical team member becomes unavailable:
 
@@ -390,7 +389,7 @@ If a critical team member becomes unavailable:
 
 ---
 
-## Infrastructure Continuity
+### Infrastructure Continuity
 
 In case of cloud failure:
 
@@ -402,9 +401,9 @@ In case of cloud failure:
 
 ---
 
-# 10. Incident Response Framework
+## 10. Incident Response Framework
 
-## Incident Workflow
+### Incident Workflow
 
 ```text
 Incident Detected
@@ -430,19 +429,19 @@ Post-Incident Review
 
 ---
 
-## Response Timeline
+### Response Timeline
 
 | Time               | Action                         |
 | ------------------ | ------------------------------ |
-| **T+0**      | Detect and classify incident   |
-| **T+30 min** | Containment initiated          |
-| **T+2 hrs**  | Root cause investigation       |
-| **T+6 hrs**  | Patch or recovery deployed     |
-| **T+24 hrs** | Post-incident review completed |
+| **T+0**            | Detect and classify incident   |
+| **T+30 min**       | Containment initiated          |
+| **T+2 hrs**        | Root cause investigation       |
+| **T+6 hrs**        | Patch or recovery deployed     |
+| **T+24 hrs**       | Post-incident review completed |
 
 ---
 
-# 11. Disaster Recovery Strategy
+## 11. Disaster Recovery Strategy
 
 Critical assets protected through:
 
@@ -454,16 +453,16 @@ Critical assets protected through:
 
 ---
 
-## Recovery Objectives
+### Recovery Objectives
 
 | Metric                                   | Target   |
 | ---------------------------------------- | -------- |
-| **Recovery Time Objective (RTO)**  | 4 Hours  |
-| **Recovery Point Objective (RPO)** | 24 Hours |
+| **Recovery Time Objective (RTO)**        | 4 Hours  |
+| **Recovery Point Objective (RPO)**       | 24 Hours |
 
 ---
 
-# 12. Risk Monitoring & Review
+## 12. Risk Monitoring & Review
 
 Risk reviews are conducted according to the following schedule:
 
@@ -477,7 +476,7 @@ Risk reviews are conducted according to the following schedule:
 
 ---
 
-# 13. Escalation Matrix
+## 13. Escalation Matrix
 
 | Severity | Escalation Owner | Response Priority |
 | -------- | ---------------- | ----------------- |
@@ -488,7 +487,7 @@ Risk reviews are conducted according to the following schedule:
 
 ---
 
-# 14. Risk Management Principles
+## 14. Risk Management Principles
 
 The organization follows these guiding principles:
 
@@ -503,28 +502,28 @@ The organization follows these guiding principles:
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Divya**
 Head of Operations, Management & Marketing
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Om**
 Founder & CEO
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                   | Value                                                            |
 | -------------------------- | ---------------------------------------------------------------- |
-| **Document Name**    | Operational Risk Matrix, Legal Compliance & Contingency Planning |
-| **Version**          | 1.0                                                              |
-| **Status**           | Draft                                                            |
-| **Primary Owner**    | Divya                                                            |
-| **Reviewer**         | Om                                                               |
-| **Review Frequency** | Quarterly                                                        |
-| **Last Updated**     | August 2026                                                      |
+| **Document Name**          | Operational Risk Matrix, Legal Compliance & Contingency Planning |
+| **Version**                | 1.0                                                              |
+| **Status**                 | Draft                                                            |
+| **Primary Owner**          | Divya                                                            |
+| **Reviewer**               | Om                                                               |
+| **Review Frequency**       | Quarterly                                                        |
+| **Last Updated**           | August 2026                                                      |

@@ -1,11 +1,10 @@
-
 # ProjectRequirements.md
 
-# Project Intake, Technical Feasibility & Requirement Standards
+## Project Intake, Technical Feasibility & Requirement Standards
 
 ---
 
-# 1. Overview & Document Purpose
+## 1. Overview & Document Purpose
 
 This document establishes the **functional**, **non-functional**, **technical**, and **legal** standards governing every project undertaken by the organization.
 
@@ -23,26 +22,26 @@ Every engagement—whether for **students**, **academic researchers**, **startup
 
 ---
 
-# 2. Project Classification & Scope Boundaries
+## 2. Project Classification & Scope Boundaries
 
 Projects are categorized into four service tiers based on technical complexity, engineering effort, expected deliverables, and project duration.
 
 ---
 
-## Project Tier Matrix
+### Project Tier Matrix
 
 | Service Tier                              | Target Audience                  | Price Range            | Estimated Timeline |
 | ----------------------------------------- | -------------------------------- | ---------------------- | ------------------ |
-| **Tier 1 – Micro Consulting**      | Students, Independent Developers | ₹2,000 – ₹10,000    | 1–3 Days          |
-| **Tier 2 – Research Support**      | Researchers, PG Students         | ₹10,000 – ₹30,000   | 1–2 Weeks         |
-| **Tier 3 – MVP Development**       | Early-Stage Founders, SMEs       | ₹25,000 – ₹60,000   | 2–4 Weeks         |
-| **Tier 4 – Enterprise AI & MLOps** | Mid-Sized Businesses, Scale-Ups  | ₹60,000 – ₹100,000+ | 1–2 Months        |
+| **Tier 1 – Micro Consulting**             | Students, Independent Developers | ₹2,000 – ₹10,000       | 1–3 Days           |
+| **Tier 2 – Research Support**             | Researchers, PG Students         | ₹10,000 – ₹30,000      | 1–2 Weeks          |
+| **Tier 3 – MVP Development**              | Early-Stage Founders, SMEs       | ₹25,000 – ₹60,000      | 2–4 Weeks          |
+| **Tier 4 – Enterprise AI & MLOps**        | Mid-Sized Businesses, Scale-Ups  | ₹60,000 – ₹100,000+    | 1–2 Months         |
 
 ---
 
-## Tier 1 — Micro Consulting & Debugging
+### Tier 1 — Micro Consulting & Debugging
 
-### Permitted Scope
+#### Permitted Scope
 
 - Script optimization
 - Bug fixing
@@ -53,7 +52,7 @@ Projects are categorized into four service tiers based on technical complexity, 
 - Code review
 - Dependency management
 
-### Excluded Services
+#### Excluded Services
 
 - Assignment completion
 - Final-year project proxy work
@@ -62,9 +61,9 @@ Projects are categorized into four service tiers based on technical complexity, 
 
 ---
 
-## Tier 2 — Research Implementation Support
+### Tier 2 — Research Implementation Support
 
-### Permitted Scope
+#### Permitted Scope
 
 - Dataset preprocessing
 - Machine Learning training
@@ -74,7 +73,7 @@ Projects are categorized into four service tiers based on technical complexity, 
 - Research infrastructure
 - Open-source implementation
 
-### Excluded Services
+#### Excluded Services
 
 - Thesis writing
 - Research paper authoring
@@ -83,9 +82,9 @@ Projects are categorized into four service tiers based on technical complexity, 
 
 ---
 
-## Tier 3 — MVP & Software Development
+### Tier 3 — MVP & Software Development
 
-### Permitted Scope
+#### Permitted Scope
 
 - Web Applications
 - Mobile Applications
@@ -95,7 +94,7 @@ Projects are categorized into four service tiers based on technical complexity, 
 - Authentication
 - Cloud Deployment
 
-### Excluded Services
+#### Excluded Services
 
 - Unlimited feature requests
 - Undefined project scope
@@ -103,9 +102,9 @@ Projects are categorized into four service tiers based on technical complexity, 
 
 ---
 
-## Tier 4 — Enterprise AI, MLOps & Advanced Systems
+### Tier 4 — Enterprise AI, MLOps & Advanced Systems
 
-### Permitted Scope
+#### Permitted Scope
 
 - AI Platform Development
 - LLM Applications
@@ -116,7 +115,7 @@ Projects are categorized into four service tiers based on technical complexity, 
 - Automated Testing
 - Enterprise Integrations
 
-### Excluded Services
+#### Excluded Services
 
 - Unverified production deployments
 - Credential sharing
@@ -125,13 +124,13 @@ Projects are categorized into four service tiers based on technical complexity, 
 
 ---
 
-# 3. Technical Feasibility & Evaluation Framework
+## 3. Technical Feasibility & Evaluation Framework
 
 Before issuing a quotation or Statement of Work (SOW), every project undergoes a structured technical evaluation conducted by **Om (Lead Architect)** and **Somnath (Backend Lead)**.
 
 ---
 
-## Evaluation Process
+### Evaluation Process
 
 ```text
 Client Requirement
@@ -161,9 +160,9 @@ Generated    Restructure
 
 ---
 
-## 3.1 Evaluation Criteria
+### 3.1 Evaluation Criteria
 
-### 1. Technology Stack Compatibility
+#### 1. Technology Stack Compatibility
 
 Questions
 
@@ -186,7 +185,7 @@ Approved Technologies
 
 ---
 
-### 2. Timeline Feasibility
+#### 2. Timeline Feasibility
 
 Assessment includes:
 
@@ -196,7 +195,7 @@ Assessment includes:
 - Deployment
 - Buffer Period
 
-### Rush Requests
+#### Rush Requests
 
 Projects requiring delivery within **48 hours** require:
 
@@ -206,7 +205,7 @@ Projects requiring delivery within **48 hours** require:
 
 ---
 
-### 3. Resource & Capacity Planning
+#### 3. Resource & Capacity Planning
 
 Review Team Availability
 
@@ -221,7 +220,7 @@ The project is accepted only if sufficient engineering capacity exists.
 
 ---
 
-# 4. UGC Compliance & Legal Guardrails
+## 4. UGC Compliance & Legal Guardrails
 
 All academic engagements must comply with:
 
@@ -229,7 +228,7 @@ All academic engagements must comply with:
 
 ---
 
-## UGC Compliance Filter
+### UGC Compliance Filter
 
 ```text
                     UGC COMPLIANCE ENGINE
@@ -253,7 +252,7 @@ Proceed to Quotation         Reject or Restructure
 
 ---
 
-## Mandatory Client Declaration
+### Mandatory Client Declaration
 
 Every student and researcher must digitally acknowledge the following statement before project onboarding.
 
@@ -261,15 +260,15 @@ Every student and researcher must digitally acknowledge the following statement 
 
 ---
 
-# 5. Standard Non-Functional Project Requirements
+## 5. Standard Non-Functional Project Requirements
 
 Every software deliverable must satisfy the organization's engineering standards before client delivery.
 
 ---
 
-## 5.1 Code Quality Standards
+### 5.1 Code Quality Standards
 
-### Modularity
+#### Modularity
 
 Applications should follow clear separation of concerns using layered architecture, including:
 
@@ -281,7 +280,7 @@ Applications should follow clear separation of concerns using layered architectu
 
 ---
 
-### Documentation
+#### Documentation
 
 Every project must include:
 
@@ -293,7 +292,7 @@ Every project must include:
 
 ---
 
-### Version Control
+#### Version Control
 
 Mandatory Git Branches
 
@@ -309,9 +308,9 @@ No code is demonstrated to clients unless merged through the defined branching s
 
 ---
 
-## 5.2 Security Standards
+### 5.2 Security Standards
 
-### Secret Management
+#### Secret Management
 
 Never hardcode:
 
@@ -331,7 +330,7 @@ Secret Manager
 
 ---
 
-### Database Security
+#### Database Security
 
 Requirements
 
@@ -342,7 +341,7 @@ Requirements
 
 ---
 
-### Secure Communication
+#### Secure Communication
 
 All APIs must use:
 
@@ -353,27 +352,27 @@ All APIs must use:
 
 ---
 
-# 6. Deliverable Sign-Off & Acceptance Criteria
+## 6. Deliverable Sign-Off & Acceptance Criteria
 
 A project reaches **Final Delivery (Step 12)** only after all acceptance conditions are satisfied.
 
 ---
 
-## Acceptance Checklist
+### Acceptance Checklist
 
-### 1. Staging Verification
+#### 1. Staging Verification
 
 The complete solution must execute successfully in the staging environment without critical defects.
 
 ---
 
-### 2. QA Approval
+#### 2. QA Approval
 
 All acceptance criteria defined in the Statement of Work (SOW) must pass functional and quality assurance testing.
 
 ---
 
-### 3. Financial Clearance
+#### 3. Financial Clearance
 
 Before source code or production credentials are transferred:
 
@@ -382,7 +381,7 @@ Before source code or production credentials are transferred:
 
 ---
 
-### 4. Documentation Delivery
+#### 4. Documentation Delivery
 
 The client receives:
 
@@ -394,7 +393,7 @@ The client receives:
 
 ---
 
-### 5. Support Window
+#### 5. Support Window
 
 Each completed project includes:
 
@@ -404,26 +403,26 @@ Each completed project includes:
 
 ---
 
-# 7. Project Approval Checklist
+## 7. Project Approval Checklist
 
 Before project initiation, the following conditions must be satisfied.
 
 | Requirement                             | Status |
 | --------------------------------------- | ------ |
-| Requirement Gathering Completed         | ☐     |
-| Technical Feasibility Approved          | ☐     |
-| Scope Finalized                         | ☐     |
-| Quotation Issued                        | ☐     |
-| Statement of Work Signed                | ☐     |
-| Master Service Agreement Signed         | ☐     |
-| UGC Compliance Verified (if applicable) | ☐     |
-| Initial Payment Received                | ☐     |
-| Sprint Planning Completed               | ☐     |
-| Development Approved                    | ☐     |
+| Requirement Gathering Completed         | ☐      |
+| Technical Feasibility Approved          | ☐      |
+| Scope Finalized                         | ☐      |
+| Quotation Issued                        | ☐      |
+| Statement of Work Signed                | ☐      |
+| Master Service Agreement Signed         | ☐      |
+| UGC Compliance Verified (if applicable) | ☐      |
+| Initial Payment Received                | ☐      |
+| Sprint Planning Completed               | ☐      |
+| Development Approved                    | ☐      |
 
 ---
 
-# Engineering Principles
+## Engineering Principles
 
 Every project undertaken by the organization follows these principles:
 
@@ -440,13 +439,13 @@ Every project undertaken by the organization follows these principles:
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                         |
 | ----------------------- | ------------------------------------------------------------- |
-| **Document Name** | Project Intake, Technical Feasibility & Requirement Standards |
-| **Version**       | 1.0                                                           |
-| **Status**        | Draft                                                         |
-| **Primary Owner** | Om (CEO & Lead Architect)                                     |
-| **Reviewers**     | Somnath, Falguni, Divya                                       |
-| **Last Updated**  | August 2026                                                   |
+| **Document Name**       | Project Intake, Technical Feasibility & Requirement Standards |
+| **Version**             | 1.0                                                           |
+| **Status**              | Draft                                                         |
+| **Primary Owner**       | Om (CEO & Lead Architect)                                     |
+| **Reviewers**           | Somnath, Falguni, Divya                                       |
+| **Last Updated**        | August 2026                                                   |

@@ -1,11 +1,10 @@
-
 # Phases.md
 
-# Corporate Execution Roadmap, Strategic Phases & Growth Milestones
+## Corporate Execution Roadmap, Strategic Phases & Growth Milestones
 
 ---
 
-# 1. Executive Summary & Growth Strategy
+## 1. Executive Summary & Growth Strategy
 
 To establish a sustainable, process-driven, and scalable technology services consultancy, the organization follows a structured four-phase execution roadmap.
 
@@ -21,30 +20,30 @@ The roadmap emphasizes gradual expansion from campus-focused consulting to enter
 
 ---
 
-# 2. Multi-Phase Execution Roadmap
+## 2. Multi-Phase Execution Roadmap
 
 | Phase             | Strategic Focus                       | Timeline       | Primary Objective                                    | Major Deliverables                                       |
 | ----------------- | ------------------------------------- | -------------- | ---------------------------------------------------- | -------------------------------------------------------- |
-| **Phase 1** | Foundation & Compliance               | Months 1–3    | Establish legal entity and operational foundation    | Company registration, GST, documentation, infrastructure |
-| **Phase 2** | Platform Launch & Campus Outreach     | Months 4–8    | Launch client platform and acquire initial customers | Client Portal, marketing campaigns, first 20+ projects   |
-| **Phase 3** | SME Expansion & Service Scaling       | Months 9–18   | Expand into commercial B2B engagements               | SME retainers, team growth, recurring revenue            |
-| **Phase 4** | Advanced Systems & Regional Expansion | Months 19–36+ | Diversify into advanced engineering domains          | AI, IoT, HealthTech, multi-city expansion                |
+| **Phase 1**       | Foundation & Compliance               | Months 1–3     | Establish legal entity and operational foundation    | Company registration, GST, documentation, infrastructure |
+| **Phase 2**       | Platform Launch & Campus Outreach     | Months 4–8     | Launch client platform and acquire initial customers | Client Portal, marketing campaigns, first 20+ projects   |
+| **Phase 3**       | SME Expansion & Service Scaling       | Months 9–18    | Expand into commercial B2B engagements               | SME retainers, team growth, recurring revenue            |
+| **Phase 4**       | Advanced Systems & Regional Expansion | Months 19–36+  | Diversify into advanced engineering domains          | AI, IoT, HealthTech, multi-city expansion                |
 
 ---
 
-# 3. Phase 1 — Foundation & Compliance
+## 3. Phase 1 — Foundation & Compliance
 
 **Timeline:** Months 1–3
 
-## Primary Objective
+### Primary Objective
 
 Establish the legal, operational, financial, and technical foundation required for long-term business operations.
 
 ---
 
-## Key Deliverables
+### Key Deliverables
 
-### Legal Foundation
+#### Legal Foundation
 
 - Register as a Private Limited Company (Pvt. Ltd.)
 - Complete statutory registrations
@@ -52,7 +51,7 @@ Establish the legal, operational, financial, and technical foundation required f
 
 ---
 
-### Regulatory Compliance
+#### Regulatory Compliance
 
 - DPIIT Startup India Registration
 - GST Registration
@@ -61,7 +60,7 @@ Establish the legal, operational, financial, and technical foundation required f
 
 ---
 
-### Documentation
+#### Documentation
 
 Complete and maintain all core documentation, including:
 
@@ -88,7 +87,7 @@ Complete and maintain all core documentation, including:
 
 ---
 
-### Internal Infrastructure
+#### Internal Infrastructure
 
 - GitHub Organization
 - AppFlowy Workspace
@@ -98,7 +97,7 @@ Complete and maintain all core documentation, including:
 
 ---
 
-## Success Metrics
+### Success Metrics
 
 - Legal registration completed
 - Documentation finalized
@@ -107,17 +106,17 @@ Complete and maintain all core documentation, including:
 
 ---
 
-# 4. Phase 2 — Platform Launch & Campus Outreach
+## 4. Phase 2 — Platform Launch & Campus Outreach
 
 **Timeline:** Months 4–8
 
-## Primary Objective
+### Primary Objective
 
 Launch the proprietary client platform and establish a presence within the academic ecosystem.
 
 ---
 
-## Platform Launch
+### Platform Launch
 
 Deliver the first production-ready version of:
 
@@ -129,7 +128,7 @@ Deliver the first production-ready version of:
 
 ---
 
-## Campus Outreach
+### Campus Outreach
 
 Target locations include:
 
@@ -148,7 +147,7 @@ Activities include:
 
 ---
 
-## Educational Programs
+### Educational Programs
 
 Host workshops covering:
 
@@ -160,7 +159,7 @@ Host workshops covering:
 
 ---
 
-## Client Acquisition Goals
+### Client Acquisition Goals
 
 Successfully complete:
 
@@ -174,7 +173,7 @@ Maintain:
 
 ---
 
-## Success Metrics
+### Success Metrics
 
 - Client portal operational
 - 20+ completed projects
@@ -183,17 +182,17 @@ Maintain:
 
 ---
 
-# 5. Phase 3 — SME Expansion & Service Scaling
+## 5. Phase 3 — SME Expansion & Service Scaling
 
 **Timeline:** Months 9–18
 
-## Primary Objective
+### Primary Objective
 
 Transition from predominantly academic engagements to recurring commercial contracts.
 
 ---
 
-## B2B Sales
+### B2B Sales
 
 Target industries include:
 
@@ -212,7 +211,7 @@ Target regions:
 
 ---
 
-## Service Expansion
+### Service Expansion
 
 Offer:
 
@@ -225,7 +224,7 @@ Offer:
 
 ---
 
-## Team Expansion
+### Team Expansion
 
 Recruit:
 
@@ -236,7 +235,7 @@ Recruit:
 
 ---
 
-## Financial Optimization
+### Financial Optimization
 
 Objectives include:
 
@@ -247,7 +246,7 @@ Objectives include:
 
 ---
 
-## Success Metrics
+### Success Metrics
 
 - Stable monthly recurring revenue
 - Multiple active SME retainers
@@ -256,17 +255,17 @@ Objectives include:
 
 ---
 
-# 6. Phase 4 — Advanced Systems & Regional Expansion
+## 6. Phase 4 — Advanced Systems & Regional Expansion
 
 **Timeline:** Months 19–36+
 
-## Primary Objective
+### Primary Objective
 
 Expand into advanced engineering services and broaden the company's regional presence.
 
 ---
 
-## Advanced Technologies
+### Advanced Technologies
 
 Develop expertise in:
 
@@ -280,7 +279,7 @@ Develop expertise in:
 
 ---
 
-## Industry Verticals
+### Industry Verticals
 
 Expand into:
 
@@ -292,7 +291,7 @@ Expand into:
 
 ---
 
-## Regional Expansion
+### Regional Expansion
 
 Expand operations beyond Pune into:
 
@@ -303,7 +302,7 @@ Expand operations beyond Pune into:
 
 ---
 
-## Organizational Growth
+### Organizational Growth
 
 Build specialized teams for:
 
@@ -315,7 +314,7 @@ Build specialized teams for:
 
 ---
 
-## Success Metrics
+### Success Metrics
 
 - Multi-city operations
 - Diversified client base
@@ -324,15 +323,15 @@ Build specialized teams for:
 
 ---
 
-# 7. Phase Transition Gates
+## 7. Phase Transition Gates
 
 Each phase transition requires formal review by leadership before progressing.
 
 ---
 
-## Gate 1 — Phase 1 → Phase 2
+### Gate 1 — Phase 1 → Phase 2
 
-### Requirements
+#### Requirements
 
 - Company registration completed
 - GST registration active
@@ -342,9 +341,9 @@ Each phase transition requires formal review by leadership before progressing.
 
 ---
 
-## Gate 2 — Phase 2 → Phase 3
+### Gate 2 — Phase 2 → Phase 3
 
-### Requirements
+#### Requirements
 
 - Minimum ₹150,000 gross revenue
 - Positive client feedback
@@ -354,9 +353,9 @@ Each phase transition requires formal review by leadership before progressing.
 
 ---
 
-## Gate 3 — Phase 3 → Phase 4
+### Gate 3 — Phase 3 → Phase 4
 
-### Requirements
+#### Requirements
 
 - Monthly recurring revenue exceeds operational costs
 - Section 80-IAC approval (where applicable)
@@ -365,18 +364,18 @@ Each phase transition requires formal review by leadership before progressing.
 
 ---
 
-# 8. Key Performance Indicators (KPIs)
+## 8. Key Performance Indicators (KPIs)
 
 | Phase             | Primary KPIs                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
-| **Phase 1** | Legal registration, documentation completion, infrastructure readiness |
-| **Phase 2** | Client portal launch, project delivery, customer acquisition           |
-| **Phase 3** | Monthly recurring revenue, SME retainers, engineering capacity         |
-| **Phase 4** | Regional expansion, advanced service offerings, organizational growth  |
+| **Phase 1**       | Legal registration, documentation completion, infrastructure readiness |
+| **Phase 2**       | Client portal launch, project delivery, customer acquisition           |
+| **Phase 3**       | Monthly recurring revenue, SME retainers, engineering capacity         |
+| **Phase 4**       | Regional expansion, advanced service offerings, organizational growth  |
 
 ---
 
-# 9. Strategic Principles
+## 9. Strategic Principles
 
 The execution roadmap is guided by the following principles:
 
@@ -389,7 +388,7 @@ The execution roadmap is guided by the following principles:
 
 ---
 
-# 10. Long-Term Vision
+## 10. Long-Term Vision
 
 By successfully completing all four phases, the organization aims to become:
 
@@ -401,13 +400,13 @@ By successfully completing all four phases, the organization aims to become:
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                             |
 | ----------------------- | ----------------------------------------------------------------- |
-| **Document Name** | Corporate Execution Roadmap, Strategic Phases & Growth Milestones |
-| **Version**       | 1.0                                                               |
-| **Status**        | Draft                                                             |
-| **Primary Owner** | Om (CEO & Founder)                                                |
-| **Reviewers**     | Divya, Somnath, Falguni                                           |
-| **Last Updated**  | August 2026                                                       |
+| **Document Name**       | Corporate Execution Roadmap, Strategic Phases & Growth Milestones |
+| **Version**             | 1.0                                                               |
+| **Status**              | Draft                                                             |
+| **Primary Owner**       | Om (CEO & Founder)                                                |
+| **Reviewers**           | Divya, Somnath, Falguni                                           |
+| **Last Updated**        | August 2026                                                       |

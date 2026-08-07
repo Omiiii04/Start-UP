@@ -1,11 +1,10 @@
-
 # TechStack.md
 
-# Approved Technology Stack, Infrastructure Architecture & Tooling Standards
+## Approved Technology Stack, Infrastructure Architecture & Tooling Standards
 
 ---
 
-# 1. Executive Summary & Selection Philosophy
+## 1. Executive Summary & Selection Philosophy
 
 To ensure reliability, maintainability, scalability, and rapid software delivery, the organization follows a standardized technology stack across all internal systems and client projects.
 
@@ -20,38 +19,38 @@ Every production system should adhere to the technologies and standards defined 
 
 ---
 
-# 2. Approved Technology Stack Matrix
+## 2. Approved Technology Stack Matrix
 
 | Layer                               | Primary Technology                  | Alternate / Secondary       | Primary Owner     |
 | ----------------------------------- | ----------------------------------- | --------------------------- | ----------------- |
-| **Frontend Framework**        | React 18 + TypeScript               | Next.js                     | Falguni           |
-| **Styling**                   | Tailwind CSS                        | Shadcn/UI, Radix UI         | Falguni           |
-| **Build Tool**                | Vite                                | SWC, Webpack                | Somnath           |
-| **Backend API**               | Node.js + Express + TypeScript      | FastAPI                     | Somnath           |
-| **AI / ML Engine**            | Python 3.11+, PyTorch, Scikit-learn | Hugging Face Transformers   | Om                |
-| **Database**                  | PostgreSQL 16+                      | Amazon RDS PostgreSQL       | Somnath           |
-| **Cache & Queue**             | Redis                               | BullMQ                      | Somnath           |
-| **Containerization**          | Docker & Docker Compose             | Containerd                  | Somnath & Falguni |
-| **Cloud Platform**            | AWS                                 | Google Cloud Platform (GCP) | Om                |
-| **CI/CD**                     | GitHub Actions                      | AWS CodePipeline            | Somnath           |
-| **Workspace & Documentation** | AppFlowy                            | Notion, Jira                | Divya             |
+| **Frontend Framework**              | React 18 + TypeScript               | Next.js                     | Falguni           |
+| **Styling**                         | Tailwind CSS                        | Shadcn/UI, Radix UI         | Falguni           |
+| **Build Tool**                      | Vite                                | SWC, Webpack                | Somnath           |
+| **Backend API**                     | Node.js + Express + TypeScript      | FastAPI                     | Somnath           |
+| **AI / ML Engine**                  | Python 3.11+, PyTorch, Scikit-learn | Hugging Face Transformers   | Om                |
+| **Database**                        | PostgreSQL 16+                      | Amazon RDS PostgreSQL       | Somnath           |
+| **Cache & Queue**                   | Redis                               | BullMQ                      | Somnath           |
+| **Containerization**                | Docker & Docker Compose             | Containerd                  | Somnath & Falguni |
+| **Cloud Platform**                  | AWS                                 | Google Cloud Platform (GCP) | Om                |
+| **CI/CD**                           | GitHub Actions                      | AWS CodePipeline            | Somnath           |
+| **Workspace & Documentation**       | AppFlowy                            | Notion, Jira                | Divya             |
 
 ---
 
-# 3. Layer Specifications
+## 3. Layer Specifications
 
 ---
 
-## 3.1 Frontend Layer
+### 3.1 Frontend Layer
 
-### Primary Technologies
+#### Primary Technologies
 
 - React 18
 - TypeScript
 - Tailwind CSS
 - Vite
 
-### Engineering Goals
+#### Engineering Goals
 
 - Component-based architecture
 - Strong static typing
@@ -60,7 +59,7 @@ Every production system should adhere to the technologies and standards defined 
 - Accessible design
 - Reusable UI components
 
-### Supporting Libraries
+#### Supporting Libraries
 
 - React Router
 - TanStack Query
@@ -71,15 +70,15 @@ Every production system should adhere to the technologies and standards defined 
 
 ---
 
-## 3.2 Backend Services
+### 3.2 Backend Services
 
-### Primary Stack
+#### Primary Stack
 
 - Node.js
 - Express.js
 - TypeScript
 
-### Responsibilities
+#### Responsibilities
 
 - Authentication
 - Client Portal
@@ -92,7 +91,7 @@ Every production system should adhere to the technologies and standards defined 
 
 ---
 
-### Alternate Service Layer
+#### Alternate Service Layer
 
 **FastAPI**
 
@@ -106,7 +105,7 @@ Used for:
 
 ---
 
-# 3.3 AI & Machine Learning Stack
+## 3.3 AI & Machine Learning Stack
 
 Primary Technologies
 
@@ -126,7 +125,7 @@ Optional Technologies
 
 ---
 
-## AI Responsibilities
+### AI Responsibilities
 
 - Model Training
 - Dataset Processing
@@ -137,9 +136,9 @@ Optional Technologies
 
 ---
 
-# 3.4 Database Layer
+## 3.4 Database Layer
 
-## Primary Database
+### Primary Database
 
 **PostgreSQL 16+**
 
@@ -154,7 +153,7 @@ Stores:
 
 ---
 
-## Cache Layer
+### Cache Layer
 
 **Redis**
 
@@ -167,7 +166,7 @@ Responsibilities
 
 ---
 
-## Object Storage
+### Object Storage
 
 **Amazon S3**
 
@@ -182,7 +181,7 @@ Stores:
 
 ---
 
-# 4. DevOps & Cloud Architecture
+## 4. DevOps & Cloud Architecture
 
 ```text
                     CLOUD INFRASTRUCTURE
@@ -208,16 +207,16 @@ Stores:
 
 ---
 
-## Infrastructure Components
+### Infrastructure Components
 
-### Compute
+#### Compute
 
 - AWS ECS Fargate
 - Docker Containers
 
 ---
 
-### Database
+#### Database
 
 - Amazon RDS PostgreSQL
 - Automated Backups
@@ -225,7 +224,7 @@ Stores:
 
 ---
 
-### Storage
+#### Storage
 
 - Amazon S3
 - AES-256 Encryption
@@ -234,7 +233,7 @@ Stores:
 
 ---
 
-### Monitoring
+#### Monitoring
 
 - CloudWatch
 - Sentry
@@ -242,11 +241,11 @@ Stores:
 
 ---
 
-# 5. Deployment Environments
+## 5. Deployment Environments
 
 ---
 
-## Local Development
+### Local Development
 
 Purpose
 
@@ -262,7 +261,7 @@ Components
 
 ---
 
-## Staging
+### Staging
 
 Purpose
 
@@ -277,7 +276,7 @@ Infrastructure
 
 ---
 
-## Production
+### Production
 
 Purpose
 
@@ -294,9 +293,9 @@ Infrastructure
 
 ---
 
-# 6. Development Tooling
+## 6. Development Tooling
 
-## IDEs
+### IDEs
 
 Recommended
 
@@ -305,37 +304,37 @@ Recommended
 
 ---
 
-## Version Control
+### Version Control
 
 - Git
 - GitHub
 
 ---
 
-## API Development
+### API Development
 
 - Postman
 - Swagger / OpenAPI
 
 ---
 
-## Database Management
+### Database Management
 
 - pgAdmin
 - PostgreSQL CLI
 
 ---
 
-## Container Management
+### Container Management
 
 - Docker Desktop
 - Docker Compose
 
 ---
 
-# 7. Security Standards
+## 7. Security Standards
 
-## Secret Management
+### Secret Management
 
 Approved methods
 
@@ -352,7 +351,7 @@ Never commit:
 
 ---
 
-## Dependency Security
+### Dependency Security
 
 Automated tools
 
@@ -363,7 +362,7 @@ Automated tools
 
 ---
 
-## Static Analysis
+### Static Analysis
 
 Mandatory
 
@@ -375,7 +374,7 @@ Mandatory
 
 ---
 
-# 8. CI/CD Pipeline
+## 8. CI/CD Pipeline
 
 ```text
 Developer
@@ -431,7 +430,7 @@ Production
 
 ---
 
-# 9. Technology Governance
+## 9. Technology Governance
 
 Introducing a new technology requires approval from:
 
@@ -450,7 +449,7 @@ Evaluation criteria include:
 
 ---
 
-# 10. Prohibited Technologies
+## 10. Prohibited Technologies
 
 The following technologies are not approved without formal review:
 
@@ -463,7 +462,7 @@ The following technologies are not approved without formal review:
 
 ---
 
-# 11. Engineering Principles
+## 11. Engineering Principles
 
 Technology decisions should prioritize:
 
@@ -480,7 +479,7 @@ Technology decisions should prioritize:
 
 ---
 
-# 12. Future Technology Roadmap
+## 12. Future Technology Roadmap
 
 The organization may evaluate future adoption of:
 
@@ -497,27 +496,27 @@ Adoption will follow architecture review and technical approval.
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Somnath**
 Co-Founder & Lead Systems Engineer
 
-### Secondary Reviewer
+#### Secondary Reviewer
 
 **Om**
 Founder & CEO
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                                      |
 | ----------------------- | -------------------------------------------------------------------------- |
-| **Document Name** | Approved Technology Stack, Infrastructure Architecture & Tooling Standards |
-| **Version**       | 1.0                                                                        |
-| **Status**        | Draft                                                                      |
-| **Primary Owner** | Somnath                                                                    |
-| **Reviewer**      | Om                                                                         |
-| **Last Updated**  | August 2026                                                                |
+| **Document Name**       | Approved Technology Stack, Infrastructure Architecture & Tooling Standards |
+| **Version**             | 1.0                                                                        |
+| **Status**              | Draft                                                                      |
+| **Primary Owner**       | Somnath                                                                    |
+| **Reviewer**            | Om                                                                         |
+| **Last Updated**        | August 2026                                                                |

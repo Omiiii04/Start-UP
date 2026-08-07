@@ -1,11 +1,10 @@
-
 # SOP.md
 
-# Standard Operating Procedures (SOP)
+## Standard Operating Procedures (SOP)
 
 ---
 
-# 1. Executive Summary & Purpose
+## 1. Executive Summary & Purpose
 
 This document establishes the Standard Operating Procedures (SOPs) that govern the organization's daily operations, engineering workflows, client management, financial processes, quality assurance, and regulatory compliance.
 
@@ -23,17 +22,17 @@ All team members are expected to understand and follow these procedures.
 
 ---
 
-# 2. Daily & Weekly Operational Rhythm
+## 2. Daily & Weekly Operational Rhythm
 
-## SOP-01 — Daily Standup Meeting
+### SOP-01 — Daily Standup Meeting
 
-### Objective
+#### Objective
 
 Maintain team alignment, identify blockers early, and monitor project progress.
 
 ---
 
-### Schedule
+#### Schedule
 
 - **Days:** Monday – Friday
 - **Time:** 09:30 AM IST
@@ -41,7 +40,7 @@ Maintain team alignment, identify blockers early, and monitor project progress.
 
 ---
 
-### Participants
+#### Participants
 
 - Om (CEO)
 - Somnath (Lead Systems Engineer)
@@ -50,7 +49,7 @@ Maintain team alignment, identify blockers early, and monitor project progress.
 
 ---
 
-### Meeting Format
+#### Meeting Format
 
 Each participant answers three questions:
 
@@ -60,7 +59,7 @@ Each participant answers three questions:
 
 ---
 
-### Meeting Outcome
+#### Meeting Outcome
 
 Divya records:
 
@@ -73,19 +72,19 @@ All blockers should be assigned within **4 hours**.
 
 ---
 
-# 3. Client Onboarding Procedures
+## 3. Client Onboarding Procedures
 
 ---
 
-## SOP-02 — Initial Inquiry & Client Intake
+### SOP-02 — Initial Inquiry & Client Intake
 
-### Owner
+#### Owner
 
 **Divya**
 
 ---
 
-### Service Level Agreement (SLA)
+#### Service Level Agreement (SLA)
 
 | Activity                | Target Time     |
 | ----------------------- | --------------- |
@@ -94,7 +93,7 @@ All blockers should be assigned within **4 hours**.
 
 ---
 
-### Procedure
+#### Procedure
 
 1. Receive project inquiry.
 2. Review submitted documents.
@@ -105,7 +104,7 @@ All blockers should be assigned within **4 hours**.
 
 ---
 
-### Possible Outcomes
+#### Possible Outcomes
 
 ```text
 Approved
@@ -117,16 +116,16 @@ Requires Restructuring
 
 ---
 
-# SOP-03 — Quotation & Contract Execution
+## SOP-03 — Quotation & Contract Execution
 
-### Owners
+#### Owners
 
 - Divya
 - Om
 
 ---
 
-### Procedure
+#### Procedure
 
 1. Receive technical feasibility approval.
 2. Select service tier.
@@ -140,7 +139,7 @@ Requires Restructuring
 
 ---
 
-### Outputs
+#### Outputs
 
 - Quotation PDF
 - MSA
@@ -149,20 +148,20 @@ Requires Restructuring
 
 ---
 
-# 4. Engineering Procedures
+## 4. Engineering Procedures
 
 ---
 
-## SOP-04 — Development & Pull Request Workflow
+### SOP-04 — Development & Pull Request Workflow
 
-### Owners
+#### Owners
 
 - Somnath
 - Falguni
 
 ---
 
-### Development Process
+#### Development Process
 
 ```text
 Feature Branch
@@ -185,7 +184,7 @@ Merge to Staging
 
 ---
 
-### Development Checklist
+#### Development Checklist
 
 Before creating a Pull Request:
 
@@ -197,7 +196,7 @@ Before creating a Pull Request:
 
 ---
 
-### Pull Request Requirements
+#### Pull Request Requirements
 
 Every Pull Request must include:
 
@@ -208,7 +207,7 @@ Every Pull Request must include:
 
 ---
 
-### Code Review Checklist
+#### Code Review Checklist
 
 Reviewers verify:
 
@@ -222,15 +221,15 @@ Reviewers verify:
 
 ---
 
-# SOP-05 — Quality Assurance & Client Demonstration
+## SOP-05 — Quality Assurance & Client Demonstration
 
-### Owner
+#### Owner
 
 **Falguni**
 
 ---
 
-### QA Process
+#### QA Process
 
 1. Execute unit tests.
 2. Execute integration tests.
@@ -242,7 +241,7 @@ Reviewers verify:
 
 ---
 
-### Outputs
+#### Outputs
 
 - QA Pass Certificate
 - Staging Approval
@@ -250,20 +249,20 @@ Reviewers verify:
 
 ---
 
-# 5. Financial Procedures
+## 5. Financial Procedures
 
 ---
 
-## SOP-06 — GST Invoicing & Payment Collection
+### SOP-06 — GST Invoicing & Payment Collection
 
-### Owners
+#### Owners
 
 - Divya
 - Om
 
 ---
 
-### Invoice Workflow
+#### Invoice Workflow
 
 ```text
 Milestone Completed
@@ -286,22 +285,22 @@ Issue Tax Invoice
 
 ---
 
-### GST Rules
+#### GST Rules
 
-#### Maharashtra
+##### Maharashtra
 
 - CGST — 9%
 - SGST — 9%
 
 ---
 
-#### Outside Maharashtra
+##### Outside Maharashtra
 
 - IGST — 18%
 
 ---
 
-### SAC Codes
+#### SAC Codes
 
 | Service              | SAC    |
 | -------------------- | ------ |
@@ -310,7 +309,7 @@ Issue Tax Invoice
 
 ---
 
-### Outputs
+#### Outputs
 
 - Tax Invoice
 - Payment Receipt
@@ -318,20 +317,20 @@ Issue Tax Invoice
 
 ---
 
-# 6. Compliance Procedures
+## 6. Compliance Procedures
 
 ---
 
-## SOP-07 — UGC Compliance & Scope Restructuring
+### SOP-07 — UGC Compliance & Scope Restructuring
 
-### Owners
+#### Owners
 
 - Om
 - Divya
 
 ---
 
-### Trigger
+#### Trigger
 
 Client requests:
 
@@ -342,7 +341,7 @@ Client requests:
 
 ---
 
-### Procedure
+#### Procedure
 
 1. Place request on **COMPLIANCE HOLD**.
 2. Notify client.
@@ -353,7 +352,7 @@ Client requests:
 
 ---
 
-### Permitted Alternatives
+#### Permitted Alternatives
 
 - Technical Mentorship
 - Code Review
@@ -365,7 +364,7 @@ Client requests:
 
 ---
 
-### Rejection Criteria
+#### Rejection Criteria
 
 If the client insists on prohibited work:
 
@@ -375,16 +374,16 @@ If the client insists on prohibited work:
 
 ---
 
-# SOP-08 — Emergency Incident Response
+## SOP-08 — Emergency Incident Response
 
-### Owners
+#### Owners
 
 - Om
 - Somnath
 
 ---
 
-### Trigger Events
+#### Trigger Events
 
 - Production outage
 - Security breach
@@ -394,7 +393,7 @@ If the client insists on prohibited work:
 
 ---
 
-### Response Workflow
+#### Response Workflow
 
 ```text
 Incident Detected
@@ -417,9 +416,9 @@ Post-Mortem
 
 ---
 
-### Incident Actions
+#### Incident Actions
 
-#### Containment
+##### Containment
 
 - Revoke credentials
 - Isolate affected systems
@@ -427,7 +426,7 @@ Post-Mortem
 
 ---
 
-#### Investigation
+##### Investigation
 
 Review:
 
@@ -438,7 +437,7 @@ Review:
 
 ---
 
-#### Resolution
+##### Resolution
 
 - Hotfix Development
 - QA Verification
@@ -446,7 +445,7 @@ Review:
 
 ---
 
-#### Post-Mortem
+##### Post-Mortem
 
 Within **24 Hours**
 
@@ -460,7 +459,7 @@ Document:
 
 ---
 
-# 7. Internal Meeting Schedule
+## 7. Internal Meeting Schedule
 
 | Meeting           | Frequency     | Participants     |
 | ----------------- | ------------- | ---------------- |
@@ -474,7 +473,7 @@ Document:
 
 ---
 
-# 8. Operational Maintenance Matrix
+## 8. Operational Maintenance Matrix
 
 | SOP Domain    | Owner      | Review Frequency | Next Review          |
 | ------------- | ---------- | ---------------- | -------------------- |
@@ -486,7 +485,7 @@ Document:
 
 ---
 
-# 9. Operational Principles
+## 9. Operational Principles
 
 Every team member should follow these principles:
 
@@ -503,7 +502,7 @@ Every team member should follow these principles:
 
 ---
 
-# 10. SOP Review & Change Management
+## 10. SOP Review & Change Management
 
 Any modification to an SOP requires:
 
@@ -518,14 +517,14 @@ Major operational changes should be reviewed during leadership meetings before i
 
 ---
 
-## Document Governance
+### Document Governance
 
-### Primary Owner
+#### Primary Owner
 
 **Divya**
 Head of Operations
 
-### Secondary Reviewers
+#### Secondary Reviewers
 
 - Om (Founder & CEO)
 - Somnath (Lead Systems Engineer)
@@ -533,13 +532,13 @@ Head of Operations
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                               |
 | ----------------------- | ----------------------------------- |
-| **Document Name** | Standard Operating Procedures (SOP) |
-| **Version**       | 1.0                                 |
-| **Status**        | Draft                               |
-| **Primary Owner** | Divya                               |
-| **Reviewers**     | Om, Somnath, Falguni                |
-| **Last Updated**  | August 2026                         |
+| **Document Name**       | Standard Operating Procedures (SOP) |
+| **Version**             | 1.0                                 |
+| **Status**              | Draft                               |
+| **Primary Owner**       | Divya                               |
+| **Reviewers**           | Om, Somnath, Falguni                |
+| **Last Updated**        | August 2026                         |

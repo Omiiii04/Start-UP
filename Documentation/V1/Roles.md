@@ -1,11 +1,10 @@
-
 # Roles.md
 
-# Organizational Governance, Team Responsibilities & Ownership Matrix
+## Organizational Governance, Team Responsibilities & Ownership Matrix
 
 ---
 
-# 1. Executive Summary & Leadership Framework
+## 1. Executive Summary & Leadership Framework
 
 This document defines the organizational structure, governance framework, role ownership, operational authority, decision-making responsibilities, and cross-functional accountability within the company.
 
@@ -19,15 +18,15 @@ The objective is to:
 
 ---
 
-# 2. Executive Leadership & Core Functional Roles
+## 2. Executive Leadership & Core Functional Roles
 
-## 2.1 Om — Founder & Chief Executive Officer (CEO)
+### 2.1 Om — Founder & Chief Executive Officer (CEO)
 
-### Core Mandate
+#### Core Mandate
 
 Corporate vision, strategic planning, AI/ML leadership, cloud infrastructure, software architecture, and enterprise consulting.
 
-### Primary Responsibilities
+#### Primary Responsibilities
 
 - Define long-term business strategy.
 - Lead AI/ML and MLOps initiatives.
@@ -40,7 +39,7 @@ Corporate vision, strategic planning, AI/ML leadership, cloud infrastructure, so
 - Ensure UGC compliance.
 - Drive research and innovation.
 
-### Ownership Domains
+#### Ownership Domains
 
 - AI & Machine Learning
 - Cloud Infrastructure
@@ -50,13 +49,13 @@ Corporate vision, strategic planning, AI/ML leadership, cloud infrastructure, so
 
 ---
 
-## 2.2 Somnath — Co-Founder & Lead Systems Engineer
+### 2.2 Somnath — Co-Founder & Lead Systems Engineer
 
-### Core Mandate
+#### Core Mandate
 
 Backend architecture, full-stack engineering, APIs, databases, infrastructure automation, and DevOps.
 
-### Primary Responsibilities
+#### Primary Responsibilities
 
 - Backend application development.
 - REST API design.
@@ -69,7 +68,7 @@ Backend architecture, full-stack engineering, APIs, databases, infrastructure au
 - Security hardening.
 - Technical feasibility reviews.
 
-### Ownership Domains
+#### Ownership Domains
 
 - Backend Engineering
 - API Development
@@ -79,13 +78,13 @@ Backend architecture, full-stack engineering, APIs, databases, infrastructure au
 
 ---
 
-## 2.3 Falguni — Lead Full-Stack Engineer & Quality Assurance
+### 2.3 Falguni — Lead Full-Stack Engineer & Quality Assurance
 
-### Core Mandate
+#### Core Mandate
 
 Frontend engineering, full-stack feature implementation, software testing, QA automation, deployment verification, and UI consistency.
 
-### Primary Responsibilities
+#### Primary Responsibilities
 
 - React frontend development.
 - Feature integration.
@@ -97,7 +96,7 @@ Frontend engineering, full-stack feature implementation, software testing, QA au
 - Staging verification.
 - Deployment QA.
 
-### Ownership Domains
+#### Ownership Domains
 
 - Frontend Engineering
 - Quality Assurance
@@ -107,13 +106,13 @@ Frontend engineering, full-stack feature implementation, software testing, QA au
 
 ---
 
-## 2.4 Divya — Head of Operations, Management & Marketing
+### 2.4 Divya — Head of Operations, Management & Marketing
 
-### Core Mandate
+#### Core Mandate
 
 Operations management, CRM, finance coordination, documentation, marketing, and customer success.
 
-### Primary Responsibilities
+#### Primary Responsibilities
 
 - Client onboarding.
 - Requirement intake.
@@ -126,7 +125,7 @@ Operations management, CRM, finance coordination, documentation, marketing, and 
 - Social media.
 - Documentation management.
 
-### Ownership Domains
+#### Ownership Domains
 
 - Operations
 - CRM
@@ -136,84 +135,84 @@ Operations management, CRM, finance coordination, documentation, marketing, and 
 
 ---
 
-# 3. Operational RACI Governance Matrix
+## 3. Operational RACI Governance Matrix
 
-## RACI Definitions
+### RACI Definitions
 
 | Code        | Meaning                            |
 | ----------- | ---------------------------------- |
-| **R** | Responsible (Executes the task)    |
-| **A** | Accountable (Final decision maker) |
-| **C** | Consulted (Provides expertise)     |
-| **I** | Informed (Receives updates)        |
+| **R**       | Responsible (Executes the task)    |
+| **A**       | Accountable (Final decision maker) |
+| **C**       | Consulted (Provides expertise)     |
+| **I**       | Informed (Receives updates)        |
 
 ---
 
-## Operational Responsibility Matrix
+### Operational Responsibility Matrix
 
-| Activity                       |      Om      |    Somnath    |    Falguni    |     Divya     |
+| Activity                       | Om            | Somnath       | Falguni       | Divya         |
 | ------------------------------ | :-----------: | :-----------: | :-----------: | :-----------: |
-| Inquiry Screening & UGC Review |       C       |       I       |       I       | **R/A** |
-| Technical Feasibility Review   |  **A**  |  **R**  |       C       |       I       |
-| Scope Definition & Quotation   |       A       |       C       |       C       |  **R**  |
-| MSA & SOW Approval             |  **A**  |       I       |       I       |       R       |
-| Invoice Generation             |       I       |       I       |       I       | **R/A** |
-| Architecture Planning          | **R/A** |       R       |       C       |       I       |
-| Sprint Development             |       C       | **R/A** |       R       |       I       |
-| Frontend Development           |       I       |       R       | **R/A** |       I       |
-| QA Verification                |       C       |       C       | **R/A** |       I       |
-| Client Demonstration           |       A       |       R       |       I       |  **R**  |
-| Final Payment Collection       |       I       |       I       |       I       | **R/A** |
-| Source Code Handover           |  **A**  |       R       |       R       |       I       |
-| Post-Delivery Support          |       C       |       R       | **R/A** |       I       |
+| Inquiry Screening & UGC Review | C             | I             | I             | **R/A**       |
+| Technical Feasibility Review   | **A**         | **R**         | C             | I             |
+| Scope Definition & Quotation   | A             | C             | C             | **R**         |
+| MSA & SOW Approval             | **A**         | I             | I             | R             |
+| Invoice Generation             | I             | I             | I             | **R/A**       |
+| Architecture Planning          | **R/A**       | R             | C             | I             |
+| Sprint Development             | C             | **R/A**       | R             | I             |
+| Frontend Development           | I             | R             | **R/A**       | I             |
+| QA Verification                | C             | C             | **R/A**       | I             |
+| Client Demonstration           | A             | R             | I             | **R**         |
+| Final Payment Collection       | I             | I             | I             | **R/A**       |
+| Source Code Handover           | **A**         | R             | R             | I             |
+| Post-Delivery Support          | C             | R             | **R/A**       | I             |
 
 ---
 
-# 4. Documentation Ownership Matrix
+## 4. Documentation Ownership Matrix
 
 Every repository document has a designated owner responsible for maintenance and periodic review.
 
 | Repository Document        | Purpose                       | Primary Owner | Reviewer |
 | -------------------------- | ----------------------------- | ------------- | -------- |
-| `README.md`              | Repository Overview           | Om            | Divya    |
-| `BusinessPlan.md`        | Business Strategy             | Om            | Divya    |
-| `SRS.md`                 | Software Requirements         | Om            | Somnath  |
-| `SDD.md`                 | Software Design               | Somnath       | Falguni  |
-| `Architecture.md`        | Cloud & System Architecture   | Om            | Somnath  |
-| `ProjectRequirements.md` | Requirement Standards         | Divya         | Om       |
-| `Roles.md`               | Governance & RACI             | Divya         | Om       |
-| `Rules.md`               | Engineering Standards         | Somnath       | Falguni  |
-| `Phases.md`              | Development Roadmap           | Divya         | Om       |
-| `Design.md`              | UI/UX Guidelines              | Falguni       | Divya    |
-| `Memory.md`              | Technical Knowledge Base      | Om            | Somnath  |
-| `Workflow.md`            | Project Lifecycle             | Divya         | Om       |
-| `SOP.md`                 | Standard Operating Procedures | Divya         | Om       |
-| `Pricing.md`             | Pricing & Billing             | Divya         | Om       |
-| `TechStack.md`           | Approved Technologies         | Somnath       | Om       |
-| `RiskManagement.md`      | Risk Register                 | Divya         | Om       |
-| `QA.md`                  | Testing Standards             | Falguni       | Somnath  |
-| `Legal.md`               | Contracts & Compliance        | Om            | Divya    |
-| `BrandGuide.md`          | Branding Guidelines           | Divya         | Falguni  |
-| `Roadmap.md`             | Corporate Roadmap             | Om            | Divya    |
+| `README.md`                | Repository Overview           | Om            | Divya    |
+| `BusinessPlan.md`          | Business Strategy             | Om            | Divya    |
+| `SRS.md`                   | Software Requirements         | Om            | Somnath  |
+| `SDD.md`                   | Software Design               | Somnath       | Falguni  |
+| `Architecture.md`          | Cloud & System Architecture   | Om            | Somnath  |
+| `ProjectRequirements.md`   | Requirement Standards         | Divya         | Om       |
+| `Roles.md`                 | Governance & RACI             | Divya         | Om       |
+| `Rules.md`                 | Engineering Standards         | Somnath       | Falguni  |
+| `Phases.md`                | Development Roadmap           | Divya         | Om       |
+| `Design.md`                | UI/UX Guidelines              | Falguni       | Divya    |
+| `Memory.md`                | Technical Knowledge Base      | Om            | Somnath  |
+| `Workflow.md`              | Project Lifecycle             | Divya         | Om       |
+| `SOP.md`                   | Standard Operating Procedures | Divya         | Om       |
+| `Pricing.md`               | Pricing & Billing             | Divya         | Om       |
+| `TechStack.md`             | Approved Technologies         | Somnath       | Om       |
+| `RiskManagement.md`        | Risk Register                 | Divya         | Om       |
+| `QA.md`                    | Testing Standards             | Falguni       | Somnath  |
+| `Legal.md`                 | Contracts & Compliance        | Om            | Divya    |
+| `BrandGuide.md`            | Branding Guidelines           | Divya         | Falguni  |
+| `Roadmap.md`               | Corporate Roadmap             | Om            | Divya    |
 
 ---
 
-# 5. System Access Control & Role-Based Permissions (RBAC)
+## 5. System Access Control & Role-Based Permissions (RBAC)
 
-## Infrastructure Permission Matrix
+### Infrastructure Permission Matrix
 
-| Platform Asset       |          Om          |   Somnath   |  Falguni  |        Divya        |
+| Platform Asset       | Om                   | Somnath      | Falguni    | Divya                |
 | -------------------- | :------------------: | :----------: | :--------: | :------------------: |
-| AWS Console          |         Full         |    Admin    |  Staging  |      Read Only      |
-| Production Database  |     Read / Write     | Read / Write | No Access |      No Access      |
-| GitHub Organization  |        Owner        |    Admin    | Maintainer |        Member        |
-| Payment Gateway      |        Owner        |   API Read   | No Access |   Operations Admin   |
-| GST & Banking Portal | Authorized Signatory |  No Access  | No Access | Financial Controller |
-| CRM / AppFlowy       |        Admin        |    Editor    |   Editor   |   Workspace Owner   |
+| AWS Console          | Full                 | Admin        | Staging    | Read Only            |
+| Production Database  | Read / Write         | Read / Write | No Access  | No Access            |
+| GitHub Organization  | Owner                | Admin        | Maintainer | Member               |
+| Payment Gateway      | Owner                | API Read     | No Access  | Operations Admin     |
+| GST & Banking Portal | Authorized Signatory | No Access    | No Access  | Financial Controller |
+| CRM / AppFlowy       | Admin                | Editor       | Editor     | Workspace Owner      |
 
 ---
 
-# 6. Decision-Making Authority
+## 6. Decision-Making Authority
 
 | Decision                | Final Authority            |
 | ----------------------- | -------------------------- |
@@ -230,9 +229,9 @@ Every repository document has a designated owner responsible for maintenance and
 
 ---
 
-# 7. Delegation & Contingency Protocols
+## 7. Delegation & Contingency Protocols
 
-## Engineering Capacity
+### Engineering Capacity
 
 If engineering workload exceeds available capacity:
 
@@ -242,7 +241,7 @@ If engineering workload exceeds available capacity:
 
 ---
 
-## Operations Continuity
+### Operations Continuity
 
 If Divya is unavailable:
 
@@ -256,7 +255,7 @@ Target response time remains **within 24 hours**.
 
 ---
 
-## Production Release Authorization
+### Production Release Authorization
 
 Production deployment requires:
 
@@ -268,7 +267,7 @@ No production deployment may occur without satisfying all three conditions.
 
 ---
 
-# 8. Organizational Principles
+## 8. Organizational Principles
 
 Every member of the organization follows these operating principles:
 
@@ -285,7 +284,7 @@ Every member of the organization follows these operating principles:
 
 ---
 
-# 9. Organizational Structure
+## 9. Organizational Structure
 
 ```text
                            Founder & CEO
@@ -305,16 +304,16 @@ Every member of the organization follows these operating principles:
 
 ---
 
-## Document Information
+### Document Information
 
 | Property                | Value                                                               |
 | ----------------------- | ------------------------------------------------------------------- |
-| **Document Name** | Organizational Governance, Team Responsibilities & Ownership Matrix |
-| **Version**       | 1.0                                                                 |
-| **Status**        | Draft                                                               |
-| **Primary Owner** | Divya (Operations)                                                  |
-| **Reviewers**     | Om, Somnath, Falguni                                                |
-| **Last Updated**  | August 2026                                                         |
+| **Document Name**       | Organizational Governance, Team Responsibilities & Ownership Matrix |
+| **Version**             | 1.0                                                                 |
+| **Status**              | Draft                                                               |
+| **Primary Owner**       | Divya (Operations)                                                  |
+| **Reviewers**           | Om, Somnath, Falguni                                                |
+| **Last Updated**        | August 2026                                                         |
 
 ```
 
