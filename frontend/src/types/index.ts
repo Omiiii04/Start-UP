@@ -21,6 +21,9 @@ export interface User {
   clientCategory?: ClientCategory;
   institutionOrCompany?: string;
   createdAt: string;
+  picture?: string;
+  googleId?: string;
+  isAdmin?: boolean;
 }
 
 export type WorkflowStepId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
@@ -34,7 +37,7 @@ export interface WorkflowStepMeta {
 }
 
 export const WORKFLOW_STEPS: WorkflowStepMeta[] = [
-  { step: 1, name: 'Requirement Submission', phase: 'Phase I: Onboarding', owner: 'Divya', description: 'Intake form submission with UGC compliance check' },
+  { step: 1, name: 'Requirement Submission', phase: 'Phase I: Onboarding', owner: 'Divya', description: 'Intake form submission with technical feasibility check' },
   { step: 2, name: 'Technical Feasibility Review', phase: 'Phase I: Onboarding', owner: 'Om & Somnath', description: 'Stack compatibility & resource capacity evaluation' },
   { step: 3, name: 'Requirement Discussion', phase: 'Phase I: Onboarding', owner: 'Divya & Om', description: 'Discovery call to clarify specs & constraints' },
   { step: 4, name: 'Scope Finalization', phase: 'Phase II: Contract', owner: 'Om & Somnath', description: 'Feature checklist & baseline agreement' },

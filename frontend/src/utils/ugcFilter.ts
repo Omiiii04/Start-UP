@@ -1,8 +1,8 @@
 import { UGCScreeningResult } from '../types';
 
 /**
- * UGC Academic Integrity Compliance & Keyword Engine
- * References UGC Regulations 2018
+ * Academic Ethics & Technical Scope Feasibility Engine
+ * Standard verification guidelines
  */
 
 const RESTRICTED_KEYWORDS = [
@@ -43,6 +43,6 @@ export function screenRequirementUGC(text: string): UGCScreeningResult {
     passed: true,
     flaggedKeywords: [],
     recommendation: 'proceed',
-    notes: 'Standard technical scope verified. Complies with UGC 2018 academic integrity guidelines.',
+    notes: 'Standard technical scope verified. Complies with quality and ethics guidelines.',
   };
 }

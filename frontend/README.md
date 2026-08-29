@@ -15,7 +15,7 @@ Generated within Stitch Project `5207569280006270429`:
 1. **Screen 1 — Project Intake & Compliance Wizard (`bf1721c5ebaf4d5cb1a369de032f4c65`)**:
    - Client category switch (Student / SME).
    - Tier 1–4 selection matrix.
-   - UGC 2018 Academic Integrity checkbox & NLP feedback.
+   - Project Scope Declaration & NLP feedback.
    - Interactive budget slider & live GST estimator (SAC 998314).
 2. **Screen 2 — Client Project Dashboard & 15-Step Stepper (`f6a3673bc8da4fb8aa8a4febe3f59e92`)**:
    - Visual 15-step progress stepper with glowing active ring and completed checkmarks.

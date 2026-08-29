@@ -32,59 +32,64 @@ export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOp
     },
     {
       id: '3',
-      title: 'UGC Compliance Verified',
-      desc: 'Requirement REQ-8492-X passed UGC 2018 validation.',
+      title: 'Scope Feasibility Verified',
+      desc: 'Requirement REQ-8492-X passed technical feasibility review.',
       time: 'Yesterday',
       icon: CheckCircle2,
-      iconColor: 'text-black',
+      iconColor: 'text-emerald-400',
       actionTab: 'dashboard' as NavTab,
     },
   ];
 
   return (
     <>
-      <div className="fixed inset-0 z-40" onClick={onClose} />
-      <div className="absolute right-0 top-14 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 z-50 animate-in fade-in slide-in-from-top-2">
-        <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-2">
+      <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] animate-fade-in" onClick={onClose} />
+      <div className="absolute right-0 sm:right-0 top-14 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-surface/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 p-4 z-50 animate-fade-in-up md:animate-scale-in text-white">
+        <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-2">
           <div className="flex items-center gap-2">
-            <Bell className="w-4 h-4 text-black" />
-            <h3 className="font-headline font-bold text-sm text-black">Notifications</h3>
+            <div className="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center">
+              <Bell className="w-3.5 h-3.5 text-primary-light" />
+            </div>
+            <h3 className="font-headline font-bold text-sm text-white">Notifications</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-gray-400 hover:text-black transition-colors"
+            className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="space-y-2 max-h-80 overflow-y-auto">
-          {notifications.map((n) => (
+        <div className="space-y-2 max-h-80 overflow-y-auto pr-0.5">
+          {notifications.map((n, idx) => (
             <div
               key={n.id}
               onClick={() => {
                 onNavigate(n.actionTab);
                 onClose();
               }}
-              className="p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-100 flex items-start gap-3"
+              style={{ animationDelay: `${idx * 75}ms` }}
+              className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 cursor-pointer border border-white/5 hover:border-primary/30 flex items-start gap-3 hover-lift group animate-fade-in-up"
             >
-              <n.icon className={`w-4 h-4 ${n.iconColor} shrink-0 mt-0.5`} />
+              <div className="p-1.5 rounded-lg bg-white/5 group-hover:bg-primary/20 transition-colors shrink-0 mt-0.5">
+                <n.icon className={`w-4 h-4 ${n.iconColor}`} />
+              </div>
               <div className="flex-1">
-                <p className="text-xs font-bold text-black">{n.title}</p>
-                <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">{n.desc}</p>
-                <span className="text-[10px] font-mono text-gray-400 mt-1 block">{n.time}</span>
+                <p className="text-xs font-bold text-white group-hover:text-primary-light transition-colors">{n.title}</p>
+                <p className="text-[11px] text-zinc-300 mt-0.5 leading-relaxed">{n.desc}</p>
+                <span className="text-[10px] font-mono text-zinc-400 mt-1 block">{n.time}</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="pt-3 border-t border-gray-100 mt-2 text-center">
+        <div className="pt-3 border-t border-white/10 mt-2 text-center">
           <button
             onClick={() => {
               onNavigate('dashboard');
               onClose();
             }}
-            className="text-xs font-bold text-black hover:underline"
+            className="text-xs font-bold text-primary-light hover:text-white transition-colors flex items-center justify-center gap-1 mx-auto hover:underline"
           >
             View all in Dashboard →
           </button>

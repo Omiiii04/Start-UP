@@ -44,8 +44,8 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
     setTimeout(() => {
       let replyText = "Thanks for reaching out! Our lead architect (Om) and operations lead (Divya) have received your note and will review it within 2 hours.";
       const lower = currentQuery.toLowerCase();
-      if (lower.includes('ugc') || lower.includes('compliance')) {
-        replyText = "All scopes on ProjectBridge adhere strictly to UGC 2018 Academic Integrity regulations. Deliverables are technical prototypes, mentorship, and code libraries.";
+      if (lower.includes('ip') || lower.includes('policy') || lower.includes('deliverable') || lower.includes('ownership')) {
+        replyText = "All scopes on ProjectBridge include 100% full intellectual property transfer upon final milestone clearance. Deliverables consist of production code, documentation, and staging environments.";
       } else if (lower.includes('price') || lower.includes('gst') || lower.includes('quote') || lower.includes('cost')) {
         replyText = "Our engineering service tiers range from Tier 1 (₹2k-10k) to Tier 4 Enterprise (₹60k+), with standard 18% GST (SAC 998314). Formal SOWs are issued on milestone agreements.";
       } else if (lower.includes('status') || lower.includes('order') || lower.includes('project')) {
@@ -63,43 +63,46 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
   };
 
   const quickQuestions = [
-    'How does UGC 2018 compliance work?',
+    'What is your intellectual property handover policy?',
     'What are the payment milestones?',
     'How do I access the staging demo?',
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-md animate-fade-in transition-all duration-300">
       <div 
-        className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between border-l border-gray-200"
+        className="w-full max-w-md bg-surface h-full shadow-2xl flex flex-col justify-between border-l border-white/10 text-white animate-fade-in-up md:animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 bg-black text-white flex items-center justify-between">
+        <div className="p-4 sm:p-5 bg-surface/90 backdrop-blur-lg border-b border-white/10 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">
+            <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-xs shadow-glow animate-float">
               <Bot className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-headline font-bold text-sm text-white flex items-center gap-1.5">
+              <h3 className="font-headline font-bold text-sm text-white flex items-center gap-2">
                 <span>ProjectBridge Support</span>
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-radar-ping"></span>
               </h3>
-              <p className="text-[11px] text-gray-300 font-mono">Divya & Om (Online)</p>
+              <p className="text-[11px] text-zinc-400 font-mono flex items-center gap-1.5 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Divya & Om (Online • Avg reply &lt; 2m)</span>
+              </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+            className="p-1.5 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-all active:scale-90"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Message Area */}
-        <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50 text-xs">
-          <div className="text-center">
-            <span className="px-3 py-1 bg-gray-200 text-gray-600 rounded-full text-[10px] font-mono font-semibold">
+        <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-background text-xs">
+          <div className="text-center animate-fade-in-down">
+            <span className="px-3 py-1 bg-white/5 border border-white/10 text-zinc-300 rounded-full text-[10px] font-mono font-semibold shadow-sm">
               Live Architecture & Operations Desk
             </span>
           </div>
@@ -107,28 +110,28 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`flex gap-2.5 max-w-[85%] ${
+              className={`flex gap-2.5 max-w-[85%] animate-fade-in-up ${
                 msg.sender === 'user' ? 'ml-auto flex-row-reverse' : ''
               }`}
             >
               <div
                 className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
-                  msg.sender === 'user' ? 'bg-black text-white' : 'bg-gray-200 text-black'
+                  msg.sender === 'user' ? 'bg-primary text-white shadow-glow' : 'bg-white/10 text-zinc-200 border border-white/10'
                 }`}
               >
                 {msg.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
               </div>
               <div>
                 <div
-                  className={`p-3 rounded-2xl ${
+                  className={`p-3 rounded-2xl transition-all ${
                     msg.sender === 'user'
-                      ? 'bg-black text-white rounded-tr-none'
-                      : 'bg-white text-gray-800 border border-gray-200 shadow-sm rounded-tl-none'
+                      ? 'bg-primary text-white rounded-tr-none shadow-glow'
+                      : 'bg-surface text-zinc-200 border border-white/10 shadow-sm rounded-tl-none hover:border-white/20'
                   }`}
                 >
                   <p className="leading-relaxed">{msg.text}</p>
                 </div>
-                <span className="text-[10px] text-gray-400 font-mono mt-1 block px-1">
+                <span className="text-[10px] text-zinc-400 font-mono mt-1 block px-1">
                   {msg.time}
                 </span>
               </div>
@@ -137,7 +140,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
 
           {/* Quick suggestions */}
           <div className="pt-2">
-            <p className="text-[11px] text-gray-500 font-bold mb-2">Suggested Questions:</p>
+            <p className="text-[11px] text-zinc-400 font-bold mb-2">Suggested Inquiries:</p>
             <div className="flex flex-col gap-1.5">
               {quickQuestions.map((q, idx) => (
                 <button
@@ -145,7 +148,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
                   onClick={() => {
                     setInput(q);
                   }}
-                  className="text-left p-2 rounded-lg bg-white border border-gray-200 hover:border-black text-[11px] text-gray-700 font-medium transition-all"
+                  className="text-left p-2.5 rounded-xl bg-surface border border-white/10 hover:border-primary hover:bg-white/5 text-[11px] text-zinc-300 font-medium transition-all active:scale-[0.99]"
                 >
                   {q}
                 </button>
@@ -155,18 +158,18 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
         </div>
 
         {/* Input Footer */}
-        <form onSubmit={handleSend} className="p-4 bg-white border-t border-gray-200 flex items-center gap-2">
+        <form onSubmit={handleSend} className="p-4 bg-surface/95 border-t border-white/10 flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your question..."
-            className="flex-1 h-10 px-3.5 rounded-xl border border-gray-300 text-xs text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
+            className="flex-1 h-10 px-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />
           <button
             type="submit"
             disabled={!input.trim()}
-            className="h-10 px-4 rounded-xl bg-black hover:bg-gray-800 text-white font-bold text-xs flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-10 px-4 rounded-xl bg-primary hover:bg-primary-dark text-white font-bold text-xs flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-glow active:scale-95"
           >
             <Send className="w-4 h-4" />
           </button>
