@@ -69,41 +69,41 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-md animate-fade-in transition-all duration-300">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-fade-in transition-all duration-300">
       <div 
-        className="w-full max-w-md bg-surface h-full shadow-2xl flex flex-col justify-between border-l border-white/10 text-white animate-fade-in-up md:animate-scale-in"
+        className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between border-l border-zinc-200 text-zinc-900 animate-fade-in-up md:animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 bg-surface/90 backdrop-blur-lg border-b border-white/10 text-white flex items-center justify-between">
+        <div className="p-4 sm:p-5 bg-white border-b border-zinc-100 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-xs shadow-glow animate-float">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-bold text-xs shadow-sm animate-float">
               <Bot className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-headline font-bold text-sm text-white flex items-center gap-2">
+              <h3 className="font-headline font-bold text-sm text-zinc-900 flex items-center gap-2">
                 <span>ProjectBridge Support</span>
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-radar-ping"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-radar-ping"></span>
               </h3>
-              <p className="text-[11px] text-zinc-400 font-mono flex items-center gap-1.5 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>Divya & Om (Online • Avg reply &lt; 2m)</span>
+              <p className="text-[11px] text-zinc-500 font-mono flex items-center gap-1.5 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Divya &amp; Om (Online • Avg reply &lt; 2m)</span>
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-all active:scale-90"
+            className="p-1.5 rounded-full hover:bg-zinc-100 text-zinc-400 hover:text-zinc-800 transition-all active:scale-90 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Message Area */}
-        <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-background text-xs">
+        <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-zinc-50 text-xs">
           <div className="text-center animate-fade-in-down">
-            <span className="px-3 py-1 bg-white/5 border border-white/10 text-zinc-300 rounded-full text-[10px] font-mono font-semibold shadow-sm">
-              Live Architecture & Operations Desk
+            <span className="px-3 py-1 bg-white border border-zinc-200 text-zinc-600 rounded-full text-[10px] font-mono font-semibold shadow-sm">
+              Live Architecture &amp; Operations Desk
             </span>
           </div>
 
@@ -116,7 +116,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
             >
               <div
                 className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
-                  msg.sender === 'user' ? 'bg-primary text-white shadow-glow' : 'bg-white/10 text-zinc-200 border border-white/10'
+                  msg.sender === 'user' ? 'bg-zinc-900 text-white shadow-sm' : 'bg-zinc-200 text-zinc-800'
                 }`}
               >
                 {msg.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
@@ -125,8 +125,8 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
                 <div
                   className={`p-3 rounded-2xl transition-all ${
                     msg.sender === 'user'
-                      ? 'bg-primary text-white rounded-tr-none shadow-glow'
-                      : 'bg-surface text-zinc-200 border border-white/10 shadow-sm rounded-tl-none hover:border-white/20'
+                      ? 'bg-zinc-900 text-white rounded-tr-none shadow-sm'
+                      : 'bg-white text-zinc-800 border border-zinc-200 shadow-sm rounded-tl-none'
                   }`}
                 >
                   <p className="leading-relaxed">{msg.text}</p>
@@ -140,7 +140,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
 
           {/* Quick suggestions */}
           <div className="pt-2">
-            <p className="text-[11px] text-zinc-400 font-bold mb-2">Suggested Inquiries:</p>
+            <p className="text-[11px] text-zinc-500 font-bold mb-2">Suggested Inquiries:</p>
             <div className="flex flex-col gap-1.5">
               {quickQuestions.map((q, idx) => (
                 <button
@@ -148,7 +148,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
                   onClick={() => {
                     setInput(q);
                   }}
-                  className="text-left p-2.5 rounded-xl bg-surface border border-white/10 hover:border-primary hover:bg-white/5 text-[11px] text-zinc-300 font-medium transition-all active:scale-[0.99]"
+                  className="text-left p-2.5 rounded-xl bg-white border border-zinc-200 hover:border-zinc-400 hover:bg-zinc-100 text-[11px] text-zinc-700 font-medium transition-all active:scale-[0.99] cursor-pointer"
                 >
                   {q}
                 </button>
@@ -158,18 +158,18 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
         </div>
 
         {/* Input Footer */}
-        <form onSubmit={handleSend} className="p-4 bg-surface/95 border-t border-white/10 flex items-center gap-2">
+        <form onSubmit={handleSend} className="p-4 bg-white border-t border-zinc-200 flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your question..."
-            className="flex-1 h-10 px-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+            className="flex-1 h-10 px-3.5 rounded-xl bg-white border border-zinc-300 text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all"
           />
           <button
             type="submit"
             disabled={!input.trim()}
-            className="h-10 px-4 rounded-xl bg-primary hover:bg-primary-dark text-white font-bold text-xs flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-glow active:scale-95"
+            className="h-10 px-4 rounded-xl bg-zinc-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-sm active:scale-95 cursor-pointer"
           >
             <Send className="w-4 h-4" />
           </button>

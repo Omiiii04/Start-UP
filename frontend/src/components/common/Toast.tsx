@@ -39,40 +39,40 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`pointer-events-auto relative overflow-hidden flex items-center justify-between p-4 rounded-xl shadow-2xl border backdrop-blur-xl transition-all duration-300 animate-fade-in-up hover-lift ${
+            className={`pointer-events-auto relative overflow-hidden flex items-center justify-between p-4 rounded-xl shadow-2xl border backdrop-blur-xl transition-all duration-300 animate-fade-in-up hover-lift bg-zinc-900 text-white ${
               toast.type === 'success'
-                ? 'bg-surface/95 text-white border-emerald-500/30 shadow-[0_4px_24px_rgba(52,211,153,0.15)]'
+                ? 'border-emerald-500/40 shadow-[0_4px_24px_rgba(16,185,129,0.25)]'
                 : toast.type === 'error'
-                ? 'bg-surface/95 text-white border-red-500/30 shadow-[0_4px_24px_rgba(248,113,113,0.15)]'
-                : 'bg-surface/95 text-white border-primary/30 shadow-[0_4px_24px_rgba(124,58,237,0.15)]'
+                ? 'border-red-500/40 shadow-[0_4px_24px_rgba(239,68,68,0.25)]'
+                : 'border-zinc-700 shadow-[0_4px_24px_rgba(0,0,0,0.3)]'
             }`}
           >
             {/* Top glowing line */}
             <div className={`absolute top-0 left-0 right-0 h-0.5 ${
-              toast.type === 'success' ? 'bg-emerald-400' : toast.type === 'error' ? 'bg-red-400' : 'bg-primary'
+              toast.type === 'success' ? 'bg-emerald-400' : toast.type === 'error' ? 'bg-red-400' : 'bg-zinc-400'
             }`} />
 
             <div className="flex items-center gap-3">
               {toast.type === 'success' && (
-                <div className="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 animate-scale-in" />
                 </div>
               )}
               {toast.type === 'error' && (
-                <div className="w-7 h-7 rounded-lg bg-red-500/15 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-lg bg-red-500/20 flex items-center justify-center shrink-0">
                   <AlertCircle className="w-4 h-4 text-red-400 animate-scale-in" />
                 </div>
               )}
               {toast.type === 'info' && (
-                <div className="w-7 h-7 rounded-lg bg-primary/15 flex items-center justify-center shrink-0">
-                  <Info className="w-4 h-4 text-primary-light animate-scale-in" />
+                <div className="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0">
+                  <Info className="w-4 h-4 text-zinc-300 animate-scale-in" />
                 </div>
               )}
-              <span className="text-xs font-semibold tracking-wide">{toast.message}</span>
+              <span className="text-xs font-semibold text-white tracking-wide">{toast.message}</span>
             </div>
             <button
               onClick={() => removeToast(toast.id)}
-              className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors ml-2"
+              className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors ml-2"
             >
               <X className="w-4 h-4" />
             </button>

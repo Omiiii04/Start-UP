@@ -65,23 +65,23 @@ export const EngineeringPipeline: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto py-6 sm:py-10 px-3 sm:px-6 space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="bg-surface rounded-2xl border border-white/10 shadow-card p-4 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+      <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-4 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
         <div>
-          <span className="text-[10px] font-mono uppercase font-bold text-primary-light">
-            Engineering & QA Command Center
+          <span className="text-[10px] font-mono uppercase font-bold text-zinc-500">
+            Engineering &amp; QA Command Center
           </span>
-          <h1 className="font-headline text-xl sm:text-2xl md:text-3xl font-bold text-white mt-0.5">
-            Sprint 2: Architecture & Staging Pipeline
+          <h1 className="font-headline text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900 mt-0.5">
+            Sprint 2: Architecture &amp; Staging Pipeline
           </h1>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-zinc-400 mt-2">
-            <span className="flex items-center gap-1.5 font-bold text-white">
-              <GitBranch className="w-3.5 h-3.5 text-primary-light" /> branch: staging
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-zinc-500 mt-2">
+            <span className="flex items-center gap-1.5 font-bold text-zinc-900">
+              <GitBranch className="w-3.5 h-3.5 text-zinc-800" /> branch: staging
             </span>
             <span>•</span>
-            <span>Commit <strong className="text-white font-bold">#8f2a1b9</strong></span>
+            <span>Commit <strong className="text-zinc-900 font-bold">#8f2a1b9</strong></span>
             <span>•</span>
-            <span className="text-emerald-400 font-bold flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ECS Staging Active
+            <span className="text-emerald-600 font-bold flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ECS Staging Active
             </span>
           </div>
         </div>
@@ -90,16 +90,16 @@ export const EngineeringPipeline: React.FC = () => {
           <button
             onClick={handleTriggerDeploy}
             disabled={isDeploying}
-            className="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white/10 border border-white/10 text-xs font-bold text-white hover:bg-white/15 flex items-center gap-2 transition-all shadow-sm active:scale-95 disabled:opacity-50"
+            className="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-zinc-100 border border-zinc-200 text-xs font-bold text-zinc-800 hover:bg-zinc-200 flex items-center gap-2 transition-all shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer"
           >
-            <RotateCw className={`w-3.5 h-3.5 text-primary-light ${isDeploying ? 'animate-spin' : ''}`} />
+            <RotateCw className={`w-3.5 h-3.5 text-zinc-700 ${isDeploying ? 'animate-spin' : ''}`} />
             <span>{isDeploying ? 'Deploying...' : 'Trigger Re-Deploy'}</span>
           </button>
           <a
             href="https://staging-app.startupsystems.internal/demo-84"
             target="_blank"
             rel="noreferrer"
-            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-glow flex items-center gap-2 transition-colors active:scale-95"
+            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-bold shadow-sm flex items-center gap-2 transition-colors active:scale-95 cursor-pointer"
           >
             <ExternalLink className="w-4 h-4" />
             <span>Open Staging</span>
@@ -111,36 +111,36 @@ export const EngineeringPipeline: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Sprint Backlog (35%) */}
         <div className="lg:col-span-4 space-y-4">
-          <div className="bg-surface rounded-2xl border border-white/10 shadow-card p-4 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <h3 className="font-headline font-bold text-sm text-white uppercase flex items-center gap-2">
-                <Layers className="w-4 h-4 text-primary-light" />
-                Sprint Backlog & Tasks
+          <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-4 sm:p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+              <h3 className="font-headline font-bold text-sm text-zinc-900 uppercase flex items-center gap-2">
+                <Layers className="w-4 h-4 text-zinc-700" />
+                Sprint Backlog &amp; Tasks
               </h3>
-              <span className="text-[10px] font-mono font-bold bg-white/5 border border-white/10 text-white px-2.5 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono font-bold bg-zinc-100 border border-zinc-200 text-zinc-800 px-2.5 py-0.5 rounded-full">
                 29 Story Pts
               </span>
             </div>
 
             <div className="space-y-3">
               {sprintTasks.map((task, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                <div key={idx} className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-xs font-bold text-white leading-snug">{task.title}</p>
-                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-white/10 text-zinc-300 border border-white/10 shrink-0">
+                    <p className="text-xs font-bold text-zinc-900 leading-snug">{task.title}</p>
+                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 border border-zinc-300 shrink-0">
                       {task.pts}pt
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] pt-1">
-                    <span className="text-zinc-400 font-mono">Lead: {task.owner}</span>
+                    <span className="text-zinc-500 font-mono">Lead: {task.owner}</span>
                     <span
                       className={`font-mono font-bold text-[10px] px-2 py-0.5 rounded-full uppercase border ${
                         task.status === 'done'
-                          ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                           : task.status === 'testing'
-                          ? 'bg-blue-500/15 text-blue-300 border-blue-500/30'
-                          : 'bg-white/5 text-zinc-400 border-white/10'
+                          ? 'bg-blue-50 text-blue-800 border-blue-200'
+                          : 'bg-zinc-200 text-zinc-700 border-zinc-300'
                       }`}
                     >
                       {task.status}
@@ -154,13 +154,13 @@ export const EngineeringPipeline: React.FC = () => {
 
         {/* CI/CD & QA Suite (45%) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-surface rounded-2xl border border-white/10 shadow-card p-6 space-y-5">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <h3 className="font-headline font-bold text-sm text-white uppercase flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-primary-light" />
+          <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-6 space-y-5">
+            <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+              <h3 className="font-headline font-bold text-sm text-zinc-900 uppercase flex items-center gap-2">
+                <Terminal className="w-4 h-4 text-zinc-700" />
                 GitHub Actions Automated CI/CD
               </h3>
-              <span className="text-[10px] font-mono text-emerald-400 font-bold">Passing (57.3s)</span>
+              <span className="text-[10px] font-mono text-emerald-600 font-bold">Passing (57.3s)</span>
             </div>
 
             <div className="space-y-2 font-mono text-xs">
@@ -168,43 +168,43 @@ export const EngineeringPipeline: React.FC = () => {
                 <div
                   key={idx}
                   style={{ animationDelay: `${idx * 60}ms` }}
-                  className="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary/40 flex items-center justify-between hover-lift transition-all animate-fade-in-up"
+                  className="p-3.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 hover:border-zinc-400 flex items-center justify-between hover-lift transition-all animate-fade-in-up"
                 >
                   <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 animate-scale-in" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 animate-scale-in" />
                     <div>
-                      <p className="text-white font-bold text-xs flex items-center gap-1.5">
+                      <p className="text-zinc-900 font-bold text-xs flex items-center gap-1.5">
                         <span>{stage.name}</span>
                         {stage.status === 'deployed' && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-radar-ping"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-radar-ping"></span>
                         )}
                       </p>
-                      <p className="text-[10px] text-zinc-400 font-sans">{stage.details}</p>
+                      <p className="text-[10px] text-zinc-500 font-sans">{stage.details}</p>
                     </div>
                   </div>
-                  <span className="text-[10px] text-zinc-400 font-mono">{stage.time}</span>
+                  <span className="text-[10px] text-zinc-500 font-mono">{stage.time}</span>
                 </div>
               ))}
             </div>
 
             {/* QA Signoff Checklist by Falguni */}
-            <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 space-y-2 text-xs">
-              <p className="font-bold text-white flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 space-y-2 text-xs">
+              <p className="font-bold text-zinc-900 flex items-center justify-between">
                 <span>QA Acceptance Gates (Falguni):</span>
-                <span className="font-mono text-emerald-400 text-[11px] font-bold">
+                <span className="font-mono text-emerald-600 text-[11px] font-bold">
                   {qaGates.every(g => g.checked) ? 'Gate 4: PASSED' : 'Gate 4: IN PROGRESS'}
                 </span>
               </p>
-              <div className="space-y-1.5 text-zinc-300">
+              <div className="space-y-1.5 text-zinc-700">
                 {qaGates.map((g) => (
                   <label key={g.id} className="flex items-center gap-2 cursor-pointer select-none">
                     <input 
                       type="checkbox" 
                       checked={g.checked} 
                       onChange={() => toggleQaGate(g.id)}
-                      className="w-3.5 h-3.5 rounded border-white/20 text-primary accent-primary cursor-pointer" 
+                      className="w-3.5 h-3.5 rounded border-zinc-300 text-zinc-900 accent-zinc-900 cursor-pointer" 
                     />
-                    <span className={g.checked ? 'line-through text-zinc-500' : 'text-zinc-200'}>{g.label}</span>
+                    <span className={g.checked ? 'line-through text-zinc-400' : 'text-zinc-800'}>{g.label}</span>
                   </label>
                 ))}
               </div>
@@ -214,36 +214,36 @@ export const EngineeringPipeline: React.FC = () => {
 
         {/* Handover & Release (20%) */}
         <div className="lg:col-span-3 space-y-4">
-          <div className="bg-surface rounded-2xl border border-white/10 shadow-card p-6 space-y-4">
-            <h3 className="font-headline font-bold text-sm text-white uppercase flex items-center gap-2">
-              <Package className="w-4 h-4 text-primary-light" />
+          <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-6 space-y-4">
+            <h3 className="font-headline font-bold text-sm text-zinc-900 uppercase flex items-center gap-2">
+              <Package className="w-4 h-4 text-zinc-700" />
               IP Handover
             </h3>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                <span className="text-zinc-400 text-[10px] uppercase font-mono font-bold">Delivery Package</span>
-                <p className="font-bold text-white mt-0.5">Full Source Code ZIP</p>
-                <p className="text-[10px] text-zinc-400">Includes Docker Compose & README</p>
+              <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
+                <span className="text-zinc-500 text-[10px] uppercase font-mono font-bold">Delivery Package</span>
+                <p className="font-bold text-zinc-900 mt-0.5">Full Source Code ZIP</p>
+                <p className="text-[10px] text-zinc-500">Includes Docker Compose &amp; README</p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                <span className="text-zinc-400 text-[10px] uppercase font-mono font-bold">IP Certificate</span>
-                <p className="font-bold text-white mt-0.5">Step 14: Ready</p>
-                <p className="text-[10px] text-zinc-400">Pending Final Invoice Clearance</p>
+              <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
+                <span className="text-zinc-500 text-[10px] uppercase font-mono font-bold">IP Certificate</span>
+                <p className="font-bold text-zinc-900 mt-0.5">Step 14: Ready</p>
+                <p className="text-[10px] text-zinc-500">Pending Final Invoice Clearance</p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                <span className="text-emerald-400 text-[10px] uppercase font-mono font-bold">30-Day Support</span>
-                <p className="font-bold text-emerald-300 mt-0.5">SLA Auto-Activates</p>
-                <p className="text-[10px] text-emerald-400">Upon Final Delivery Sign-off</p>
+              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                <span className="text-emerald-700 text-[10px] uppercase font-mono font-bold">30-Day Support</span>
+                <p className="font-bold text-emerald-800 mt-0.5">SLA Auto-Activates</p>
+                <p className="text-[10px] text-emerald-700">Upon Final Delivery Sign-off</p>
               </div>
             </div>
 
             <button 
               onClick={handleBuildBundle}
               disabled={isBuildingBundle}
-              className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-glow transition-all active:scale-95 disabled:opacity-50"
+              className="w-full py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-bold shadow-sm transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
             >
               {isBuildingBundle ? 'Building Release Archive...' : 'Build Release Bundle'}
             </button>

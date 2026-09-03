@@ -8,45 +8,53 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ShwaX Studio inspired sleek OLED dark palette
-        background: '#050505',
+        // ProjectMart-inspired clean white/light palette
+        background: '#f8f8fa',
         surface: {
-          DEFAULT: '#0e0e13',
-          dim: '#08080b',
-          bright: '#181822',
-          low: '#0a0a0f',
-          container: '#14141c',
-          high: '#1c1c27',
-          highest: '#252533',
-          border: 'rgba(255, 255, 255, 0.08)',
-          borderDark: 'rgba(255, 255, 255, 0.14)',
+          DEFAULT: '#ffffff',
+          dim: '#f3f4f6',
+          bright: '#ffffff',
+          low: '#f9fafb',
+          container: '#f1f3f5',
+          high: '#e9ecef',
+          highest: '#dee2e6',
+          border: 'rgba(0, 0, 0, 0.08)',
+          borderDark: 'rgba(0, 0, 0, 0.14)',
         },
         primary: {
-          DEFAULT: '#7c3aed',   // Vibrant violet/purple
-          dark: '#5b21b6',
-          light: '#a78bfa',
-          container: 'rgba(124, 58, 237, 0.18)',
-          fixed: 'rgba(124, 58, 237, 0.08)',
+          DEFAULT: '#18181b',   // Elegant faint black / soft charcoal
+          dark: '#09090b',      // Deeper black on hover
+          light: '#27272a',     // Subtle zinc charcoal
+          container: 'rgba(24, 24, 27, 0.08)',
+          fixed: 'rgba(24, 24, 27, 0.04)',
+        },
+        // Semi-faint black brand accent
+        brand: {
+          DEFAULT: '#18181b',
+          hover: '#09090b',
+          light: 'rgba(24, 24, 27, 0.06)',
+          muted: 'rgba(24, 24, 27, 0.65)',
+          border: 'rgba(24, 24, 27, 0.15)',
         },
         navy: {
-          DEFAULT: '#ffffff',
-          dark: '#e4e4e7',
-          light: '#14141c',
+          DEFAULT: '#18181b',
+          dark: '#09090b',
+          light: '#f4f4f5',
         },
         secondary: {
-          DEFAULT: '#a78bfa',
-          container: 'rgba(167, 139, 250, 0.15)',
+          DEFAULT: '#3f3f46',
+          container: 'rgba(63, 63, 70, 0.08)',
         },
         tertiary: {
-          DEFAULT: '#34d399',
-          container: 'rgba(52, 211, 153, 0.15)',
-          light: '#6ee7b7',
+          DEFAULT: '#10b981',
+          container: 'rgba(16, 185, 129, 0.12)',
+          light: '#34d399',
         },
-        success: '#34d399',
-        warning: '#fbbf24',
-        error: '#f87171',
-        darkBg: '#050505',
-        darkCard: '#0e0e13',
+        success: '#10b981',
+        warning: '#f59e0b',
+        error: '#ef4444',
+        darkBg: '#09090b',
+        darkCard: '#18181b',
       },
       fontFamily: {
         headline: ['Hanken Grotesk', 'Plus Jakarta Sans', 'Inter', 'sans-serif'],
@@ -54,10 +62,10 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        card: '0px 4px 24px rgba(0, 0, 0, 0.6)',
-        cardHover: '0px 8px 32px rgba(124, 58, 237, 0.25)',
-        modal: '0px 16px 48px rgba(0, 0, 0, 0.8)',
-        glow: '0 0 24px rgba(124, 58, 237, 0.45)',
+        card: '0px 2px 12px rgba(0, 0, 0, 0.06)',
+        cardHover: '0px 8px 24px rgba(0, 0, 0, 0.10)',
+        modal: '0px 16px 48px rgba(0, 0, 0, 0.18)',
+        glow: '0 4px 14px rgba(24, 24, 27, 0.22)',
       },
       borderRadius: {
         'xl': '0.75rem',
@@ -89,8 +97,8 @@ export default {
           '50%': { transform: 'translateY(-6px)' },
         },
         glowPulse: {
-          '0%, 100%': { opacity: '0.8', filter: 'drop-shadow(0 0 12px rgba(124, 58, 237, 0.4))' },
-          '50%': { opacity: '1', filter: 'drop-shadow(0 0 24px rgba(124, 58, 237, 0.75))' },
+          '0%, 100%': { opacity: '0.9', filter: 'drop-shadow(0 0 8px rgba(24, 24, 27, 0.25))' },
+          '50%': { opacity: '1', filter: 'drop-shadow(0 0 16px rgba(24, 24, 27, 0.45))' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
