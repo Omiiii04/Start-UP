@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { ShieldCheck, ShieldAlert, Lock, LogIn, ArrowLeft, KeyRound, Shield } from 'lucide-react';
+// NOTE: KeyRound is used in the unauthenticated view below — do not remove
 import { UserRole } from '../../types';
 
 interface AdminGuardProps {
@@ -9,7 +10,7 @@ interface AdminGuardProps {
 }
 
 export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDashboard }) => {
-  const { user, isAuthenticated, isAdmin, openAuthModal, toggleAdminElevation, switchRole } = useAuth();
+  const { user, isAuthenticated, isAdmin, openAuthModal, switchRole } = useAuth();
 
   // If fully authenticated as Admin
   if (isAuthenticated && isAdmin && user) {
@@ -119,15 +120,6 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
             >
               <LogIn className="w-4 h-4" />
               <span>Sign in with Google Admin</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleAdminElevation}
-              className="w-full sm:w-auto px-5 py-3 bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-800 font-semibold rounded-xl text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <KeyRound className="w-4 h-4 text-amber-600" />
-              <span>Elevate to Admin (Demo)</span>
             </button>
 
             <button

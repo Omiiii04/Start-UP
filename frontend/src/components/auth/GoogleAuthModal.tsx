@@ -17,6 +17,9 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'user' | 'admin'>(authModal.targetRole || 'user');
 
+  // Demo mode guard — NEVER show demo accounts in production
+  const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
+
   if (!authModal.isOpen) return null;
 
   const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
@@ -194,7 +197,8 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
             )}
           </div>
 
-          {/* Quick Switch Profiles for Testing */}
+          {/* Quick Switch Profiles — DEMO MODE ONLY */}
+          {isDemoMode ? (
           <div className="pt-2">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] uppercase tracking-wider font-mono text-zinc-500 font-semibold">
@@ -313,6 +317,12 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
               </div>
             )}
           </div>
+          ) : (
+            /* Production mode: demo accounts hidden */
+            <div className="pt-2 p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-center text-[11px] text-zinc-500">
+              <span>Sign in above with your Google account to continue.</span>
+            </div>
+          )}
         </div>
 
         {/* Footer */}
