@@ -1,7 +1,13 @@
 import sgMail from '@sendgrid/mail';
 import { env } from '../../config/env';
 
-sgMail.setApiKey(env.SENDGRID_API_KEY);
+const SENDGRID_CONFIGURED = Boolean(env.SENDGRID_API_KEY && env.SENDGRID_API_KEY.startsWith('SG.'));
+
+if (SENDGRID_CONFIGURED) {
+  sgMail.setApiKey(env.SENDGRID_API_KEY as string);
+} else {
+  console.warn('[Email] SendGrid not configured — emails will be skipped in dev mode.');
+}
 
 const FROM = { email: env.SENDGRID_FROM_EMAIL, name: env.SENDGRID_FROM_NAME };
 
@@ -71,6 +77,10 @@ export async function sendIntakeConfirmationEmail(params: {
     <p>If you have questions, reach out to <a href="mailto:support@projectbridge.io">support@projectbridge.io</a></p>
   `);
 
+  if (!SENDGRID_CONFIGURED) {
+    console.log(`[Email:dev] Intake confirmation skipped — to: ${params.toEmail}, tracking: ${params.trackingCode}`);
+    return;
+  }
   await sgMail.send({
     to: { email: params.toEmail, name: params.toName },
     from: FROM,
@@ -118,6 +128,10 @@ export async function sendInvoiceEmail(params: {
     <p>Our operations team will share payment instructions separately. Please reference Invoice <strong>${params.invoiceNumber}</strong> in all communications.</p>
   `);
 
+  if (!SENDGRID_CONFIGURED) {
+    console.log(`[Email:dev] Invoice email skipped — to: ${params.toEmail}, invoice: ${params.invoiceNumber}`);
+    return;
+  }
   await sgMail.send({
     to: { email: params.toEmail, name: params.toName },
     from: FROM,
@@ -146,6 +160,10 @@ export async function sendStatusUpdateEmail(params: {
     <p>Log in to your ProjectBridge dashboard to view the latest updates.</p>
   `);
 
+  if (!SENDGRID_CONFIGURED) {
+    console.log(`[Email:dev] Status update email skipped — to: ${params.toEmail}, step: ${params.newStep}`);
+    return;
+  }
   await sgMail.send({
     to: { email: params.toEmail, name: params.toName },
     from: FROM,

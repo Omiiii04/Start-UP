@@ -16,22 +16,25 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
   
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'user' | 'admin'>(authModal.targetRole || 'user');
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   // Demo mode guard — NEVER show demo accounts in production
   const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
 
   if (!authModal.isOpen) return null;
 
-  const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
+  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
-      const success = loginWithGoogleCredential(
+      setIsSigningIn(true);
+      const success = await loginWithGoogleCredential(
         credentialResponse.credential,
         activeTab === 'admin' ? 'admin_ceo' : 'client'
       );
+      setIsSigningIn(false);
       if (success) {
         showToast(
-          activeTab === 'admin' 
-            ? 'Authenticated with Admin privileges via Google.' 
+          activeTab === 'admin'
+            ? 'Authenticated with Admin privileges via Google.'
             : 'Welcome to ProjectBridge Client Portal.',
           'success'
         );
@@ -39,7 +42,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
           onNavigate(authModal.onSuccessRedirectTab);
         }
       } else {
-        showToast('Unable to verify Google credential token.', 'error');
+        showToast('Sign-in failed. Your account may not be authorized or network error.', 'error');
       }
     }
   };
@@ -154,7 +157,12 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
 
             {/* Google OAuth Live Button or Fallback */}
             <div className="flex justify-center pt-1">
-              {hasConfiguredGoogleAuth ? (
+              {isSigningIn ? (
+                <div className="flex flex-col items-center gap-2 py-2">
+                  <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-800 rounded-full animate-spin" />
+                  <span className="text-xs text-zinc-500">Verifying with server...</span>
+                </div>
+              ) : hasConfiguredGoogleAuth ? (
                 <div className="w-full flex justify-center">
                   <GoogleLogin
                     onSuccess={handleGoogleSuccess}

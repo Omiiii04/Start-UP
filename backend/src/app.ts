@@ -79,6 +79,29 @@ export function createApp() {
   app.use('/api/v1/invoices', invoicesRoutes);
   app.use('/api/v1/crm', crmRoutes);
 
+  // ── API Index — lists all available endpoints
+  app.get('/api/v1', (_req, res) => {
+    res.json({
+      success: true,
+      data: {
+        name: 'ProjectBridge API',
+        version: '1.0.0',
+        status: 'running',
+        endpoints: {
+          health:    'GET  /api/v1/health',
+          auth:      'POST /api/v1/auth/google  |  POST /api/v1/auth/refresh  |  POST /api/v1/auth/logout',
+          users:     'GET  /api/v1/users/me  |  PATCH /api/v1/users/me',
+          intake:    'POST /api/v1/intake/submit  |  GET /api/v1/intake/status/:trackingCode',
+          projects:  'GET  /api/v1/projects  |  GET /api/v1/projects/:id',
+          milestones:'GET  /api/v1/projects/:projectId/milestones',
+          invoices:  'POST /api/v1/invoices/generate  |  GET /api/v1/invoices/:id',
+          uploads:   'POST /api/v1/projects/:projectId/files',
+          crm:       'GET  /api/v1/crm/stats  |  GET /api/v1/crm/inquiries',
+        },
+      },
+    });
+  });
+
   // ── 404 handler (must be before error handler)
   app.use(notFoundHandler);
 

@@ -1,7 +1,14 @@
 import axios from 'axios';
 import { env } from '../../config/env';
 
+const WA_CONFIGURED = Boolean(env.WHATSAPP_PHONE_NUMBER_ID && env.WHATSAPP_ACCESS_TOKEN
+  && env.WHATSAPP_PHONE_NUMBER_ID !== 'your_phone_number_id');
+
 const WHATSAPP_API_BASE = `https://graph.facebook.com/v19.0/${env.WHATSAPP_PHONE_NUMBER_ID}`;
+
+if (!WA_CONFIGURED) {
+  console.warn('[WhatsApp] Not configured — notifications will be skipped in dev mode.');
+}
 
 /**
  * Send a plain text WhatsApp message via Meta Cloud API.
@@ -12,6 +19,10 @@ export async function sendWhatsAppNotification(
   message: string
 ): Promise<void> {
   // Normalize phone: strip non-digits, ensure no leading +
+  if (!WA_CONFIGURED) {
+    console.log(`[WhatsApp:dev] Message skipped — to: ${to}, msg: ${message.substring(0, 60)}...`);
+    return;
+  }
   const phone = to.replace(/\D/g, '');
 
   await axios.post(

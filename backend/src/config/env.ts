@@ -21,7 +21,7 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
 
   // Google OAuth
-  GOOGLE_CLIENT_ID: z.string().min(10, 'GOOGLE_CLIENT_ID is required'),
+  GOOGLE_CLIENT_ID: z.string().min(10).optional().or(z.literal('')),
 
   // Admin emails (server-authoritative)
   ADMIN_EMAILS: z
@@ -29,18 +29,18 @@ const envSchema = z.object({
     .default('om@projectbridge.io,somnath@projectbridge.io,falguni@projectbridge.io,divya@projectbridge.io'),
 
   // Cloudinary
-  CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
-  CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),
-  CLOUDINARY_API_SECRET: z.string().min(1, 'CLOUDINARY_API_SECRET is required'),
+  CLOUDINARY_CLOUD_NAME: z.string().min(1).optional().or(z.literal('')),
+  CLOUDINARY_API_KEY: z.string().min(1).optional().or(z.literal('')),
+  CLOUDINARY_API_SECRET: z.string().min(1).optional().or(z.literal('')),
 
-  // SendGrid
-  SENDGRID_API_KEY: z.string().startsWith('SG.', 'SENDGRID_API_KEY must start with SG.'),
-  SENDGRID_FROM_EMAIL: z.string().email('SENDGRID_FROM_EMAIL must be a valid email'),
+  // SendGrid (optional — warnings logged if not configured)
+  SENDGRID_API_KEY: z.string().optional().or(z.literal('')),
+  SENDGRID_FROM_EMAIL: z.string().email().default('noreply@projectbridge.io'),
   SENDGRID_FROM_NAME: z.string().default('ProjectBridge'),
 
-  // WhatsApp Business API (Meta Cloud API)
-  WHATSAPP_PHONE_NUMBER_ID: z.string().min(1, 'WHATSAPP_PHONE_NUMBER_ID is required'),
-  WHATSAPP_ACCESS_TOKEN: z.string().min(1, 'WHATSAPP_ACCESS_TOKEN is required'),
+  // WhatsApp Business API (optional — warnings logged if not configured)
+  WHATSAPP_PHONE_NUMBER_ID: z.string().optional().or(z.literal('')),
+  WHATSAPP_ACCESS_TOKEN: z.string().optional().or(z.literal('')),
 
   // CORS
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
