@@ -56,9 +56,11 @@ if (!parsed.success) {
   }
   console.error('\nPlease check your .env file against .env.example\n');
   process.exit(1);
+  throw new Error('Invalid environment variables');
 }
 
-export const env = parsed.data;
+export type Env = z.infer<typeof envSchema>;
+export const env: Env = parsed.data;
 
 // Derived helpers
 export const ADMIN_EMAILS_SET = new Set(

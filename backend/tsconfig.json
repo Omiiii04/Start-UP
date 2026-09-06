@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "Node16",
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -15,11 +15,10 @@
     "declarationMap": true,
     "sourceMap": true,
     "moduleResolution": "node16",
-    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "scripts/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

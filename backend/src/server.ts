@@ -32,7 +32,7 @@ process.on('SIGTERM', () => shutdown('SIGTERM'));
 process.on('SIGINT', () => shutdown('SIGINT'));
 
 // ── Catch unhandled rejections ──
-process.on('unhandledRejection', (reason) => {
+process.on('unhandledRejection', (reason: unknown) => {
   console.error('Unhandled Promise Rejection:', reason);
   if (env.NODE_ENV === 'production') {
     shutdown('UNHANDLED_REJECTION');
