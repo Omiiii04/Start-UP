@@ -15,7 +15,6 @@
     "declarationMap": true,
     "sourceMap": true,
     "moduleResolution": "node16",
-    "types": ["node", "multer"],
     "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"]
