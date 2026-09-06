@@ -50,7 +50,7 @@ export async function uploadProjectFile(
         else resolve({ public_id: result.public_id, secure_url: result.secure_url });
       }
     );
-    uploadStream.end(file.buffer);
+    (uploadStream as NodeJS.WritableStream).end(file.buffer);
   });
 
   type DbFileRow = {

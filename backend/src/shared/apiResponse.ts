@@ -47,7 +47,7 @@ export class AppError extends Error {
     this.statusCode = statusCode;
     this.code = code;
     this.isOperational = true; // Distinguishes known errors from unexpected crashes
-    Error.captureStackTrace(this, this.constructor);
+    if (Error.captureStackTrace) Error.captureStackTrace(this, this.constructor);
   }
 }
 
