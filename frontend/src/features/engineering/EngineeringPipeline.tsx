@@ -5,7 +5,6 @@ import {
   CheckCircle2, 
   RotateCw, 
   Package, 
-  ExternalLink,
   Layers
 } from 'lucide-react';
 import { useToast } from '../../components/common/Toast';
@@ -15,28 +14,16 @@ export const EngineeringPipeline: React.FC = () => {
   const [isDeploying, setIsDeploying] = useState(false);
   const [isBuildingBundle, setIsBuildingBundle] = useState(false);
 
-  // Interactive QA Gates state
+  // Interactive QA Gates state — starts unchecked; nothing is verified until a human checks it
   const [qaGates, setQaGates] = useState([
-    { id: 'gate-1', label: 'UI/UX Design Tokens & 12-column layout (Design.md)', checked: true },
-    { id: 'gate-2', label: 'Cross-browser testing (Chrome, Safari, Firefox)', checked: true },
-    { id: 'gate-3', label: 'Zero Critical / High defects on Staging build', checked: true },
+    { id: 'gate-1', label: 'UI/UX Design Tokens & 12-column layout (Design.md)', checked: false },
+    { id: 'gate-2', label: 'Cross-browser testing (Chrome, Safari, Firefox)', checked: false },
+    { id: 'gate-3', label: 'Zero Critical / High defects on Staging build', checked: false },
   ]);
 
-  const sprintTasks = [
-    { title: 'Multi-stage Dockerfile container build & ECR push', pts: 5, owner: 'Somnath', status: 'done' },
-    { title: 'PostgreSQL schema migrations & Argon2id auth middleware', pts: 8, owner: 'Somnath', status: 'done' },
-    { title: 'React 18 + Tailwind UI components & 15-step Stepper', pts: 8, owner: 'Falguni', status: 'done' },
-    { title: 'PyTorch UNet inference API latencies benchmark (<250ms)', pts: 5, owner: 'Om & Somnath', status: 'testing' },
-    { title: 'Final Staging walkthrough & IP Transfer package bundle', pts: 3, owner: 'Somnath', status: 'todo' },
-  ];
-
-  const pipelineStages = [
-    { name: 'ESLint & Strict TypeScript Typecheck', status: 'pass', time: '1.4s', details: '0 errors, 0 warnings' },
-    { name: 'Snyk & Dependabot Vulnerability Scan', status: 'pass', time: '3.1s', details: '0 high/critical CVEs' },
-    { name: 'Automated Test Suite (Jest/Pytest)', status: 'pass', time: '14.2s', details: '48/48 tests passing (100%)' },
-    { name: 'Docker Build & Amazon ECR Registry Push', status: 'pass', time: '38.6s', details: 'Image sha256:4f8e91...' },
-    { name: 'AWS ECS Fargate Staging Service Update', status: 'deployed', time: '22.0s', details: 'Healthcheck: 200 OK' },
-  ];
+  // Sprint tasks & pipeline stages — no backend endpoint exists yet for live sprint/CI data
+  const sprintTasks: { title: string; pts: number; owner: string; status: string }[] = [];
+  const pipelineStages: { name: string; status: string; time: string; details: string }[] = [];
 
   const handleTriggerDeploy = () => {
     setIsDeploying(true);
@@ -77,12 +64,6 @@ export const EngineeringPipeline: React.FC = () => {
             <span className="flex items-center gap-1.5 font-bold text-zinc-900">
               <GitBranch className="w-3.5 h-3.5 text-zinc-800" /> branch: staging
             </span>
-            <span>•</span>
-            <span>Commit <strong className="text-zinc-900 font-bold">#8f2a1b9</strong></span>
-            <span>•</span>
-            <span className="text-emerald-600 font-bold flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ECS Staging Active
-            </span>
           </div>
         </div>
 
@@ -95,15 +76,6 @@ export const EngineeringPipeline: React.FC = () => {
             <RotateCw className={`w-3.5 h-3.5 text-zinc-700 ${isDeploying ? 'animate-spin' : ''}`} />
             <span>{isDeploying ? 'Deploying...' : 'Trigger Re-Deploy'}</span>
           </button>
-          <a
-            href="https://staging-app.startupsystems.internal/demo-84"
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-bold shadow-sm flex items-center gap-2 transition-colors active:scale-95 cursor-pointer"
-          >
-            <ExternalLink className="w-4 h-4" />
-            <span>Open Staging</span>
-          </a>
         </div>
       </div>
 
@@ -118,12 +90,14 @@ export const EngineeringPipeline: React.FC = () => {
                 Sprint Backlog &amp; Tasks
               </h3>
               <span className="text-[10px] font-mono font-bold bg-zinc-100 border border-zinc-200 text-zinc-800 px-2.5 py-0.5 rounded-full">
-                29 Story Pts
+                {sprintTasks.reduce((sum, t) => sum + t.pts, 0)} Story Pts
               </span>
             </div>
 
             <div className="space-y-3">
-              {sprintTasks.map((task, idx) => (
+              {sprintTasks.length === 0 ? (
+                <p className="text-xs text-zinc-400 italic py-4">No sprint tasks yet.</p>
+              ) : sprintTasks.map((task, idx) => (
                 <div key={idx} className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-xs font-bold text-zinc-900 leading-snug">{task.title}</p>
@@ -160,11 +134,15 @@ export const EngineeringPipeline: React.FC = () => {
                 <Terminal className="w-4 h-4 text-zinc-700" />
                 GitHub Actions Automated CI/CD
               </h3>
-              <span className="text-[10px] font-mono text-emerald-600 font-bold">Passing (57.3s)</span>
+              <span className="text-[10px] font-mono text-zinc-400 font-bold">
+                {pipelineStages.length === 0 ? 'No runs yet' : 'Passing'}
+              </span>
             </div>
 
             <div className="space-y-2 font-mono text-xs">
-              {pipelineStages.map((stage, idx) => (
+              {pipelineStages.length === 0 ? (
+                <p className="text-xs text-zinc-400 italic py-4 font-sans">No CI/CD runs recorded yet.</p>
+              ) : pipelineStages.map((stage, idx) => (
                 <div
                   key={idx}
                   style={{ animationDelay: `${idx * 60}ms` }}
@@ -187,10 +165,10 @@ export const EngineeringPipeline: React.FC = () => {
               ))}
             </div>
 
-            {/* QA Signoff Checklist by Falguni */}
+            {/* QA Signoff Checklist */}
             <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 space-y-2 text-xs">
               <p className="font-bold text-zinc-900 flex items-center justify-between">
-                <span>QA Acceptance Gates (Falguni):</span>
+                <span>QA Acceptance Gates:</span>
                 <span className="font-mono text-emerald-600 text-[11px] font-bold">
                   {qaGates.every(g => g.checked) ? 'Gate 4: PASSED' : 'Gate 4: IN PROGRESS'}
                 </span>

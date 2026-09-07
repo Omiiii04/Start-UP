@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Users, 
   Send, 
@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { formatINR } from '../../utils/gst';
 import { useToast } from '../../components/common/Toast';
+import { getCRMInquiries, getCRMStats } from '../../api/client';
 
 interface InquiryItem {
   inquiryId: string;
@@ -30,93 +31,66 @@ interface InquiryItem {
 export const OperationsDashboard: React.FC = () => {
   const { showToast } = useToast();
 
-  const [inquiriesList] = useState<InquiryItem[]>([
-    {
-      inquiryId: 'REQ-8492-X',
-      clientName: 'Vikram Sharma',
-      email: 'vikram.sharma@techsphere.in',
-      projectTitle: 'AI Vision Segmentation Pipeline (AWS ECS)',
-      serviceTier: 'mvp_development',
-      budgetInr: 45000,
-      ugcResult: {
-        passed: true,
-        flaggedKeywords: [],
-        notes: 'Strictly engineering deliverables. Zero UGC/thesis plagiarism detected.',
-      },
-      techFeasibility: 'approved',
-      assignedArchitect: 'Om (Lead Architect)',
-    },
-    {
-      inquiryId: 'REQ-8493-Y',
-      clientName: 'Priya Deshmukh',
-      email: 'priya.research@iitb.ac.in',
-      projectTitle: 'In-Silico Molecular Docking & Binding Affinity',
-      serviceTier: 'research_support',
-      budgetInr: 25000,
-      ugcResult: {
-        passed: true,
-        flaggedKeywords: [],
-        notes: 'Academic computational assistance. Full research IP retained by client.',
-      },
-      techFeasibility: 'approved',
-      assignedArchitect: 'Om & Somnath',
-    },
-    {
-      inquiryId: 'REQ-8494-Z',
-      clientName: 'Rahul Mehta',
-      email: 'rahul.m@gmail.com',
-      projectTitle: 'Automated Micro-services Architecture & Kubernetes',
-      serviceTier: 'micro_debug',
-      budgetInr: 8000,
-      ugcResult: {
-        passed: true,
-        flaggedKeywords: [],
-        notes: 'Micro consulting and bug resolution.',
-      },
-      techFeasibility: 'under_review',
-      assignedArchitect: 'Somnath (Backend Lead)',
-    },
-    {
-      inquiryId: 'REQ-8495-W',
-      clientName: 'Amit Verma',
-      email: 'amit.v@unverified.org',
-      projectTitle: 'Complete Engineering Thesis Ghostwriting & Exam Proxy',
-      serviceTier: 'research_support',
-      budgetInr: 20000,
-      ugcResult: {
-        passed: false,
-        flaggedKeywords: ['ghostwriting', 'thesis writing for me', 'exam proxy'],
-        notes: 'CRITICAL UGC VIOLATION: Academic dishonesty request detected.',
-      },
-      techFeasibility: 'rejected',
-      assignedArchitect: 'Divya (Operations Lead)',
-    },
-  ]);
 
-  const [selectedInquiry, setSelectedInquiry] = useState<string>('REQ-8492-X');
+  // CRM inquiries — fetched from the backend (no hardcoded/dummy client data)
+  const [inquiriesList, setInquiriesList] = useState<InquiryItem[]>([]);
+  const [isInquiriesLoading, setIsInquiriesLoading] = useState<boolean>(true);
+  const [selectedInquiry, setSelectedInquiry] = useState<string>('');
   const [isSowModalOpen, setIsSowModalOpen] = useState(false);
   const [isRestructureModalOpen, setIsRestructureModalOpen] = useState(false);
   const [customNotes, setCustomNotes] = useState('');
 
+  // Ops stats — fetched from the backend (no hardcoded/dummy KPI numbers)
+  const [crmStats, setCrmStats] = useState<Record<string, any> | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    setIsInquiriesLoading(true);
+    getCRMInquiries()
+      .then((data) => {
+        if (!isMounted) return;
+        const list = (data as InquiryItem[]) || [];
+        setInquiriesList(list);
+        if (list.length > 0) setSelectedInquiry(list[0].inquiryId);
+      })
+      .catch(() => {
+        if (isMounted) setInquiriesList([]);
+      })
+      .finally(() => {
+        if (isMounted) setIsInquiriesLoading(false);
+      });
+
+    getCRMStats()
+      .then((data) => {
+        if (isMounted) setCrmStats((data as Record<string, any>) || null);
+      })
+      .catch(() => {
+        if (isMounted) setCrmStats(null);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const active = inquiriesList.find((i) => i.inquiryId === selectedInquiry) || inquiriesList[0];
 
-  const teamCapacity = [
-    { name: 'Om J.', role: 'Lead Architect & AI Systems', load: 68 },
-    { name: 'Somnath', role: 'Backend & Cloud Infrastructure', load: 82 },
-    { name: 'Divya', role: 'Operations & SOW Feasibility', load: 45 },
-    { name: 'Falguni', role: 'Frontend & QA Validation', load: 55 },
-  ];
+  // Team capacity — no backend endpoint exists yet for live workload data
+  const teamCapacity: { name: string; role: string; load: number }[] = [];
 
   const handleIssueProforma = () => {
+    if (!active) return;
     showToast(`Proforma Invoice & SOW for ${active.inquiryId} issued to ${active.clientName}!`, 'success');
   };
 
   const handleSendSow = () => {
+    if (!active) return;
     setIsSowModalOpen(false);
     showToast(`Formal SOW dispatched to ${active.email} for e-signature!`, 'success');
   };
 
   const handleSendRestructure = () => {
+    if (!active) return;
     setIsRestructureModalOpen(false);
     showToast(`UGC Mentorship Restructure brief sent to ${active.email}!`, 'info');
   };
@@ -133,16 +107,18 @@ export const OperationsDashboard: React.FC = () => {
             Admin Control Center
           </h1>
           <p className="text-xs text-zinc-300 mt-1">
-            Operations: <strong className="text-white">Divya</strong> | Lead Architect: <strong className="text-white">Om</strong>
+            Internal admin view for the operations & engineering team
           </p>
         </div>
 
         <div className="flex items-center gap-3 text-xs font-mono">
           <span className="px-3.5 py-1.5 rounded-xl bg-white/90 border border-white/20 text-zinc-900 font-bold shadow-sm backdrop-blur-sm">
-            Pipeline: ₹4.85L (14 Active)
+            Pipeline: {formatINR(inquiriesList.reduce((sum, i) => sum + i.budgetInr, 0))} ({inquiriesList.length} Active)
           </span>
           <span className="px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
-            Feasibility Rate: 82%
+            Feasibility Rate: {inquiriesList.length > 0
+              ? Math.round((inquiriesList.filter(i => i.techFeasibility === 'approved').length / inquiriesList.length) * 100)
+              : 0}%
           </span>
         </div>
       </div>
@@ -151,27 +127,28 @@ export const OperationsDashboard: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm hover-lift transition-all animate-fade-in-up delay-50">
           <span className="text-xs text-zinc-500 font-medium">Total Active Inquiries</span>
-          <p className="text-2xl font-headline font-bold text-zinc-900 mt-1">14 Leads</p>
-          <span className="text-[10px] text-emerald-600 font-mono font-bold flex items-center gap-1 mt-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-radar-ping"></span>
-            +4 this week
-          </span>
+          <p className="text-2xl font-headline font-bold text-zinc-900 mt-1">
+            {isInquiriesLoading ? '—' : `${inquiriesList.length} Leads`}
+          </p>
         </div>
         <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm hover-lift transition-all animate-fade-in-up delay-100">
           <span className="text-xs text-zinc-500 font-medium">Feasibility Approved</span>
-          <p className="text-2xl font-headline font-bold text-emerald-600 mt-1">8 SOWs</p>
+          <p className="text-2xl font-headline font-bold text-emerald-600 mt-1">
+            {isInquiriesLoading ? '—' : `${inquiriesList.filter(i => i.techFeasibility === 'approved').length} SOWs`}
+          </p>
           <span className="text-[10px] text-zinc-500 font-mono">Ready for quotation</span>
         </div>
         <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm hover-lift transition-all animate-fade-in-up delay-150">
           <span className="text-xs text-zinc-500 font-medium">Scope Review Inquiries</span>
-          <p className="text-2xl font-headline font-bold text-amber-600 mt-1">2 Flagged</p>
-          <span className="text-[10px] text-amber-600 font-mono font-bold animate-pulse">Requires restructuring</span>
+          <p className="text-2xl font-headline font-bold text-amber-600 mt-1">
+            {isInquiriesLoading ? '—' : `${inquiriesList.filter(i => !i.ugcResult.passed).length} Flagged`}
+          </p>
+          <span className="text-[10px] text-amber-600 font-mono font-bold">Requires restructuring</span>
         </div>
         <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm hover-lift transition-all animate-fade-in-up delay-200">
           <span className="text-xs text-zinc-500 font-medium">Active Staging Demos</span>
           <p className="text-2xl font-headline font-bold text-zinc-900 mt-1 flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-radar-ping"></span>
-            5 Staged
+            {crmStats && typeof crmStats.activeStagingDemos !== 'undefined' ? crmStats.activeStagingDemos : '—'}
           </p>
           <span className="text-[10px] text-zinc-600 font-mono font-bold">AWS ECS Fargate</span>
         </div>
@@ -202,7 +179,13 @@ export const OperationsDashboard: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-100 text-zinc-700">
-                  {inquiriesList.map((inq) => {
+                  {inquiriesList.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="p-6 text-center text-zinc-400 italic">
+                        {isInquiriesLoading ? 'Loading inquiries…' : 'No inquiries yet.'}
+                      </td>
+                    </tr>
+                  ) : inquiriesList.map((inq) => {
                     const isSelected = inq.inquiryId === selectedInquiry;
                     return (
                       <tr
@@ -263,6 +246,13 @@ export const OperationsDashboard: React.FC = () => {
           </div>
 
           {/* Selected Lead Details */}
+          {!active ? (
+            <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 p-10 text-center">
+              <p className="text-sm text-zinc-400 italic">
+                {isInquiriesLoading ? 'Loading inquiries…' : 'No inquiries yet.'}
+              </p>
+            </div>
+          ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
               <div>
@@ -319,6 +309,7 @@ export const OperationsDashboard: React.FC = () => {
               )}
             </div>
           </div>
+          )}
         </div>
 
         {/* Right Column: Workload & Generator (35%) */}
@@ -331,7 +322,9 @@ export const OperationsDashboard: React.FC = () => {
             </h3>
 
             <div className="space-y-4">
-              {teamCapacity.map((member) => (
+              {teamCapacity.length === 0 ? (
+                <p className="text-xs text-zinc-400 italic py-2">Workload data isn't connected yet.</p>
+              ) : teamCapacity.map((member) => (
                 <div key={member.name} className="space-y-1.5 text-xs">
                   <div className="flex justify-between">
                     <span className="font-bold text-zinc-900">{member.name} ({member.role})</span>
@@ -354,9 +347,12 @@ export const OperationsDashboard: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 space-y-4">
             <h3 className="font-headline font-bold text-sm text-zinc-900 uppercase flex items-center gap-2">
               <FileCheck className="w-4 h-4 text-zinc-700" />
-              Quick Quotation Engine (Divya)
+              Quick Quotation Engine
             </h3>
 
+            {!active ? (
+              <p className="text-xs text-zinc-400 italic py-2">Select an inquiry to generate a quotation.</p>
+            ) : (
             <div className="space-y-3 text-xs">
               <div>
                 <label className="block text-zinc-700 font-semibold mb-1">Target Client</label>
@@ -401,12 +397,13 @@ export const OperationsDashboard: React.FC = () => {
                 <span>Issue SOW &amp; Proforma PDF</span>
               </button>
             </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* SOW & QUOTATION PREVIEW MODAL */}
-      {isSowModalOpen && (
+      {isSowModalOpen && active && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
             className="bg-white rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-xl p-5 sm:p-8 relative shadow-2xl border border-zinc-200 max-h-[90vh] overflow-y-auto text-zinc-900"
@@ -478,7 +475,7 @@ export const OperationsDashboard: React.FC = () => {
       )}
 
       {/* RESTRUCTURE BRIEF MODAL */}
-      {isRestructureModalOpen && (
+      {isRestructureModalOpen && active && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
             className="bg-white rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-lg p-5 sm:p-8 relative shadow-2xl border border-zinc-200 max-h-[90vh] overflow-y-auto text-zinc-900"

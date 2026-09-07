@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, Clock, X, Bell } from 'lucide-react';
+import { CheckCircle2, X, Bell } from 'lucide-react';
 import { NavTab } from './Header';
 
 interface NotificationDropdownProps {
@@ -11,35 +11,16 @@ interface NotificationDropdownProps {
 export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onClose, onNavigate }) => {
   if (!isOpen) return null;
 
-  const notifications = [
-    {
-      id: '1',
-      title: 'Staging Build Passing (v1.2.4)',
-      desc: 'Automated 48-point test suite passed on AWS ECS.',
-      time: '2 hours ago',
-      icon: CheckCircle2,
-      iconColor: 'text-emerald-600',
-      actionTab: 'admin' as NavTab,
-    },
-    {
-      id: '2',
-      title: 'Milestone 2 Invoiced',
-      desc: 'Demo & QA Milestone (₹21,240) is ready for clearance.',
-      time: '5 hours ago',
-      icon: Clock,
-      iconColor: 'text-blue-600',
-      actionTab: 'dashboard' as NavTab,
-    },
-    {
-      id: '3',
-      title: 'Scope Feasibility Verified',
-      desc: 'Requirement REQ-8492-X passed technical feasibility review.',
-      time: 'Yesterday',
-      icon: CheckCircle2,
-      iconColor: 'text-emerald-600',
-      actionTab: 'dashboard' as NavTab,
-    },
-  ];
+  // No backend endpoint exists yet for live notifications — no hardcoded/dummy entries
+  const notifications: {
+    id: string;
+    title: string;
+    desc: string;
+    time: string;
+    icon: typeof CheckCircle2;
+    iconColor: string;
+    actionTab: NavTab;
+  }[] = [];
 
   return (
     <>
@@ -61,7 +42,9 @@ export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOp
         </div>
 
         <div className="space-y-2 max-h-80 overflow-y-auto pr-0.5">
-          {notifications.map((n, idx) => (
+          {notifications.length === 0 ? (
+            <p className="text-xs text-zinc-400 italic text-center py-8">No notifications yet.</p>
+          ) : notifications.map((n, idx) => (
             <div
               key={n.id}
               onClick={() => {

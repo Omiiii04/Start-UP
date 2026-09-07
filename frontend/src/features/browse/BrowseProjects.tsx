@@ -22,6 +22,7 @@ import {
 import { formatINR } from '../../utils/gst';
 import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
+import { getProjects } from '../../api/client';
 
 interface BrowseProjectsProps {
   onNavigate: (tab: NavTab) => void;
@@ -92,357 +93,6 @@ export const CATEGORIES_CONFIG: CategoryDefinition[] = [
   }
 ];
 
-export const PROJECT_CATALOG: ProjectItem[] = [
-  // 1. Engineering Projects -> Web Development
-  {
-    id: 'PRJ-ENG-01',
-    title: 'SaaS Analytics Dashboard & Client Portal',
-    category: 'Engineering projects',
-    subsection: 'Web development',
-    tier: 'Tier 3 (MVP)',
-    budget: 45000,
-    rating: 4.9,
-    deliveryTime: '2 Weeks',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    description: 'High-performance React & Node.js B2B web application with multi-tenant authentication, real-time metrics, interactive telemetry, and Stripe billing.',
-    tags: ['React', 'Node.js', 'Tailwind', 'TypeScript', 'PostgreSQL'],
-    features: [
-      'Interactive multi-tenant telemetry charts & CSV export',
-      'Role-based access control (RBAC) with JWT auth',
-      'Light/Dark mode responsive UI with Tailwind',
-      'Strict TypeScript interfaces & unit test suite'
-    ],
-    deliverables: ['Production React & Node.js codebase', 'Figma design tokens', 'Component test suite', '15-Step Deployment checklist']
-  },
-  {
-    id: 'PRJ-ENG-02',
-    title: 'Modern FinTech Wallet & Mobile Web App',
-    category: 'Engineering projects',
-    subsection: 'Web development',
-    tier: 'Tier 3 (MVP)',
-    budget: 52000,
-    rating: 4.9,
-    deliveryTime: '3 Weeks',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
-    description: 'PWA & cross-platform financial portal with biometric login, UPI gateway deep linking, automated GST invoices, and live ledger.',
-    tags: ['React', 'TypeScript', 'PostgreSQL', 'Tailwind'],
-    features: [
-      'UPI deep-link & QR code payment gateway engine',
-      'Immutable transactional audit log ledger',
-      'Automated GST calculation and PDF receipt generator',
-      'Fast responsive web app with zero-latency caching'
-    ],
-    deliverables: ['Full-stack repository', 'REST API documentation in OpenAPI 3.0', 'Database schema migrations', 'Verified milestone report']
-  },
-
-  // 1. Engineering Projects -> AIML
-  {
-    id: 'PRJ-ENG-03',
-    title: 'Real-time Object Detection & Computer Vision',
-    category: 'Engineering projects',
-    subsection: 'AIML',
-    tier: 'Tier 3 (MVP)',
-    budget: 65000,
-    rating: 5.0,
-    deliveryTime: '2 Weeks',
-    image: 'https://images.unsplash.com/photo-1507146426996-ef05388b7762?auto=format&fit=crop&w=800&q=80',
-    description: 'Edge-optimized YOLOv8 + PyTorch inference server with WebRTC video stream annotations, bounding-box visualizer, and low-latency API.',
-    tags: ['Python', 'PyTorch', 'FastAPI', 'Docker'],
-    features: [
-      'Sub-30ms TensorRT accelerated inference engine',
-      'REST & WebSocket streaming endpoints for video streams',
-      'Live bounding-box visualizer web app',
-      'Automated GPU memory management & logging'
-    ],
-    deliverables: ['Trained model weights & quantization scripts', 'FastAPI backend service', 'React live preview client', 'Benchmark test reports']
-  },
-  {
-    id: 'PRJ-ENG-04',
-    title: 'Enterprise LLM RAG & Document AI Engine',
-    category: 'Engineering projects',
-    subsection: 'AIML',
-    tier: 'Tier 4 (Enterprise)',
-    budget: 85000,
-    rating: 4.9,
-    deliveryTime: '3 Weeks',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80',
-    description: 'Retrieval-Augmented Generation (RAG) system with ChromaDB vector search, hybrid chunking, source citation, and fine-tuned domain models.',
-    tags: ['Python', 'PyTorch', 'FastAPI', 'Docker'],
-    features: [
-      'High-precision semantic vector search with re-ranking',
-      'PDF, DOCX, and unstructured data ingestion pipeline',
-      'Hallucination prevention guardrails & source citations',
-      'Dockerized deployment ready for AWS or on-prem'
-    ],
-    deliverables: ['LangChain / LlamaIndex pipeline', 'Vector database configuration', 'Evaluation benchmark suite', 'Interactive chat UI client']
-  },
-
-  // 1. Engineering Projects -> Cloud and devops
-  {
-    id: 'PRJ-ENG-05',
-    title: 'Multi-Tenant Kubernetes Platform & GitOps',
-    category: 'Engineering projects',
-    subsection: 'Cloud and devops',
-    tier: 'Tier 4 (Enterprise)',
-    budget: 95000,
-    rating: 5.0,
-    deliveryTime: '4 Weeks',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
-    description: 'Production Kubernetes cluster deployment with automated Terraform IaC, ArgoCD GitOps, Istio service mesh, and Prometheus observability.',
-    tags: ['Kubernetes', 'AWS', 'Docker', 'Node.js'],
-    features: [
-      'Zero-downtime blue/green & canary deployments',
-      'Centralized Grafana & Prometheus telemetry metrics',
-      'Strict AWS IAM least-privilege RBAC policies',
-      'Automated TLS certificates & ingress controller setup'
-    ],
-    deliverables: ['Helm charts & Terraform infrastructure code', 'GitHub Actions CI/CD pipeline', 'Disaster recovery runbook', 'Security audit log']
-  },
-
-  // 1. Engineering Projects -> IOT projects
-  {
-    id: 'PRJ-ENG-06',
-    title: 'Smart IoT Edge Telemetry & Sensor Gateway',
-    category: 'Engineering projects',
-    subsection: 'IOT projects',
-    tier: 'Tier 3 (MVP)',
-    budget: 48000,
-    rating: 4.8,
-    deliveryTime: '2 Weeks',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
-    description: 'Hardware edge IoT gateway connecting ESP32/Raspberry Pi sensors via MQTT, featuring real-time telemetry streaming and remote device management.',
-    tags: ['Python', 'AWS', 'Docker', 'PostgreSQL'],
-    features: [
-      'Ultra-low power MQTT / WebSockets broker pipeline',
-      'Time-series sensor telemetry logging & anomaly alerts',
-      'Over-the-air (OTA) firmware upgrade mechanism',
-      'Real-time IoT telemetry control dashboard'
-    ],
-    deliverables: ['Embedded C++ / MicroPython firmware code', 'AWS IoT Core / MQTT backend server', 'Real-time dashboard frontend', 'Hardware schematic guide']
-  },
-
-  // 1. Engineering Projects -> Data analytics projects
-  {
-    id: 'PRJ-ENG-07',
-    title: 'Automated Real-Time ETL & Lakehouse Pipeline',
-    category: 'Engineering projects',
-    subsection: 'Data analytics projects',
-    tier: 'Tier 4 (Enterprise)',
-    budget: 80000,
-    rating: 5.0,
-    deliveryTime: '3 Weeks',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    description: 'Scalable data pipeline processing 50GB+ daily metrics into a central PostgreSQL/Redshift warehouse with automated Airflow orchestration.',
-    tags: ['Python', 'AWS', 'Docker', 'PostgreSQL'],
-    features: [
-      'Apache Airflow / Prefect DAG orchestration',
-      'Data quality assertion with Great Expectations',
-      'Automated schema migration & dead-letter queue replay',
-      'Interactive executive KPI drill-down view'
-    ],
-    deliverables: ['Dockerized ETL repository', 'Terraform data lake templates', 'Data Dictionary & System Documentation', 'Pipeline monitoring dashboard']
-  },
-
-  // 2. Pharmacy thesis & projects
-  {
-    id: 'PRJ-PHARM-01',
-    title: 'Molecular Docking & Pharmacokinetics Study',
-    category: 'Pharmacy thesis & projects',
-    tier: 'Tier 2 (Research)',
-    budget: 38000,
-    rating: 4.9,
-    deliveryTime: '2 Weeks',
-    image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80',
-    description: 'In-silico molecular docking, binding affinity simulation, ADMET profiling, and comprehensive pharmacokinetics thesis research report.',
-    tags: ['Python', 'PostgreSQL'],
-    features: [
-      'AutoDock Vina / PyMOL receptor-ligand docking simulation',
-      'ADMET pharmacokinetic property prediction & Lipinski rule checks',
-      'High-resolution 3D ligand interaction visual charts',
-      'Complete experimental methodology documentation'
-    ],
-    deliverables: ['Docking simulation log files & PDB coordinates', 'ADMET computational report', 'Thesis dissertation chapter draft', 'Statistical validation graphs']
-  },
-  {
-    id: 'PRJ-PHARM-02',
-    title: 'Nano-Formulation Drug Release Kinetics Modeling',
-    category: 'Pharmacy thesis & projects',
-    tier: 'Tier 3 (MVP)',
-    budget: 42000,
-    rating: 4.8,
-    deliveryTime: '2 Weeks',
-    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80',
-    description: 'Controlled nano-carrier drug release kinetic analysis using Higuchi, Korsmeyer-Peppas, and zero-order mathematical curve-fitting models.',
-    tags: ['Python'],
-    features: [
-      'Polymer nanoparticle dissolution rate curve regression',
-      'Stability testing & zeta potential distribution analysis',
-      'Automated regression charts with R-squared benchmarks',
-      'Pharma industry standard thesis formatting'
-    ],
-    deliverables: ['Mathematical model scripts', 'Drug release kinetics comparative report', 'Statistical validation deck', 'Formatted thesis chapter']
-  },
-
-  // 3. Business related project
-  {
-    id: 'PRJ-BIZ-01',
-    title: 'Predictive Revenue & Churn Intelligence Engine',
-    category: 'Business related project',
-    tier: 'Tier 2 (Research)',
-    budget: 35000,
-    rating: 4.8,
-    deliveryTime: '10 Days',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80',
-    description: 'Predictive customer lifetime value (CLV), churn propensity modeling, and executive board-ready business intelligence dashboards.',
-    tags: ['Python', 'PostgreSQL'],
-    features: [
-      'Cohort-based customer churn prediction with XGBoost',
-      'Dynamic scenario modeling for pricing & unit economics',
-      'Automated executive PDF summary generation',
-      'Interactive executive KPI drill-down view'
-    ],
-    deliverables: ['Jupyter analysis notebooks', 'Production scoring script', 'Business feasibility methodology report', 'Executive presentation deck']
-  },
-  {
-    id: 'PRJ-BIZ-02',
-    title: 'B2B Market Expansion & Unit Economics Model',
-    category: 'Business related project',
-    tier: 'Tier 2 (Research)',
-    budget: 30000,
-    rating: 4.9,
-    deliveryTime: '10 Days',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    description: 'Comprehensive financial forecasting model, TAM/SAM/SOM market sizing, competitor benchmarking, and investor pitch metrics deck.',
-    tags: ['Python'],
-    features: [
-      '5-Year dynamic financial pro-forma statements',
-      'Sensitivity analysis & burn rate projections',
-      'Investor-ready unit economics valuation matrix',
-      'Clean interactive visual dashboards'
-    ],
-    deliverables: ['Dynamic Financial Spreadsheet Model', 'Executive Market Research Report', 'Investor Pitch Valuation Deck', 'Executive Summary Memo']
-  },
-
-  // 4. Research paper publish
-  {
-    id: 'PRJ-RES-01',
-    title: 'Scopus / IEEE Q1 Research Manuscript & Validation',
-    category: 'Research paper publish',
-    tier: 'Tier 2 (Research)',
-    budget: 28000,
-    rating: 5.0,
-    deliveryTime: '10 Days',
-    image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80',
-    description: 'Complete research manuscript drafting in LaTeX with experimental benchmarking, ablation studies, baseline comparisons, and citation indexation.',
-    tags: ['Python'],
-    features: [
-      'Strict IEEE / Springer / Elsevier double-column LaTeX template',
-      'Empirical ablation study & statistical significance testing',
-      'High-resolution vector charts & architecture diagrams',
-      'Complete literature review & BibTeX bibliography'
-    ],
-    deliverables: ['Complete Overleaf/LaTeX source files', 'Compiled camera-ready PDF manuscript', 'Benchmark data & ablation tables', 'Peer review submission checklist']
-  },
-  {
-    id: 'PRJ-RES-02',
-    title: 'Systematic Literature Review & Meta-Analysis Framework',
-    category: 'Research paper publish',
-    tier: 'Tier 1 (Micro)',
-    budget: 22000,
-    rating: 4.8,
-    deliveryTime: '1 Week',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80',
-    description: 'PRISMA-guided systematic review with bibliometric network mapping, risk of bias assessment, and multi-study synthesis.',
-    tags: ['Python'],
-    features: [
-      'PRISMA flow diagram generation & study inclusion screening',
-      'Co-occurrence & citation network bibliometric charts',
-      'Structured comparative synthesis matrix',
-      'Full journal publication formatting'
-    ],
-    deliverables: ['PRISMA systematic review manuscript', 'Bibliometric data extraction sheets', 'Journal submission cover letter', 'Publication compliance checklist']
-  },
-
-  // 5. UI designing
-  {
-    id: 'PRJ-UI-01',
-    title: 'FinTech & Neo-Bank Design System in Figma',
-    category: 'UI designing',
-    tier: 'Tier 3 (MVP)',
-    budget: 35000,
-    rating: 4.9,
-    deliveryTime: '10 Days',
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
-    description: 'End-to-end Figma UI/UX design system with 60+ interactive mobile screens, dark/light theme tokens, micro-interactions, and component library.',
-    tags: ['Tailwind', 'React'],
-    features: [
-      'Comprehensive atomic design system & color/typography tokens',
-      '60+ pixel-perfect responsive iOS/Android Figma screens',
-      'Interactive Figma prototypes with realistic micro-animations',
-      'Developer handoff documentation & CSS token exports'
-    ],
-    deliverables: ['Figma master project link with full edit access', 'Design token JSON / Tailwind CSS config', 'Interactive prototype demo link', 'UX research persona document']
-  },
-  {
-    id: 'PRJ-UI-02',
-    title: 'B2B Enterprise SaaS Dark-Mode UI/UX Suite',
-    category: 'UI designing',
-    tier: 'Tier 2 (Research)',
-    budget: 32000,
-    rating: 5.0,
-    deliveryTime: '1 Week',
-    image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80',
-    description: 'Sleek, futuristic dark-mode user interface designed for developer tools, telemetry dashboards, and cloud management consoles.',
-    tags: ['Tailwind', 'React'],
-    features: [
-      'Glassmorphic dark-mode component architecture',
-      'Telemetry charts, status pills, table filters & modal states',
-      'Figma auto-layout with strict accessibility WCAG standards',
-      'Tailwind CSS classes ready for direct developer integration'
-    ],
-    deliverables: ['Figma UI Kit & Design System', 'Tailwind component export code', 'Interactive prototype walkthrough', 'UX user flow diagrams']
-  },
-
-  // 6. Deployment Services
-  {
-    id: 'PRJ-DEP-01',
-    title: 'Zero-Downtime AWS Cloud Migration & Security Hardening',
-    category: 'Deployment Services',
-    tier: 'Tier 2 (Research)',
-    budget: 25000,
-    rating: 5.0,
-    deliveryTime: '5 Days',
-    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80',
-    description: 'Production infrastructure provisioning on AWS ECS/EC2 with SSL, NGINX reverse proxy, Cloudflare DDoS defense, and database auto-backups.',
-    tags: ['AWS', 'Docker', 'PostgreSQL'],
-    features: [
-      'Automated SSL / TLS certificates via Let\'s Encrypt',
-      'NGINX reverse proxy with rate limiting & gzip compression',
-      'Automated daily PostgreSQL S3 encrypted backups',
-      'CloudWatch monitoring & Telegram / Slack uptime alerts'
-    ],
-    deliverables: ['Docker-compose / ECS task definitions', 'NGINX hardened configuration files', 'Automated backup shell scripts', 'Server handover & credentials report']
-  },
-  {
-    id: 'PRJ-DEP-02',
-    title: 'Production CI/CD Automation & Docker Containerization',
-    category: 'Deployment Services',
-    tier: 'Tier 1 (Micro)',
-    budget: 18000,
-    rating: 4.9,
-    deliveryTime: '3 Days',
-    image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80',
-    description: 'Fast automated GitHub Actions CI/CD pipeline with multi-stage Docker builds, staging preview environments, and production push triggers.',
-    tags: ['Docker', 'AWS', 'Kubernetes'],
-    features: [
-      'Multi-stage Dockerfile optimization (sub-100MB production images)',
-      'Automated test runner & linter verification on pull requests',
-      'One-click rollback mechanism & secret management via GitHub Secrets',
-      'Zero-downtime container rolling restart'
-    ],
-    deliverables: ['GitHub Actions .github/workflows YAML suite', 'Optimized multi-stage Dockerfiles', 'Deployment runbook & secrets guide', 'Live verification test report']
-  }
-];
 
 const ALL_TECH_STACKS = [
   'React',
@@ -475,6 +125,29 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['engineering']);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
+
+  // Project catalog — fetched from the backend (no hardcoded/dummy listings)
+  const [projectCatalog, setProjectCatalog] = useState<ProjectItem[]>([]);
+  const [isCatalogLoading, setIsCatalogLoading] = useState<boolean>(true);
+  const [catalogError, setCatalogError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    setIsCatalogLoading(true);
+    getProjects()
+      .then((data) => {
+        if (isMounted) setProjectCatalog((data as ProjectItem[]) || []);
+      })
+      .catch((err) => {
+        if (isMounted) setCatalogError(err instanceof Error ? err.message : 'Failed to load projects');
+      })
+      .finally(() => {
+        if (isMounted) setIsCatalogLoading(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (initialSearch) {
@@ -581,7 +254,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
   // Filtering Logic
   const filteredProjects = useMemo(() => {
-    return PROJECT_CATALOG.filter(project => {
+    return projectCatalog.filter(project => {
       // 1. Category and Subsection matching
       if (selectedCategories.length > 0) {
         const matchesCategory = selectedCategories.includes(project.category);
@@ -629,7 +302,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
       return true;
     });
-  }, [selectedCategories, selectedSubsections, selectedTechs, minBudget, maxBudget, searchQuery]);
+  }, [projectCatalog, selectedCategories, selectedSubsections, selectedTechs, minBudget, maxBudget, searchQuery]);
 
   const hasActiveFilters = selectedCategories.length > 0 || selectedSubsections.length > 0 || selectedTechs.length > 0 || minBudget !== '' || maxBudget !== '' || searchQuery !== '';
 
@@ -930,8 +603,16 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
               )}
             </div>
 
-            {/* Empty State */}
-            {filteredProjects.length === 0 ? (
+            {/* Loading / Error / Empty States */}
+            {isCatalogLoading ? (
+              <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading project templates…</p>
+              </div>
+            ) : catalogError ? (
+              <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
+                <p className="text-sm text-red-500">{catalogError}</p>
+              </div>
+            ) : filteredProjects.length === 0 ? (
               <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
                 <div className="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4 text-zinc-400 animate-float">
                   <Search className="w-6 h-6" />

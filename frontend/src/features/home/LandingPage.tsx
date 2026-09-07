@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowRight, 
   Code, 
@@ -25,6 +25,7 @@ import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
 import { useAuth } from '../../context/AuthContext';
 import { ProjectItem } from '../browse/BrowseProjects';
+import { getProjects } from '../../api/client';
 
 interface LandingPageProps {
   onNavigate: (tab: NavTab) => void;
@@ -82,54 +83,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     }
   };
 
-  // Featured Project Blueprints
-  const featuredProjects: ProjectItem[] = [
-    {
-      id: 'feat-1',
-      title: 'Real-Time PyTorch Segmentation Engine',
-      category: 'Engineering projects',
-      subsection: 'AIML',
-      tier: 'Tier 3 (MVP)',
-      budget: 45000,
-      rating: 4.9,
-      deliveryTime: '2–4 Weeks',
-      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80',
-      description: 'YOLOv8 + UNet pipeline with Dockerized AWS ECS deployment, REST APIs, and live bounding-box visualization client.',
-      tags: ['PyTorch', 'YOLOv8', 'Docker', 'AWS ECS', 'FastAPI'],
-      features: ['Full Source Code Handover', 'AWS ECS Staging Environment', '48-Point QA Checklist', '30-Day Bug Support'],
-      deliverables: ['GitHub Repository Transfer', 'GST Tax Invoice', 'System Architecture Report', 'API Documentation']
-    },
-    {
-      id: 'feat-2',
-      title: 'Multi-Tenant Organization Management Platform',
-      category: 'Engineering projects',
-      subsection: 'Web development',
-      tier: 'Tier 3 (MVP)',
-      budget: 50000,
-      rating: 4.9,
-      deliveryTime: '3 Weeks',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-      description: 'React 18 + Node.js portal with RBAC security, PostgreSQL database, automated GST invoicing, and Stripe/Razorpay integrations.',
-      tags: ['React 18', 'TypeScript', 'Node.js', 'PostgreSQL', 'TailwindCSS'],
-      features: ['RBAC Multi-Tenant Scaffolding', 'Automated GST Invoicing Engine', 'Production Docker Compose', 'Full API Specs'],
-      deliverables: ['Clean Git Monorepo', 'Database Migration Scripts', 'Staging Walkthrough Video', '30-Day Tech Support']
-    },
-    {
-      id: 'feat-3',
-      title: 'Decentralized Edge Telemetry & IoT Hub',
-      category: 'Engineering projects',
-      subsection: 'IOT projects',
-      tier: 'Tier 4 (Enterprise)',
-      budget: 75000,
-      rating: 5.0,
-      deliveryTime: '4 Weeks',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
-      description: 'MQTT microservice with TimeScaleDB streaming ingestion, Grafana telemetry boards, and firmware OTA update client.',
-      tags: ['MQTT', 'ESP32', 'TimeScaleDB', 'Grafana', 'Docker'],
-      features: ['Real-Time Time-Series Ingestion', 'Grafana Dashboards Included', 'Firmware OTA Pipeline', 'High-Throughput Queue'],
-      deliverables: ['Hardware Schematics & Code', 'Cloud MQTT Broker Config', 'IEEE Format Project Report', 'Viva PPT Slides']
-    }
-  ];
+  // Featured Project Blueprints — fetched from the backend (no hardcoded/dummy listings)
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectItem[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    getProjects()
+      .then((data) => {
+        if (isMounted) setFeaturedProjects(((data as ProjectItem[]) || []).slice(0, 3));
+      })
+      .catch(() => {
+        if (isMounted) setFeaturedProjects([]);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="w-full bg-transparent flex flex-col space-y-12 sm:space-y-16 pb-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">

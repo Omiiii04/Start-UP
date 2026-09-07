@@ -181,7 +181,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
                     if (activeTab === 'admin') {
                       handleDemoSignIn('admin_ceo', 'Om J. (Lead Architect)', 'om@projectbridge.io');
                     } else {
-                      handleDemoSignIn('client', 'Vikram Sharma', 'client.demo@gmail.com');
+                      handleDemoSignIn('client');
                     }
                   }}
                   className="w-full sm:w-auto px-6 py-2.5 bg-white border border-zinc-300 text-zinc-800 hover:bg-zinc-50 font-semibold rounded-full text-xs sm:text-sm flex items-center justify-center gap-3 transition-all shadow-sm cursor-pointer"
@@ -255,23 +255,6 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
 
                 <button
                   type="button"
-                  onClick={() => handleDemoSignIn('admin_ops', 'Divya (Operations Lead)', 'divya@projectbridge.io')}
-                  className="p-2.5 bg-white hover:bg-zinc-50 border border-zinc-200 hover:border-blue-400 rounded-xl text-left transition-all flex items-center justify-between group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-xs">
-                      D
-                    </div>
-                    <div>
-                      <div className="font-semibold text-zinc-900 group-hover:text-blue-800 transition-colors">Divya</div>
-                      <div className="text-[10px] text-zinc-500">divya@projectbridge.io</div>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">Ops/Finance</span>
-                </button>
-
-                <button
-                  type="button"
                   onClick={() => handleDemoSignIn('admin_qa', 'Falguni (QA & Frontend)', 'falguni@projectbridge.io')}
                   className="p-2.5 bg-white hover:bg-zinc-50 border border-zinc-200 hover:border-purple-400 rounded-xl text-left transition-all flex items-center justify-between group cursor-pointer"
                 >
@@ -288,36 +271,19 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-1 gap-2 text-xs">
                 <button
                   type="button"
-                  onClick={() => handleDemoSignIn('client', 'Vikram Sharma', 'vikram.sharma@techsphere.in')}
+                  onClick={() => handleDemoSignIn('client')}
                   className="p-2.5 bg-white hover:bg-zinc-50 border border-zinc-200 hover:border-zinc-400 rounded-xl text-left transition-all flex items-center justify-between group cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-zinc-100 text-zinc-900 flex items-center justify-center font-bold text-xs">
-                      VS
+                      DC
                     </div>
                     <div>
-                      <div className="font-semibold text-zinc-900 group-hover:text-black transition-colors">Vikram Sharma</div>
-                      <div className="text-[10px] text-zinc-500">TechSphere Solutions</div>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-900 transition-colors" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleDemoSignIn('client', 'Priya Deshmukh', 'priya.research@iitb.ac.in')}
-                  className="p-2.5 bg-white hover:bg-zinc-50 border border-zinc-200 hover:border-zinc-400 rounded-xl text-left transition-all flex items-center justify-between group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center font-bold text-xs">
-                      PD
-                    </div>
-                    <div>
-                      <div className="font-semibold text-zinc-900 group-hover:text-teal-800 transition-colors">Priya Deshmukh</div>
-                      <div className="text-[10px] text-zinc-500">Academic / Researcher</div>
+                      <div className="font-semibold text-zinc-900 group-hover:text-black transition-colors">Continue as Demo Client</div>
+                      <div className="text-[10px] text-zinc-500">Sandbox account — no real data</div>
                     </div>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-900 transition-colors" />
