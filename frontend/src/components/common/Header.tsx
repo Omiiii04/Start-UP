@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Search, Bell, MessageSquare, ShieldCheck, X, Lock, Sun, Moon } from 'lucide-react';
+import { Search, Bell, MessageSquare, ShieldCheck, X, Lock, Sun, Moon, Download } from 'lucide-react';
 import { NotificationDropdown } from './NotificationDropdown';
 import { UserMenu } from '../auth/UserMenu';
-import { AppDownloadModal } from './AppDownloadModal';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 
-export type NavTab = 'home' | 'browse' | 'submit' | 'dashboard' | 'admin';
+export type NavTab = 'home' | 'browse' | 'submit' | 'dashboard' | 'admin' | 'download';
 
 interface HeaderProps {
   activeTab: NavTab;
@@ -24,7 +23,6 @@ export const Header: React.FC<HeaderProps> = ({
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
-  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
   const { isAuthenticated, isAdmin } = useAuth();
   const { isDark, toggleTheme } = useTheme();
 
@@ -62,13 +60,9 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const handlePlayStoreClick = (e: React.MouseEvent) => {
-    // Direct routing to Google Play Store
-    if (e.shiftKey) {
-      window.open('https://play.google.com/store/apps', '_blank', 'noopener,noreferrer');
-    } else {
-      setIsDownloadModalOpen(true);
-    }
+  const handleDownloadClick = () => {
+    // Route to the "Download Here" work-in-progress page instead of an external app store
+    onTabChange('download');
   };
 
   return (
@@ -227,35 +221,24 @@ export const Header: React.FC<HeaderProps> = ({
               />
             </div>
 
-            {/* Google Play Store Download Button for Desktop */}
+            {/* Download Here Button for Desktop - routes to work-in-progress page */}
             <button
-              onClick={handlePlayStoreClick}
+              onClick={handleDownloadClick}
               className="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-semibold shadow-sm transition-all hover:scale-105 active:scale-95 group cursor-pointer shrink-0"
-              title="Download Android App on Play Store"
+              title="Download Here"
             >
-              {/* Google Play SVG Icon */}
-              <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186A2.247 2.247 0 013 20.612V3.388c0-.604.226-1.16.609-1.574z" fill="#00D3FF"/>
-                <path d="M17.18 8.613L13.793 12l3.387 3.387 3.82-2.17a2.227 2.227 0 000-3.874l-3.82-2.17z" fill="#FFCE00"/>
-                <path d="M3.609 1.814l10.184 10.186 3.387-3.387L6.037.892A2.253 2.253 0 003.609 1.814z" fill="#00F076"/>
-                <path d="M17.18 15.387L13.793 12 3.61 22.186c.725.79 1.874.83 2.427.521l11.143-7.32z" fill="#F8485E"/>
-              </svg>
-              <span>Download App</span>
+              <Download className="w-3.5 h-3.5 shrink-0" />
+              <span>Download Here</span>
             </button>
 
-            {/* Mobile Play Store Download Icon Button */}
+            {/* Mobile Download Here Icon Button - routes to work-in-progress page */}
             <button
               type="button"
-              onClick={handlePlayStoreClick}
+              onClick={handleDownloadClick}
               className="p-2 text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-all active:scale-95 sm:hidden flex items-center justify-center relative cursor-pointer shrink-0"
-              title="Download App on Play Store"
+              title="Download Here"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186A2.247 2.247 0 013 20.612V3.388c0-.604.226-1.16.609-1.574z" fill="#00D3FF"/>
-                <path d="M17.18 8.613L13.793 12l3.387 3.387 3.82-2.17a2.227 2.227 0 000-3.874l-3.82-2.17z" fill="#FFCE00"/>
-                <path d="M3.609 1.814l10.184 10.186 3.387-3.387L6.037.892A2.253 2.253 0 003.609 1.814z" fill="#00F076"/>
-                <path d="M17.18 15.387L13.793 12 3.61 22.186c.725.79 1.874.83 2.427.521l11.143-7.32z" fill="#F8485E"/>
-              </svg>
+              <Download className="w-4 h-4" />
             </button>
 
             {/* Day / Night Theme Shift Toggle Button */}
@@ -359,13 +342,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         )}
       </header>
-
-      {/* Google Play Store Download Modal */}
-      <AppDownloadModal
-        isOpen={isDownloadModalOpen}
-        onClose={() => setIsDownloadModalOpen(false)}
-        playStoreUrl="https://play.google.com/store/apps"
-      />
     </>
   );
 };

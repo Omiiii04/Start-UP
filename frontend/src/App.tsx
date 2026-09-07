@@ -14,13 +14,12 @@ import { SupportChatDrawer } from './components/common/SupportChatDrawer';
 import { GoogleAuthModal } from './components/auth/GoogleAuthModal';
 import { AdminGuard } from './components/auth/AdminGuard';
 import { ScrollMotionBackground } from './components/common/ScrollMotionBackground';
-import { AppDownloadModal } from './components/common/AppDownloadModal';
+import { WorkInProgress } from './features/download/WorkInProgress';
 import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
 
 export const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
   const [isSupportOpen, setIsSupportOpen] = useState(false);
-  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState<ProjectItem | null>(null);
   const { isAuthenticated, isAdmin, openAuthModal } = useAuth();
@@ -139,6 +138,10 @@ export const AppContent: React.FC = () => {
             </div>
           </AdminGuard>
         )}
+
+        {activeTab === 'download' && (
+          <WorkInProgress onNavigate={handleTabChange} />
+        )}
       </main>
 
       {/* Google Authentication Modal */}
@@ -148,13 +151,6 @@ export const AppContent: React.FC = () => {
       <SupportChatDrawer
         isOpen={isSupportOpen}
         onClose={() => setIsSupportOpen(false)}
-      />
-
-      {/* Google Play Store Download Modal */}
-      <AppDownloadModal
-        isOpen={isDownloadModalOpen}
-        onClose={() => setIsDownloadModalOpen(false)}
-        playStoreUrl="https://play.google.com/store/apps"
       />
 
       {/* Modern Clean Footer (Desktop & Tablet) */}
@@ -269,11 +265,15 @@ export const AppContent: React.FC = () => {
           /* Public Visitor Mobile Tabs */
           <>
             <button
-              onClick={() => setIsDownloadModalOpen(true)}
-              className="flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300"
+              onClick={() => handleTabChange('download')}
+              className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+                activeTab === 'download'
+                  ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
+              }`}
             >
-              <Download className="w-5 h-5 mb-0.5" />
-              <span className="text-[10px] font-medium">Get App</span>
+              <Download className={`w-5 h-5 mb-0.5 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[10px] font-medium">Download Here</span>
             </button>
 
             <button
