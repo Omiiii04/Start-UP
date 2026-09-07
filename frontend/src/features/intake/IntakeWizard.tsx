@@ -225,61 +225,61 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
           </div>
 
           {/* Multi-step Form Container */}
-          <div className="bg-white rounded-2xl sm:rounded-[24px] shadow-sm border border-zinc-200 overflow-hidden hover-lift transition-all">
+          <div className="bg-white dark:bg-zinc-950/35 dark:backdrop-blur-2xl rounded-2xl sm:rounded-[24px] shadow-sm border border-zinc-200 dark:border-white/10 overflow-hidden hover-lift transition-all">
             {/* Progress Bar Header */}
-            <div className="p-4 sm:p-8 pb-4 sm:pb-5 bg-white border-b border-zinc-200">
-              <div className="flex justify-between items-center mb-2.5 text-xs font-mono font-medium text-zinc-600">
+            <div className="p-4 sm:p-8 pb-4 sm:pb-5 bg-white dark:bg-white/5 border-b border-zinc-200 dark:border-white/10">
+              <div className="flex justify-between items-center mb-2.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 animate-radar-ping"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 animate-radar-ping"></span>
                   {formStep === 1 && 'Step 1 of 3: Project Basics'}
                   {formStep === 2 && 'Step 2 of 3: Academic & Logistics'}
                   {formStep === 3 && 'Step 3 of 3: Compliance & Review'}
                 </span>
-                <span className="text-zinc-900 font-bold">
+                <span className="text-zinc-900 dark:text-white font-bold">
                   {formStep === 1 && '33%'}
                   {formStep === 2 && '66%'}
                   {formStep === 3 && '100%'}
                 </span>
               </div>
 
-              <div className="w-full bg-zinc-100 h-2 rounded-full overflow-hidden border border-zinc-200">
+              <div className="w-full bg-zinc-100 dark:bg-white/10 h-2 rounded-full overflow-hidden border border-zinc-200 dark:border-white/10">
                 <div 
-                  className="bg-zinc-900 h-full transition-all duration-500 ease-out rounded-full" 
+                  className="bg-zinc-900 dark:bg-zinc-100 h-full transition-all duration-500 ease-out rounded-full" 
                   style={{ width: `${formStep === 1 ? 33 : formStep === 2 ? 66 : 100}%` }}
                 ></div>
               </div>
 
               {/* Visual Step Indicators */}
               <div className="flex justify-between mt-4 sm:mt-6 relative max-w-md mx-auto">
-                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-zinc-200 -z-10 -translate-y-1/2"></div>
+                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-zinc-200 dark:bg-zinc-700 -z-10 -translate-y-1/2"></div>
                 
                 {/* Step 1 Pill */}
                 <button 
                   type="button"
                   onClick={() => setFormStep(1)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
-                    formStep >= 1 ? 'bg-zinc-900 text-white border-zinc-900 shadow-sm' : 'bg-zinc-100 text-zinc-500 border-zinc-300 group-hover:bg-zinc-200'
+                    formStep >= 1 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
                   }`}>
                     1
                   </div>
-                  <span className="text-[9px] sm:text-[10px] font-mono font-bold text-zinc-900 uppercase tracking-wider">BASICS</span>
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold text-zinc-900 dark:text-white uppercase tracking-wider">BASICS</span>
                 </button>
 
                 {/* Step 2 Pill */}
                 <button 
                   type="button"
                   onClick={() => setFormStep(2)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
-                    formStep >= 2 ? 'bg-zinc-900 text-white border-zinc-900 shadow-sm' : 'bg-zinc-100 text-zinc-500 border-zinc-300 group-hover:bg-zinc-200'
+                    formStep >= 2 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
                   }`}>
                     2
                   </div>
                   <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${
-                    formStep >= 2 ? 'text-zinc-900' : 'text-zinc-400'
+                    formStep >= 2 ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-zinc-500'
                   }`}>
                     DETAILS
                   </span>
@@ -289,15 +289,15 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 <button 
                   type="button"
                   onClick={() => setFormStep(3)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
-                    formStep === 3 ? 'bg-zinc-900 text-white border-zinc-900 shadow-sm' : 'bg-zinc-100 text-zinc-500 border-zinc-300 group-hover:bg-zinc-200'
+                    formStep === 3 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
                   }`}>
                     3
                   </div>
                   <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${
-                    formStep === 3 ? 'text-zinc-900' : 'text-zinc-400'
+                    formStep === 3 ? 'text-zinc-900 dark:text-white' : 'text-zinc-400 dark:text-zinc-500'
                   }`}>
                     REVIEW
                   </span>
@@ -311,13 +311,13 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 /* Step 1: Project Basics */
                 <div className="space-y-6 animate-fade-in-up">
                   <div>
-                    <h2 className="font-headline text-lg font-bold text-zinc-900 mb-1">Project Basics</h2>
-                    <p className="text-xs text-zinc-600">Provide the high-level overview of what you want to build.</p>
+                    <h2 className="font-headline text-lg font-bold text-zinc-900 dark:text-white mb-1">Project Basics</h2>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400">Provide the high-level overview of what you want to build.</p>
                   </div>
 
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-zinc-800 font-semibold mb-1.5" htmlFor="project-title">
+                      <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5" htmlFor="project-title">
                         Requirement Title <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -326,20 +326,20 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                         value={projectTitle}
                         onChange={(e) => setProjectTitle(e.target.value)}
                         placeholder="e.g. AI Vision Segmentation Pipeline"
-                        className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all"
+                        className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-zinc-800 font-semibold mb-1.5">
+                        <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">
                           Category <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                           <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 appearance-none focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all cursor-pointer"
+                            className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 appearance-none focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all cursor-pointer"
                           >
                             <option value="engineering">Engineering projects</option>
                             <option value="pharmacy">Pharmacy thesis &amp; projects</option>
@@ -353,25 +353,25 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-zinc-800 font-semibold mb-1.5">Tech Preferences</label>
+                        <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">Tech Preferences</label>
                         <input
                           type="text"
                           value={techPreference}
                           onChange={(e) => setTechPreference(e.target.value)}
                           placeholder="e.g. React, Node.js, PyTorch, AWS"
-                          className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all"
+                          className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-zinc-800 font-semibold mb-1.5">Detailed Scope Description</label>
+                      <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">Detailed Scope Description</label>
                       <textarea
                         rows={4}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Describe the core objective, expected APIs, and deliverables..."
-                        className="w-full rounded-xl bg-white border border-zinc-300 p-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all resize-none"
+                        className="w-full rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 p-4 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all resize-none"
                       />
                     </div>
                   </div>
@@ -382,30 +382,30 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 /* Step 2: Academic & Logistics */
                 <div className="space-y-6 animate-fade-in-up">
                   <div>
-                    <h2 className="font-headline text-lg font-bold text-zinc-900 mb-1">Academic Context &amp; Logistics</h2>
-                    <p className="text-xs text-zinc-600">Specify timeline, institution, and budget range.</p>
+                    <h2 className="font-headline text-lg font-bold text-zinc-900 dark:text-white mb-1">Academic Context &amp; Logistics</h2>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400">Specify timeline, institution, and budget range.</p>
                   </div>
 
                   <div className="space-y-5 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-zinc-800 font-semibold mb-1.5">University / Institution</label>
+                        <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">University / Institution</label>
                         <input
                           type="text"
                           value={university}
                           onChange={(e) => setUniversity(e.target.value)}
                           placeholder="e.g. VJTI Mumbai / IIT Bombay"
-                          className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all"
+                          className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-zinc-800 font-semibold mb-1.5">Year Level / Category</label>
+                        <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">Year Level / Category</label>
                         <div className="relative">
                           <select
                             value={semester}
                             onChange={(e) => setSemester(e.target.value)}
-                            className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 appearance-none focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all cursor-pointer"
+                            className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 appearance-none focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all cursor-pointer"
                           >
                             <option value="senior">Year 4 (Senior Project)</option>
                             <option value="grad">Graduate / Masters</option>
@@ -419,7 +419,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
 
                     {/* Budget Radio Pills */}
                     <div>
-                      <label className="block text-zinc-800 font-semibold mb-2">Estimated Budget Range (INR)</label>
+                      <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-2">Estimated Budget Range (INR)</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         {[
                           { tier: 'micro_debug', label: '₹2k – ₹10k', amount: 5000, name: 'Micro' },
@@ -432,12 +432,12 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                             onClick={() => handleBudgetOption(b.tier as ServiceTier, b.amount)}
                             className={`h-16 flex flex-col items-center justify-center rounded-xl border cursor-pointer transition-all hover-lift active:scale-95 ${
                               budgetTier === b.tier
-                                ? 'border-zinc-900 bg-zinc-900 font-bold text-white shadow-sm'
-                                : 'border-zinc-200 bg-zinc-50 text-zinc-800 hover:border-zinc-300 hover:bg-zinc-100'
+                                ? 'border-zinc-900 dark:border-white bg-zinc-900 dark:bg-white font-bold text-white dark:text-zinc-900 shadow-sm'
+                                : 'border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 text-zinc-800 dark:text-zinc-200 hover:border-zinc-300 dark:hover:border-white/25 hover:bg-zinc-100 dark:hover:bg-white/10'
                             }`}
                           >
                             <span className="text-xs">{b.label}</span>
-                            <span className={`text-[10px] font-mono font-normal ${budgetTier === b.tier ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                            <span className={`text-[10px] font-mono font-normal ${budgetTier === b.tier ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'}`}>
                               Tier: {b.name}
                             </span>
                           </div>
@@ -446,12 +446,12 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-zinc-800 font-semibold mb-1.5">Target Delivery Deadline</label>
+                      <label className="block text-zinc-800 dark:text-zinc-200 font-semibold mb-1.5">Target Delivery Deadline</label>
                       <input
                         type="date"
                         value={deadline}
                         onChange={(e) => setDeadline(e.target.value)}
-                        className="w-full h-12 rounded-xl bg-white border border-zinc-300 px-4 text-sm text-zinc-900 focus:outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 transition-all cursor-pointer"
+                        className="w-full h-12 rounded-xl bg-white dark:bg-zinc-950/35 dark:backdrop-blur-md border border-zinc-300 dark:border-white/10 px-4 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 transition-all cursor-pointer"
                       />
                     </div>
                   </div>
@@ -462,30 +462,30 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 /* Step 3: Review, Scope Verification & GST Summary */
                 <div className="space-y-6 animate-fade-in-up">
                   <div>
-                    <h2 className="font-headline text-lg font-bold text-zinc-900 mb-1">Scope &amp; Quotation Review</h2>
-                    <p className="text-xs text-zinc-600">Verify requirement specifications and review the GST calculation.</p>
+                    <h2 className="font-headline text-lg font-bold text-zinc-900 dark:text-white mb-1">Scope &amp; Quotation Review</h2>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400">Verify requirement specifications and review the GST calculation.</p>
                   </div>
 
                   {/* Scope Feasibility check */}
                   {!ugcScreening.passed ? (
-                    <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3 text-xs">
-                      <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                    <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 flex items-start gap-3 text-xs">
+                      <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-bold text-amber-900">Technical Scope Notice</p>
-                        <p className="text-amber-800 mt-0.5">{ugcScreening.notes}</p>
+                        <p className="font-bold text-amber-900 dark:text-amber-200">Technical Scope Notice</p>
+                        <p className="text-amber-800 dark:text-amber-300 mt-0.5">{ugcScreening.notes}</p>
                       </div>
                     </div>
                   ) : (
-                    <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-xs text-emerald-800">
-                      <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
-                      <span>Technical Scope Feasibility: <strong className="text-zinc-900 font-bold">Verified (Passed Standards)</strong></span>
+                    <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300">
+                      <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>Technical Scope Feasibility: <strong className="text-zinc-900 dark:text-white font-bold">Verified (Passed Standards)</strong></span>
                     </div>
                   )}
 
                   {/* Live Cost & GST Breakdown Card */}
-                  <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-3 text-xs">
-                    <div className="flex justify-between items-center border-b border-zinc-200 pb-2">
-                      <span className="font-bold text-zinc-900 uppercase font-mono">Invoice Summary</span>
+                  <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 space-y-3 text-xs">
+                    <div className="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+                      <span className="font-bold text-zinc-900 dark:text-white uppercase font-mono">Invoice Summary</span>
                       <button
                         type="button"
                         onClick={() => {
@@ -495,39 +495,39 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                             'info'
                           );
                         }}
-                        className="text-[11px] font-mono text-zinc-700 font-semibold underline hover:text-zinc-900 transition-colors cursor-pointer"
+                        className="text-[11px] font-mono text-zinc-700 dark:text-zinc-300 font-semibold underline hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
                       >
                         {isMaharashtra ? 'Maharashtra (CGST+SGST 18%)' : 'Interstate (IGST 18%)'}
                       </button>
                     </div>
 
-                    <div className="space-y-1.5 text-zinc-700">
+                    <div className="space-y-1.5 text-zinc-700 dark:text-zinc-300">
                       <div className="flex justify-between">
                         <span>Scope Base Amount:</span>
-                        <span className="font-mono font-bold text-zinc-900">{formatINR(gstBreakdown.subtotal)}</span>
+                        <span className="font-mono font-bold text-zinc-900 dark:text-white">{formatINR(gstBreakdown.subtotal)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>GST (SAC 998314 - 18%):</span>
-                        <span className="font-mono text-zinc-900">{formatINR(gstBreakdown.totalTax)}</span>
+                        <span className="font-mono text-zinc-900 dark:text-white">{formatINR(gstBreakdown.totalTax)}</span>
                       </div>
-                      <div className="flex justify-between text-sm font-extrabold text-zinc-900 pt-2 border-t border-zinc-200">
+                      <div className="flex justify-between text-sm font-extrabold text-zinc-900 dark:text-white pt-2 border-t border-zinc-200 dark:border-white/10">
                         <span>Total Due (incl. GST):</span>
-                        <span className="font-mono text-zinc-900">{formatINR(gstBreakdown.grandTotal)}</span>
+                        <span className="font-mono text-zinc-900 dark:text-white">{formatINR(gstBreakdown.grandTotal)}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Mandatory Scope Declaration Checkbox */}
-                  <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 shadow-sm">
+                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 shadow-sm">
                     <label className="flex items-start gap-3 cursor-pointer select-none">
                       <input
                         type="checkbox"
                         checked={ugcConfirmed}
                         onChange={(e) => setUgcConfirmed(e.target.checked)}
-                        className="mt-0.5 w-4 h-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900 cursor-pointer"
+                        className="mt-0.5 w-4 h-4 rounded border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100 focus:ring-zinc-900 accent-zinc-900 dark:accent-zinc-100 cursor-pointer"
                       />
-                      <span className="text-xs text-zinc-700 leading-relaxed">
-                        <strong className="text-zinc-900">Mandatory Project Declaration:</strong> I confirm deliverables consist strictly of custom engineering, proof-of-concept software, architecture designs, or academic thesis research assistance. I retain full IP ownership.
+                      <span className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                        <strong className="text-zinc-900 dark:text-white">Mandatory Project Declaration:</strong> I confirm deliverables consist strictly of custom engineering, proof-of-concept software, architecture designs, or academic thesis research assistance. I retain full IP ownership.
                       </span>
                     </label>
                   </div>
@@ -535,12 +535,12 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
               )}
 
               {/* Action Buttons Footer */}
-              <div className="flex flex-wrap sm:flex-nowrap justify-between items-center pt-6 border-t border-zinc-200 gap-3">
+              <div className="flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-zinc-200 dark:border-white/10 gap-3 w-full">
                 {formStep > 1 ? (
                   <button
                     type="button"
                     onClick={() => setFormStep((prev) => (prev - 1) as any)}
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
+                    className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-zinc-700 dark:text-zinc-200 bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 border border-zinc-200 dark:border-white/10 flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Previous</span>
@@ -549,7 +549,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                   <button
                     type="button"
                     onClick={handleSaveDraft}
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 shadow-sm transition-colors active:scale-95 cursor-pointer"
+                    className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-zinc-700 dark:text-zinc-200 bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 border border-zinc-200 dark:border-white/10 shadow-sm transition-colors active:scale-95 cursor-pointer justify-center"
                   >
                     Save Draft
                   </button>
@@ -565,7 +565,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                       }
                       setFormStep((prev) => (prev + 1) as any);
                     }}
-                    className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-white bg-zinc-900 hover:bg-black shadow-sm flex items-center gap-2 transition-transform active:scale-95 ml-auto cursor-pointer"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-white dark:text-zinc-900 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white shadow-sm flex items-center justify-center gap-2 transition-transform active:scale-95 sm:ml-auto cursor-pointer"
                   >
                     <span>Next Step</span>
                     <ArrowRight className="w-4 h-4" />
@@ -575,10 +575,10 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                     type="button"
                     disabled={!ugcConfirmed || !ugcScreening.passed}
                     onClick={handleSubmitRequirement}
-                    className={`px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition-transform ml-auto ${
+                    className={`w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-transform sm:ml-auto ${
                       ugcConfirmed && ugcScreening.passed
-                        ? 'bg-zinc-900 hover:bg-black text-white shadow-sm active:scale-95 cursor-pointer'
-                        : 'bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed'
+                        ? 'bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 shadow-sm active:scale-95 cursor-pointer'
+                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-400 dark:text-zinc-500 border border-zinc-200 dark:border-white/10 cursor-not-allowed'
                     }`}
                   >
                     <span>Submit Requirement</span>

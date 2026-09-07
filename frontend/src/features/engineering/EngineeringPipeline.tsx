@@ -39,7 +39,7 @@ export const EngineeringPipeline: React.FC = () => {
     showToast('Packaging production source code & IP Certificate...', 'info');
     setTimeout(() => {
       setIsBuildingBundle(false);
-      showToast('Release package "projectbridge-release-v1.2.4.zip" generated!', 'success');
+      showToast('Release package "projectwallah-release-v1.2.4.zip" generated!', 'success');
     }, 2200);
   };
 

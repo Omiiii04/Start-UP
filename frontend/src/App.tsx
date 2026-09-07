@@ -15,7 +15,9 @@ import { GoogleAuthModal } from './components/auth/GoogleAuthModal';
 import { AdminGuard } from './components/auth/AdminGuard';
 import { ScrollMotionBackground } from './components/common/ScrollMotionBackground';
 import { WorkInProgress } from './features/download/WorkInProgress';
-import { Home, Compass, ClipboardList, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
+import { CustomerReviews } from './features/reviews/CustomerReviews';
+import { BestSellingProjects } from './features/bestseller/BestSellingProjects';
+import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
 
 export const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
@@ -36,7 +38,7 @@ export const AppContent: React.FC = () => {
     if (tab === 'dashboard' && !isAuthenticated) {
       openAuthModal({
         targetRole: 'user',
-        message: 'Please sign in with Google to access your ProjectBridge Client Dashboard.',
+        message: 'Please sign in with Google to access your Project Wallah Client Dashboard.',
         onSuccessRedirectTab: 'dashboard'
       });
       return;
@@ -61,11 +63,6 @@ export const AppContent: React.FC = () => {
     }
 
     setActiveTab(tab);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
   };
 
   const handleSearchSubmit = (query: string) => {
@@ -87,17 +84,15 @@ export const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-20 md:pb-0 relative transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-24 md:pb-0 relative transition-colors duration-300">
       {/* Dynamic Framer Motion Scroll Synced Background */}
       <ScrollMotionBackground enableInteractiveGlow={true} />
 
-      {/* Top ProjectBridge Navigation Header */}
+      {/* Top Project Wallah Navigation Header */}
       <Header 
         activeTab={activeTab} 
         onTabChange={handleTabChange}
         onOpenSupport={() => setIsSupportOpen(true)}
-        searchQuery={searchQuery}
-        onSearchChange={handleSearchChange}
         onSearchSubmit={handleSearchSubmit}
       />
 
@@ -123,7 +118,6 @@ export const AppContent: React.FC = () => {
           <BrowseProjects 
             onNavigate={handleTabChange} 
             initialSearch={searchQuery}
-            onSearchChange={handleSearchChange}
             onSelectProject={handleSelectTemplate}
           />
         )}
@@ -150,6 +144,17 @@ export const AppContent: React.FC = () => {
         {activeTab === 'download' && (
           <WorkInProgress onNavigate={handleTabChange} />
         )}
+
+        {activeTab === 'reviews' && (
+          <CustomerReviews onNavigate={handleTabChange} />
+        )}
+
+        {activeTab === 'bestseller' && (
+          <BestSellingProjects 
+            onNavigate={handleTabChange} 
+            onOpenSupport={() => setIsSupportOpen(true)}
+          />
+        )}
       </main>
 
       {/* Google Authentication Modal */}
@@ -161,21 +166,25 @@ export const AppContent: React.FC = () => {
         onClose={() => setIsSupportOpen(false)}
       />
 
-      {/* Modern Clean Footer (Desktop & Tablet) */}
-      <footer className="border-t border-zinc-200/80 dark:border-zinc-800 bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md py-8 px-4 sm:px-6 mt-16 text-xs text-zinc-500 dark:text-zinc-400 hidden md:block relative z-10 transition-colors">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs">
-              P
+      {/* Modern Clean Footer (Responsive & Centrally Aligned on Mobile) */}
+      <footer className="border-t border-zinc-200/80 dark:border-white/10 bg-white/85 dark:bg-zinc-950/40 dark:backdrop-blur-xl py-8 px-4 sm:px-6 mt-12 sm:mt-16 text-xs text-zinc-500 dark:text-zinc-400 relative z-10 transition-colors">
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs">
+                P
+              </div>
+              <span className="font-headline font-bold text-zinc-900 dark:text-white text-sm">Project Wallah</span>
             </div>
-            <span className="font-headline font-bold text-zinc-900 dark:text-white text-sm">ProjectBridge</span>
-            <span className="text-zinc-300 dark:text-zinc-700">•</span>
-            <span className="text-zinc-500 dark:text-zinc-400">Enterprise Quality Assurance &amp; 15-Step Delivery Protocol</span>
+            <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">•</span>
+            <span className="text-zinc-500 dark:text-zinc-400 text-center">Enterprise Quality Assurance &amp; 15-Step Delivery Protocol</span>
           </div>
 
-          <div className="flex flex-wrap gap-6 text-zinc-500 dark:text-zinc-400 font-medium">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-zinc-500 dark:text-zinc-400 font-medium">
             <button onClick={() => handleTabChange('home')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Home</button>
             <button onClick={() => handleTabChange('browse')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Browse Projects</button>
+            <button onClick={() => handleTabChange('bestseller')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Best Selling</button>
+            <button onClick={() => handleTabChange('reviews')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Customer Reviews</button>
             {isAuthenticated ? (
               <>
                 <button onClick={() => handleTabChange('dashboard')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Dashboard Hub</button>
@@ -184,7 +193,7 @@ export const AppContent: React.FC = () => {
               </>
             ) : (
               <button 
-                onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in to access your ProjectBridge client workspace.' })} 
+                onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in to access your Project Wallah client workspace.' })} 
                 className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
               >
                 Sign In / Client Portal
@@ -192,38 +201,38 @@ export const AppContent: React.FC = () => {
             )}
           </div>
 
-          <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500">
-            © 2026 ProjectBridge. All rights reserved.
+          <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 text-center md:text-right">
+            © 2026 Project Wallah. All rights reserved.
           </p>
         </div>
       </footer>
 
-      {/* Bottom Navigation Bar (Mobile Only with glassmorphism) */}
-      <nav className="fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-2 py-1.5 md:hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.06)] z-40 border-t border-zinc-200 dark:border-zinc-800 safe-area-bottom transition-colors">
+      {/* Bottom Navigation Bar (Mobile / App View Only with glassmorphism & centrally aligned items) */}
+      <nav className="fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-1 py-1.5 md:hidden bg-white/95 dark:bg-zinc-950/85 dark:backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.08)] z-40 border-t border-zinc-200 dark:border-white/10 safe-area-bottom transition-colors">
         {/* Home Tab */}
         <button
           onClick={() => handleTabChange('home')}
-          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+          className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all ${
             activeTab === 'home'
               ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
               : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
           }`}
         >
-          <Home className={`w-5 h-5 mb-0.5 ${activeTab === 'home' ? 'text-zinc-900 dark:text-white' : ''}`} />
-          <span className="text-[10px] font-medium">Home</span>
+          <Home className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'home' ? 'text-zinc-900 dark:text-white' : ''}`} />
+          <span className="text-[10px] font-medium tracking-tight">Home</span>
         </button>
 
         {/* Browse Projects Tab */}
         <button
           onClick={() => handleTabChange('browse')}
-          className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+          className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all ${
             activeTab === 'browse'
               ? 'text-white dark:text-zinc-900 font-bold bg-zinc-900 dark:bg-zinc-100'
               : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
           }`}
         >
-          <Compass className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] font-medium">Browse</span>
+          <Compass className="w-5 h-5 mb-0.5 shrink-0" />
+          <span className="text-[10px] font-medium tracking-tight">Browse</span>
         </button>
 
         {isAuthenticated ? (
@@ -231,63 +240,65 @@ export const AppContent: React.FC = () => {
           <>
             <button
               onClick={() => handleTabChange('dashboard')}
-              className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all ${
                 activeTab === 'dashboard'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
                   : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
-              <LayoutDashboard className={`w-5 h-5 mb-0.5 ${activeTab === 'dashboard' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-medium">Dashboard</span>
+              <LayoutDashboard className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'dashboard' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[10px] font-medium tracking-tight">Dashboard</span>
             </button>
 
             <button
               onClick={() => handleTabChange('submit')}
-              className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all ${
                 activeTab === 'submit'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
                   : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
-              <ClipboardList className={`w-5 h-5 mb-0.5 ${activeTab === 'submit' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-medium">Submit</span>
+              <ClipboardList className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'submit' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[10px] font-medium tracking-tight">Submit</span>
             </button>
 
-            {isAdmin && (
-              <button
-                onClick={() => handleTabChange('admin')}
-                className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all relative ${
-                  activeTab === 'admin'
-                    ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
-                    : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
-                }`}
-              >
-                <User className={`w-5 h-5 mb-0.5 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : ''}`} />
-                <span className="text-[10px] font-medium">Admin</span>
-              </button>
-            )}
+            <button
+              onClick={() => handleTabChange('admin')}
+              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all relative ${
+                activeTab === 'admin'
+                  ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
+              }`}
+            >
+              {isAdmin ? (
+                <User className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              ) : (
+                <Lock className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : 'text-amber-500'}`} />
+              )}
+              <span className="text-[10px] font-medium tracking-tight">Admin</span>
+            </button>
           </>
         ) : (
           /* Public Visitor Mobile Tabs */
           <>
             <button
               onClick={() => handleTabChange('download')}
-              className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all ${
+              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all ${
                 activeTab === 'download'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
                   : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
-              <Download className={`w-5 h-5 mb-0.5 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-medium">Download Here</span>
+              <Download className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[10px] font-medium tracking-tight">Download</span>
             </button>
 
             <button
               onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in with Google to access your student project dashboard.' })}
-              className="flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800"
+              className="flex flex-col items-center justify-center flex-1 max-w-[72px] py-1 px-1 rounded-xl transition-all text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800"
             >
-              <LogIn className="w-5 h-5 mb-0.5 text-zinc-900 dark:text-white" />
-              <span className="text-[10px] font-medium">Sign In</span>
+              <LogIn className="w-5 h-5 mb-0.5 shrink-0 text-zinc-900 dark:text-white" />
+              <span className="text-[10px] font-medium tracking-tight">Sign In</span>
             </button>
           </>
         )}

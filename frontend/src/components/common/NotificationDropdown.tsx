@@ -25,17 +25,17 @@ export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOp
   return (
     <>
       <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] animate-fade-in" onClick={onClose} />
-      <div className="absolute right-0 sm:right-0 top-14 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-zinc-200 p-4 z-50 animate-fade-in-up md:animate-scale-in text-zinc-900">
-        <div className="flex items-center justify-between pb-3 border-b border-zinc-100 mb-2">
+      <div className="absolute right-0 sm:right-0 top-14 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl rounded-2xl shadow-2xl border border-zinc-200 dark:border-white/15 p-4 z-50 animate-fade-in-up md:animate-scale-in text-zinc-900 dark:text-zinc-100">
+        <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-white/10 mb-2">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-zinc-100 flex items-center justify-center">
-              <Bell className="w-3.5 h-3.5 text-zinc-800" />
+            <div className="w-6 h-6 rounded-lg bg-zinc-100 dark:bg-white/10 flex items-center justify-center">
+              <Bell className="w-3.5 h-3.5 text-zinc-800 dark:text-zinc-200" />
             </div>
-            <h3 className="font-headline font-bold text-sm text-zinc-900">Notifications</h3>
+            <h3 className="font-headline font-bold text-sm text-zinc-900 dark:text-white">Notifications</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100 transition-colors cursor-pointer"
+            className="p-1 rounded-md text-zinc-400 hover:text-zinc-800 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -43,7 +43,7 @@ export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOp
 
         <div className="space-y-2 max-h-80 overflow-y-auto pr-0.5">
           {notifications.length === 0 ? (
-            <p className="text-xs text-zinc-400 italic text-center py-8">No notifications yet.</p>
+            <p className="text-xs text-zinc-400 dark:text-zinc-500 italic text-center py-8">No notifications yet.</p>
           ) : notifications.map((n, idx) => (
             <div
               key={n.id}
@@ -52,9 +52,9 @@ export const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOp
                 onClose();
               }}
               style={{ animationDelay: `${idx * 75}ms` }}
-              className="p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 transition-all duration-200 cursor-pointer border border-zinc-200 hover:border-zinc-400 flex items-start gap-3 hover-lift group animate-fade-in-up"
+              className="p-3 rounded-xl bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 transition-all duration-200 cursor-pointer border border-zinc-200 dark:border-white/10 hover:border-zinc-400 flex items-start gap-3 hover-lift group animate-fade-in-up"
             >
-              <div className="p-1.5 rounded-lg bg-white border border-zinc-200 group-hover:bg-zinc-200 transition-colors shrink-0 mt-0.5">
+              <div className="p-1.5 rounded-lg bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-colors shrink-0 mt-0.5">
                 <n.icon className={`w-4 h-4 ${n.iconColor}`} />
               </div>
               <div className="flex-1">

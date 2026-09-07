@@ -35,7 +35,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
         showToast(
           activeTab === 'admin'
             ? 'Authenticated with Admin privileges via Google.'
-            : 'Welcome to ProjectBridge Client Portal.',
+            : 'Welcome to Project Wallah Client Portal.',
           'success'
         );
         if (authModal.onSuccessRedirectTab && onNavigate) {
@@ -63,22 +63,22 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-lg bg-white border border-zinc-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-100 relative z-10 bg-zinc-50">
+        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-100 dark:border-white/10 relative z-10 bg-zinc-50 dark:bg-white/5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-extrabold text-lg shadow-sm">
               P
             </div>
             <div>
-              <h3 className="font-headline font-bold text-lg text-zinc-900">
+              <h3 className="font-headline font-bold text-lg text-zinc-900 dark:text-white">
                 {activeTab === 'admin' ? 'Admin Portal Access' : 'Client Sign-In'}
               </h3>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
                 {activeTab === 'admin' 
                   ? 'Sign in with your authorized Google Admin account' 
                   : 'Access your projects, milestones & submissions'}
@@ -87,21 +87,21 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
           </div>
           <button 
             onClick={closeAuthModal}
-            className="p-1.5 text-zinc-400 hover:text-zinc-700 rounded-lg hover:bg-zinc-200 transition-colors"
+            className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Tabs: User / Admin */}
-        <div className="grid grid-cols-2 p-1.5 bg-zinc-100 border border-zinc-200 mx-5 sm:mx-6 mt-4 rounded-xl">
+        <div className="grid grid-cols-2 p-1.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 mx-5 sm:mx-6 mt-4 rounded-xl">
           <button
             type="button"
             onClick={() => setActiveTab('user')}
             className={`py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
               activeTab === 'user'
-                ? 'bg-zinc-900 text-white shadow-sm font-bold'
-                : 'text-zinc-600 hover:text-zinc-900'
+                ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm font-bold'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
             <User className="w-3.5 h-3.5" />
@@ -113,7 +113,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
             className={`py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
               activeTab === 'admin'
                 ? 'bg-amber-600 text-white shadow-sm font-bold'
-                : 'text-zinc-600 hover:text-zinc-900'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
             <Lock className="w-3.5 h-3.5" />
@@ -124,17 +124,17 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
         {/* Modal Body */}
         <div className="p-5 sm:p-6 space-y-5 overflow-y-auto">
           {authModal.message && (
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-xs text-amber-800">
-              <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-xl flex items-start gap-2.5 text-xs text-amber-800 dark:text-amber-300">
+              <ShieldAlert className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
               <span>{authModal.message}</span>
             </div>
           )}
 
           {/* Primary Google Sign-In Container */}
-          <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-5 text-center space-y-4">
+          <div className="bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl p-5 text-center space-y-4">
             <div className="flex justify-center">
               {/* Google Brand Multi-color SVG */}
-              <div className="w-12 h-12 rounded-full bg-white border border-zinc-200 flex items-center justify-center shadow-sm">
+              <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center shadow-sm">
                 <svg className="w-6 h-6" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -145,10 +145,10 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
             </div>
 
             <div>
-              <h4 className="font-semibold text-zinc-900 text-sm">
+              <h4 className="font-semibold text-zinc-900 dark:text-white text-sm">
                 {activeTab === 'admin' ? 'Google Admin Authentication' : 'Continue with Google'}
               </h4>
-              <p className="text-xs text-zinc-500 mt-1 max-w-xs mx-auto">
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-xs mx-auto">
                 {activeTab === 'admin' 
                   ? 'Sign in using your authorized company Google account to access operations & engineering.'
                   : 'Fast, secure one-click sign-in to track deliverables and agreements.'}
@@ -302,7 +302,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
         {/* Footer */}
         <div className="p-4 bg-zinc-50 border-t border-zinc-200 text-center text-[11px] text-zinc-500 flex items-center justify-between px-6">
           <span>Protected with OAuth 2.0 &amp; TLS Encryption</span>
-          <span className="font-mono text-zinc-600">ProjectBridge SSO v2.4</span>
+          <span className="font-mono text-zinc-600">Project Wallah SSO v2.4</span>
         </div>
       </div>
     </div>

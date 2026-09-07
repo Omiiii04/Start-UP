@@ -503,7 +503,7 @@ export const OperationsDashboard: React.FC = () => {
             <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-800 space-y-2 mb-6">
               <p className="font-bold text-amber-900">Restructuring Strategy:</p>
               <p className="leading-relaxed">
-                We will inform the client that ProjectBridge provides open-source prototype architecture, technical tutoring, and code optimization. The client retains authorship of their academic papers.
+                We will inform the client that Project Wallah provides open-source prototype architecture, technical tutoring, and code optimization. The client retains authorship of their academic papers.
               </p>
             </div>
 
