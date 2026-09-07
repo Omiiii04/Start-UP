@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Plus, 
   LayoutDashboard, 
@@ -33,6 +33,7 @@ import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
 import { useAuth } from '../../context/AuthContext';
 import { ProjectItem } from '../browse/BrowseProjects';
+import { getProjects, getMilestones } from '../../api/client';
 
 interface ClientProjectHubProps {
   onNavigate?: (tab: NavTab) => void;
@@ -81,30 +82,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
     });
   };
 
-  // Milestone Ledger State (Interactive Payment)
-  const [milestones, setMilestones] = useState([
-    {
-      id: 'M1',
-      title: 'Advance Kickoff (40%)',
-      amount: 28320,
-      invoice: 'INV-084-1',
-      status: 'PAID',
-    },
-    {
-      id: 'M2',
-      title: 'Staging Demo & QA (30%)',
-      amount: 21240,
-      invoice: 'INV-084-2',
-      status: 'DUE',
-    },
-    {
-      id: 'M3',
-      title: 'Final IP Handover (30%)',
-      amount: 21240,
-      invoice: 'INV-084-3',
-      status: 'LOCKED',
-    },
-  ]);
+  // Milestone Ledger State — fetched from the backend once a project is active
+  // (no hardcoded/dummy milestone or payment data)
+  const [milestones, setMilestones] = useState<{ id: string; title: string; amount: number; invoice: string; status: string }[]>([]);
 
   // Selected project for inspection modal
   const [inspectedProject, setInspectedProject] = useState<CustomProjectItem | null>(null);
@@ -117,104 +97,36 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
   // Logout Confirm Modal
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
-  // Purchases
-  const [purchasesList, setPurchasesList] = useState([
-    {
-      id: 'PUR-01',
-      name: 'Corporate SaaS Design System Template',
-      meta: 'Downloaded • V2.1',
-      fileName: 'projectbridge-corporate-saas-v2.1.zip',
-      actionIcon: Download,
-      date: '24 Aug 2026',
-    },
-    {
-      id: 'PUR-02',
-      name: 'Analytics Widget & Chart Pack',
-      meta: 'Update Available • V1.4',
-      fileName: 'analytics-charts-pack-v1.4.zip',
-      actionIcon: RotateCw,
-      date: '18 Aug 2026',
-    },
-  ]);
+  // Purchases — no dummy seed data; populated once the backend exposes a purchases endpoint
+  const [purchasesList, setPurchasesList] = useState<{ id: string; name: string; meta: string; fileName: string; actionIcon: any; date: string }[]>([]);
 
-  const customProjects: CustomProjectItem[] = [
-    {
-      id: 'PRJ-DELTA',
-      name: 'Project Delta Redesign (Vision Pipeline)',
-      category: 'AI Vision & AWS ECS',
-      status: 'Under Review',
-      badgeClass: 'bg-zinc-700 text-white font-medium',
-      icon: Layers,
-      tech: 'Python 3.11, PyTorch, FastAPI, Docker, AWS ECS',
-      lead: 'Om (Lead Architect)',
-      progress: 65,
-      branch: 'staging/vision-v1',
-      budget: 65000,
-    },
-    {
-      id: 'PRJ-GAMMA',
-      name: 'Project Gamma (FinTech Management Portal)',
-      category: 'UI/UX Revamp & React',
-      status: 'In Progress',
-      badgeClass: 'bg-blue-600 text-white',
-      icon: Code,
-      tech: 'React 18, TypeScript, TailwindCSS, Vite',
-      lead: 'Somnath & Falguni',
-      progress: 80,
-      branch: 'feature/portal-ui',
-      budget: 45000,
-    },
-    {
-      id: 'PRJ-EPSILON',
-      name: 'Project Epsilon (Multi-Tenant Auth Microservice)',
-      category: 'Backend REST API',
-      status: 'Planning',
-      badgeClass: 'bg-slate-100 text-slate-700 border border-slate-200',
-      icon: Code,
-      tech: 'Node.js, Express, PostgreSQL, Redis',
-      lead: 'Somnath',
-      progress: 25,
-      branch: 'chore/auth-scaffold',
-      budget: 35000,
-    },
-  ];
+  // Custom (client-owned) projects — no dummy seed data; populated from the backend
+  const [customProjects] = useState<CustomProjectItem[]>([]);
 
-  // Featured projects list
-  const featuredProjects = [
-    {
-      id: 'feat-1',
-      title: 'Real-Time PyTorch Segmentation Engine',
-      category: 'AI & MACHINE LEARNING',
-      description: 'YOLOv8 + UNet pipeline with Dockerized AWS ECS deployment, REST APIs, and live bounding-box visualization client.',
-      lead: 'Om (Lead Architect)',
-      tier: 'Tier 3 (MVP)',
-      timeline: '2–4 Weeks',
-      avatar: 'OM',
-      budget: 45000,
-    },
-    {
-      id: 'feat-2',
-      title: 'Multi-Tenant Organization Management Platform',
-      category: 'FULL-STACK DEVELOPMENT',
-      description: 'React 18 + Node.js portal with RBAC security, PostgreSQL database, automated GST invoicing, and Stripe/Razorpay integrations.',
-      lead: 'Somnath & Falguni',
-      tier: 'Tier 3 (MVP)',
-      timeline: '3 Weeks',
-      avatar: 'SOM',
-      budget: 50000,
-    },
-    {
-      id: 'feat-3',
-      title: 'Decentralized Edge Telemetry & IoT Hub',
-      category: 'EMBEDDED & CLOUD',
-      description: 'MQTT microservice with TimeScaleDB streaming ingestion, Grafana telemetry boards, and firmware OTA update client.',
-      lead: 'Om & Somnath',
-      tier: 'Tier 4 (Enterprise)',
-      timeline: '4 Weeks',
-      avatar: 'PB',
-      budget: 75000,
-    }
-  ];
+  useEffect(() => {
+    if (customProjects.length === 0) return;
+    const activeProjectId = customProjects[0].id;
+    getMilestones(activeProjectId)
+      .then((data) => setMilestones((data as typeof milestones) || []))
+      .catch(() => setMilestones([]));
+  }, [customProjects]);
+
+  // Featured projects — fetched from the backend (no hardcoded/dummy listings)
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectItem[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    getProjects()
+      .then((data) => {
+        if (isMounted) setFeaturedProjects(((data as ProjectItem[]) || []).slice(0, 3));
+      })
+      .catch(() => {
+        if (isMounted) setFeaturedProjects([]);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Handle Download Purchase
   const handleDownloadItem = (item: typeof purchasesList[0]) => {
@@ -235,35 +147,30 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
       setIsProcessingPayment(false);
       setIsPaymentModalOpen(false);
 
-      // Update milestones: M2 becomes PAID, M3 becomes DUE
+      // Mark the next due milestone as paid (generic — not tied to fixed dummy IDs)
+      const dueIndex = milestones.findIndex(m => m.status === 'DUE');
+      const paidMilestone = dueIndex >= 0 ? milestones[dueIndex] : undefined;
+
       setMilestones(prev =>
-        prev.map(m => {
-          if (m.id === 'M2') return { ...m, status: 'PAID' };
-          if (m.id === 'M3') return { ...m, status: 'DUE' };
+        prev.map((m, idx) => {
+          if (idx === dueIndex) return { ...m, status: 'PAID' };
+          if (idx === dueIndex + 1) return { ...m, status: 'DUE' };
           return m;
         })
       );
 
-      showToast('Payment of ₹21,240 cleared! Milestone 2 verified.', 'success');
+      showToast(
+        paidMilestone
+          ? `Payment of ${formatINR(paidMilestone.amount)} cleared! ${paidMilestone.title} verified.`
+          : 'Payment cleared!',
+        'success'
+      );
     }, 1200);
   };
 
-  const handleOrderFeaturedScope = (project: typeof featuredProjects[0]) => {
+  const handleOrderFeaturedScope = (project: ProjectItem) => {
     if (onSelectTemplate) {
-      onSelectTemplate({
-        id: project.id,
-        title: project.title,
-        category: project.category,
-        tier: project.tier,
-        budget: project.budget,
-        rating: 4.9,
-        deliveryTime: project.timeline,
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-        description: project.description,
-        tags: ['Production Ready', 'Docker', 'FastAPI', 'PostgreSQL'],
-        features: ['Full Source Code Handover', 'AWS ECS Staging Environment', '48-Point QA Checklist', '30-Day Bug Support'],
-        deliverables: ['GitHub Repository Transfer', 'GST Tax Invoice', 'System Architecture Report', 'API Documentation']
-      });
+      onSelectTemplate(project);
     } else if (onNavigate) {
       onNavigate('submit');
     }
@@ -503,11 +410,17 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                   <span className="text-xs font-mono font-bold text-gray-400 uppercase">
                     Milestone Escrow (SAC 998314 • 18% GST)
                   </span>
-                  <span className="text-xs text-gray-400">Agreed SOW: ₹65,000 + GST</span>
+                  <span className="text-xs text-gray-400">
+                    Agreed SOW: {formatINR(milestones.reduce((sum, m) => sum + m.amount, 0))} + GST
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {milestones.map((m) => {
+                  {milestones.length === 0 ? (
+                    <p className="text-xs text-gray-400 italic py-4 col-span-full">
+                      No milestones yet. They'll appear here once a project is active.
+                    </p>
+                  ) : milestones.map((m) => {
                     if (m.status === 'PAID') {
                       return (
                         <div key={m.id} className="p-4 rounded-xl border border-gray-200 bg-gray-50 space-y-2">
@@ -573,7 +486,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                 </div>
 
                 <div className="space-y-3">
-                  {customProjects.map((p) => (
+                  {customProjects.length === 0 ? (
+                    <p className="text-xs text-gray-400 italic py-4">No active projects yet.</p>
+                  ) : customProjects.map((p) => (
                     <div
                       key={p.id}
                       onClick={() => setInspectedProject(p)}
@@ -614,7 +529,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                 </div>
 
                 <div className="space-y-3">
-                  {purchasesList.map((item) => (
+                  {purchasesList.length === 0 ? (
+                    <p className="text-xs text-gray-400 italic py-4">No purchases yet.</p>
+                  ) : purchasesList.map((item) => (
                     <div
                       key={item.id}
                       className="flex items-center justify-between p-3.5 rounded-xl hover:bg-gray-50 border border-gray-100 transition-colors"
@@ -696,11 +613,11 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="w-7 h-7 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-[10px]">
-                            {proj.avatar}
+                            {proj.tier?.charAt(0) || 'P'}
                           </div>
                           <div>
-                            <p className="font-bold text-gray-900 text-[11px] leading-tight">{proj.lead}</p>
-                            <p className="text-[10px] text-gray-400">{proj.timeline}</p>
+                            <p className="font-bold text-gray-900 text-[11px] leading-tight">{proj.tier}</p>
+                            <p className="text-[10px] text-gray-400">{proj.deliveryTime}</p>
                           </div>
                         </div>
                         <span className="font-mono font-bold text-zinc-800 text-xs">
@@ -1046,7 +963,11 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
             </div>
 
             <div className="space-y-4">
-              {customProjects.map((p) => (
+              {customProjects.length === 0 ? (
+                <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center">
+                  <p className="text-sm text-gray-400 italic">No custom project requests yet. Submit a new scope to get started.</p>
+                </div>
+              ) : customProjects.map((p) => (
                 <div
                   key={p.id}
                   className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4"
@@ -1123,7 +1044,11 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {purchasesList.map((item) => (
+              {purchasesList.length === 0 ? (
+                <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center md:col-span-2">
+                  <p className="text-sm text-gray-400 italic">No purchases yet. Browse templates to get started.</p>
+                </div>
+              ) : purchasesList.map((item) => (
                 <div
                   key={item.id}
                   className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between"

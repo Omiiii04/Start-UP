@@ -65,7 +65,6 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
               >
                 <option value="admin_ceo">Om (Lead Architect)</option>
                 <option value="admin_backend">Somnath (Backend Lead)</option>
-                <option value="admin_ops">Divya (Operations Lead)</option>
                 <option value="admin_qa">Falguni (QA & UI)</option>
               </select>
 

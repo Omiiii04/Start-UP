@@ -43,7 +43,6 @@ const DEFAULT_ADMIN_EMAILS = [
   'om@projectbridge.io',
   'somnath@projectbridge.io',
   'falguni@projectbridge.io',
-  'divya@projectbridge.io',
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────

@@ -18,7 +18,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
     {
       id: '1',
       sender: 'support',
-      text: 'Hello! I am Divya from the ProjectBridge Operations Desk. How can I help you today with your project scope or UGC compliance?',
+      text: 'Hello! I\'m the ProjectBridge Support Assistant. How can I help you today with your project scope or UGC compliance?',
       time: 'Just now',
     },
   ]);
@@ -42,7 +42,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
     setInput('');
 
     setTimeout(() => {
-      let replyText = "Thanks for reaching out! Our lead architect (Om) and operations lead (Divya) have received your note and will review it within 2 hours.";
+      let replyText = "Thanks for reaching out! Our team has received your note and will review it within 2 hours.";
       const lower = currentQuery.toLowerCase();
       if (lower.includes('ip') || lower.includes('policy') || lower.includes('deliverable') || lower.includes('ownership')) {
         replyText = "All scopes on ProjectBridge include 100% full intellectual property transfer upon final milestone clearance. Deliverables consist of production code, documentation, and staging environments.";
@@ -87,7 +87,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
               </h3>
               <p className="text-[11px] text-zinc-500 font-mono flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>Divya &amp; Om (Online • Avg reply &lt; 2m)</span>
+                <span>Support Team (Online • Avg reply &lt; 2m)</span>
               </p>
             </div>
           </div>
