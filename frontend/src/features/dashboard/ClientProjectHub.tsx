@@ -294,13 +294,13 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
               </div>
 
               {/* Quick KPI Stats Row */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center gap-3 hover-lift transition-all animate-fade-in-up delay-50">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 shrink-0">
                     <FileCode2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <p className="text-xl sm:text-2xl font-extrabold font-headline text-gray-900">3</p>
+                    <p className="text-xl sm:text-2xl font-extrabold font-headline text-gray-900">{customProjects.length || 3}</p>
                     <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Active Projects</p>
                   </div>
                 </div>
@@ -316,16 +316,6 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                 </div>
 
                 <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center gap-3 hover-lift transition-all animate-fade-in-up delay-150">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0">
-                    <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </div>
-                  <div>
-                    <p className="text-xl sm:text-2xl font-extrabold font-headline text-emerald-600">100%</p>
-                    <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Quality Verified</p>
-                  </div>
-                </div>
-
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center gap-3 hover-lift transition-all animate-fade-in-up delay-200">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 shrink-0">
                     <GitBranch className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>

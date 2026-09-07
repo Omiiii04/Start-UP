@@ -53,8 +53,8 @@ export default {
         success: '#10b981',
         warning: '#f59e0b',
         error: '#ef4444',
-        darkBg: '#09090b',
-        darkCard: '#18181b',
+        darkBg: '#121620',
+        darkCard: '#1a202c',
       },
       fontFamily: {
         headline: ['Hanken Grotesk', 'Plus Jakarta Sans', 'Inter', 'sans-serif'],
