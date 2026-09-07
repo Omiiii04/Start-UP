@@ -15,7 +15,7 @@ import { GoogleAuthModal } from './components/auth/GoogleAuthModal';
 import { AdminGuard } from './components/auth/AdminGuard';
 import { ScrollMotionBackground } from './components/common/ScrollMotionBackground';
 import { WorkInProgress } from './features/download/WorkInProgress';
-import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
+import { Home, Compass, ClipboardList, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
 
 export const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
@@ -61,6 +61,11 @@ export const AppContent: React.FC = () => {
     }
 
     setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
   };
 
   const handleSearchSubmit = (query: string) => {
@@ -91,6 +96,8 @@ export const AppContent: React.FC = () => {
         activeTab={activeTab} 
         onTabChange={handleTabChange}
         onOpenSupport={() => setIsSupportOpen(true)}
+        searchQuery={searchQuery}
+        onSearchChange={handleSearchChange}
         onSearchSubmit={handleSearchSubmit}
       />
 
@@ -116,6 +123,7 @@ export const AppContent: React.FC = () => {
           <BrowseProjects 
             onNavigate={handleTabChange} 
             initialSearch={searchQuery}
+            onSearchChange={handleSearchChange}
             onSelectProject={handleSelectTemplate}
           />
         )}
@@ -245,21 +253,19 @@ export const AppContent: React.FC = () => {
               <span className="text-[10px] font-medium">Submit</span>
             </button>
 
-            <button
-              onClick={() => handleTabChange('admin')}
-              className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all relative ${
-                activeTab === 'admin'
-                  ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
-                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
-              }`}
-            >
-              {isAdmin ? (
+            {isAdmin && (
+              <button
+                onClick={() => handleTabChange('admin')}
+                className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-2 rounded-xl transition-all relative ${
+                  activeTab === 'admin'
+                    ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800'
+                    : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
+                }`}
+              >
                 <User className={`w-5 h-5 mb-0.5 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              ) : (
-                <Lock className={`w-5 h-5 mb-0.5 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : 'text-amber-500'}`} />
-              )}
-              <span className="text-[10px] font-medium">Admin</span>
-            </button>
+                <span className="text-[10px] font-medium">Admin</span>
+              </button>
+            )}
           </>
         ) : (
           /* Public Visitor Mobile Tabs */

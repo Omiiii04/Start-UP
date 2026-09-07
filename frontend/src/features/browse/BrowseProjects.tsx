@@ -27,6 +27,7 @@ import { getProjects } from '../../api/client';
 interface BrowseProjectsProps {
   onNavigate: (tab: NavTab) => void;
   initialSearch?: string;
+  onSearchChange?: (query: string) => void;
   onSelectProject?: (project: ProjectItem) => void;
 }
 
@@ -110,6 +111,7 @@ const ALL_TECH_STACKS = [
 export const BrowseProjects: React.FC<BrowseProjectsProps> = ({ 
   onNavigate, 
   initialSearch = '',
+  onSearchChange,
   onSelectProject
 }) => {
   const { showToast } = useToast();
@@ -131,6 +133,13 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   const [isCatalogLoading, setIsCatalogLoading] = useState<boolean>(true);
   const [catalogError, setCatalogError] = useState<string | null>(null);
 
+  const handleSearchInput = (value: string) => {
+    setSearchQuery(value);
+    if (onSearchChange) {
+      onSearchChange(value);
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
     setIsCatalogLoading(true);
@@ -150,6 +159,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   }, []);
 
   useEffect(() => {
+    setSearchQuery(initialSearch);
     if (initialSearch) {
       // Check if search matches a category name
       const matchedCat = CATEGORIES_CONFIG.find(
@@ -157,8 +167,6 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
       );
       if (matchedCat) {
         setSelectedCategories([matchedCat.name]);
-      } else {
-        setSearchQuery(initialSearch);
       }
     }
   }, [initialSearch]);
@@ -231,7 +239,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
     setSelectedTechs([]);
     setMinBudget('');
     setMaxBudget('');
-    setSearchQuery('');
+    handleSearchInput('');
     showToast('Filters reset', 'info');
   };
 
@@ -517,14 +525,15 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchInput(e.target.value)}
                   placeholder="Search projects, subsections (AIML, Web, Cloud, IoT, Pharmacy, Research)..."
-                  className="w-full h-14 pl-12 pr-10 rounded-xl border border-gray-200 dark:border-zinc-700 focus:border-zinc-900 dark:focus:border-zinc-300 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 shadow-sm text-base text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-all"
+                  className="w-full h-14 pl-12 pr-10 rounded-xl border border-gray-200 dark:border-zinc-700 focus:border-zinc-900 dark:focus:border-zinc-300 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 shadow-sm text-base text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-all font-medium"
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white p-1 z-10 cursor-pointer"
+                    onClick={() => handleSearchInput('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white p-1 z-10 cursor-pointer transition-colors"
+                    title="Clear search"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -609,8 +618,24 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading project templates…</p>
               </div>
             ) : catalogError ? (
-              <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
-                <p className="text-sm text-red-500">{catalogError}</p>
+              <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-10 sm:p-14 text-center my-8 shadow-md animate-scale-in max-w-xl mx-auto">
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/15 dark:bg-amber-400/20 border border-amber-500/30 dark:border-amber-400/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto mb-4 animate-float">
+                  <Sparkles className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold font-headline text-slate-900 dark:text-white mb-3 tracking-tight">
+                  Catalog Updating Soon
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-zinc-200 leading-relaxed mb-6 max-w-md mx-auto font-medium">
+                  Our project blueprint library is currently being updated with fresh verified architectures. Please check back shortly or submit your custom project requirements.
+                </p>
+                <div className="flex justify-center gap-3">
+                  <button
+                    onClick={() => onNavigate('submit')}
+                    className="px-6 py-3 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 text-xs font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
+                  >
+                    Submit Custom Requirement
+                  </button>
+                </div>
               </div>
             ) : filteredProjects.length === 0 ? (
               <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
