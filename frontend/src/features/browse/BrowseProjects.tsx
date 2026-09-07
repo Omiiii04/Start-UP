@@ -23,11 +23,11 @@ import { formatINR } from '../../utils/gst';
 import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
 import { getProjects } from '../../api/client';
+import { ProjectDetailsModal } from '../../components/common/ProjectDetailsModal';
 
 interface BrowseProjectsProps {
   onNavigate: (tab: NavTab) => void;
   initialSearch?: string;
-  onSearchChange?: (query: string) => void;
   onSelectProject?: (project: ProjectItem) => void;
 }
 
@@ -111,7 +111,6 @@ const ALL_TECH_STACKS = [
 export const BrowseProjects: React.FC<BrowseProjectsProps> = ({ 
   onNavigate, 
   initialSearch = '',
-  onSearchChange,
   onSelectProject
 }) => {
   const { showToast } = useToast();
@@ -124,6 +123,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   const [minBudget, setMinBudget] = useState<string>('');
   const [maxBudget, setMaxBudget] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [isProjectDetailsOpen, setIsProjectDetailsOpen] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['engineering']);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
@@ -132,13 +132,6 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   const [projectCatalog, setProjectCatalog] = useState<ProjectItem[]>([]);
   const [isCatalogLoading, setIsCatalogLoading] = useState<boolean>(true);
   const [catalogError, setCatalogError] = useState<string | null>(null);
-
-  const handleSearchInput = (value: string) => {
-    setSearchQuery(value);
-    if (onSearchChange) {
-      onSearchChange(value);
-    }
-  };
 
   useEffect(() => {
     let isMounted = true;
@@ -159,7 +152,6 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   }, []);
 
   useEffect(() => {
-    setSearchQuery(initialSearch);
     if (initialSearch) {
       // Check if search matches a category name
       const matchedCat = CATEGORIES_CONFIG.find(
@@ -167,6 +159,8 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
       );
       if (matchedCat) {
         setSelectedCategories([matchedCat.name]);
+      } else {
+        setSearchQuery(initialSearch);
       }
     }
   }, [initialSearch]);
@@ -239,7 +233,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
     setSelectedTechs([]);
     setMinBudget('');
     setMaxBudget('');
-    handleSearchInput('');
+    setSearchQuery('');
     showToast('Filters reset', 'info');
   };
 
@@ -329,7 +323,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
       <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
         
         {/* Mobile Filter Bar & Quick Toggles */}
-        <div className="md:hidden mb-4 flex items-center justify-between gap-2 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm">
+        <div className="md:hidden mb-4 flex items-center justify-between gap-2 bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-xl p-3 rounded-2xl border border-gray-200 dark:border-white/10 shadow-sm">
           <button
             onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
             className={`flex items-center gap-2 px-3.5 py-2 border rounded-xl text-xs font-bold transition-all ${
@@ -362,7 +356,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
           
           {/* Sidebar Filters (Desktop & Collapsible Mobile) */}
-          <aside className={`${isMobileFilterOpen ? 'block' : 'hidden'} md:block w-full md:w-72 flex-shrink-0 bg-white dark:bg-zinc-900/95 border border-gray-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-6 md:sticky md:top-28 shadow-sm`}>
+          <aside className={`${isMobileFilterOpen ? 'block' : 'hidden'} md:block w-full md:w-72 flex-shrink-0 bg-white dark:bg-zinc-950/35 dark:backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-2xl p-5 sm:p-6 md:sticky md:top-28 shadow-sm`}>
             <div className="flex items-center justify-between mb-5 sm:mb-6">
               <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white font-headline">Filters</h2>
               {hasActiveFilters && (
@@ -388,7 +382,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                     const hasSubsections = Boolean(cat.subsections && cat.subsections.length > 0);
 
                     return (
-                      <div key={cat.id} className="border border-gray-100 dark:border-zinc-800 rounded-xl p-2.5 bg-gray-50/50 dark:bg-zinc-800/40 hover:bg-gray-50 dark:hover:bg-zinc-800/70 transition-colors">
+                      <div key={cat.id} className="border border-gray-100 dark:border-white/10 rounded-xl p-2.5 bg-gray-50/50 dark:bg-zinc-900/30 hover:bg-gray-50 dark:hover:bg-zinc-800/40 transition-colors">
                         <div className="flex items-center justify-between gap-2">
                           <label className="flex items-center space-x-2.5 cursor-pointer select-none flex-grow">
                             <input
@@ -525,15 +519,14 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => handleSearchInput(e.target.value)}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search projects, subsections (AIML, Web, Cloud, IoT, Pharmacy, Research)..."
-                  className="w-full h-14 pl-12 pr-10 rounded-xl border border-gray-200 dark:border-zinc-700 focus:border-zinc-900 dark:focus:border-zinc-300 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 shadow-sm text-base text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-all font-medium"
+                  className="w-full h-14 pl-12 pr-10 rounded-xl border border-gray-200 dark:border-white/10 focus:border-zinc-900 dark:focus:border-white/30 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 shadow-sm text-base text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-950/35 dark:backdrop-blur-xl placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-all"
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => handleSearchInput('')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white p-1 z-10 cursor-pointer transition-colors"
-                    title="Clear search"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white p-1 z-10 cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -542,7 +535,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
               {/* Active Filter Chips */}
               {(selectedCategories.length > 0 || selectedSubsections.length > 0 || selectedTechs.length > 0 || minBudget || maxBudget) && (
-                <div className="flex items-center gap-2 flex-wrap pt-1">
+                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap pt-1 text-center sm:text-left">
                   <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mr-1">Active:</span>
                   
                   {selectedCategories.map(cat => (
@@ -618,24 +611,8 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">Loading project templates…</p>
               </div>
             ) : catalogError ? (
-              <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-slate-200/80 dark:border-zinc-800 rounded-3xl p-10 sm:p-14 text-center my-8 shadow-md animate-scale-in max-w-xl mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-amber-500/15 dark:bg-amber-400/20 border border-amber-500/30 dark:border-amber-400/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto mb-4 animate-float">
-                  <Sparkles className="w-7 h-7" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extrabold font-headline text-slate-900 dark:text-white mb-3 tracking-tight">
-                  Catalog Updating Soon
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-zinc-200 leading-relaxed mb-6 max-w-md mx-auto font-medium">
-                  Our project blueprint library is currently being updated with fresh verified architectures. Please check back shortly or submit your custom project requirements.
-                </p>
-                <div className="flex justify-center gap-3">
-                  <button
-                    onClick={() => onNavigate('submit')}
-                    className="px-6 py-3 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 text-xs font-bold rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
-                  >
-                    Submit Custom Requirement
-                  </button>
-                </div>
+              <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
+                <p className="text-sm text-red-500">{catalogError}</p>
               </div>
             ) : filteredProjects.length === 0 ? (
               <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-12 text-center my-8 animate-scale-in">
@@ -654,10 +631,10 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                     Reset All Filters
                   </button>
                   <button
-                    onClick={() => onNavigate('submit')}
+                    onClick={() => setIsProjectDetailsOpen(true)}
                     className="px-4 py-2 bg-zinc-900 dark:bg-zinc-100 hover:bg-black dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold rounded-lg transition-colors active:scale-95 shadow-md cursor-pointer"
                   >
-                    Submit Custom Scope
+                    Enter Project Details
                   </button>
                 </div>
               </div>
@@ -668,7 +645,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                   <article
                     key={project.id}
                     style={{ animationDelay: `${(idx % 6) * 60}ms` }}
-                    className="bg-white dark:bg-zinc-900/90 border border-gray-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-black/40 hover:shadow-[0_16px_36px_rgba(0,0,0,0.18)] transition-all duration-300 flex flex-col group hover:-translate-y-1.5 border-hover glass-shine animate-fade-in-up"
+                    className="bg-white dark:bg-zinc-950/35 dark:backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-black/40 hover:shadow-[0_16px_36px_rgba(0,0,0,0.18)] transition-all duration-300 flex flex-col group hover:-translate-y-1.5 border-hover glass-shine animate-fade-in-up"
                   >
                     {/* Thumbnail Image with Rating Badge & Bookmark */}
                     <div className="h-48 w-full relative overflow-hidden bg-zinc-100 dark:bg-zinc-800">
@@ -681,14 +658,14 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                       <div className="absolute top-3 right-3 flex items-center gap-2">
                         <button
                           onClick={() => toggleBookmark(project.id, project.title)}
-                          className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm p-1.5 rounded-md text-zinc-900 dark:text-zinc-100 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all active:scale-90 cursor-pointer"
+                          className="bg-white/95 dark:bg-zinc-900/40 dark:backdrop-blur-md p-1.5 rounded-md text-zinc-900 dark:text-zinc-100 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all active:scale-90 cursor-pointer"
                           title="Bookmark"
                         >
                           <Bookmark className={`w-3.5 h-3.5 ${
                             bookmarks.includes(project.id) ? 'fill-zinc-900 dark:fill-white text-zinc-900 dark:text-white' : 'text-zinc-600 dark:text-zinc-400'
                           }`} />
                         </button>
-                        <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm text-zinc-900 dark:text-zinc-100 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1 border border-gray-200 dark:border-zinc-700 font-mono">
+                        <div className="bg-white/95 dark:bg-zinc-900/40 dark:backdrop-blur-md text-zinc-900 dark:text-zinc-100 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1 border border-gray-200 dark:border-white/10 font-mono">
                           <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
                           <span>{project.rating.toFixed(1)}</span>
                         </div>
@@ -696,10 +673,10 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                     </div>
 
                     {/* Card Content */}
-                    <div className="p-6 flex flex-col flex-grow justify-between">
+                    <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between text-center sm:text-left">
                       <div>
-                        <div className="flex justify-between items-start mb-2 gap-2">
-                          <div className="flex flex-col">
+                        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start mb-2 gap-2 text-center sm:text-left">
+                          <div className="flex flex-col items-center sm:items-start">
                             <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">
                               {project.category}
                             </span>
@@ -715,20 +692,20 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                           </span>
                         </div>
 
-                        <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 line-clamp-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors font-headline">
+                        <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 line-clamp-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors font-headline text-center sm:text-left">
                           {project.title}
                         </h3>
 
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed text-center sm:text-left">
                           {project.description}
                         </p>
 
                         {/* Tech stack tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-6">
+                        <div className="flex flex-wrap gap-1.5 mb-6 justify-center sm:justify-start">
                           {project.tags.map(tag => (
                             <span
                               key={tag}
-                              className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-md text-[11px] font-semibold font-mono hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                              className="px-2.5 py-1 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-md text-[11px] font-semibold font-mono hover:bg-zinc-200 dark:hover:bg-white/15 transition-colors"
                             >
                               {tag}
                             </span>
@@ -739,7 +716,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                       {/* View Details Button */}
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="w-full bg-white dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100 border border-zinc-900 dark:border-zinc-700 font-semibold text-sm rounded-xl py-2.5 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all duration-200 active:scale-95 shadow-sm flex items-center justify-center gap-1.5 group-hover:bg-zinc-900 dark:group-hover:bg-zinc-100 group-hover:border-zinc-900 dark:group-hover:border-zinc-100 group-hover:text-white dark:group-hover:text-zinc-900 cursor-pointer"
+                        className="w-full bg-white dark:bg-white/10 text-zinc-900 dark:text-zinc-100 border border-zinc-900 dark:border-white/15 font-semibold text-sm rounded-xl py-2.5 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-all duration-200 active:scale-95 shadow-sm flex items-center justify-center gap-1.5 group-hover:bg-zinc-900 dark:group-hover:bg-white group-hover:border-zinc-900 dark:group-hover:border-white group-hover:text-white dark:group-hover:text-zinc-900 cursor-pointer"
                       >
                         <span>View Details</span>
                         <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -755,9 +732,9 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
       {/* Project Details Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fade-in">
           <div 
-            className="bg-white dark:bg-zinc-900 rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-zinc-700 p-5 sm:p-8 relative text-zinc-900 dark:text-zinc-100 animate-scale-in"
+            className="bg-white dark:bg-zinc-950/80 dark:backdrop-blur-2xl rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-white/15 p-5 sm:p-8 relative text-zinc-900 dark:text-zinc-100 animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -872,6 +849,13 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
           </div>
         </div>
       )}
+
+      {/* Enter Project Details Modal */}
+      <ProjectDetailsModal
+        isOpen={isProjectDetailsOpen}
+        onClose={() => setIsProjectDetailsOpen(false)}
+        onNavigate={onNavigate}
+      />
     </div>
   );
 };

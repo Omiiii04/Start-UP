@@ -53,7 +53,7 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
               </div>
               <div>
                 <h3 className="font-headline font-bold text-lg text-zinc-900 leading-tight">
-                  ProjectBridge Mobile
+                  Project Wallah Mobile
                 </h3>
                 <p className="text-xs text-zinc-500">Android Official App on Play Store</p>
               </div>

@@ -44,9 +44,11 @@ html.dark body {
 }
 
 .dark .pb-card {
-  background: rgba(24, 24, 27, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.45);
+  background: rgba(15, 18, 28, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .pb-card-hover:hover {
@@ -56,8 +58,8 @@ html.dark body {
 }
 
 .dark .pb-card-hover:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .pb-input {
@@ -69,7 +71,9 @@ html.dark body {
 }
 
 .dark .pb-input {
-  background: #18181b;
+  background: rgba(24, 24, 27, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #f4f4f5;
 }
@@ -90,7 +94,7 @@ html.dark body {
 
 .dark .pb-input:focus {
   border-color: #f4f4f5;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 /* Fix dropdown options light and dark backgrounds */

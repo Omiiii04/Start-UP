@@ -108,7 +108,7 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
 
           <p className="text-sm text-zinc-600 max-w-lg mx-auto mb-6">
             You are signed in as <strong className="text-zinc-900">{user?.email}</strong> (Client Role). 
-            Access to Operations Dashboard, CRM pipelines, financial milestones, and Engineering management is restricted to authorized ProjectBridge team members.
+            Access to Operations Dashboard, CRM pipelines, financial milestones, and Engineering management is restricted to authorized Project Wallah team members.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">

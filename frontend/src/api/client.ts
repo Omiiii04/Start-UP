@@ -1,5 +1,5 @@
 /**
- * ProjectBridge API Client
+ * Project Wallah API Client
  * Centralizes all backend requests — handles auth headers, token refresh, errors.
  */
 

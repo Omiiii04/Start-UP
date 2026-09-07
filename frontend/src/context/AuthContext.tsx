@@ -132,7 +132,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       fullName: customName || (isAdm ? 'Om J. (Lead Architect)' : 'Demo Client'),
       role,
       clientCategory: role === 'client' ? 'sme' : undefined,
-      institutionOrCompany: isAdm ? 'ProjectBridge Core' : 'Demo Company',
+      institutionOrCompany: isAdm ? 'Project Wallah Core' : 'Demo Company',
       picture: undefined,
       isAdmin: isAdm,
       createdAt: new Date().toISOString(),

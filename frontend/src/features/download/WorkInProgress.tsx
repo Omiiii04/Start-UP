@@ -20,36 +20,36 @@ export const WorkInProgress: React.FC<WorkInProgressProps> = ({ onNavigate }) =>
           <Hammer className="w-7 h-7" />
         </div>
 
-        <h1 className="font-headline font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight mb-3">
-          The ProjectBridge app is still being built
+        <h1 className="font-headline font-bold text-2xl sm:text-3xl text-zinc-900 dark:text-white tracking-tight mb-3">
+          The Project Wallah app is still being built
         </h1>
 
-        <p className="text-sm sm:text-base text-slate-700 dark:text-zinc-200 font-medium leading-relaxed max-w-md mx-auto mb-8">
+        <p className="text-sm sm:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-md mx-auto mb-8">
           We're wiring up push notifications, offline milestone tracking, and mobile sign-off before this ships.
           For now, everything you can do in the app already works right here in the browser.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs sm:max-w-none mx-auto">
           <button
             onClick={() => onNavigate('home')}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 text-sm font-bold shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-sm font-semibold shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            <span>Back to Home</span>
           </button>
 
           <button
             onClick={() => onNavigate('browse')}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-900 dark:text-zinc-100 text-sm font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer border border-slate-200 dark:border-zinc-700"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-100 text-sm font-semibold transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
             <Smartphone className="w-4 h-4" />
-            Browse Projects Instead
+            <span>Browse Projects Instead</span>
           </button>
         </div>
 
-        <div className="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 text-xs font-bold border border-amber-200 dark:border-amber-800/60 shadow-xs">
-          <Bell className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>We'll announce the launch here first</span>
+        <div className="mt-10 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tertiary-container text-tertiary text-xs font-semibold border border-tertiary/20">
+          <Bell className="w-3.5 h-3.5" />
+          We'll announce the launch here first
         </div>
       </motion.div>
     </div>
