@@ -228,14 +228,16 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
           <div className="bg-white dark:bg-zinc-950/35 dark:backdrop-blur-2xl rounded-2xl sm:rounded-[24px] shadow-sm border border-zinc-200 dark:border-white/10 overflow-hidden hover-lift transition-all">
             {/* Progress Bar Header */}
             <div className="p-4 sm:p-8 pb-4 sm:pb-5 bg-white dark:bg-white/5 border-b border-zinc-200 dark:border-white/10">
-              <div className="flex justify-between items-center mb-2.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400">
+              <div className="flex flex-wrap justify-between items-center gap-2 mb-2.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 animate-radar-ping"></span>
-                  {formStep === 1 && 'Step 1 of 3: Project Basics'}
-                  {formStep === 2 && 'Step 2 of 3: Academic & Logistics'}
-                  {formStep === 3 && 'Step 3 of 3: Compliance & Review'}
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 animate-radar-ping shrink-0"></span>
+                  <span>
+                    {formStep === 1 && 'Step 1 of 3: Project Basics'}
+                    {formStep === 2 && 'Step 2 of 3: Academic & Logistics'}
+                    {formStep === 3 && 'Step 3 of 3: Compliance & Review'}
+                  </span>
                 </span>
-                <span className="text-zinc-900 dark:text-white font-bold">
+                <span className="text-zinc-900 dark:text-white font-bold ml-auto sm:ml-0">
                   {formStep === 1 && '33%'}
                   {formStep === 2 && '66%'}
                   {formStep === 3 && '100%'}
@@ -257,7 +259,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 <button 
                   type="button"
                   onClick={() => setFormStep(1)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-zinc-900/90 px-2 sm:px-3 rounded-lg cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
                     formStep >= 1 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
@@ -271,7 +273,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 <button 
                   type="button"
                   onClick={() => setFormStep(2)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-zinc-900/90 px-2 sm:px-3 rounded-lg cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
                     formStep >= 2 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
@@ -289,7 +291,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 <button 
                   type="button"
                   onClick={() => setFormStep(3)}
-                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-transparent px-2 sm:px-3 cursor-pointer group"
+                  className="flex flex-col items-center gap-1 sm:gap-1.5 z-10 bg-white dark:bg-zinc-900/90 px-2 sm:px-3 rounded-lg cursor-pointer group"
                 >
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs border-2 transition-all ${
                     formStep === 3 ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-300 dark:border-zinc-600 group-hover:bg-zinc-200'
@@ -484,7 +486,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
 
                   {/* Live Cost & GST Breakdown Card */}
                   <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 space-y-3 text-xs">
-                    <div className="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-zinc-200 dark:border-white/10 pb-2">
                       <span className="font-bold text-zinc-900 dark:text-white uppercase font-mono">Invoice Summary</span>
                       <button
                         type="button"
@@ -495,7 +497,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                             'info'
                           );
                         }}
-                        className="text-[11px] font-mono text-zinc-700 dark:text-zinc-300 font-semibold underline hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                        className="text-[11px] font-mono text-zinc-700 dark:text-zinc-300 font-semibold underline hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer text-left sm:text-right"
                       >
                         {isMaharashtra ? 'Maharashtra (CGST+SGST 18%)' : 'Interstate (IGST 18%)'}
                       </button>

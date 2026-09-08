@@ -28,7 +28,7 @@ export const AppContent: React.FC = () => {
 
   // If user logs out while on a protected tab, reset back to public landing page
   useEffect(() => {
-    if (!isAuthenticated && (activeTab === 'dashboard' || activeTab === 'submit' || activeTab === 'admin')) {
+    if (!isAuthenticated && (activeTab === 'dashboard' || activeTab === 'admin')) {
       setActiveTab('home');
     }
   }, [isAuthenticated, activeTab]);
@@ -40,15 +40,6 @@ export const AppContent: React.FC = () => {
         targetRole: 'user',
         message: 'Please sign in with Google to access your Project Wallah Client Dashboard.',
         onSuccessRedirectTab: 'dashboard'
-      });
-      return;
-    }
-
-    if (tab === 'submit' && !isAuthenticated) {
-      openAuthModal({
-        targetRole: 'user',
-        message: 'Please sign in with Google to submit custom project requirements.',
-        onSuccessRedirectTab: 'submit'
       });
       return;
     }
@@ -72,19 +63,11 @@ export const AppContent: React.FC = () => {
 
   const handleSelectTemplate = (template: ProjectItem) => {
     setSelectedTemplate(template);
-    if (!isAuthenticated) {
-      openAuthModal({
-        targetRole: 'user',
-        message: `Please sign in with Google to order or customize "${template.title}".`,
-        onSuccessRedirectTab: 'submit'
-      });
-    } else {
-      setActiveTab('submit');
-    }
+    setActiveTab('submit');
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-24 md:pb-0 relative transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-28 md:pb-0 relative transition-colors duration-300">
       {/* Dynamic Framer Motion Scroll Synced Background */}
       <ScrollMotionBackground enableInteractiveGlow={true} />
 
@@ -122,7 +105,7 @@ export const AppContent: React.FC = () => {
           />
         )}
 
-        {activeTab === 'submit' && isAuthenticated && (
+        {activeTab === 'submit' && (
           <IntakeWizard 
             onNavigate={handleTabChange} 
             onOpenSupport={() => setIsSupportOpen(true)}

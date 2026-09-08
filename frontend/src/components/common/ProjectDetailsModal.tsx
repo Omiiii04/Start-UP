@@ -10,10 +10,8 @@ import {
   MessageCircle, 
   FileText, 
   Building2, 
-  Phone, 
-  LogIn
+  Phone
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
 import { useToast } from './Toast';
 import { NavTab } from './Header';
 import { submitIntake } from '../../api/client';
@@ -95,7 +93,6 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   onClose,
   onNavigate
 }) => {
-  const { isAuthenticated, user, openAuthModal } = useAuth();
   const { showToast } = useToast();
 
   const [title, setTitle] = useState('');
@@ -119,36 +116,6 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
     trackingCode: string;
     data: ProjectDetailsFormData;
   } | null>(null);
-
-  // Restore pending submission from sessionStorage on open or auth state change
-  useEffect(() => {
-    if (isOpen) {
-      const pendingRaw = sessionStorage.getItem('pending_project_details_submission');
-      if (pendingRaw) {
-        try {
-          const pending: ProjectDetailsFormData = JSON.parse(pendingRaw);
-          if (pending.title) setTitle(pending.title);
-          if (pending.domain) setDomain(pending.domain);
-          if (pending.projectType) setProjectType(pending.projectType);
-          if (pending.techStack) setTechStack(pending.techStack);
-          if (pending.description) setDescription(pending.description);
-          if (pending.deliverables) setDeliverables(pending.deliverables);
-          if (pending.budgetRange) setBudgetRange(pending.budgetRange);
-          if (pending.deadline) setDeadline(pending.deadline);
-          if (pending.whatsapp) setWhatsapp(pending.whatsapp);
-          if (pending.college) setCollege(pending.college);
-
-          // If the user just completed OAuth authentication, auto-submit!
-          if (isAuthenticated && !submittedResult) {
-            handleCompleteSubmission(pending);
-            sessionStorage.removeItem('pending_project_details_submission');
-          }
-        } catch {
-          sessionStorage.removeItem('pending_project_details_submission');
-        }
-      }
-    }
-  }, [isOpen, isAuthenticated]);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -255,19 +222,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
       college: college.trim()
     };
 
-    // If user is NOT logged in: Route for Google OAuth authentication
-    if (!isAuthenticated) {
-      sessionStorage.setItem('pending_project_details_submission', JSON.stringify(payload));
-      showToast('Please sign in with Google to authenticate and submit your project details.', 'info');
-      openAuthModal({
-        targetRole: 'user',
-        message: `Sign in with Google to submit "${title.trim()}" and receive real-time project tracking.`,
-        onSuccessRedirectTab: 'home'
-      });
-      return;
-    }
-
-    // User is logged in: Complete submission directly
+    // Directly submit project details without OAuth authentication requirement
     handleCompleteSubmission(payload);
   };
 
@@ -296,32 +251,32 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] text-zinc-900 dark:text-zinc-100"
+        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[88vh] text-zinc-900 dark:text-zinc-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Header */}
-        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-100 dark:border-white/10 bg-zinc-50/80 dark:bg-white/5 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold shadow-sm">
-              <FileText className="w-5 h-5" />
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-zinc-100 dark:border-white/10 bg-zinc-50/80 dark:bg-white/5 relative z-10 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 pr-2">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold shadow-sm shrink-0">
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-headline font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <h3 className="font-headline font-bold text-base sm:text-xl text-zinc-900 dark:text-white truncate">
                   Enter Project Details
                 </h3>
-                <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60">
+                <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60 shrink-0">
                   <Sparkles className="w-2.5 h-2.5" />
                   Custom Scope
                 </span>
               </div>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 line-clamp-1 sm:line-clamp-none">
                 Submit your customized project syllabus, algorithms, and deadlines for 100% verified delivery.
               </p>
             </div>
@@ -329,7 +284,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
           <button
             onClick={onClose}
             disabled={isSubmitting}
-            className="p-2 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-xl hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-xl hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -337,7 +292,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
         </div>
 
         {/* Modal Body Container */}
-        <div className="overflow-y-auto flex-1 p-5 sm:p-6 md:p-8 space-y-6">
+        <div className="overflow-y-auto overscroll-contain smooth-touch-scroll flex-1 p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
           {submittedResult ? (
             /* ── SUCCESS STATE VIEW ── */
             <div className="space-y-6 py-4 text-center animate-in fade-in duration-300">
@@ -445,34 +400,6 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
             /* ── PROJECT DETAILS FORM ── */
             <form onSubmit={handleSubmit} className="space-y-6">
               
-              {/* Login Status Notification Banner */}
-              {!isAuthenticated ? (
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/20 flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5">
-                    <LogIn className="w-4 h-4" />
-                  </div>
-                  <div className="text-xs space-y-1">
-                    <p className="font-bold text-zinc-900 dark:text-white">
-                      Sign-in Required on Submission
-                    </p>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      You can enter all your project details below without logging in first. When you click <strong>Submit Project Details</strong>, Google OAuth verification will prompt to securely link and track your project.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5 text-xs text-emerald-800 dark:text-emerald-300">
-                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                    <span>
-                      Authenticated as <strong>{user?.fullName || user?.email}</strong>
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/20 font-semibold text-emerald-800 dark:text-emerald-200">
-                    Active Session
-                  </span>
-                </div>
-              )}
 
               {/* 1. Project Title */}
               <div className="space-y-2">
@@ -528,7 +455,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
 
               {/* 4. Preferred Tech Stack & Quick Pills */}
               <div className="space-y-2">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
                     4. Preferred Tech Stack &amp; Tools
                   </label>
@@ -557,7 +484,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
 
               {/* 5. Detailed Scope & Requirements */}
               <div className="space-y-2">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
                     5. Detailed Requirements &amp; Features <span className="text-rose-500">*</span>
                   </label>
@@ -578,7 +505,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                 <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
                   6. Expected Deliverables (Select all that apply)
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2.5">
                   {DELIVERABLE_OPTIONS.map((item) => {
                     const isSelected = deliverables.includes(item);
                     return (
@@ -586,7 +513,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                         key={item}
                         type="button"
                         onClick={() => toggleDeliverable(item)}
-                        className={`p-3 rounded-xl border text-left text-xs font-medium flex items-center gap-2.5 transition-all cursor-pointer ${
+                        className={`p-2.5 sm:p-3 rounded-xl border text-left text-xs font-medium flex items-center gap-2.5 transition-all cursor-pointer ${
                           isSelected
                             ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-zinc-900 dark:border-white shadow-xs font-semibold'
                             : 'bg-zinc-50/70 dark:bg-white/5 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/10'
@@ -599,7 +526,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                         }`}>
                           {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                         </div>
-                        <span className="truncate">{item}</span>
+                        <span className="text-xs break-words leading-tight">{item}</span>
                       </button>
                     );
                   })}
@@ -686,17 +613,17 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
               </div>
 
               {/* Submit CTA */}
-              <div className="pt-4 border-t border-zinc-100 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
+              <div className="pt-4 border-t border-zinc-100 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+                <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
                   🔒 100% Privacy Guaranteed. NDA &amp; Student Plagiarism-Free SLA.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={onClose}
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto justify-center px-5 py-3 rounded-xl border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-700 dark:text-zinc-300 font-bold text-xs transition-all cursor-pointer"
+                    className="w-full sm:w-auto justify-center px-5 py-2.5 sm:py-3 rounded-xl border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-700 dark:text-zinc-300 font-bold text-xs transition-all cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -704,7 +631,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto justify-center px-6 py-3 rounded-xl bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-md flex items-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto justify-center px-6 py-2.5 sm:py-3 rounded-xl bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-md flex items-center gap-2 cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
