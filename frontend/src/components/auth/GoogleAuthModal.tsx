@@ -63,9 +63,9 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-lg bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100"
+        className="relative w-full max-w-lg bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[90vh] animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}

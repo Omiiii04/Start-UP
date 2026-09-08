@@ -111,7 +111,7 @@ export const OperationsDashboard: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono">
           <span className="px-3.5 py-1.5 rounded-xl bg-white/90 border border-white/20 text-zinc-900 font-bold shadow-sm backdrop-blur-sm">
             Pipeline: {formatINR(inquiriesList.reduce((sum, i) => sum + i.budgetInr, 0))} ({inquiriesList.length} Active)
           </span>

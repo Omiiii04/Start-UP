@@ -132,20 +132,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleRequireAuth = (targetTab: NavTab, actionMessage: string, template?: ProjectItem) => {
-    if (!isAuthenticated) {
-      openAuthModal({
-        targetRole: 'user',
-        message: actionMessage,
-        onSuccessRedirectTab: targetTab
-      });
-    } else {
-      if (template && onSelectTemplate) {
-        onSelectTemplate(template);
-      }
-      onNavigate(targetTab);
-    }
-  };
 
   // Featured Project Blueprints — fetched from the backend (no hardcoded/dummy listings)
   const [featuredProjects, setFeaturedProjects] = useState<ProjectItem[]>([]);
@@ -524,7 +510,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </div>
 
                 <button
-                  onClick={() => handleRequireAuth('submit', `Please sign in with Google to order or customize "${project.title}".`, project)}
+                  onClick={() => {
+                    if (onSelectTemplate) onSelectTemplate(project);
+                    onNavigate('submit');
+                  }}
                   className="w-full sm:w-auto justify-center px-4 py-2 rounded-xl text-white dark:text-zinc-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm hover:opacity-95 active:scale-95 cursor-pointer bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100"
                 >
                   <span>Order Scope</span>

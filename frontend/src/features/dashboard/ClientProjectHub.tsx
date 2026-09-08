@@ -943,7 +943,7 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
         {/* VIEW 2: MY REQUESTS TAB */}
         {activeSubTab === 'requests' && (
           <div className="space-y-6 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h1 className="font-headline text-2xl font-bold text-zinc-900 dark:text-white">My Requirement Requests</h1>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Track architecture review, technical scoping, and development status.</p>
@@ -1024,7 +1024,7 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
         {/* VIEW 3: MY PURCHASES TAB */}
         {activeSubTab === 'purchases' && (
           <div className="space-y-6 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h1 className="font-headline text-2xl font-bold text-zinc-900 dark:text-white">Purchased Templates &amp; Deliverables</h1>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Download production repositories, Figma design tokens, and UGC documentation.</p>
