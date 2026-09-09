@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-black/5 dark:border-white/10 backdrop-blur-xl transition-all duration-300 shadow-sm bg-white/92 dark:bg-zinc-950/40 dark:backdrop-blur-2xl">
-        <div className="w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Logo & Name */}
           <div className="flex items-center shrink-0">
             <button 

@@ -57,9 +57,9 @@ export const BestSellingProjects: React.FC<BestSellingProjectsProps> = ({
           </div>
 
           {/* Verification Protocol Notice */}
-          <div className="p-4 rounded-xl bg-slate-50/80 dark:bg-zinc-900/40 border border-slate-200/60 dark:border-white/10 max-w-lg mx-auto text-center sm:text-left flex flex-col sm:flex-row items-center sm:items-start gap-3">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-            <div className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
+          <div className="p-4 rounded-xl bg-slate-50/80 dark:bg-zinc-900/40 border border-slate-200/60 dark:border-white/10 max-w-lg mx-auto text-center flex flex-col items-center justify-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <div className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed text-center">
               <span className="font-bold text-slate-900 dark:text-white block mb-0.5">Automated Bestseller Verification</span>
               All bestseller rankings are dynamically generated based on verified milestone completions, code quality reviews, and student feedback.
             </div>

@@ -151,126 +151,117 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   }, []);
 
   return (
-    <div className="w-full bg-transparent flex flex-col space-y-12 sm:space-y-16 pb-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+    <>
+      <div className="w-full bg-transparent flex flex-col space-y-12 sm:space-y-16 pb-0 sm:pb-2 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
       
       {/* ── 1. HERO SECTION ── */}
-      <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 p-6 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+      <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 p-6 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all text-center">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center space-y-6">
           
-          {/* Left Column: Hero Copy & CTA */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 border border-slate-200/80 dark:border-white/15 text-slate-800 dark:text-zinc-200 text-xs font-mono font-semibold backdrop-blur-sm shadow-2xs mx-auto lg:mx-0">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-              <span>Enterprise Delivery Standards • 100% Quality Guaranteed</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/10 border border-slate-200/80 dark:border-white/15 text-slate-800 dark:text-zinc-200 text-xs font-mono font-semibold backdrop-blur-sm shadow-2xs mx-auto">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+            <span>Enterprise Delivery Standards • 100% Quality Guaranteed</span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="font-headline font-black text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.15] tracking-tight text-center max-w-3xl mx-auto">
+            Turn your ideas into reality
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed max-w-2xl mx-auto text-center">
+            Explore 200+ ready-to-submit college projects across Computer Science, Data Science, MBA, BCA, and more. Save time, eliminate submission stress, and focus on what matters — your grades.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2 w-full max-w-xl mx-auto">
+            <button
+              onClick={() => onNavigate('browse')}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 transition-all hover:scale-[1.02] active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Compass className="w-4 h-4" />
+              <span>Browse Projects</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={handleOpenWhatsApp}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span>Chat on WhatsApp</span>
+            </button>
+
+            <button
+              onClick={() => setIsProjectDetailsModalOpen(true)}
+              className="w-full sm:w-auto px-5 py-3.5 rounded-xl font-bold text-sm text-slate-700 dark:text-white bg-white/60 hover:bg-white/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/70 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+            >
+              <Plus className="w-4 h-4 text-slate-600 dark:text-zinc-300" />
+              <span>Enter Project Details</span>
+            </button>
+          </div>
+
+          {/* 4-Stat Metric Row */}
+          <div className="pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full max-w-2xl mx-auto text-center">
+            <div className="flex flex-col items-center">
+              <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">200+</p>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Ready-Made Projects</p>
             </div>
-
-            {/* Main Headline */}
-            <h1 className="font-headline font-black text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.15] tracking-tight text-center lg:text-left">
-              Turn your ideas into reality
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
-              Explore 200+ ready-to-submit college projects across Computer Science, Data Science, MBA, BCA, and more. Save time, eliminate submission stress, and focus on what matters — your grades.
-            </p>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2 w-full">
-              <button
-                onClick={() => onNavigate('browse')}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 transition-all hover:scale-[1.02] active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Compass className="w-4 h-4" />
-                <span>Browse Projects</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={handleOpenWhatsApp}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span>Chat on WhatsApp</span>
-              </button>
-
-              <button
-                onClick={() => setIsProjectDetailsModalOpen(true)}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-xl font-bold text-sm text-slate-700 dark:text-white bg-white/60 hover:bg-white/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/70 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-              >
-                <Plus className="w-4 h-4 text-slate-600 dark:text-zinc-300" />
-                <span>Enter Project Details</span>
-              </button>
+            <div className="flex flex-col items-center">
+              <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">1,000+</p>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Happy Students</p>
             </div>
-
-            {/* 4-Stat Metric Row */}
-            <div className="pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full text-center">
-              <div className="flex flex-col items-center">
-                <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">200+</p>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Ready-Made Projects</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">1,000+</p>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Happy Students</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">100%</p>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Quality Verified</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">24/7</p>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Expert Support</p>
-              </div>
+            <div className="flex flex-col items-center">
+              <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">100%</p>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Quality Verified</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <p className="text-xl sm:text-2xl font-black font-headline text-slate-900 dark:text-white">24/7</p>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Expert Support</p>
             </div>
           </div>
 
-          {/* Right Column: Best Selling Projects Hub Showcase (Blank Routing — Zero Dummy Data) */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl bg-white/40 dark:bg-zinc-950/30 backdrop-blur-xl border border-white/60 dark:border-white/10 p-4 sm:p-6 overflow-hidden shadow-inner">
-              {/* Clean Best Selling Card */}
-              <div className="bg-white/75 dark:bg-zinc-950/35 backdrop-blur-xl rounded-xl p-5 border border-slate-200/80 dark:border-white/10 shadow-lg space-y-4 text-center sm:text-left flex flex-col items-center sm:items-start">
-                <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-2">
-                  <span className="bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-slate-200/80 dark:border-white/15">
-                    BEST SELLER • TOP RANKED
-                  </span>
-                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span className="text-[11px] font-mono font-semibold">Verified Blueprints</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 w-full">
-                  <h3 className="font-headline font-bold text-base text-slate-900 dark:text-white">
-                    Best Selling Projects
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">
-                    Explore curated top-tier student and engineering projects with complete source code, synopsis, IEEE reports, and viva presentations.
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-200/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-center sm:justify-between text-xs gap-3 w-full">
-                  <div>
-                    <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-400 block">Status</span>
-                    <span className="font-bold text-slate-900 dark:text-white font-headline text-xs sm:text-sm">Bestseller Hub</span>
-                  </div>
-                  <button
-                    onClick={() => onNavigate('bestseller')}
-                    className="w-full sm:w-auto justify-center px-3.5 py-1.5 rounded-lg text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-200 font-bold text-xs transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
-                  >
-                    <span>View Projects</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+          {/* Best Selling Projects Hub Showcase (Centrally Aligned Card) */}
+          <div className="w-full max-w-xl mx-auto pt-2">
+            <div className="rounded-2xl bg-white/50 dark:bg-zinc-950/30 backdrop-blur-xl border border-white/60 dark:border-white/10 p-5 sm:p-6 overflow-hidden shadow-sm text-center flex flex-col items-center space-y-4">
+              <div className="flex flex-wrap justify-center items-center gap-2">
+                <span className="bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-slate-200/80 dark:border-white/15">
+                  BEST SELLER • TOP RANKED
+                </span>
+                <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span className="text-[11px] font-mono font-semibold">Verified Blueprints</span>
                 </div>
               </div>
 
+              <div className="space-y-1 max-w-md mx-auto">
+                <h3 className="font-headline font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                  Best Selling Projects
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">
+                  Explore curated top-tier student and engineering projects with complete source code, synopsis, IEEE reports, and viva presentations.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full">
+                <button
+                  onClick={() => onNavigate('bestseller')}
+                  className="w-full sm:w-auto justify-center px-5 py-2 rounded-xl text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-200 font-bold text-xs transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                >
+                  <span>View Best Selling Projects</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
               {/* Fast Delivery Badge */}
-              <div className="mt-4 p-3 bg-white/75 dark:bg-zinc-950/40 backdrop-blur-xl rounded-xl border border-slate-200/80 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center text-center sm:text-left gap-3">
-                <div className="w-8 h-8 rounded-full bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <div className="p-3 bg-white/70 dark:bg-zinc-950/40 backdrop-blur-xl rounded-xl border border-slate-200/80 dark:border-white/10 shadow-2xs flex items-center justify-center text-center gap-2.5 max-w-md mx-auto">
+                <div className="w-7 h-7 rounded-full bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">Instant Delivery Guaranteed</p>
-                  <p className="text-[10px] text-slate-600 dark:text-zinc-300">Full source code, synopsis, IEEE report &amp; viva presentation</p>
-                </div>
+                <p className="text-[11px] text-slate-700 dark:text-zinc-300">
+                  <span className="font-bold text-slate-900 dark:text-white mr-1">Instant Delivery:</span>
+                  Full code, synopsis, IEEE report &amp; viva notes
+                </p>
               </div>
             </div>
           </div>
@@ -279,7 +270,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ── 2. TRUST BANNER ── */}
-      <div className="bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-xl rounded-2xl py-4 px-6 border border-white/60 dark:border-white/10 shadow-md transition-all">
+      <div className="bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-xl rounded-2xl py-4 px-6 border border-white/60 dark:border-white/10 shadow-md transition-all max-w-4xl mx-auto w-full">
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white text-center">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
@@ -309,27 +300,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </div>
 
       {/* ── 3. CATEGORY CATALOG ── */}
-      <section id="categories-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-6 text-center sm:text-left transition-all">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-center sm:text-left items-center sm:items-start">
-          <div>
-            <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
-              EXPLORE CATEGORIES
-            </p>
-            <h2 className="font-headline font-black text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">
-              Find Projects by Category
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 mt-1 max-w-xl mx-auto sm:mx-0">
-              Browse our curated collection across every academic and engineering discipline
-            </p>
+      <section id="categories-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+        <div className="max-w-2xl mx-auto text-center space-y-2">
+          <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
+            EXPLORE CATEGORIES
+          </p>
+          <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
+            Find Projects by Category
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
+            Browse our curated collection across every academic and engineering discipline
+          </p>
+          <div className="pt-1">
+            <button
+              onClick={() => onNavigate('browse')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white hover:underline cursor-pointer"
+            >
+              <span>View All Categories</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
-
-          <button
-            onClick={() => onNavigate('browse')}
-            className="text-xs font-bold text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white hover:underline flex items-center gap-1.5 self-center sm:self-auto cursor-pointer"
-          >
-            <span>View All Categories</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -387,15 +377,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   onNavigate('browse');
                 }
               }}
-              className={`rounded-2xl p-6 border transition-all cursor-pointer flex flex-col justify-between text-center sm:text-left group backdrop-blur-md items-center sm:items-start ${
+              className={`rounded-2xl p-6 border transition-all cursor-pointer flex flex-col justify-between items-center text-center group backdrop-blur-md ${
                 c.isHighlight 
                   ? 'bg-zinc-900/85 hover:bg-zinc-900 dark:bg-zinc-800/80 dark:hover:bg-zinc-800 border-zinc-700/50 text-white shadow-md hover:shadow-lg' 
                   : 'bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-md'
               }`}
             >
-              <div className="w-full">
-                <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors mx-auto sm:mx-0 ${
+              <div className="w-full flex flex-col items-center text-center">
+                <div className="flex flex-col items-center justify-center mb-4 gap-2">
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors mx-auto ${
                     c.isHighlight 
                       ? 'bg-white/15 text-white' 
                       : 'bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-white group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-950'
@@ -411,21 +401,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </span>
                 </div>
 
-                <h3 className={`font-headline font-bold text-lg mb-1.5 transition-colors ${
+                <h3 className={`font-headline font-bold text-lg mb-1.5 transition-colors text-center ${
                   c.isHighlight 
                     ? 'text-white' 
                     : 'text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300'
                 }`}>
                   {c.title}
                 </h3>
-                <p className={`text-xs leading-relaxed mb-4 ${
+                <p className={`text-xs leading-relaxed mb-4 text-center max-w-xs ${
                   c.isHighlight ? 'text-zinc-300' : 'text-slate-600 dark:text-zinc-300'
                 }`}>
                   {c.desc}
                 </p>
               </div>
 
-              <div className={`pt-3 border-t flex items-center justify-center sm:justify-between text-xs font-bold w-full ${
+              <div className={`pt-3 border-t flex items-center justify-center text-xs font-bold w-full gap-1.5 ${
                 c.isHighlight 
                   ? 'border-white/10 text-zinc-300 group-hover:text-white' 
                   : 'border-slate-200/60 dark:border-white/10 text-slate-900 dark:text-zinc-200 group-hover:underline'
@@ -439,36 +429,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ── 4. FEATURED PROJECTS SHOWCASE ── */}
-      <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-6 text-center sm:text-left transition-all">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-center sm:text-left items-center sm:items-start">
-          <div>
-            <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
-              POPULAR BLUEPRINTS
-            </p>
-            <h2 className="font-headline font-black text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">
-              Featured Project Blueprints
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 mt-1 max-w-xl mx-auto sm:mx-0">
-              Pre-built, production-tested architectures with full source code and academic reports
-            </p>
+      <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+        <div className="max-w-2xl mx-auto text-center space-y-2">
+          <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
+            POPULAR BLUEPRINTS
+          </p>
+          <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
+            Featured Project Blueprints
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
+            Pre-built, production-tested architectures with full source code and academic reports
+          </p>
+          <div className="pt-1">
+            <button
+              onClick={() => onNavigate('browse')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white hover:underline cursor-pointer"
+            >
+              <span>View all 200+ Blueprints</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
-
-          <button
-            onClick={() => onNavigate('browse')}
-            className="text-xs font-bold text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white flex items-center gap-1.5 cursor-pointer self-center sm:self-auto"
-          >
-            <span>View all 200+ Blueprints</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
             <div 
               key={project.id}
-              className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between transition-all group text-center sm:text-left items-center sm:items-start"
+              className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center text-center transition-all group"
             >
-              <div className="w-full">
+              <div className="w-full flex flex-col items-center">
                 <div className="flex justify-between items-center mb-3 w-full">
                   <span className="bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-slate-200/80 dark:border-white/15">
                     {project.tier} • {project.subsection || 'ENGINEERING'}
@@ -486,15 +475,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </button>
                 </div>
 
-                <h3 className="font-headline text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
+                <h3 className="font-headline text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors text-center">
                   {project.title}
                 </h3>
 
-                <p className="text-xs text-slate-600 dark:text-zinc-300 mb-4 leading-relaxed line-clamp-3">
+                <p className="text-xs text-slate-600 dark:text-zinc-300 mb-4 leading-relaxed line-clamp-3 text-center">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-6 justify-center sm:justify-start w-full">
+                <div className="flex flex-wrap gap-1.5 mb-6 justify-center w-full">
                   {project.tags.slice(0, 3).map(tag => (
                     <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100/90 dark:bg-white/10 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-white/10">
                       {tag}
@@ -503,8 +492,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-200/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-center sm:justify-between text-xs gap-3 w-full text-center sm:text-left">
-                <div>
+              <div className="pt-4 border-t border-slate-200/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs gap-3 w-full text-center sm:text-left">
+                <div className="text-center sm:text-left">
                   <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-400 block">Est. Budget</span>
                   <span className="font-bold text-slate-900 dark:text-white font-headline text-sm">₹{project.budget.toLocaleString('en-IN')}</span>
                 </div>
@@ -526,24 +515,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ── 5. GET OUR INSTANT SERVICES ── */}
-      <section id="services-tiers-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-6 text-center sm:text-left transition-all">
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+      <section id="services-tiers-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+        <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
             TRANSPARENT PRICING
           </p>
-          <h2 className="font-headline font-black text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">
+          <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
             Get our Instant Services
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 mt-1 max-w-xl mx-auto sm:mx-0">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
             Instant turnaround academic deliverables starting at just ₹100. Standardized pricing governed by verified SLA delivery guarantees.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Tier 1: Instant PPT */}
-          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center sm:items-start text-center sm:text-left transition-all">
-            <div className="w-full flex flex-col items-center sm:items-start">
-              <div className="w-10 h-10 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-4 mx-auto sm:mx-0">
+          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center text-center transition-all">
+            <div className="w-full flex flex-col items-center">
+              <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Zap className="w-5 h-5 text-amber-500 dark:text-amber-300" />
               </div>
               <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 1</span>
@@ -551,7 +540,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹200</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 4–12 Hours</p>
 
-              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto sm:mx-0">
+              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto">
                 <li className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>12–15 structured presentation slides</span>
@@ -576,12 +565,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Tier 2: Instant Mini Project (Most Popular) */}
-          <div className="rounded-2xl p-6 border-2 border-cyan-500/70 dark:border-cyan-400/60 bg-white/70 dark:bg-cyan-950/20 backdrop-blur-xl shadow-lg shadow-cyan-900/10 dark:shadow-cyan-950/30 relative flex flex-col justify-between items-center sm:items-start text-center sm:text-left hover:shadow-xl transition-all">
+          <div className="rounded-2xl p-6 border-2 border-cyan-500/70 dark:border-cyan-400/60 bg-white/70 dark:bg-cyan-950/20 backdrop-blur-xl shadow-lg shadow-cyan-900/10 dark:shadow-cyan-950/30 relative flex flex-col justify-between items-center text-center hover:shadow-xl transition-all">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-white dark:text-zinc-950 text-[10px] font-bold font-mono tracking-wider uppercase bg-cyan-600 dark:bg-cyan-400 shadow-sm">
               Most Popular
             </div>
-            <div className="w-full flex flex-col items-center sm:items-start">
-              <div className="w-10 h-10 rounded-xl text-white dark:text-zinc-950 flex items-center justify-center mb-4 shadow-sm bg-cyan-600 dark:bg-cyan-400 mx-auto sm:mx-0">
+            <div className="w-full flex flex-col items-center">
+              <div className="w-11 h-11 rounded-xl text-white dark:text-zinc-950 flex items-center justify-center mb-3 shadow-sm bg-cyan-600 dark:bg-cyan-400 mx-auto">
                 <Cpu className="w-5 h-5" />
               </div>
               <span className="text-[11px] font-mono font-bold text-cyan-700 dark:text-cyan-300 uppercase">Tier 2</span>
@@ -589,7 +578,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹1,000</p>
               <p className="text-xs text-slate-500 dark:text-zinc-300 mt-1">Delivery: 24–48 Hours</p>
 
-              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-200 text-left w-full max-w-xs mx-auto sm:mx-0">
+              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-200 text-left w-full max-w-xs mx-auto">
                 <li className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                   <span>Working source code &amp; DB scripts</span>
@@ -614,9 +603,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Tier 3: Instant Report */}
-          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center sm:items-start text-center sm:text-left transition-all">
-            <div className="w-full flex flex-col items-center sm:items-start">
-              <div className="w-10 h-10 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-4 mx-auto sm:mx-0">
+          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center text-center transition-all">
+            <div className="w-full flex flex-col items-center">
+              <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Code className="w-5 h-5 text-cyan-600 dark:text-cyan-300" />
               </div>
               <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 3</span>
@@ -624,7 +613,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹100</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 2–6 Hours</p>
 
-              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto sm:mx-0">
+              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto">
                 <li className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>IEEE / university format document</span>
@@ -649,9 +638,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Tier 4: Instant Poster */}
-          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center sm:items-start text-center sm:text-left transition-all">
-            <div className="w-full flex flex-col items-center sm:items-start">
-              <div className="w-10 h-10 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-4 mx-auto sm:mx-0">
+          <div className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center text-center transition-all">
+            <div className="w-full flex flex-col items-center">
+              <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
               </div>
               <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 4</span>
@@ -659,7 +648,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹400</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 6–12 Hours</p>
 
-              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto sm:mx-0">
+              <ul className="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 text-left w-full max-w-xs mx-auto">
                 <li className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>High-res print-ready flex / PDF poster</span>
@@ -686,30 +675,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ── 6. 15-STEP PROTOCOL & GOVERNANCE ── */}
-      <section id="protocol-section" className="bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-2xl rounded-[24px] p-6 sm:p-12 space-y-8 border border-white/60 dark:border-white/10 shadow-xl text-center md:text-left transition-all">
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 text-center md:text-left">
-          <div className="max-w-2xl flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase">
-                Verified Engineering Delivery Standard
-              </span>
-            </div>
-            <h2 className="font-headline text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
-              The 15-Step Verified Delivery Protocol
-            </h2>
-            <p className="text-xs text-slate-600 dark:text-zinc-300 mt-2 leading-relaxed max-w-xl mx-auto md:mx-0">
-              Every Project Wallah engagement is strictly governed by our five milestone gates, 48-point automated QA check, and live staging demo preview before handover.
-            </p>
+      <section id="protocol-section" className="bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-2xl rounded-[24px] p-6 sm:p-12 space-y-8 border border-white/60 dark:border-white/10 shadow-xl text-center transition-all">
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center space-y-3">
+          <div className="flex items-center justify-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase">
+              Verified Engineering Delivery Standard
+            </span>
           </div>
-
-          <button
-            onClick={onOpenSupport}
-            className="w-full sm:w-auto px-5 py-3 rounded-xl text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-2 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all shrink-0 cursor-pointer shadow-xs self-center md:self-auto"
-          >
-            <MessageSquare className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-            <span>Consult Lead Engineer</span>
-          </button>
+          <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
+            The 15-Step Verified Delivery Protocol
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed max-w-xl mx-auto">
+            Every Project Wallah engagement is strictly governed by our five milestone gates, 48-point automated QA check, and live staging demo preview before handover.
+          </p>
+          <div className="pt-2">
+            <button
+              onClick={onOpenSupport}
+              className="px-6 py-3 rounded-xl text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-2 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all cursor-pointer shadow-xs mx-auto"
+            >
+              <MessageSquare className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+              <span>Consult Lead Engineer</span>
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
@@ -720,42 +708,41 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             { phase: 'Phase IV', title: 'Demo & Payment', desc: 'Staging demo walkthrough & 30% milestone clearance.' },
             { phase: 'Phase V', title: 'IP Handover', desc: 'Git repository transfer, final 30% clearance & 30-day bug support.' }
           ].map((item, i) => (
-            <div key={i} className="p-4 rounded-xl border border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm space-y-1.5 shadow-xs text-center sm:text-left flex flex-col items-center sm:items-start">
+            <div key={i} className="p-4 rounded-xl border border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm space-y-1.5 shadow-xs text-center flex flex-col items-center justify-center">
               <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">{item.phase}</span>
               <h4 className="text-xs font-bold text-slate-900 dark:text-white">{item.title}</h4>
-              <p className="text-[11px] text-slate-600 dark:text-zinc-300">{item.desc}</p>
+              <p className="text-[11px] text-slate-600 dark:text-zinc-300 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── 7. CUSTOMER REVIEWS (BLANK ROUTING & CONTAINER — NO DUMMY CODE) ── */}
-      <section id="reviews-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-6 text-center sm:text-left transition-all">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-center sm:text-left items-center sm:items-start">
-          <div className="flex flex-col items-center sm:items-start">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[11px] font-mono font-semibold border border-slate-200/80 dark:border-white/10 mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-              <span>VERIFIED REVIEWS PROTOCOL</span>
-            </div>
-            <h2 className="font-headline font-black text-2xl sm:text-3xl text-slate-900 dark:text-white">
-              Customer Reviews
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 mt-1 max-w-xl mx-auto sm:mx-0">
-              Authentic student and client reviews published after verified milestone completion.
-            </p>
+      {/* ── 7. CUSTOMER REVIEWS ── */}
+      <section id="reviews-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+        <div className="max-w-2xl mx-auto text-center space-y-2 flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[11px] font-mono font-semibold border border-slate-200/80 dark:border-white/10 mb-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+            <span>VERIFIED REVIEWS PROTOCOL</span>
           </div>
-
-          <button
-            onClick={() => onNavigate('reviews')}
-            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0 shadow-xs self-center sm:self-auto"
-          >
-            <span>View All Reviews</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
+            Customer Reviews
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
+            Authentic student and client reviews published after verified milestone completion.
+          </p>
+          <div className="pt-2">
+            <button
+              onClick={() => onNavigate('reviews')}
+              className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs mx-auto"
+            >
+              <span>View All Reviews</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
-        {/* Blank Reviews State Card — Zero Dummy Code */}
-        <div className="rounded-2xl p-6 sm:p-12 border border-dashed border-slate-300/80 dark:border-white/15 bg-white/30 dark:bg-zinc-900/20 text-center space-y-4">
+        {/* Blank Reviews State Card */}
+        <div className="rounded-2xl p-6 sm:p-12 border border-dashed border-slate-300/80 dark:border-white/15 bg-white/30 dark:bg-zinc-900/20 text-center space-y-4 max-w-xl mx-auto">
           <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-zinc-400 flex items-center justify-center mx-auto">
             <MessageSquare className="w-6 h-6" />
           </div>
@@ -769,7 +756,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
           <button
             onClick={() => onNavigate('reviews')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 transition-all cursor-pointer shadow-xs"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 transition-all cursor-pointer shadow-xs"
           >
             Open Reviews Hub
           </button>
@@ -808,6 +795,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </button>
         </div>
       </section>
+    </div>
 
       {/* Instant Service Project Details Modal */}
       <InstantServiceModal
@@ -823,6 +811,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         onClose={() => setIsProjectDetailsModalOpen(false)}
         onNavigate={onNavigate}
       />
-    </div>
+    </>
   );
 };

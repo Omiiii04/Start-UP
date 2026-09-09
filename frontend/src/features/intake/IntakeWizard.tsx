@@ -44,6 +44,30 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
   const [ugcConfirmed, setUgcConfirmed] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Sync wizard steps with browser history
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (e.state && typeof e.state.formStep === 'number') {
+        setFormStep(e.state.formStep as 1 | 2 | 3);
+      } else {
+        setFormStep(1);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const goToStep = (nextStep: 1 | 2 | 3) => {
+    if (nextStep > formStep) {
+      window.history.pushState({ ...window.history.state, formStep: nextStep }, '', window.location.href);
+    } else if (window.history.state?.formStep) {
+      window.history.back();
+      return;
+    }
+    setFormStep(nextStep);
+  };
+
   useEffect(() => {
     if (selectedTemplate) {
       setProjectTitle(selectedTemplate.title);
@@ -215,17 +239,17 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
         /* Multi-Step Submit Requirement Form */
         <div className="space-y-8">
           {/* Header Section */}
-          <div className="text-center mb-6 sm:mb-8">
-            <h1 className="font-headline text-2xl sm:text-4xl font-bold text-white drop-shadow-md mb-2">
+          <div className="text-center mb-6 sm:mb-8 space-y-2 max-w-xl mx-auto">
+            <h1 className="font-headline text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white">
               Submit New Requirement
             </h1>
-            <p className="text-xs sm:text-sm text-zinc-300 font-medium max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-medium">
               Provide the details below to help our architecture team scope, benchmark, and match you with the right engineering squad.
             </p>
           </div>
 
           {/* Multi-step Form Container */}
-          <div className="bg-white dark:bg-zinc-950/35 dark:backdrop-blur-2xl rounded-2xl sm:rounded-[24px] shadow-sm border border-zinc-200 dark:border-white/10 overflow-hidden hover-lift transition-all">
+          <div className="bg-white dark:bg-zinc-950/35 dark:backdrop-blur-2xl rounded-2xl sm:rounded-[24px] shadow-sm border border-zinc-200 dark:border-white/10 overflow-hidden hover-lift transition-all max-w-3xl mx-auto">
             {/* Progress Bar Header */}
             <div className="p-4 sm:p-8 pb-4 sm:pb-5 bg-white dark:bg-white/5 border-b border-zinc-200 dark:border-white/10">
               <div className="flex flex-wrap justify-between items-center gap-2 mb-2.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400">
@@ -252,7 +276,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
               </div>
 
               {/* Visual Step Indicators */}
-              <div className="flex justify-between mt-4 sm:mt-6 relative max-w-md mx-auto">
+              <div className="flex justify-between items-center mt-4 sm:mt-6 relative max-w-xs sm:max-w-sm mx-auto">
                 <div className="absolute top-1/2 left-0 w-full h-0.5 bg-zinc-200 dark:bg-zinc-700 -z-10 -translate-y-1/2"></div>
                 
                 {/* Step 1 Pill */}
@@ -541,7 +565,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                 {formStep > 1 ? (
                   <button
                     type="button"
-                    onClick={() => setFormStep((prev) => (prev - 1) as any)}
+                    onClick={() => goToStep((formStep - 1) as 1 | 2 | 3)}
                     className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-zinc-700 dark:text-zinc-200 bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 border border-zinc-200 dark:border-white/10 flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
@@ -565,7 +589,7 @@ export const IntakeWizard: React.FC<IntakeWizardProps> = ({
                         showToast('Please enter a requirement title', 'error');
                         return;
                       }
-                      setFormStep((prev) => (prev + 1) as any);
+                      goToStep((formStep + 1) as 1 | 2 | 3);
                     }}
                     className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-xs text-white dark:text-zinc-900 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white shadow-sm flex items-center justify-center gap-2 transition-transform active:scale-95 sm:ml-auto cursor-pointer"
                   >

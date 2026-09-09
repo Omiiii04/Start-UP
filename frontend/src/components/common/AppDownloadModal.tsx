@@ -1,6 +1,8 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Smartphone, Star, ShieldCheck, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { useHistoryModal } from '../../utils/useHistoryModal';
 
 interface AppDownloadModalProps {
   isOpen: boolean;
@@ -13,20 +15,26 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
   onClose,
   playStoreUrl = 'https://play.google.com/store/apps'
 }) => {
+  const handleClose = useHistoryModal(
+    isOpen,
+    onClose,
+    'app-download-modal'
+  );
+
   const handleOpenPlayStore = () => {
     window.open(playStoreUrl, '_blank', 'noopener,noreferrer');
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={handleClose}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
@@ -40,8 +48,8 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
           >
             {/* Close Button */}
             <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-full transition-colors"
+              onClick={handleClose}
+              className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 rounded-full transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -117,6 +125,7 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };

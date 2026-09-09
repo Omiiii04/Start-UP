@@ -182,8 +182,8 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
       {/* Main Content Area - Full Width */}
       <main className="flex-1 p-4 sm:p-6 md:p-10 max-w-[1440px] mx-auto w-full space-y-8 sm:space-y-12">
         
-        {/* Sub-Navigation Pills */}
-        <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl p-1.5 sm:p-2 rounded-2xl border border-white/40 dark:border-white/10 shadow-sm flex items-center justify-start md:justify-center gap-2 overflow-x-auto scrollbar-none">
+        {/* Sub-Navigation Pills (Centrally Aligned) */}
+        <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl p-1.5 sm:p-2 rounded-2xl border border-white/40 dark:border-white/10 shadow-sm flex items-center justify-center gap-2 flex-wrap max-w-4xl mx-auto">
           <button
             onClick={() => setActiveSubTab('dashboard')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition-all ${
@@ -257,10 +257,10 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
           <div className="space-y-8 sm:space-y-12 animate-fade-in-up">
 
             {/* 1. Sub-header greeting & quick actions card */}
-            <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-6 text-center sm:text-left">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 dark:border-white/10 pb-6 animate-fade-in-up delay-150 text-center sm:text-left items-center sm:items-start">
-                <div className="space-y-1 flex flex-col items-center sm:items-start">
-                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-6 text-center">
+              <div className="flex flex-col items-center justify-center gap-4 border-b border-gray-200 dark:border-white/10 pb-6 animate-fade-in-up delay-150 text-center">
+                <div className="space-y-1.5 flex flex-col items-center text-center max-w-2xl mx-auto">
+                  <div className="flex flex-wrap items-center justify-center gap-2">
                     <h2 className="font-headline text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">
                       Welcome back, {user?.fullName || 'Client'}.
                     </h2>
@@ -269,22 +269,22 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                       {user?.institutionOrCompany ? user.institutionOrCompany : 'Active Client'}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 max-w-xl mx-auto sm:mx-0">
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 max-w-xl mx-auto text-center">
                     Your Project Wallah Command Center. Track active engineering sprints, inspect milestones, release escrow, and download deliverables.
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 w-full pt-1">
                   <button
                     onClick={() => onNavigate && onNavigate('submit')}
-                    className="w-full sm:w-auto justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-white font-bold text-xs flex items-center gap-2 transition-all hover-lift active:scale-95 bg-zinc-900 hover:bg-black dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200 shadow-sm cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 transition-all hover-lift active:scale-95 bg-zinc-900 hover:bg-black dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200 shadow-sm cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Submit Requirement</span>
                   </button>
                   <button
                     onClick={() => onNavigate && onNavigate('browse')}
-                    className="w-full sm:w-auto justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-900/40 border border-gray-200 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-zinc-800/60 text-gray-700 dark:text-zinc-300 font-bold text-xs flex items-center gap-2 transition-all hover-lift active:scale-95 cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-900/40 border border-gray-200 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-zinc-800/60 text-gray-700 dark:text-zinc-300 font-bold text-xs flex items-center justify-center gap-2 transition-all hover-lift active:scale-95 cursor-pointer"
                   >
                     <Compass className="w-4 h-4" />
                     <span>Browse Projects</span>
@@ -294,9 +294,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
 
               {/* Quick KPI Stats Row */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left justify-center sm:justify-start gap-3 hover-lift transition-all animate-fade-in-up delay-50">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-200 shrink-0 mx-auto sm:mx-0">
-                    <FileCode2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col items-center justify-center text-center gap-2 hover-lift transition-all animate-fade-in-up delay-50">
+                  <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-200 shrink-0 mx-auto">
+                    <FileCode2 className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold font-headline text-gray-900 dark:text-white">3</p>
@@ -304,9 +304,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left justify-center sm:justify-start gap-3 hover-lift transition-all animate-fade-in-up delay-100">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 flex items-center justify-center text-amber-500 shrink-0 mx-auto sm:mx-0">
-                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+                <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col items-center justify-center text-center gap-2 hover-lift transition-all animate-fade-in-up delay-100">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 flex items-center justify-center text-amber-500 shrink-0 mx-auto">
+                    <Clock className="w-5 h-5 animate-pulse" />
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold font-headline text-amber-500">1 Due</p>
@@ -314,9 +314,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left justify-center sm:justify-start gap-3 hover-lift transition-all animate-fade-in-up delay-150">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center text-emerald-600 shrink-0 mx-auto sm:mx-0">
-                    <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col items-center justify-center text-center gap-2 hover-lift transition-all animate-fade-in-up delay-150">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center text-emerald-600 shrink-0 mx-auto">
+                    <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold font-headline text-emerald-600 dark:text-emerald-400">100%</p>
@@ -324,9 +324,9 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left justify-center sm:justify-start gap-3 hover-lift transition-all animate-fade-in-up delay-200">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-200 shrink-0 mx-auto sm:mx-0">
-                    <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/40 dark:backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm flex flex-col items-center justify-center text-center gap-2 hover-lift transition-all animate-fade-in-up delay-200">
+                  <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-200 shrink-0 mx-auto">
+                    <CreditCard className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold font-headline text-gray-900 dark:text-white">Escrow</p>

@@ -24,6 +24,7 @@ import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
 import { getProjects } from '../../api/client';
 import { ProjectDetailsModal } from '../../components/common/ProjectDetailsModal';
+import { useHistoryModal } from '../../utils/useHistoryModal';
 
 interface BrowseProjectsProps {
   onNavigate: (tab: NavTab) => void;
@@ -124,6 +125,12 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
   const [maxBudget, setMaxBudget] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [isProjectDetailsOpen, setIsProjectDetailsOpen] = useState(false);
+
+  const handleCloseProjectModal = useHistoryModal(
+    !!selectedProject,
+    () => setSelectedProject(null),
+    'browse-project-quickview'
+  );
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['engineering']);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
@@ -535,7 +542,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
               {/* Active Filter Chips */}
               {(selectedCategories.length > 0 || selectedSubsections.length > 0 || selectedTechs.length > 0 || minBudget || maxBudget) && (
-                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap pt-1 text-center sm:text-left">
+                <div className="flex items-center justify-center gap-2 flex-wrap pt-1 text-center max-w-3xl mx-auto">
                   <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mr-1">Active:</span>
                   
                   {selectedCategories.map(cat => (
@@ -673,9 +680,9 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                     </div>
 
                     {/* Card Content */}
-                    <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between text-center sm:text-left">
-                      <div>
-                        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start mb-2 gap-2 text-center sm:text-left">
+                    <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between items-center text-center">
+                      <div className="w-full flex flex-col items-center">
+                        <div className="flex flex-col sm:flex-row justify-between items-center w-full mb-2 gap-2 text-center">
                           <div className="flex flex-col items-center sm:items-start">
                             <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">
                               {project.category}
@@ -692,16 +699,16 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                           </span>
                         </div>
 
-                        <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 line-clamp-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors font-headline text-center sm:text-left">
+                        <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 line-clamp-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors font-headline text-center">
                           {project.title}
                         </h3>
 
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed text-center sm:text-left">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed text-center">
                           {project.description}
                         </p>
 
                         {/* Tech stack tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-6 justify-center sm:justify-start">
+                        <div className="flex flex-wrap gap-1.5 mb-6 justify-center">
                           {project.tags.map(tag => (
                             <span
                               key={tag}
@@ -732,14 +739,17 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
 
       {/* Project Details Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fade-in">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fade-in"
+          onClick={handleCloseProjectModal}
+        >
           <div 
             className="bg-white dark:bg-zinc-950/80 dark:backdrop-blur-2xl rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-white/15 p-5 sm:p-8 relative text-zinc-900 dark:text-zinc-100 animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
-              onClick={() => setSelectedProject(null)}
+              onClick={handleCloseProjectModal}
               className="absolute top-4 sm:top-6 right-4 sm:right-6 p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all active:scale-90 cursor-pointer"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -840,7 +850,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
                 <span>Order This Project Template</span>
               </button>
               <button
-                onClick={() => setSelectedProject(null)}
+                onClick={handleCloseProjectModal}
                 className="px-5 sm:px-6 py-3 sm:py-3.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl font-semibold text-xs sm:text-sm transition-colors active:scale-95 cursor-pointer"
               >
                 Close

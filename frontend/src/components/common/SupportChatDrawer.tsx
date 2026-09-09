@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Send, Bot, User } from 'lucide-react';
 
 interface SupportChatDrawerProps {
@@ -68,8 +69,11 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
     'How do I access the staging demo?',
   ];
 
-  return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-md animate-fade-in transition-all duration-300">
+  return createPortal(
+    <div 
+      className="fixed inset-0 z-[100] flex justify-end bg-black/70 backdrop-blur-md animate-fade-in transition-all duration-300"
+      onClick={onClose}
+    >
       <div 
         className="w-full max-w-md bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl h-full shadow-2xl flex flex-col justify-between border-l border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-zinc-100 animate-fade-in-up md:animate-scale-in"
         onClick={(e) => e.stopPropagation()}
@@ -175,6 +179,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
           </button>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
