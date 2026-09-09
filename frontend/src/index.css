@@ -34,13 +34,29 @@ html.dark body {
   color: #f4f4f5;
 }
 
+#root {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Safe area insets for mobile gesture bars & notches */
 .safe-area-bottom {
-  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 14px));
 }
 
 .safe-area-top {
   padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+}
+
+.safe-area-left {
+  padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
+}
+
+.safe-area-right {
+  padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
 }
 
 /* Smooth touch scrolling & overscroll control for modal containers */
