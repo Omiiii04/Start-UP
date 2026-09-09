@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { 
   X, 
@@ -11,6 +12,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useToast } from './Toast';
 import { NavTab } from './Header';
 import { submitIntake } from '../../api/client';
+import { useHistoryModal } from '../../utils/useHistoryModal';
 
 export interface InstantServiceItem {
   tier: string;
@@ -46,6 +48,12 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
   service,
   onNavigate
 }) => {
+  const handleClose = useHistoryModal(
+    isOpen,
+    onClose,
+    'instant-service-modal'
+  );
+
   const { isAuthenticated, openAuthModal } = useAuth();
   const { showToast } = useToast();
 
@@ -199,14 +207,21 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
     });
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+  return createPortal(
+    <div 
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && !isSubmitting) {
+          handleClose();
+        }
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
         transition={{ duration: 0.2 }}
-        className="relative w-full max-w-2xl bg-white dark:bg-zinc-950/90 dark:backdrop-blur-2xl border border-slate-200 dark:border-white/15 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[88vh] text-slate-900 dark:text-zinc-100"
+        className="relative w-full max-w-2xl bg-white dark:bg-zinc-950/90 dark:backdrop-blur-2xl border border-slate-200 dark:border-white/15 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[86vh] text-slate-900 dark:text-zinc-100 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -231,7 +246,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-1.5 sm:p-2 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             aria-label="Close"
           >
@@ -277,7 +292,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <button
                   onClick={() => {
-                    onClose();
+                    handleClose();
                     onNavigate('dashboard');
                   }}
                   className="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 transition-all shadow-sm cursor-pointer"
@@ -285,7 +300,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
                   View Client Dashboard
                 </button>
                 <button
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white transition-all cursor-pointer"
                 >
                   Done
@@ -411,7 +426,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2 w-full sm:w-auto">
                   <button
                     type="button"
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer text-center"
                   >
                     Cancel
@@ -433,6 +448,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
           )}
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };

@@ -18,22 +18,67 @@ import { WorkInProgress } from './features/download/WorkInProgress';
 import { CustomerReviews } from './features/reviews/CustomerReviews';
 import { BestSellingProjects } from './features/bestseller/BestSellingProjects';
 import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
+import { parseLocation, pushNavigation, replaceNavigation } from './utils/navigation';
 
 export const AppContent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<NavTab>('home');
-  const [isSupportOpen, setIsSupportOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  // Initialize state directly from the current URL / session
+  const [activeTab, setActiveTab] = useState<NavTab>(() => parseLocation().tab);
+  const [isSupportOpen, setIsSupportOpen] = useState(() => parseLocation().modal === 'support');
+  const [searchQuery, setSearchQuery] = useState(() => parseLocation().query || '');
   const [selectedTemplate, setSelectedTemplate] = useState<ProjectItem | null>(null);
   const { isAuthenticated, isAdmin, openAuthModal } = useAuth();
+
+  // Establish initial state in browser history so entry 0 has complete state
+  useEffect(() => {
+    const loc = parseLocation();
+
+    // If attempting to access protected route without auth, redirect to home with replaceState
+    if (!isAuthenticated && (loc.tab === 'dashboard' || loc.tab === 'admin')) {
+      replaceNavigation('home', { modal: null });
+      setActiveTab('home');
+      return;
+    }
+
+    replaceNavigation(loc.tab, {
+      query: loc.query,
+      templateId: loc.templateId,
+      modal: loc.modal,
+    });
+  }, []);
+
+  // Listen for browser Back and Forward button events (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const loc = parseLocation();
+
+      // Update current active tab
+      setActiveTab(loc.tab);
+
+      // Restore search query if provided in URL or cleared
+      setSearchQuery(loc.query || '');
+
+      // Toggle support drawer based on history state
+      setIsSupportOpen(loc.modal === 'support');
+
+      // Smoothly scroll to top on back/forward
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // If user logs out while on a protected tab, reset back to public landing page
   useEffect(() => {
     if (!isAuthenticated && (activeTab === 'dashboard' || activeTab === 'admin')) {
-      setActiveTab('home');
+      handleTabChange('home', { replace: true });
     }
   }, [isAuthenticated, activeTab]);
 
-  const handleTabChange = (tab: NavTab) => {
+  const handleTabChange = (
+    tab: NavTab, 
+    options?: { replace?: boolean; query?: string; template?: ProjectItem | null }
+  ) => {
     // Gate user-access routing behind OAuth authentication
     if (tab === 'dashboard' && !isAuthenticated) {
       openAuthModal({
@@ -53,17 +98,65 @@ export const AppContent: React.FC = () => {
       return;
     }
 
+    const currentQuery = options?.query !== undefined ? options.query : (tab === 'browse' ? searchQuery : '');
+    const currentTemplate = options?.template !== undefined ? options.template : selectedTemplate;
+
+    if (options?.replace) {
+      replaceNavigation(tab, {
+        query: currentQuery,
+        templateId: currentTemplate?.id,
+        modal: null,
+      });
+    } else {
+      pushNavigation(tab, {
+        query: currentQuery,
+        templateId: currentTemplate?.id,
+        modal: null,
+      });
+    }
+
     setActiveTab(tab);
+    if (options?.query !== undefined) {
+      setSearchQuery(options.query);
+    }
+    if (options?.template !== undefined) {
+      setSelectedTemplate(options.template);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSearchSubmit = (query: string) => {
     setSearchQuery(query);
-    setActiveTab('browse');
+    handleTabChange('browse', { query });
   };
 
   const handleSelectTemplate = (template: ProjectItem) => {
     setSelectedTemplate(template);
-    setActiveTab('submit');
+    handleTabChange('submit', { template });
+  };
+
+  const handleOpenSupport = () => {
+    setIsSupportOpen(true);
+    pushNavigation(activeTab, {
+      query: searchQuery,
+      templateId: selectedTemplate?.id,
+      modal: 'support',
+      support: true,
+    });
+  };
+
+  const handleCloseSupport = () => {
+    setIsSupportOpen(false);
+    if (window.history.state?.modal === 'support') {
+      window.history.back();
+    } else {
+      replaceNavigation(activeTab, {
+        query: searchQuery,
+        templateId: selectedTemplate?.id,
+        modal: null,
+      });
+    }
   };
 
   return (
@@ -75,24 +168,24 @@ export const AppContent: React.FC = () => {
       <Header 
         activeTab={activeTab} 
         onTabChange={handleTabChange}
-        onOpenSupport={() => setIsSupportOpen(true)}
+        onOpenSupport={handleOpenSupport}
         onSearchSubmit={handleSearchSubmit}
       />
 
       {/* Main Content View Switcher */}
-      <main className="flex-1 relative z-10">
+      <main className="flex-1 relative">
         {activeTab === 'home' && (
           <LandingPage 
             onNavigate={handleTabChange}
             onSelectTemplate={handleSelectTemplate}
-            onOpenSupport={() => setIsSupportOpen(true)}
+            onOpenSupport={handleOpenSupport}
           />
         )}
 
         {activeTab === 'dashboard' && isAuthenticated && (
           <ClientProjectHub 
             onNavigate={handleTabChange} 
-            onOpenSupport={() => setIsSupportOpen(true)}
+            onOpenSupport={handleOpenSupport}
             onSelectTemplate={handleSelectTemplate}
           />
         )}
@@ -108,13 +201,13 @@ export const AppContent: React.FC = () => {
         {activeTab === 'submit' && (
           <IntakeWizard 
             onNavigate={handleTabChange} 
-            onOpenSupport={() => setIsSupportOpen(true)}
+            onOpenSupport={handleOpenSupport}
             selectedTemplate={selectedTemplate}
           />
         )}
 
         {activeTab === 'admin' && (
-          <AdminGuard onNavigateToDashboard={() => setActiveTab('dashboard')}>
+          <AdminGuard onNavigateToDashboard={() => handleTabChange('dashboard')}>
             <div className="space-y-8 sm:space-y-12 max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
               <OperationsDashboard />
               <div className="border-t border-zinc-200 dark:border-zinc-800 pt-8">
@@ -135,35 +228,35 @@ export const AppContent: React.FC = () => {
         {activeTab === 'bestseller' && (
           <BestSellingProjects 
             onNavigate={handleTabChange} 
-            onOpenSupport={() => setIsSupportOpen(true)}
+            onOpenSupport={handleOpenSupport}
           />
         )}
       </main>
 
       {/* Google Authentication Modal */}
-      <GoogleAuthModal onNavigate={setActiveTab} />
+      <GoogleAuthModal onNavigate={handleTabChange} />
 
       {/* Support Chat Modal / Drawer */}
       <SupportChatDrawer
         isOpen={isSupportOpen}
-        onClose={() => setIsSupportOpen(false)}
+        onClose={handleCloseSupport}
       />
 
-      {/* Modern Clean Footer (Responsive & Centrally Aligned on Mobile) */}
-      <footer className="border-t border-zinc-200/80 dark:border-white/10 bg-white/85 dark:bg-zinc-950/40 dark:backdrop-blur-xl py-8 px-4 sm:px-6 mt-12 sm:mt-16 text-xs text-zinc-500 dark:text-zinc-400 relative z-10 transition-colors">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs">
+      {/* Modern Clean Centrally Aligned Footer */}
+      <footer className="border-t border-zinc-200/80 dark:border-white/10 bg-white/85 dark:bg-zinc-950/40 dark:backdrop-blur-xl py-8 sm:py-10 px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 text-xs text-zinc-500 dark:text-zinc-400 relative z-10 transition-colors">
+        <div className="max-w-[1440px] mx-auto flex flex-col items-center justify-center gap-6 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs shadow-xs">
                 P
               </div>
-              <span className="font-headline font-bold text-zinc-900 dark:text-white text-sm">Project Wallah</span>
+              <span className="font-headline font-bold text-zinc-900 dark:text-white text-base">Project Wallah</span>
             </div>
             <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">•</span>
-            <span className="text-zinc-500 dark:text-zinc-400 text-center">Enterprise Quality Assurance &amp; 15-Step Delivery Protocol</span>
+            <span className="text-zinc-500 dark:text-zinc-400 text-center font-medium">Enterprise Quality Assurance &amp; 15-Step Delivery Protocol</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-zinc-500 dark:text-zinc-400 font-medium">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-zinc-600 dark:text-zinc-400 font-medium max-w-2xl mx-auto">
             <button onClick={() => handleTabChange('home')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Home</button>
             <button onClick={() => handleTabChange('browse')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Browse Projects</button>
             <button onClick={() => handleTabChange('bestseller')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Best Selling</button>
@@ -184,7 +277,7 @@ export const AppContent: React.FC = () => {
             )}
           </div>
 
-          <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 text-center md:text-right">
+          <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 text-center">
             © 2026 Project Wallah. All rights reserved.
           </p>
         </div>

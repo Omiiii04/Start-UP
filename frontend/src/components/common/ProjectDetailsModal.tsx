@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { 
   X, 
@@ -15,6 +16,7 @@ import {
 import { useToast } from './Toast';
 import { NavTab } from './Header';
 import { submitIntake } from '../../api/client';
+import { useHistoryModal } from '../../utils/useHistoryModal';
 
 export interface ProjectDetailsFormData {
   title: string;
@@ -93,6 +95,12 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   onClose,
   onNavigate
 }) => {
+  const handleClose = useHistoryModal(
+    isOpen,
+    onClose,
+    'project-details-modal'
+  );
+
   const { showToast } = useToast();
 
   const [title, setTitle] = useState('');
@@ -121,7 +129,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && !isSubmitting) {
-        onClose();
+        handleClose();
       }
     };
     if (isOpen) {
@@ -250,14 +258,21 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+  return createPortal(
+    <div 
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && !isSubmitting) {
+          handleClose();
+        }
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[88vh] text-zinc-900 dark:text-zinc-100"
+        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[86vh] text-zinc-900 dark:text-zinc-100 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Header */}
@@ -282,7 +297,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
             </div>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             disabled={isSubmitting}
             className="p-1.5 sm:p-2 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-xl hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             aria-label="Close modal"
@@ -377,7 +392,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
 
                 <button
                   onClick={() => {
-                    onClose();
+                    handleClose();
                     onNavigate('dashboard');
                   }}
                   className="w-full sm:w-auto flex-1 px-5 py-3 rounded-xl font-bold text-sm bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
@@ -621,7 +636,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                   <button
                     type="button"
-                    onClick={onClose}
+                    onClick={handleClose}
                     disabled={isSubmitting}
                     className="w-full sm:w-auto justify-center px-5 py-2.5 sm:py-3 rounded-xl border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-700 dark:text-zinc-300 font-bold text-xs transition-all cursor-pointer"
                   >
@@ -651,6 +666,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
           )}
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };

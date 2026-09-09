@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../common/Toast';
 import { X, ShieldAlert, User, Lock, ArrowRight, Info } from 'lucide-react';
 import { UserRole } from '../../types';
+import { useHistoryModal } from '../../utils/useHistoryModal';
 
 export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({ onNavigate }) => {
   const { 
@@ -14,6 +16,12 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
     hasConfiguredGoogleAuth
   } = useAuth();
   
+  const handleClose = useHistoryModal(
+    authModal.isOpen,
+    closeAuthModal,
+    'auth-modal'
+  );
+
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'user' | 'admin'>(authModal.targetRole || 'user');
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -62,10 +70,17 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+  return createPortal(
+    <div 
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && !isSigningIn) {
+          handleClose();
+        }
+      }}
+    >
       <div 
-        className="relative w-full max-w-lg bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[90vh] animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100"
+        className="relative w-full max-w-lg bg-white dark:bg-zinc-950/85 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[90vh] animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
@@ -86,8 +101,8 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
             </div>
           </div>
           <button 
-            onClick={closeAuthModal}
-            className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors"
+            onClick={handleClose}
+            className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -305,6 +320,7 @@ export const GoogleAuthModal: React.FC<{ onNavigate?: (tab: any) => void }> = ({
           <span className="font-mono text-zinc-600">Project Wallah SSO v2.4</span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
