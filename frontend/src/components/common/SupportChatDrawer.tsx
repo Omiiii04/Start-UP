@@ -162,7 +162,7 @@ export const SupportChatDrawer: React.FC<SupportChatDrawerProps> = ({ isOpen, on
         </div>
 
         {/* Input Footer */}
-        <form onSubmit={handleSend} className="p-4 bg-white dark:bg-white/5 border-t border-zinc-200 dark:border-white/10 flex items-center gap-2">
+        <form onSubmit={handleSend} className="p-3 sm:p-4 bg-white dark:bg-white/5 border-t border-zinc-200 dark:border-white/10 flex items-center gap-2 safe-area-bottom">
           <input
             type="text"
             value={input}

@@ -160,7 +160,7 @@ export const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-28 md:pb-0 relative transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-zinc-900 dark:text-zinc-100 flex flex-col font-body selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 pb-20 sm:pb-24 md:pb-0 relative transition-colors duration-300">
       {/* Dynamic Framer Motion Scroll Synced Background */}
       <ScrollMotionBackground enableInteractiveGlow={true} />
 
@@ -299,6 +299,20 @@ export const AppContent: React.FC = () => {
             <button onClick={() => handleTabChange('browse')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Browse Projects</button>
             <button onClick={() => handleTabChange('bestseller')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Best Selling</button>
             <button onClick={() => handleTabChange('reviews')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Customer Reviews</button>
+            <button 
+              onClick={() => {
+                if (activeTab !== 'home') {
+                  handleTabChange('home');
+                }
+                setTimeout(() => {
+                  const el = document.getElementById('qa-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }} 
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              Q&amp;A / FAQs
+            </button>
             {isAuthenticated ? (
               <>
                 <button onClick={() => handleTabChange('dashboard')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Dashboard Hub</button>
@@ -319,34 +333,36 @@ export const AppContent: React.FC = () => {
             © 2026 Project Wallah. All rights reserved.
           </p>
         </div>
-      </footer>      {/* Bottom Navigation Bar (Mobile / App View Only with glassmorphism & centrally aligned items) */}
-      <nav className="fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-2 pt-1.5 pb-2 safe-area-bottom md:hidden bg-white/95 dark:bg-zinc-950/90 dark:backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.08)] z-40 border-t border-zinc-200 dark:border-white/10 transition-colors">
+      </footer>
+
+      {/* Bottom Navigation Bar (Mobile / App View Only with glassmorphism & centrally aligned items) */}
+      <nav className="fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-1.5 sm:px-2 pt-1 pb-1.5 safe-area-bottom md:hidden bg-white/95 dark:bg-zinc-950/90 dark:backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.08)] z-40 border-t border-zinc-200 dark:border-white/10 transition-colors">
         {/* Home Tab */}
         <button
           type="button"
           onClick={() => handleTabChange('home')}
-          className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all cursor-pointer ${
+          className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
             activeTab === 'home'
               ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
               : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
           }`}
         >
-          <Home className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'home' ? 'text-zinc-900 dark:text-white' : ''}`} />
-          <span className="text-[10px] font-semibold tracking-tight">Home</span>
+          <Home className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'home' ? 'text-zinc-900 dark:text-white' : ''}`} />
+          <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Home</span>
         </button>
 
         {/* Browse Projects Tab */}
         <button
           type="button"
           onClick={() => handleTabChange('browse')}
-          className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all cursor-pointer ${
+          className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
             activeTab === 'browse'
               ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
               : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
           }`}
         >
-          <Compass className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'browse' ? 'text-zinc-900 dark:text-white' : ''}`} />
-          <span className="text-[10px] font-semibold tracking-tight">Browse</span>
+          <Compass className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'browse' ? 'text-zinc-900 dark:text-white' : ''}`} />
+          <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Browse</span>
         </button>
 
         {isAuthenticated ? (
@@ -355,44 +371,44 @@ export const AppContent: React.FC = () => {
             <button
               type="button"
               onClick={() => handleTabChange('dashboard')}
-              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all cursor-pointer ${
+              className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
                 activeTab === 'dashboard'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
                   : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
             >
-              <LayoutDashboard className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'dashboard' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-semibold tracking-tight">Dashboard</span>
+              <LayoutDashboard className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'dashboard' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Dashboard</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleTabChange('submit')}
-              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all cursor-pointer ${
+              className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
                 activeTab === 'submit'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
                   : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
             >
-              <ClipboardList className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'submit' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-semibold tracking-tight">Submit</span>
+              <ClipboardList className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'submit' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Submit</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleTabChange('admin')}
-              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all relative cursor-pointer ${
+              className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all relative cursor-pointer ${
                 activeTab === 'admin'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
                   : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
             >
               {isAdmin ? (
-                <User className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : ''}`} />
+                <User className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : ''}`} />
               ) : (
-                <Lock className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : 'text-amber-500'}`} />
+                <Lock className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'admin' ? 'text-zinc-900 dark:text-white' : 'text-amber-500'}`} />
               )}
-              <span className="text-[10px] font-semibold tracking-tight">Admin</span>
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Admin</span>
             </button>
           </>
         ) : (
@@ -401,23 +417,23 @@ export const AppContent: React.FC = () => {
             <button
               type="button"
               onClick={() => handleTabChange('download')}
-              className={`flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all cursor-pointer ${
+              className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
                 activeTab === 'download'
                   ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
                   : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
             >
-              <Download className={`w-5 h-5 mb-0.5 shrink-0 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[10px] font-semibold tracking-tight">Download</span>
+              <Download className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Download</span>
             </button>
 
             <button
               type="button"
               onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in with Google to access your student project dashboard.' })}
-              className="flex flex-col items-center justify-center flex-1 max-w-[72px] min-h-[46px] py-1 px-1 rounded-xl transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 cursor-pointer"
+              className="flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 cursor-pointer"
             >
-              <LogIn className="w-5 h-5 mb-0.5 shrink-0" />
-              <span className="text-[10px] font-semibold tracking-tight">Sign In</span>
+              <LogIn className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0" />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Sign In</span>
             </button>
           </>
         )}

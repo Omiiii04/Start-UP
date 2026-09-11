@@ -119,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({
                 P
               </div>
               <div>
-                <span className="font-headline font-bold text-sm sm:text-2xl text-zinc-900 dark:text-white tracking-tight group-hover:text-black dark:group-hover:text-zinc-100 transition-colors">
+                <span className="font-headline font-bold text-sm sm:text-xl lg:text-2xl text-zinc-900 dark:text-white tracking-tight whitespace-nowrap group-hover:text-black dark:group-hover:text-zinc-100 transition-colors">
                   Project Wallah
                 </span>
               </div>
@@ -300,7 +300,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={handleDownloadClick}
-              className="p-1.5 sm:p-2 text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-all active:scale-95 sm:hidden flex items-center justify-center relative cursor-pointer shrink-0"
+              className="p-1.5 sm:p-2 text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-all active:scale-95 hidden min-[480px]:flex sm:hidden items-center justify-center relative cursor-pointer shrink-0"
               title="Download Here"
             >
               <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -405,7 +405,7 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label="Mobile Navigation Bar" 
           className="lg:hidden w-full border-t border-zinc-200/80 dark:border-white/10 bg-white/95 dark:bg-zinc-950/90 backdrop-blur-xl py-2 overflow-x-auto no-scrollbar scroll-smooth"
         >
-          <div className="flex items-center gap-1.5 px-3 min-w-max mx-auto justify-center">
+          <div className="flex items-center gap-1.5 px-3 sm:px-4 min-w-max justify-start md:justify-center mx-auto">
           {/* Common Home Link */}
           <button
             onClick={() => onTabChange('home')}
@@ -584,7 +584,7 @@ export const Header: React.FC<HeaderProps> = ({
           }}
         >
           <div 
-            className="w-full bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 max-h-[85vh] overflow-y-auto smooth-touch-scroll p-4 sm:p-6 space-y-5 shadow-2xl animate-in slide-in-from-top-4 duration-300"
+            className="w-full bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 max-h-[90dvh] overflow-y-auto smooth-touch-scroll p-4 sm:p-6 space-y-5 shadow-2xl animate-in slide-in-from-top-4 duration-300 safe-area-bottom"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header inside drawer */}

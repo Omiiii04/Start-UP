@@ -44,7 +44,7 @@ html.dark body {
 
 /* Safe area insets for mobile gesture bars & notches */
 .safe-area-bottom {
-  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 14px));
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 12px));
 }
 
 .safe-area-top {
@@ -59,11 +59,30 @@ html.dark body {
   padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
 }
 
+/* Cross-browser no-scrollbar utility for smooth touch horizontal scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Smooth touch scrolling & overscroll control for modal containers */
 .smooth-touch-scroll {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
   scroll-behavior: smooth;
+}
+
+/* Dynamic viewport height for mobile keyboards */
+.h-dvh {
+  height: 100vh;
+  height: 100dvh;
+}
+.max-h-dvh {
+  max-height: 92vh;
+  max-height: 92dvh;
 }
 
 @layer base {

@@ -647,7 +647,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
               </div>
             ) : (
               /* Projects Grid (Bento/Card Style) */
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {filteredProjects.map((project, idx) => (
                   <article
                     key={project.id}
@@ -744,7 +744,7 @@ export const BrowseProjects: React.FC<BrowseProjectsProps> = ({
           onClick={handleCloseProjectModal}
         >
           <div 
-            className="bg-white dark:bg-zinc-950/80 dark:backdrop-blur-2xl rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-white/15 p-5 sm:p-8 relative text-zinc-900 dark:text-zinc-100 animate-scale-in"
+            className="bg-white dark:bg-zinc-950/80 dark:backdrop-blur-2xl rounded-2xl sm:rounded-3xl w-[calc(100vw-2rem)] max-w-2xl max-h-[90dvh] overflow-y-auto smooth-touch-scroll shadow-2xl border border-zinc-200 dark:border-white/15 p-4 sm:p-8 relative text-zinc-900 dark:text-zinc-100 animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

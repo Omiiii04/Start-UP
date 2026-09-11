@@ -166,8 +166,8 @@ export const OperationsDashboard: React.FC = () => {
               <span className="text-[10px] font-mono text-zinc-500">Live Real-time Sync</span>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+            <div className="overflow-x-auto no-scrollbar sm:overflow-x-auto">
+              <table className="w-full text-left text-xs min-w-[600px]">
                 <thead className="bg-zinc-50 text-zinc-600 uppercase font-mono text-[10px] border-b border-zinc-200">
                   <tr>
                     <th className="p-3.5">Inquiry ID</th>

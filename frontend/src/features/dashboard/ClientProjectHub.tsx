@@ -182,8 +182,8 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
       {/* Main Content Area - Full Width */}
       <main className="flex-1 p-4 sm:p-6 md:p-10 max-w-[1440px] mx-auto w-full space-y-8 sm:space-y-12">
         
-        {/* Sub-Navigation Pills (Centrally Aligned) */}
-        <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl p-1.5 sm:p-2 rounded-2xl border border-white/40 dark:border-white/10 shadow-sm flex items-center justify-center gap-2 flex-wrap max-w-4xl mx-auto">
+        {/* Sub-Navigation Pills (Centrally Aligned on Desktop, Touch-scrollable on Mobile) */}
+        <div className="bg-white/95 dark:bg-zinc-950/40 dark:backdrop-blur-2xl p-1.5 sm:p-2 rounded-2xl border border-white/40 dark:border-white/10 shadow-sm flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth max-w-4xl mx-auto w-full">
           <button
             onClick={() => setActiveSubTab('dashboard')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition-all ${
@@ -411,7 +411,7 @@ export const ClientProjectHub: React.FC<ClientProjectHubProps> = ({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {milestones.length === 0 ? (
                     <p className="text-xs text-gray-400 dark:text-zinc-500 italic py-4 col-span-full">
                       No milestones yet. They'll appear here once a project is active.
