@@ -71,20 +71,14 @@ export async function verifyGoogleToken(idToken: string): Promise<{
 
 /**
  * Resolve role from email — backend is authoritative.
- * Admin role map: om → admin_ceo, somnath → admin_backend,
- * falguni → admin_qa, divya → admin_ops
+ * Admins in ADMIN_EMAILS_SET are granted admin_ceo (superuser) access.
  */
 function resolveRoleFromEmail(email: string): UserRole {
   const lower = email.toLowerCase().trim();
 
   if (!ADMIN_EMAILS_SET.has(lower)) return 'client';
 
-  if (lower.startsWith('om@')) return 'admin_ceo';
-  if (lower.startsWith('somnath@')) return 'admin_backend';
-  if (lower.startsWith('falguni@')) return 'admin_qa';
-  if (lower.startsWith('divya@')) return 'admin_ops';
-
-  // Generic admin fallback for other admin emails
+  // All admins in the .env list get CEO/superuser access dynamically
   return 'admin_ceo';
 }
 

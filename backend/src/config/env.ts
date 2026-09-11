@@ -20,29 +20,28 @@ const envSchema = z.object({
   JWT_ACCESS_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
 
-  // Google OAuth
-  GOOGLE_CLIENT_ID: z.string().min(10).optional().or(z.literal('')),
+  // Google OAuth (required — backend cannot verify Google tokens without this)
+  GOOGLE_CLIENT_ID: z.string().min(10, 'GOOGLE_CLIENT_ID is required for Google authentication'),
 
-  // Admin emails (server-authoritative)
+  // Admin emails (server-authoritative comma-separated list)
   ADMIN_EMAILS: z
     .string()
     .default('om@projectbridge.io,somnath@projectbridge.io,falguni@projectbridge.io,divya@projectbridge.io'),
 
-  // Cloudinary
+  // Cloudinary (file uploads)
   CLOUDINARY_CLOUD_NAME: z.string().min(1).optional().or(z.literal('')),
   CLOUDINARY_API_KEY: z.string().min(1).optional().or(z.literal('')),
   CLOUDINARY_API_SECRET: z.string().min(1).optional().or(z.literal('')),
 
-  // SendGrid (optional — warnings logged if not configured)
-  SENDGRID_API_KEY: z.string().optional().or(z.literal('')),
-  SENDGRID_FROM_EMAIL: z.string().email().default('noreply@projectbridge.io'),
-  SENDGRID_FROM_NAME: z.string().default('ProjectBridge'),
+  // Telegram Bot (primary notification/chat channel)
+  // Required for Telegram notifications; warnings logged if missing in dev.
+  TELEGRAM_BOT_TOKEN: z.string().optional().or(z.literal('')),
+  TELEGRAM_BOT_USERNAME: z.string().default('start_up'),
+  TELEGRAM_ADMIN_CHAT_ID: z.string().optional().or(z.literal('')),
+  // Secret token for validating incoming Telegram webhook requests
+  TELEGRAM_WEBHOOK_SECRET: z.string().optional().or(z.literal('')),
 
-  // WhatsApp Business API (optional — warnings logged if not configured)
-  WHATSAPP_PHONE_NUMBER_ID: z.string().optional().or(z.literal('')),
-  WHATSAPP_ACCESS_TOKEN: z.string().optional().or(z.literal('')),
-
-  // CORS
+  // CORS (allowed frontend origins, comma-separated)
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
 });
 
@@ -71,3 +70,7 @@ export const CORS_ORIGINS = env.CORS_ORIGIN.split(',').map((o) => o.trim());
 
 export const isProd = env.NODE_ENV === 'production';
 export const isDev = env.NODE_ENV === 'development';
+
+export const TELEGRAM_CONFIGURED = Boolean(
+  env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_BOT_TOKEN.length > 10
+);

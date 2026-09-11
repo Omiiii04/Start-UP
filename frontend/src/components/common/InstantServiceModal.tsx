@@ -125,7 +125,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
       await submitIntake({
         title: `[${data.tier} - ${data.name}] ${data.topic}`,
         category: data.department,
-        description: `Instant Service Request:\nTier: ${data.tier} (${data.name})\nTopic: ${data.topic}\nDepartment: ${data.department}\nRequirements: ${data.requirements}\nUrgency: ${data.urgency}\nWhatsApp: ${data.whatsapp || 'N/A'}\nPrice: ${data.price}`,
+        description: `Instant Service Request:\nTier: ${data.tier} (${data.name})\nTopic: ${data.topic}\nDepartment: ${data.department}\nRequirements: ${data.requirements}\nUrgency: ${data.urgency}\nContact: ${data.whatsapp || 'N/A'}\nPrice: ${data.price}`,
         budget: data.numericPrice,
         tier: 'micro_debug',
         timeline: data.urgency
@@ -388,7 +388,7 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
               {/* Field 5: WhatsApp Number (Optional) */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-bold font-headline text-slate-800 dark:text-zinc-200">
-                  WhatsApp / Phone Number <span className="text-[10px] text-slate-400 font-normal">(for instant delivery updates)</span>
+                  Phone / Telegram Number <span className="text-[10px] text-slate-400 font-normal">(for instant delivery updates)</span>
                 </label>
                 <input
                   type="tel"

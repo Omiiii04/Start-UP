@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ConfigProvider, useConfig } from './context/ConfigContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header, NavTab } from './components/common/Header';
@@ -10,7 +11,6 @@ import { ClientProjectHub } from './features/dashboard/ClientProjectHub';
 import { OperationsDashboard } from './features/operations/OperationsDashboard';
 import { EngineeringPipeline } from './features/engineering/EngineeringPipeline';
 import { ToastProvider } from './components/common/Toast';
-import { SupportChatDrawer } from './components/common/SupportChatDrawer';
 import { GoogleAuthModal } from './components/auth/GoogleAuthModal';
 import { AdminGuard } from './components/auth/AdminGuard';
 import { ScrollMotionBackground } from './components/common/ScrollMotionBackground';
@@ -23,10 +23,10 @@ import { parseLocation, pushNavigation, replaceNavigation } from './utils/naviga
 export const AppContent: React.FC = () => {
   // Initialize state directly from the current URL / session
   const [activeTab, setActiveTab] = useState<NavTab>(() => parseLocation().tab);
-  const [isSupportOpen, setIsSupportOpen] = useState(() => parseLocation().modal === 'support');
   const [searchQuery, setSearchQuery] = useState(() => parseLocation().query || '');
   const [selectedTemplate, setSelectedTemplate] = useState<ProjectItem | null>(null);
   const { isAuthenticated, isAdmin, openAuthModal } = useAuth();
+  const { telegramBotUsername } = useConfig();
 
   // Establish initial state in browser history so entry 0 has complete state
   useEffect(() => {
@@ -57,8 +57,6 @@ export const AppContent: React.FC = () => {
       // Restore search query if provided in URL or cleared
       setSearchQuery(loc.query || '');
 
-      // Toggle support drawer based on history state
-      setIsSupportOpen(loc.modal === 'support');
 
       // Smoothly scroll to top on back/forward
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -137,26 +135,7 @@ export const AppContent: React.FC = () => {
   };
 
   const handleOpenSupport = () => {
-    setIsSupportOpen(true);
-    pushNavigation(activeTab, {
-      query: searchQuery,
-      templateId: selectedTemplate?.id,
-      modal: 'support',
-      support: true,
-    });
-  };
-
-  const handleCloseSupport = () => {
-    setIsSupportOpen(false);
-    if (window.history.state?.modal === 'support') {
-      window.history.back();
-    } else {
-      replaceNavigation(activeTab, {
-        query: searchQuery,
-        templateId: selectedTemplate?.id,
-        modal: null,
-      });
-    }
+    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -273,12 +252,6 @@ export const AppContent: React.FC = () => {
 
       {/* Google Authentication Modal */}
       <GoogleAuthModal onNavigate={handleTabChange} />
-
-      {/* Support Chat Modal / Drawer */}
-      <SupportChatDrawer
-        isOpen={isSupportOpen}
-        onClose={handleCloseSupport}
-      />
 
       {/* Modern Clean Centrally Aligned Footer */}
       <footer className="border-t border-zinc-200/80 dark:border-white/10 bg-white/85 dark:bg-zinc-950/40 dark:backdrop-blur-xl py-8 sm:py-10 px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 text-xs text-zinc-500 dark:text-zinc-400 relative z-10 transition-colors">
@@ -442,21 +415,34 @@ export const AppContent: React.FC = () => {
   );
 };
 
-export const App: React.FC = () => {
-  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'projectbridge-sandbox-auth.apps.googleusercontent.com';
+/**
+ * AppWithOAuth: Inner app that reads googleClientId from ConfigContext.
+ * ConfigProvider must be an ancestor of this component.
+ */
+const AppWithOAuth: React.FC = () => {
+  const { config } = useConfig();
+  // Use empty string until config loads — GoogleOAuthProvider handles empty clientId gracefully
+  const googleClientId = config?.googleClientId || '';
 
   return (
     <GoogleOAuthProvider clientId={googleClientId}>
-      <ThemeProvider>
-        <ToastProvider>
-          <AuthProvider>
-            <AppContent />
-          </AuthProvider>
-        </ToastProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </GoogleOAuthProvider>
   );
 };
 
-export default App;
+export const App: React.FC = () => {
+  return (
+    <ConfigProvider>
+      <ThemeProvider>
+        <ToastProvider>
+          <AppWithOAuth />
+        </ToastProvider>
+      </ThemeProvider>
+    </ConfigProvider>
+  );
+};
 
+export default App;

@@ -8,7 +8,6 @@ import {
   Bookmark, 
   Sparkles, 
   ShieldCheck, 
-  MessageCircle, 
   Plus, 
   Clock, 
   BookOpen, 
@@ -18,8 +17,10 @@ import {
   Layers, 
   CheckCircle2, 
   Cpu, 
-  MessageSquare
+  MessageSquare,
+  Send
 } from 'lucide-react';
+import { useConfig } from '../../context/ConfigContext';
 import { NavTab } from '../../components/common/Header';
 import { useToast } from '../../components/common/Toast';
 import { useAuth } from '../../context/AuthContext';
@@ -128,9 +129,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     });
   };
 
-  const handleOpenWhatsApp = () => {
-    const text = encodeURIComponent('Hello Project Wallah, I would like to inquire about project consultation and guidance.');
-    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+  const { telegramBotUsername } = useConfig();
+
+  const handleOpenTelegram = () => {
+    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
   };
 
 
@@ -186,11 +188,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
 
             <button
-              onClick={handleOpenWhatsApp}
+              onClick={handleOpenTelegram}
               className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>Chat on WhatsApp</span>
+              <Send className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+              <span>Chat on Telegram</span>
             </button>
 
             <button

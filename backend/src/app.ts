@@ -2,7 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { CORS_ORIGINS, isProd } from './config/env';
+import { CORS_ORIGINS, env } from './config/env';
 import { globalLimiter } from './middleware/rateLimiter';
 import { requestLogger } from './middleware/requestLogger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
@@ -17,6 +17,7 @@ import milestonesRoutes from './modules/milestones/milestones.routes';
 import invoicesRoutes from './modules/invoices/invoices.routes';
 import crmRoutes from './modules/crm/crm.routes';
 import uploadsRoutes from './modules/uploads/uploads.routes';
+import telegramRoutes from './modules/notifications/telegram.routes';
 
 export function createApp() {
   const app = express();
@@ -67,6 +68,19 @@ export function createApp() {
   // ── Global rate limiting
   app.use('/api', globalLimiter);
 
+  // ── Public config endpoint (no auth required)
+  // Returns only public-safe configuration for the frontend.
+  // NEVER include secrets, tokens, or private keys here.
+  app.get('/api/v1/config', (_req, res) => {
+    res.json({
+      success: true,
+      data: {
+        googleClientId: env.GOOGLE_CLIENT_ID,
+        telegramBotUsername: env.TELEGRAM_BOT_USERNAME,
+      },
+    });
+  });
+
   // ── Routes
   app.use('/api/v1/health', healthRoutes);
   app.use('/api/v1/auth', authRoutes);
@@ -78,6 +92,7 @@ export function createApp() {
   app.use('/api/v1/milestones', milestonesRoutes);
   app.use('/api/v1/invoices', invoicesRoutes);
   app.use('/api/v1/crm', crmRoutes);
+  app.use('/api/v1/telegram', telegramRoutes);
 
   // ── API Index — lists all available endpoints
   app.get('/api/v1', (_req, res) => {
@@ -89,14 +104,16 @@ export function createApp() {
         status: 'running',
         endpoints: {
           health:    'GET  /api/v1/health',
+          config:    'GET  /api/v1/config',
           auth:      'POST /api/v1/auth/google  |  POST /api/v1/auth/refresh  |  POST /api/v1/auth/logout',
-          users:     'GET  /api/v1/users/me  |  PATCH /api/v1/users/me',
+          users:     'GET  /api/v1/users/me  |  PATCH /api/v1/users/me  |  POST /api/v1/users/me/telegram/link-token  |  DELETE /api/v1/users/me/telegram/unlink',
           intake:    'POST /api/v1/intake/submit  |  GET /api/v1/intake/status/:trackingCode',
           projects:  'GET  /api/v1/projects  |  GET /api/v1/projects/:id',
           milestones:'GET  /api/v1/projects/:projectId/milestones',
           invoices:  'POST /api/v1/invoices/generate  |  GET /api/v1/invoices/:id',
           uploads:   'POST /api/v1/projects/:projectId/files',
           crm:       'GET  /api/v1/crm/stats  |  GET /api/v1/crm/inquiries',
+          telegram:  'POST /api/v1/telegram/webhook  |  GET /api/v1/telegram/info',
         },
       },
     });

@@ -1,8 +1,8 @@
 import { query } from '../../config/database';
 import { Errors } from '../../shared/apiResponse';
 import { DbInvoice, DbMilestone, DbProject } from '../../shared/types';
-import { calculateGST, formatINR } from '../../shared/gst';
-import { sendInvoiceEmail } from '../notifications/email.service';
+import { calculateGST } from '../../shared/gst';
+import { sendInvoiceTelegramNotification } from '../notifications/telegram.service';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -24,7 +24,6 @@ interface GenerateInvoiceInput {
   clientState: string;   // e.g. 'MH' for Maharashtra
   sacCode: '998314' | '998315';
   issuedBy: string;      // userId of admin who generated it
-  clientEmail: string;
   clientName: string;
 }
 
@@ -85,22 +84,14 @@ export async function generateInvoice(input: GenerateInvoiceInput): Promise<DbIn
     [invoiceNumber, input.milestoneId]
   );
 
-  // 9. Send invoice email to client (non-blocking)
-  sendInvoiceEmail({
-    toEmail: input.clientEmail,
-    toName: input.clientName,
+  // 9. Notify admin via Telegram (non-blocking)
+  sendInvoiceTelegramNotification({
     invoiceNumber,
+    clientName: input.clientName,
     projectTitle: project.title,
     milestoneLabel: milestone.milestone_name,
-    subtotalInr: gst.subtotalInr,
-    cgstInr: gst.cgstInr,
-    sgstInr: gst.sgstInr,
-    igstInr: gst.igstInr,
     totalDueInr: gst.grandTotalInr,
-    sacCode: input.sacCode,
-    sacDescription: gst.sacDescription,
-    isMaharashtra,
-  }).catch((err) => console.error('[Email] Invoice email failed:', err));
+  }).catch((err) => console.error('[Telegram] Invoice notification failed:', err?.message));
 
   return { ...rows[0], gstBreakdown: gst };
 }

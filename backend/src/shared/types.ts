@@ -39,6 +39,8 @@ export interface DbUser {
   google_id: string | null;
   picture_url: string | null;
   phone_number: string | null;
+  telegram_chat_id: number | null;
+  telegram_linked_at: Date | null;
   is_active: boolean;
   deleted_at: Date | null;
   created_at: Date;

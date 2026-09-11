@@ -2,8 +2,7 @@ import { query } from '../../config/database';
 import { screenRequirementUGC } from '../../shared/ugcFilter';
 import { AppError, Errors } from '../../shared/apiResponse';
 import { DbProject, ServiceTier, ClientCategory } from '../../shared/types';
-import { sendIntakeConfirmationEmail } from '../notifications/email.service';
-import { sendWhatsAppNotification } from '../notifications/whatsapp.service';
+import { sendIntakeTelegramNotification } from '../notifications/telegram.service';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
 
@@ -18,7 +17,6 @@ interface SubmitIntakeInput {
   serviceTierRequested: ServiceTier;
   budgetIndicationInr?: number;
   isMaharashtraClient: boolean;
-  phoneNumber?: string;
 }
 
 /**
@@ -82,23 +80,14 @@ export async function submitIntake(input: SubmitIntakeInput): Promise<{
 
   const project = rows[0];
 
-  // 3. Send confirmation email (non-blocking — don't fail intake if email fails)
-  sendIntakeConfirmationEmail({
-    toEmail: input.userEmail,
-    toName: input.userFullName,
-    projectTitle: input.title,
+  // 3. Notify admin via Telegram (non-blocking — do not fail the intake if notification fails)
+  sendIntakeTelegramNotification({
     trackingCode,
-    ugcPassed: ugcResult.passed,
-    ugcNotes: ugcResult.notes,
-  }).catch((err) => console.error('[Email] Intake confirmation failed:', err));
-
-  // 4. Send WhatsApp notification to Divya (ops manager)
-  if (input.phoneNumber) {
-    sendWhatsAppNotification(
-      input.phoneNumber,
-      `✅ ProjectBridge: Your requirement "${input.title}" has been submitted. Tracking ID: ${trackingCode}. Our team will review within 24 hours.`
-    ).catch((err) => console.error('[WhatsApp] Intake notification failed:', err));
-  }
+    clientName: input.userFullName,
+    projectTitle: input.title,
+    serviceTier: input.serviceTierRequested,
+    clientCategory: input.clientCategory,
+  }).catch((err) => console.error('[Telegram] Intake admin notification failed:', err?.message));
 
   return { project, ugcResult, trackingCode };
 }

@@ -12,7 +12,7 @@ export const intakeSubmitSchema = z.object({
     message: 'You must agree to the UGC Academic Integrity declaration to proceed.',
   }),
   isMaharashtraClient: z.boolean().default(true),
-  phoneNumber: z.string().regex(/^\+?[1-9]\d{7,14}$/).optional(),
 });
 
 export type IntakeSubmitInput = z.infer<typeof intakeSubmitSchema>;
+

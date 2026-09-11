@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useReducedMotion, useMotionValue } from 'framer-motion';
 import heroSpheresBackdrop from '../../assets/hero-spheres-backdrop.png';
 import ballCenterImg from '../../assets/ball-center.png';
 import ballLeftImg from '../../assets/ball-left.png';
@@ -20,8 +20,9 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
   const shouldReduceMotion = useReducedMotion();
   const { isDark } = useTheme();
 
-  // Subtle interactive mouse tracking
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Subtle interactive mouse tracking using MotionValues (Zero React re-renders)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -30,12 +31,16 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
       // Normalize coordinates around screen center (-1 to 1)
       const nx = (e.clientX / window.innerWidth - 0.5) * 2;
       const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMousePos({ x: nx, y: ny });
+      mouseX.set(nx);
+      mouseY.set(ny);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [shouldReduceMotion]);
+  }, [shouldReduceMotion, mouseX, mouseY]);
+
+  const smoothMouseX = useSpring(mouseX, { damping: 25, stiffness: 60 });
+  const smoothMouseY = useSpring(mouseY, { damping: 25, stiffness: 60 });
 
   // Track global window scroll position
   const { scrollYProgress } = useScroll();
@@ -83,6 +88,18 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
   const topBallX = useTransform(smoothProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, 35]);
   const topBallRotate = useTransform(smoothProgress, [0, 1], shouldReduceMotion ? [0, 0] : [0, -45]);
   const topBallScale = useTransform(smoothProgress, [0, 0.5, 1], shouldReduceMotion ? [1, 1, 1] : [1, 0.96, 1.04]);
+
+  const topBallMouseX = useTransform(smoothMouseX, v => shouldReduceMotion ? 0 : v * -8);
+  const topBallMouseY = useTransform(smoothMouseY, v => shouldReduceMotion ? 0 : v * -8);
+  
+  const leftBallMouseX = useTransform(smoothMouseX, v => shouldReduceMotion ? 0 : v * -14);
+  const leftBallMouseY = useTransform(smoothMouseY, v => shouldReduceMotion ? 0 : v * -14);
+  
+  const centerBallMouseX = useTransform(smoothMouseX, v => shouldReduceMotion ? 0 : v * -20);
+  const centerBallMouseY = useTransform(smoothMouseY, v => shouldReduceMotion ? 0 : v * -20);
+  
+  const rightBallMouseX = useTransform(smoothMouseX, v => shouldReduceMotion ? 0 : v * -16);
+  const rightBallMouseY = useTransform(smoothMouseY, v => shouldReduceMotion ? 0 : v * -16);
 
   // Dynamic ambient glow pulse synchronized with scroll depth
   const cyanGlowPulse = useTransform(smoothProgress, [0, 0.35, 0.7, 1], [0.65, 0.95, 0.75, 1.0]);
@@ -187,10 +204,9 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
           >
             <motion.div
               style={{
-                x: shouldReduceMotion ? 0 : mousePos.x * -8,
-                y: shouldReduceMotion ? 0 : mousePos.y * -8,
+                x: topBallMouseX,
+                y: topBallMouseY,
               }}
-              transition={{ type: 'spring', damping: 25, stiffness: 60 }}
             >
               <img
                 src={ballTopImg || '/ball-top.png'}
@@ -228,10 +244,9 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
           >
             <motion.div
               style={{
-                x: shouldReduceMotion ? 0 : mousePos.x * -14,
-                y: shouldReduceMotion ? 0 : mousePos.y * -14,
+                x: leftBallMouseX,
+                y: leftBallMouseY,
               }}
-              transition={{ type: 'spring', damping: 22, stiffness: 70 }}
               className="relative"
             >
               {/* Subtle Cyan Backlight Aura on Left Ball */}
@@ -273,10 +288,9 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
           >
             <motion.div
               style={{
-                x: shouldReduceMotion ? 0 : mousePos.x * -20,
-                y: shouldReduceMotion ? 0 : mousePos.y * -20,
+                x: centerBallMouseX,
+                y: centerBallMouseY,
               }}
-              transition={{ type: 'spring', damping: 20, stiffness: 80 }}
               className="relative"
             >
               {/* Internal Plasma Glow Aura */}
@@ -319,10 +333,9 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
           >
             <motion.div
               style={{
-                x: shouldReduceMotion ? 0 : mousePos.x * -16,
-                y: shouldReduceMotion ? 0 : mousePos.y * -16,
+                x: rightBallMouseX,
+                y: rightBallMouseY,
               }}
-              transition={{ type: 'spring', damping: 22, stiffness: 70 }}
               className="relative"
             >
               {/* Golden Rim Light Flare */}

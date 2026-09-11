@@ -8,7 +8,7 @@ import {
   ArrowRight, 
   Copy, 
   CheckCircle2, 
-  MessageCircle, 
+  Send, 
   FileText, 
   Building2, 
   Phone
@@ -17,6 +17,7 @@ import { useToast } from './Toast';
 import { NavTab } from './Header';
 import { submitIntake } from '../../api/client';
 import { useHistoryModal } from '../../utils/useHistoryModal';
+import { useConfig } from '../../context/ConfigContext';
 
 export interface ProjectDetailsFormData {
   title: string;
@@ -102,6 +103,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   );
 
   const { showToast } = useToast();
+  const { telegramBotUsername } = useConfig();
 
   const [title, setTitle] = useState('');
   const [domain, setDomain] = useState(DOMAINS[0]);
@@ -173,7 +175,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
       await submitIntake({
         title: `[${data.projectType}] ${data.title}`,
         category: data.domain,
-        description: `Custom Project Details Submission:\n\nTitle: ${data.title}\nDomain: ${data.domain}\nType: ${data.projectType}\nTech Stack: ${data.techStack || 'Not specified'}\nCollege: ${data.college || 'N/A'}\nWhatsApp: ${data.whatsapp}\nDeadline: ${data.deadline}\nBudget Range: ${data.budgetRange}\nDeliverables: ${data.deliverables.join(', ')}\n\nDetailed Requirements:\n${data.description}`,
+        description: `Custom Project Details Submission:\n\nTitle: ${data.title}\nDomain: ${data.domain}\nType: ${data.projectType}\nTech Stack: ${data.techStack || 'Not specified'}\nCollege: ${data.college || 'N/A'}\nContact: ${data.whatsapp}\nDeadline: ${data.deadline}\nBudget Range: ${data.budgetRange}\nDeliverables: ${data.deliverables.join(', ')}\n\nDetailed Requirements:\n${data.description}`,
         budget: numericBudget,
         tier: 'mvp_development',
         timeline: data.deadline
@@ -213,7 +215,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
       return;
     }
     if (!whatsapp.trim()) {
-      showToast('Please provide your WhatsApp number for project updates.', 'error');
+      showToast('Please provide your contact number for project updates.', 'error');
       return;
     }
 
@@ -250,10 +252,9 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
     setCollege('');
   };
 
-  const handleWhatsAppChat = () => {
+  const handleTelegramChat = () => {
     if (!submittedResult) return;
-    const msg = `Hello Project Wallah, I just entered project details for "${submittedResult.data.title}" (Tracking Code: ${submittedResult.trackingCode}). I would like to discuss development milestones and get a quick demo!`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
   };
 
   if (!isOpen) return null;
@@ -383,11 +384,11 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 max-w-md mx-auto">
                 <button
-                  onClick={handleWhatsAppChat}
-                  className="w-full sm:w-auto flex-1 px-5 py-3 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                  onClick={handleTelegramChat}
+                  className="w-full sm:w-auto flex-1 px-5 py-3 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Chat on WhatsApp</span>
+                  <Send className="w-4 h-4" />
+                  <span>Chat on Telegram</span>
                 </button>
 
                 <button
@@ -589,7 +590,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
-                    9. WhatsApp Number <span className="text-rose-500">*</span>
+                    9. Phone / Telegram Number <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
                     <Phone className="w-4 h-4 absolute left-3.5 top-3.5 text-zinc-400" />

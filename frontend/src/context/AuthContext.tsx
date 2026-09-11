@@ -7,6 +7,7 @@ import {
   tokenStore,
   AuthTokens,
 } from '../api/client';
+import { useConfig } from './ConfigContext';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -39,10 +40,11 @@ export interface AuthContextType {
 
 const USER_STORAGE_KEY = 'pb_user';
 
+// Default admin email list — these are public display hints only.
+// The server resolves roles authoritatively; this list is for UI-level checks only.
 const DEFAULT_ADMIN_EMAILS = [
   'om@projectbridge.io',
-  'somnath@projectbridge.io',
-  'falguni@projectbridge.io',
+  'omapar00@gmail.com',
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -68,11 +70,11 @@ function mapApiUserToUser(apiUser: AuthTokens['user']): User {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
-  const envAdminEmails = import.meta.env.VITE_ADMIN_EMAILS
-    ? (import.meta.env.VITE_ADMIN_EMAILS as string).split(',').map((e: string) => e.trim().toLowerCase()).filter(Boolean)
-    : [];
-  const adminEmails = Array.from(new Set([...DEFAULT_ADMIN_EMAILS, ...envAdminEmails]));
+  // Google Client ID comes from the backend config, not a frontend env var
+  const { config, hasGoogleAuth } = useConfig();
+  const googleClientId = config?.googleClientId || '';
+
+  const adminEmails = DEFAULT_ADMIN_EMAILS;
 
   const [user, setUser] = useState<User | null>(() => {
     try {
@@ -123,12 +125,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  // ── Demo login (local only — VITE_DEMO_MODE guard in modal) ─────────────
+  // ── Demo login (local only) ───────────────────────────────────────────────
   const loginAsDemo = useCallback((role: UserRole, customName?: string, customEmail?: string) => {
     const isAdm = role !== 'client';
     const demoUser: User = {
       userId: `usr_demo_${Math.random().toString(36).substring(2, 8)}`,
-      email: customEmail || (isAdm ? 'om@projectbridge.io' : 'demo.client@gmail.com'),
+      email: customEmail || (isAdm ? 'omapar00@gmail.com' : 'demo.client@gmail.com'),
       fullName: customName || (isAdm ? 'Om J. (Lead Architect)' : 'Demo Client'),
       role,
       clientCategory: role === 'client' ? 'sme' : undefined,
@@ -155,7 +157,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser({ ...user, role: newRole, isAdmin: newRole !== 'client' });
   }, [user]);
 
-  // ── Legacy: admin elevation toggle (kept for type compat, no-op in prod) ─
+  // ── Legacy: admin elevation toggle (kept for type compat) ────────────────
   const toggleAdminElevation = useCallback(() => {
     if (!user) return;
     setUser({ ...user, isAdmin: !user.isAdmin, role: !user.isAdmin ? 'admin_ceo' : 'client' });
@@ -172,7 +174,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const isAuthenticated = !!user;
   const isAdmin = !!user && user.role !== 'client';
-  const hasConfiguredGoogleAuth = !!googleClientId && googleClientId.length > 10;
+  const hasConfiguredGoogleAuth = hasGoogleAuth;
 
   return (
     <AuthContext.Provider value={{

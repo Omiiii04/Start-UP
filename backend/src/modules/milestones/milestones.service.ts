@@ -48,8 +48,7 @@ export async function getMilestonesForProject(
   userId: string,
   isAdmin: boolean
 ): Promise<DbMilestone[]> {
-  // Verify ownership via project table
-  const ownerCheck = isAdmin ? '' : `AND p.client_id = '${userId}'`;
+  // Verify ownership via project table using parameterized query
   const { rows: projectCheck } = await query(
     `SELECT project_id FROM projects WHERE project_id = $1 ${isAdmin ? '' : 'AND client_id = $2'} AND deleted_at IS NULL`,
     isAdmin ? [projectId] : [projectId, userId]

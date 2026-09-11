@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ArrowRight, ShieldCheck, FolderKanban, MessageCircle, FileText } from 'lucide-react';
+import { Award, ArrowRight, ShieldCheck, FolderKanban, Send, FileText } from 'lucide-react';
 import type { NavTab } from '../../components/common/Header';
+import { useConfig } from '../../context/ConfigContext';
 
 interface BestSellingProjectsProps {
   onNavigate: (tab: NavTab) => void;
@@ -11,10 +12,10 @@ interface BestSellingProjectsProps {
 export const BestSellingProjects: React.FC<BestSellingProjectsProps> = ({ 
   onNavigate 
 }) => {
-  const handleOpenWhatsApp = () => {
-    const phone = '919876543210';
-    const text = encodeURIComponent('Hello Project Wallah, I would like to inquire about best selling academic and student projects.');
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  const { telegramBotUsername } = useConfig();
+
+  const handleOpenTelegram = () => {
+    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -85,11 +86,11 @@ export const BestSellingProjects: React.FC<BestSellingProjectsProps> = ({
             </button>
 
             <button
-              onClick={handleOpenWhatsApp}
-              className="w-full sm:w-auto justify-center px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:hover:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800/40 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2 cursor-pointer shadow-xs"
+              onClick={handleOpenTelegram}
+              className="w-full sm:w-auto justify-center px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-blue-700 dark:text-blue-300 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/30 dark:hover:bg-blue-900/40 border border-blue-200 dark:border-blue-800/40 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2 cursor-pointer shadow-xs"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <span>Chat on WhatsApp</span>
+              <Send className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span>Chat on Telegram</span>
             </button>
           </div>
         </div>

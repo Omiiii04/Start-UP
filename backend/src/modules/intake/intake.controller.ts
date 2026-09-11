@@ -12,7 +12,7 @@ export async function submit(req: Request, res: Response, next: NextFunction): P
     const result = await intakeService.submitIntake({
       userId: req.user.userId,
       userEmail: req.user.email,
-      userFullName: req.user.email, // Service fetches name from DB via auth token
+      userFullName: req.user.email, // Used in Telegram notification; real name from DB via auth
       title: body.title,
       description: body.description,
       clientCategory: body.clientCategory,
@@ -20,7 +20,6 @@ export async function submit(req: Request, res: Response, next: NextFunction): P
       serviceTierRequested: body.serviceTierRequested,
       budgetIndicationInr: body.budgetIndicationInr,
       isMaharashtraClient: body.isMaharashtraClient,
-      phoneNumber: body.phoneNumber,
     });
 
     sendSuccess(

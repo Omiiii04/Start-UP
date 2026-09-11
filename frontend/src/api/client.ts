@@ -49,6 +49,23 @@ async function request<T>(
   return body.data as T;
 }
 
+// ── Public config (fetched from backend — no frontend env vars needed) ─────
+
+export interface PublicConfig {
+  googleClientId: string;
+  telegramBotUsername: string;
+}
+
+/**
+ * Fetch public application config from the backend.
+ * This allows the frontend to stay config-free (only VITE_API_URL needed).
+ * The backend serves googleClientId and telegramBotUsername safely.
+ * The Telegram bot TOKEN is never included here.
+ */
+export async function getPublicConfig(): Promise<PublicConfig> {
+  return request<PublicConfig>('/api/v1/config');
+}
+
 // ── Auth endpoints ─────────────────────────────────────────────────────────
 
 export interface AuthTokens {

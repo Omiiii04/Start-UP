@@ -3,7 +3,7 @@ import {
   HelpCircle, 
   ChevronDown, 
   Search, 
-  MessageCircle, 
+  Send, 
   MessageSquare, 
   Sparkles, 
   ShieldCheck, 
@@ -18,6 +18,7 @@ import {
   Award
 } from 'lucide-react';
 import { NavTab } from '../../components/common/Header';
+import { useConfig } from '../../context/ConfigContext';
 
 export interface QAItem {
   id: string;
@@ -82,7 +83,7 @@ const QA_ITEMS: QAItem[] = [
     highlights: [
       'Direct 1-on-1 remote assistance via AnyDesk, Google Meet, or TeamViewer',
       'Pre-configured Docker / virtualenv setups for zero-friction runs',
-      'Continuous WhatsApp chat assistance for instant troubleshooting'
+      'Continuous Telegram chat assistance for instant troubleshooting'
     ],
     icon: Laptop
   },
@@ -178,6 +179,7 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [openItemIds, setOpenItemIds] = useState<string[]>(['qa-package-contents']);
+  const { telegramBotUsername } = useConfig();
 
   const toggleItem = (id: string) => {
     setOpenItemIds(prev => 
@@ -209,9 +211,8 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
     });
   }, [selectedCategory, searchQuery]);
 
-  const handleWhatsAppContact = () => {
-    const text = encodeURIComponent('Hello Project Wallah! I have a question regarding project deliverables, viva support, or custom syllabus requirements.');
-    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+  const handleTelegramContact = () => {
+    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -320,7 +321,7 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
                 No matching questions found
               </p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 max-w-sm mx-auto">
-                We could not find any FAQ matching "{searchQuery}". You can ask our team directly on WhatsApp or Live Chat.
+                We could not find any FAQ matching "{searchQuery}". You can ask our team directly on Telegram or Live Chat.
               </p>
               <div className="pt-2 flex flex-wrap justify-center gap-2">
                 <button
@@ -330,11 +331,11 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
                   Clear search filter
                 </button>
                 <button
-                  onClick={handleWhatsAppContact}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  onClick={handleTelegramContact}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-1.5 cursor-pointer shadow-2xs"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>Ask on WhatsApp</span>
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Ask on Telegram</span>
                 </button>
               </div>
             </div>
@@ -428,11 +429,11 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
 
           <div className="flex flex-wrap items-center justify-center gap-2.5 shrink-0 w-full sm:w-auto">
             <button
-              onClick={handleWhatsAppContact}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-600 text-white transition-all hover:scale-105 active:scale-95 shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+              onClick={handleTelegramContact}
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl font-bold text-xs bg-blue-500 hover:bg-blue-600 text-white transition-all hover:scale-105 active:scale-95 shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>Chat on WhatsApp</span>
+              <Send className="w-3.5 h-3.5" />
+              <span>Chat on Telegram</span>
             </button>
 
             {onOpenSupport && (

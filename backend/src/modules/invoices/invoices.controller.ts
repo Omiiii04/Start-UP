@@ -7,19 +7,18 @@ export async function generateInvoice(req: Request, res: Response, next: NextFun
   try {
     if (!req.user) throw Errors.unauthorized();
 
-    const { projectId, milestoneId, clientState, sacCode, clientEmail, clientName } = req.body as {
+    const { projectId, milestoneId, clientState, sacCode, clientName } = req.body as {
       projectId: string;
       milestoneId: string;
       clientState: string;
       sacCode: '998314' | '998315';
-      clientEmail: string;
       clientName: string;
     };
 
     const invoice = await invoicesService.generateInvoice({
       projectId, milestoneId, clientState, sacCode,
       issuedBy: req.user.userId,
-      clientEmail, clientName,
+      clientName,
     });
 
     sendSuccess(res, invoice, 'Invoice generated successfully.', 201);

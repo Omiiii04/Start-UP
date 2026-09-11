@@ -25,4 +25,17 @@ router.get('/me', authenticate, usersController.getMe);
  */
 router.patch('/me', authenticate, validateBody(updateProfileSchema), usersController.updateMe);
 
+/**
+ * POST /api/v1/users/me/telegram/link-token
+ * Generate a short-lived Telegram account linking token.
+ * Returns a deep link the user opens in Telegram.
+ */
+router.post('/me/telegram/link-token', authenticate, usersController.createTelegramLinkToken);
+
+/**
+ * DELETE /api/v1/users/me/telegram/unlink
+ * Remove the Telegram account association from the current user.
+ */
+router.delete('/me/telegram/unlink', authenticate, usersController.unlinkTelegram);
+
 export default router;
