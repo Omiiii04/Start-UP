@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { ShieldCheck, ShieldAlert, Lock, LogIn, ArrowLeft, KeyRound, Shield } from 'lucide-react';
-// NOTE: KeyRound is used in the unauthenticated view below — do not remove
+import { ShieldCheck, ShieldAlert, Lock, ArrowLeft, KeyRound, Shield, LogIn } from 'lucide-react';
 import { UserRole } from '../../types';
 
 interface AdminGuardProps {
@@ -10,16 +9,16 @@ interface AdminGuardProps {
 }
 
 export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDashboard }) => {
-  const { user, isAuthenticated, isAdmin, openAuthModal, switchRole } = useAuth();
+  const { user, isAuthenticated, isAdmin, openAuthModal } = useAuth();
 
   // If fully authenticated as Admin
   if (isAuthenticated && isAdmin && user) {
     const roleTitles: Record<UserRole, string> = {
       'client': 'Client Account',
-      'admin_ceo': 'Lead Architect & AI Systems (Om)',
-      'admin_backend': 'Backend & Cloud Infrastructure (Somnath)',
-      'admin_qa': 'Frontend & Quality Assurance (Falguni)',
-      'admin_ops': 'Operations & Finance (Divya)'
+      'admin_ceo': 'System Administrator',
+      'admin_backend': 'Backend & Cloud Infrastructure',
+      'admin_qa': 'Frontend & Quality Assurance',
+      'admin_ops': 'Operations & Finance'
     };
 
     return (
@@ -55,18 +54,8 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
               </div>
             </div>
 
-            {/* Quick Admin Role Switching */}
+            {/* Removed Quick Admin Role Switching */}
             <div className="flex items-center gap-2 flex-wrap text-xs">
-              <span className="text-zinc-600 font-medium hidden lg:inline">Active Persona:</span>
-              <select
-                value={user.role}
-                onChange={(e) => switchRole(e.target.value as UserRole)}
-                className="bg-white border border-amber-300 text-amber-900 font-medium text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-amber-500 cursor-pointer shadow-sm"
-              >
-                <option value="admin_ceo">Om (Lead Architect)</option>
-                <option value="admin_backend">Somnath (Backend Lead)</option>
-                <option value="admin_qa">Falguni (QA & UI)</option>
-              </select>
 
               <button
                 type="button"
@@ -108,31 +97,17 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
 
           <p className="text-sm text-zinc-600 max-w-lg mx-auto mb-6">
             You are signed in as <strong className="text-zinc-900">{user?.email}</strong> (Client Role). 
-            Access to Operations Dashboard, CRM pipelines, financial milestones, and Engineering management is restricted to authorized Project Wallah team members.
+            Access to Operations Dashboard, CRM pipelines, financial milestones, and Engineering management is restricted to authorized administrators.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <button
               type="button"
-              onClick={() => openAuthModal({ targetRole: 'admin', message: 'Sign in with an authorized Google Admin email.' })}
-              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold rounded-xl text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
-            >
-              <LogIn className="w-4 h-4" />
-              <span>Sign in with Google Admin</span>
-            </button>
-
-            <button
-              type="button"
               onClick={onNavigateToDashboard}
-              className="w-full sm:w-auto px-5 py-3 text-zinc-500 hover:text-zinc-900 font-medium text-sm transition-colors cursor-pointer"
+              className="w-full sm:w-auto px-5 py-3 text-zinc-500 hover:text-zinc-900 font-medium text-sm transition-colors cursor-pointer border border-zinc-200 rounded-xl"
             >
               Return to Dashboard
             </button>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-zinc-200 text-xs text-zinc-500 flex flex-col sm:flex-row items-center justify-center gap-2">
-            <span>Authorized core team emails:</span>
-            <span className="font-mono text-zinc-700">om@, somnath@, divya@, falguni@projectbridge.io</span>
           </div>
         </div>
       </div>
@@ -157,17 +132,17 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
         </h2>
 
         <p className="text-sm text-zinc-600 max-w-lg mx-auto mb-8">
-          Please authenticate with your authorized Google OAuth account to access internal Operations Management, UGC Compliance screening, and Engineering Pipelines.
+          Please authenticate with your authorized Google account or Admin Email to access internal Operations Management, UGC Compliance screening, and Engineering Pipelines.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             type="button"
-            onClick={() => openAuthModal({ targetRole: 'admin', message: 'Authenticate to access Admin Portal.' })}
+            onClick={() => openAuthModal({ message: 'Sign in to access your Project Wallah account.', onSuccessRedirectTab: 'admin' })}
             className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold rounded-xl text-sm shadow-md flex items-center justify-center gap-2.5 transition-all cursor-pointer"
           >
             <LogIn className="w-4 h-4" />
-            <span>Sign in with Google OAuth</span>
+            <span>Sign In</span>
           </button>
 
           <button
@@ -175,7 +150,7 @@ export const AdminGuard: React.FC<AdminGuardProps> = ({ children, onNavigateToDa
             onClick={onNavigateToDashboard}
             className="w-full sm:w-auto px-6 py-3.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-semibold rounded-xl text-sm transition-all border border-zinc-200 cursor-pointer"
           >
-            Back to Client Hub
+            Back to Public Site
           </button>
         </div>
       </div>

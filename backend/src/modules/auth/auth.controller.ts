@@ -35,6 +35,53 @@ export async function googleLogin(req: Request, res: Response, next: NextFunctio
 }
 
 /**
+ * POST /api/v1/auth/register
+ * Client registration with Email/Password.
+ */
+export async function register(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const { email, password } = req.body;
+    const result = await authService.registerClient(email, password);
+
+    res.cookie('pb_refresh_token', result.tokens.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: '/api/v1/auth',
+    });
+
+    sendSuccess(res, { accessToken: result.tokens.accessToken, user: result.user }, 'Account created successfully.', 201);
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * POST /api/v1/auth/login
+ * Client login with Email/Password.
+ */
+export async function login(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const { email, password } = req.body;
+    const result = await authService.loginClient(email, password);
+
+    res.cookie('pb_refresh_token', result.tokens.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: '/api/v1/auth',
+    });
+
+    sendSuccess(res, { accessToken: result.tokens.accessToken, user: result.user }, 'Logged in successfully.', 200);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+/**
  * POST /api/v1/auth/refresh
  * Rotate refresh token — accepts from cookie OR body.
  */

@@ -92,6 +92,23 @@ export async function loginWithGoogle(idToken: string): Promise<AuthTokens> {
   });
 }
 
+/** Client Email/Password Registration */
+export async function registerWithEmail(data: any): Promise<AuthTokens> {
+  return request<AuthTokens>('/api/v1/auth/register', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+/** Client Email/Password Login */
+export async function loginWithEmail(data: any): Promise<AuthTokens> {
+  return request<AuthTokens>('/api/v1/auth/login', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+
 /** Use refresh token cookie to get a new access token */
 export async function refreshAccessToken(): Promise<{ accessToken: string }> {
   return request<{ accessToken: string }>('/api/v1/auth/refresh', {

@@ -19,8 +19,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onNavigate }) => {
     isAuthenticated, 
     isAdmin, 
     openAuthModal, 
-    logout, 
-    switchRole 
+    logout 
   } = useAuth();
   
   const { showToast } = useToast();
@@ -48,18 +47,12 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onNavigate }) => {
     return (
       <button
         type="button"
-        onClick={() => openAuthModal({ targetRole: 'user' })}
+        onClick={() => openAuthModal({})}
         className="shrink-0 flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer"
-        title="Sign In with Google"
-        aria-label="Sign In with Google"
+        title="Sign In"
+        aria-label="Sign In"
       >
-        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-          <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-        </svg>
-        <span className="hidden min-[400px]:inline">Sign In</span>
+        <span className="min-[400px]:inline">Sign In</span>
       </button>
     );
   }
@@ -170,37 +163,6 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onNavigate }) => {
               )}
             </button>
 
-            {/* Quick Demo Switcher */}
-            <div className="pt-2 pb-1 border-t border-zinc-100 dark:border-white/10 px-3">
-              <div className="flex items-center justify-between text-[10px] text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-mono font-semibold mb-1.5">
-                <span>Quick Role Switch</span>
-                <Sparkles className="w-3 h-3 text-zinc-500" />
-              </div>
-              <div className="grid grid-cols-2 gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => switchRole('client')}
-                  className={`py-1 px-2 rounded-lg text-[11px] font-medium border text-center transition-all cursor-pointer ${
-                    user.role === 'client'
-                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-zinc-900 dark:border-white font-bold'
-                      : 'bg-zinc-50 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/10'
-                  }`}
-                >
-                  Client
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchRole('admin_ceo')}
-                  className={`py-1 px-2 rounded-lg text-[11px] font-medium border text-center transition-all cursor-pointer ${
-                    isAdmin
-                      ? 'bg-amber-100 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800/60 font-bold'
-                      : 'bg-zinc-50 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/10'
-                  }`}
-                >
-                  Admin CEO
-                </button>
-              </div>
-            </div>
 
             {/* Sign Out */}
             <div className="pt-1 border-t border-zinc-100 dark:border-white/10">

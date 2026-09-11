@@ -11,7 +11,7 @@ import { ClientProjectHub } from './features/dashboard/ClientProjectHub';
 import { OperationsDashboard } from './features/operations/OperationsDashboard';
 import { EngineeringPipeline } from './features/engineering/EngineeringPipeline';
 import { ToastProvider } from './components/common/Toast';
-import { GoogleAuthModal } from './components/auth/GoogleAuthModal';
+import { ClientAuthModal } from './components/auth/ClientAuthModal';
 import { AdminGuard } from './components/auth/AdminGuard';
 import { ScrollMotionBackground } from './components/common/ScrollMotionBackground';
 import { WorkInProgress } from './features/download/WorkInProgress';
@@ -32,8 +32,8 @@ export const AppContent: React.FC = () => {
   useEffect(() => {
     const loc = parseLocation();
 
-    // If attempting to access protected route without auth, redirect to home with replaceState
-    if (!isAuthenticated && (loc.tab === 'dashboard' || loc.tab === 'admin')) {
+    // If attempting to access protected client route without auth, redirect to home with replaceState
+    if (!isAuthenticated && loc.tab === 'dashboard') {
       replaceNavigation('home', { modal: null });
       setActiveTab('home');
       return;
@@ -66,9 +66,9 @@ export const AppContent: React.FC = () => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // If user logs out while on a protected tab, reset back to public landing page
+  // If user logs out while on a protected client tab, reset back to public landing page
   useEffect(() => {
-    if (!isAuthenticated && (activeTab === 'dashboard' || activeTab === 'admin')) {
+    if (!isAuthenticated && activeTab === 'dashboard') {
       handleTabChange('home', { replace: true });
     }
   }, [isAuthenticated, activeTab]);
@@ -80,20 +80,14 @@ export const AppContent: React.FC = () => {
     // Gate user-access routing behind OAuth authentication
     if (tab === 'dashboard' && !isAuthenticated) {
       openAuthModal({
-        targetRole: 'user',
-        message: 'Please sign in with Google to access your Project Wallah Client Dashboard.',
+        message: 'Please sign in to access your Project Wallah Client Dashboard.',
         onSuccessRedirectTab: 'dashboard'
       });
       return;
     }
 
     if (tab === 'admin' && !isAuthenticated) {
-      openAuthModal({
-        targetRole: 'admin',
-        message: 'Please sign in with your authorized Google Admin account.',
-        onSuccessRedirectTab: 'admin'
-      });
-      return;
+      // Allow them to reach the AdminGuard which will handle the admin login
     }
 
     const currentQuery = options?.query !== undefined ? options.query : (tab === 'browse' ? searchQuery : '');
@@ -187,7 +181,6 @@ export const AppContent: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openAuthModal({
-                    targetRole: 'user',
                     message: 'Sign in to access your Project Wallah Client Dashboard.',
                     onSuccessRedirectTab: 'dashboard'
                   })}
@@ -250,8 +243,8 @@ export const AppContent: React.FC = () => {
         )}
       </main>
 
-      {/* Google Authentication Modal */}
-      <GoogleAuthModal onNavigate={handleTabChange} />
+      {/* Client Authentication Modal */}
+      <ClientAuthModal onNavigate={handleTabChange} />
 
       {/* Modern Clean Centrally Aligned Footer */}
       <footer className="border-t border-zinc-200/80 dark:border-white/10 bg-white/85 dark:bg-zinc-950/40 dark:backdrop-blur-xl py-8 sm:py-10 px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 text-xs text-zinc-500 dark:text-zinc-400 relative z-10 transition-colors">
@@ -294,7 +287,7 @@ export const AppContent: React.FC = () => {
               </>
             ) : (
               <button 
-                onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in to access your Project Wallah client workspace.' })} 
+                onClick={() => openAuthModal({ message: 'Sign in to access your Project Wallah client workspace.' })} 
                 className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
               >
                 Sign In / Client Portal
@@ -402,7 +395,7 @@ export const AppContent: React.FC = () => {
 
             <button
               type="button"
-              onClick={() => openAuthModal({ targetRole: 'user', message: 'Sign in with Google to access your student project dashboard.' })}
+              onClick={() => openAuthModal({ message: 'Sign in to access your student project dashboard.' })}
               className="flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 cursor-pointer"
             >
               <LogIn className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0" />

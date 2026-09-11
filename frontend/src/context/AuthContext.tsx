@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { User, UserRole } from '../types';
 import {
   loginWithGoogle,
+  registerWithEmail,
+  loginWithEmail,
   logoutFromServer,
   refreshAccessToken,
   tokenStore,
@@ -13,7 +15,6 @@ import { useConfig } from './ConfigContext';
 
 export interface AuthModalState {
   isOpen: boolean;
-  targetRole?: 'user' | 'admin';
   message?: string;
   onSuccessRedirectTab?: string;
 }
@@ -26,26 +27,17 @@ export interface AuthContextType {
   googleClientId: string;
   hasConfiguredGoogleAuth: boolean;
   authModal: AuthModalState;
-  adminEmails: string[];
-  openAuthModal: (options?: { targetRole?: 'user' | 'admin'; message?: string; onSuccessRedirectTab?: string }) => void;
+  openAuthModal: (options?: { message?: string; onSuccessRedirectTab?: string }) => void;
   closeAuthModal: () => void;
-  loginWithGoogleCredential: (credential: string, preferredRole?: UserRole) => Promise<boolean>;
-  loginAsDemo: (role: UserRole, customName?: string, customEmail?: string) => void;
+  loginWithGoogleCredential: (credential: string) => Promise<boolean>;
+  register: (data: any) => Promise<boolean>;
+  login: (data: any) => Promise<boolean>;
   logout: () => Promise<void>;
-  toggleAdminElevation: () => void;
-  switchRole: (newRole: UserRole) => void;
 }
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
 const USER_STORAGE_KEY = 'pb_user';
-
-// Default admin email list — these are public display hints only.
-// The server resolves roles authoritatively; this list is for UI-level checks only.
-const DEFAULT_ADMIN_EMAILS = [
-  'om@projectbridge.io',
-  'omapar00@gmail.com',
-];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -74,8 +66,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const { config, hasGoogleAuth } = useConfig();
   const googleClientId = config?.googleClientId || '';
 
-  const adminEmails = DEFAULT_ADMIN_EMAILS;
-
   const [user, setUser] = useState<User | null>(() => {
     try {
       const stored = localStorage.getItem(USER_STORAGE_KEY);
@@ -85,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [authModal, setAuthModal] = useState<AuthModalState>({ isOpen: false, targetRole: 'user' });
+  const [authModal, setAuthModal] = useState<AuthModalState>({ isOpen: false });
 
   // Persist user profile (not token) to localStorage for page refresh UX
   useEffect(() => {
@@ -107,8 +97,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // ── Login via Google OAuth (calls backend) ───────────────────────────────
   const loginWithGoogleCredential = useCallback(async (
-    credential: string,
-    _preferredRole?: UserRole
+    credential: string
   ): Promise<boolean> => {
     setIsLoading(true);
     try {
@@ -125,23 +114,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  // ── Demo login (local only) ───────────────────────────────────────────────
-  const loginAsDemo = useCallback((role: UserRole, customName?: string, customEmail?: string) => {
-    const isAdm = role !== 'client';
-    const demoUser: User = {
-      userId: `usr_demo_${Math.random().toString(36).substring(2, 8)}`,
-      email: customEmail || (isAdm ? 'omapar00@gmail.com' : 'demo.client@gmail.com'),
-      fullName: customName || (isAdm ? 'Om J. (Lead Architect)' : 'Demo Client'),
-      role,
-      clientCategory: role === 'client' ? 'sme' : undefined,
-      institutionOrCompany: isAdm ? 'Project Wallah Core' : 'Demo Company',
-      picture: undefined,
-      isAdmin: isAdm,
-      createdAt: new Date().toISOString(),
-    };
-    setUser(demoUser);
-    closeAuthModal();
+  // ── Login with Email/Password ───────────────────────────────
+  const login = useCallback(async (data: any): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      const result = await loginWithEmail(data);
+      tokenStore.set(result.accessToken);
+      setUser(mapApiUserToUser(result.user));
+      closeAuthModal();
+      return true;
+    } catch (err: any) {
+      console.error('[Auth] Login failed:', err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  // ── Register with Email/Password ───────────────────────────────
+  const register = useCallback(async (data: any): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      const result = await registerWithEmail(data);
+      tokenStore.set(result.accessToken);
+      setUser(mapApiUserToUser(result.user));
+      closeAuthModal();
+      return true;
+    } catch (err: any) {
+      console.error('[Auth] Register failed:', err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
 
   // ── Logout ───────────────────────────────────────────────────────────────
   const logout = useCallback(async () => {
@@ -151,21 +157,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem(USER_STORAGE_KEY);
   }, []);
 
-  // ── Admin persona switch (UI only — already authenticated admin) ─────────
-  const switchRole = useCallback((newRole: UserRole) => {
-    if (!user) return;
-    setUser({ ...user, role: newRole, isAdmin: newRole !== 'client' });
-  }, [user]);
-
-  // ── Legacy: admin elevation toggle (kept for type compat) ────────────────
-  const toggleAdminElevation = useCallback(() => {
-    if (!user) return;
-    setUser({ ...user, isAdmin: !user.isAdmin, role: !user.isAdmin ? 'admin_ceo' : 'client' });
-  }, [user]);
-
   // ── Modal helpers ─────────────────────────────────────────────────────────
-  const openAuthModal = useCallback((options?: { targetRole?: 'user' | 'admin'; message?: string; onSuccessRedirectTab?: string }) => {
-    setAuthModal({ isOpen: true, targetRole: options?.targetRole || 'user', message: options?.message, onSuccessRedirectTab: options?.onSuccessRedirectTab });
+  const openAuthModal = useCallback((options?: { message?: string; onSuccessRedirectTab?: string }) => {
+    setAuthModal({ isOpen: true, message: options?.message, onSuccessRedirectTab: options?.onSuccessRedirectTab });
   }, []);
 
   const closeAuthModal = useCallback(() => {
@@ -180,10 +174,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     <AuthContext.Provider value={{
       user, isAuthenticated, isAdmin, isLoading,
       googleClientId, hasConfiguredGoogleAuth,
-      authModal, adminEmails,
+      authModal,
       openAuthModal, closeAuthModal,
-      loginWithGoogleCredential, loginAsDemo,
-      logout, toggleAdminElevation, switchRole,
+      loginWithGoogleCredential, register, login,
+      logout,
     }}>
       {children}
     </AuthContext.Provider>

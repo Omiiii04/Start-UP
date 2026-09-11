@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { authLimiter } from '../../middleware/rateLimiter';
 import { authenticate } from '../../middleware/authenticate';
 import { validateBody } from '../../middleware/validateBody';
-import { googleAuthSchema, refreshTokenSchema } from './auth.schema';
+import { googleAuthSchema, refreshTokenSchema, clientRegisterSchema, clientLoginSchema } from './auth.schema';
 import * as authController from './auth.controller';
 
 const router = Router();
@@ -13,6 +13,19 @@ const router = Router();
  * Rate-limited: 10 req/15min per IP.
  */
 router.post('/google', authLimiter, validateBody(googleAuthSchema), authController.googleLogin);
+
+/**
+ * POST /api/v1/auth/register
+ * Client Email/Password registration
+ */
+router.post('/register', authLimiter, validateBody(clientRegisterSchema), authController.register);
+
+/**
+ * POST /api/v1/auth/login
+ * Client Email/Password login
+ */
+router.post('/login', authLimiter, validateBody(clientLoginSchema), authController.login);
+
 
 /**
  * POST /api/v1/auth/refresh

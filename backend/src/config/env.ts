@@ -23,10 +23,9 @@ const envSchema = z.object({
   // Google OAuth (required — backend cannot verify Google tokens without this)
   GOOGLE_CLIENT_ID: z.string().min(10, 'GOOGLE_CLIENT_ID is required for Google authentication'),
 
-  // Admin emails (server-authoritative comma-separated list)
-  ADMIN_EMAILS: z
-    .string()
-    .default('om@projectbridge.io,somnath@projectbridge.io,falguni@projectbridge.io,divya@projectbridge.io'),
+  // Admin Authentication
+  ADMIN_EMAIL: z.string().email(),
+  ADMIN_PASSWORD_HASH: z.string().min(1),
 
   // Cloudinary (file uploads)
   CLOUDINARY_CLOUD_NAME: z.string().min(1).optional().or(z.literal('')),
@@ -62,9 +61,6 @@ export type Env = z.infer<typeof envSchema>;
 export const env: Env = parsed.data;
 
 // Derived helpers
-export const ADMIN_EMAILS_SET = new Set(
-  env.ADMIN_EMAILS.split(',').map((e) => e.trim().toLowerCase()).filter(Boolean)
-);
 
 export const CORS_ORIGINS = env.CORS_ORIGIN.split(',').map((o) => o.trim());
 

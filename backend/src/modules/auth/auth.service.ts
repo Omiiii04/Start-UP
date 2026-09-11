@@ -1,6 +1,6 @@
 import { OAuth2Client } from 'google-auth-library';
 import { query, getClient } from '../../config/database';
-import { env, ADMIN_EMAILS_SET } from '../../config/env';
+import { env } from '../../config/env';
 import {
   signAccessToken,
   signRefreshToken,
@@ -11,6 +11,7 @@ import {
 import { AppError, Errors } from '../../shared/apiResponse';
 import { UserRole, DbUser, DbRefreshToken } from '../../shared/types';
 import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcryptjs';
 
 const googleClient = new OAuth2Client(env.GOOGLE_CLIENT_ID);
 
@@ -70,16 +71,10 @@ export async function verifyGoogleToken(idToken: string): Promise<{
 }
 
 /**
- * Resolve role from email — backend is authoritative.
- * Admins in ADMIN_EMAILS_SET are granted admin_ceo (superuser) access.
+ * Google OAuth is only for clients.
  */
-function resolveRoleFromEmail(email: string): UserRole {
-  const lower = email.toLowerCase().trim();
-
-  if (!ADMIN_EMAILS_SET.has(lower)) return 'client';
-
-  // All admins in the .env list get CEO/superuser access dynamically
-  return 'admin_ceo';
+function resolveRoleFromEmail(_email: string): UserRole {
+  return 'client';
 }
 
 /**
@@ -141,27 +136,112 @@ async function upsertGoogleUser(googleData: {
 }
 
 /**
- * Store a refresh token hash in the database.
+ * Register a new client via Email/Password
  */
-async function storeRefreshToken(userId: string, rawToken: string): Promise<void> {
-  const tokenHash = hashToken(rawToken);
-  const expiresAt = getRefreshTokenExpiry();
-
-  await query(
-    `INSERT INTO refresh_tokens (token_id, user_id, token_hash, expires_at)
-     VALUES ($1, $2, $3, $4)`,
-    [uuidv4(), userId, tokenHash, expiresAt]
+export async function registerClient(email: string, passwordPlain: string): Promise<AuthResult> {
+  const emailLower = email.toLowerCase().trim();
+  
+  const { rows: existing } = await query<DbUser>(
+    `SELECT * FROM users WHERE email = $1 AND deleted_at IS NULL`,
+    [emailLower]
   );
+
+  if (existing.length > 0) {
+    if (existing[0].password_hash) {
+      throw new AppError(409, 'EMAIL_EXISTS', 'An account with this email already exists. Please sign in.');
+    } else {
+      // User created via Google initially, now setting up a password
+      const hash = await bcrypt.hash(passwordPlain, 12);
+      const { rows: updated } = await query<DbUser>(
+        `UPDATE users SET password_hash = $1, updated_at = NOW() WHERE email = $2 RETURNING *`,
+        [hash, emailLower]
+      );
+      return generateAuthResult(updated[0]);
+    }
+  }
+
+  const userId = uuidv4();
+  const hash = await bcrypt.hash(passwordPlain, 12);
+  const { rows: created } = await query<DbUser>(
+    `INSERT INTO users (user_id, email, password_hash, full_name, role, is_active)
+     VALUES ($1, $2, $3, $4, $5, true)
+     RETURNING *`,
+    [userId, emailLower, hash, emailLower.split('@')[0], 'client']
+  );
+  
+  return generateAuthResult(created[0]);
 }
 
 /**
- * Authenticate with Google ID token.
- * Verifies token, upserts user, issues JWT pair.
+ * Login via Email/Password (Handles both Admin and Client)
  */
-export async function authenticateWithGoogle(idToken: string): Promise<AuthResult> {
-  const googleData = await verifyGoogleToken(idToken);
-  const user = await upsertGoogleUser(googleData);
+export async function loginClient(email: string, passwordPlain: string): Promise<AuthResult> {
+  const emailLower = email.toLowerCase().trim();
+  
+  // 1. Check if this is the Admin attempting to login
+  if (emailLower === env.ADMIN_EMAIL.toLowerCase().trim()) {
+    const isValidAdmin = await bcrypt.compare(passwordPlain, env.ADMIN_PASSWORD_HASH);
+    if (!isValidAdmin) {
+      throw Errors.unauthorized('Invalid email or password.');
+    }
 
+    // Admin authentication successful!
+    let { rows: admins } = await query<DbUser>(
+      `SELECT * FROM users WHERE email = $1 AND deleted_at IS NULL`,
+      [emailLower]
+    );
+
+    let adminUser: DbUser;
+
+    if (admins.length === 0) {
+      const userId = uuidv4();
+      const { rows: created } = await query<DbUser>(
+        `INSERT INTO users (user_id, email, full_name, role, is_active)
+         VALUES ($1, $2, $3, $4, true)
+         RETURNING *`,
+        [userId, emailLower, 'System Administrator', 'admin_ceo']
+      );
+      adminUser = created[0];
+    } else {
+      adminUser = admins[0];
+      if (adminUser.role !== 'admin_ceo') {
+        const { rows: updated } = await query<DbUser>(
+          `UPDATE users SET role = 'admin_ceo' WHERE user_id = $1 RETURNING *`,
+          [adminUser.user_id]
+        );
+        adminUser = updated[0];
+      }
+    }
+    return generateAuthResult(adminUser);
+  }
+
+  // 2. Standard Client Login
+  const { rows: existing } = await query<DbUser>(
+    `SELECT * FROM users WHERE email = $1 AND deleted_at IS NULL`,
+    [emailLower]
+  );
+
+  if (existing.length === 0) {
+    throw Errors.unauthorized('Invalid email or password.');
+  }
+
+  const user = existing[0];
+  if (!user.password_hash) {
+    throw Errors.unauthorized('This account was created with Google OAuth. Please use "Continue with Google".');
+  }
+
+  const isValid = await bcrypt.compare(passwordPlain, user.password_hash);
+  if (!isValid) {
+    throw Errors.unauthorized('Invalid email or password.');
+  }
+
+  return generateAuthResult(user);
+}
+
+/**
+ * Helper to generate JWT pair and AuthResult
+ */
+async function generateAuthResult(user: DbUser): Promise<AuthResult> {
   const tokenPayload = {
     userId: user.user_id,
     email: user.email,
@@ -183,6 +263,30 @@ export async function authenticateWithGoogle(idToken: string): Promise<AuthResul
       picture: user.picture_url,
     },
   };
+}
+
+/**
+ * Store a refresh token hash in the database.
+ */
+async function storeRefreshToken(userId: string, rawToken: string): Promise<void> {
+  const tokenHash = hashToken(rawToken);
+  const expiresAt = getRefreshTokenExpiry();
+
+  await query(
+    `INSERT INTO refresh_tokens (token_id, user_id, token_hash, expires_at)
+     VALUES ($1, $2, $3, $4)`,
+    [uuidv4(), userId, tokenHash, expiresAt]
+  );
+}
+
+/**
+ * Authenticate with Google ID token.
+ * Verifies token, upserts user, issues JWT pair.
+ */
+export async function authenticateWithGoogle(idToken: string): Promise<AuthResult> {
+  const googleData = await verifyGoogleToken(idToken);
+  const user = await upsertGoogleUser(googleData);
+  return generateAuthResult(user);
 }
 
 /**
