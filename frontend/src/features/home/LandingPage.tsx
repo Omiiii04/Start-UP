@@ -27,6 +27,7 @@ import { ProjectItem } from '../browse/BrowseProjects';
 import { getProjects } from '../../api/client';
 import { InstantServiceModal, InstantServiceItem } from '../../components/common/InstantServiceModal';
 import { ProjectDetailsModal } from '../../components/common/ProjectDetailsModal';
+import { QASection } from './QASection';
 
 const INSTANT_SERVICES: InstantServiceItem[] = [
   {
@@ -451,7 +452,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {featuredProjects.map((project) => (
             <div 
               key={project.id}
@@ -700,7 +701,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {[
             { phase: 'Phase I', title: 'Client Onboarding', desc: 'Requirement intake, technical feasibility check & discovery.' },
             { phase: 'Phase II', title: 'Contract & Advance', desc: 'Scope baseline, GST quotation, SOW sign-off & 40% advance.' },
@@ -795,6 +796,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </button>
         </div>
       </section>
+
+      {/* ── 9. Q&A / FREQUENTLY ASKED QUESTIONS (JUST ABOVE FOOTER) ── */}
+      <QASection onOpenSupport={onOpenSupport} onNavigate={onNavigate} />
     </div>
 
       {/* Instant Service Project Details Modal */}

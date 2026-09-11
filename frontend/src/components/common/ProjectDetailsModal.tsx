@@ -260,7 +260,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
 
   return createPortal(
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-5 md:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget && !isSubmitting) {
           handleClose();
@@ -272,7 +272,7 @@ export const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[86vh] text-zinc-900 dark:text-zinc-100 my-auto"
+        className="relative w-full max-w-3xl bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[88vh] text-zinc-900 dark:text-zinc-100 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Header */}
