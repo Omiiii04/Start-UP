@@ -370,9 +370,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Tier 2: Instant Mini Project (Most Popular) */}
           <div className="rounded-2xl p-6 border-2 border-cyan-500/70 dark:border-cyan-400/60 bg-white/70 dark:bg-cyan-950/20 backdrop-blur-xl shadow-lg shadow-cyan-900/10 dark:shadow-cyan-950/30 relative flex flex-col justify-between items-center text-center hover:shadow-xl transition-all">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-white dark:text-zinc-950 text-[10px] font-bold font-mono tracking-wider uppercase bg-cyan-600 dark:bg-cyan-400 shadow-sm">
-              Most Popular
-            </div>
             <div className="w-full flex flex-col items-center">
               <div className="w-11 h-11 rounded-xl text-white dark:text-zinc-950 flex items-center justify-center mb-3 shadow-sm bg-cyan-600 dark:bg-cyan-400 mx-auto">
                 <Cpu className="w-5 h-5" />
