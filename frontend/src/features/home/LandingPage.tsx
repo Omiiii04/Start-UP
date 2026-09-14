@@ -98,8 +98,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <div className="w-full bg-transparent flex flex-col space-y-12 sm:space-y-16 pb-0 sm:pb-2 max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6">
       
       {/* ── 1. HERO SECTION ── */}
-      <section className="w-full bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 py-6 px-4 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all text-center">
-        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center space-y-5 sm:space-y-6">
+      <section className="w-full bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 py-5 [@media(max-height:700px)]:py-3 [@media(max-height:600px)]:py-2 px-4 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all text-center">
+        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center space-y-5 [@media(max-height:700px)]:space-y-3 [@media(max-height:600px)]:space-y-2 sm:space-y-6">
           
           <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/10 border border-slate-200/80 dark:border-white/15 text-slate-800 dark:text-zinc-200 text-[11px] sm:text-xs font-mono font-semibold backdrop-blur-sm shadow-2xs mx-auto max-w-full text-center">
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
@@ -117,8 +117,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </p>
 
           {/* Hero Search */}
-          <div className="w-full max-w-xl mx-auto relative pt-4 pb-2">
-            <Search className="w-5 h-5 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2 z-10 mt-1" />
+          <div className="w-full max-w-xl mx-auto relative pt-4 [@media(max-height:700px)]:pt-1 pb-2 [@media(max-height:700px)]:pb-0">
+            <Search className="w-5 h-5 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2 z-10 mt-1 [@media(max-height:700px)]:mt-0" />
             <input
               type="text"
               placeholder="Search projects by keyword, tech stack, or category..."
@@ -155,7 +155,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* 3-Stat Metric Row */}
-          <div className="pt-5 sm:pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-6 w-full max-w-2xl mx-auto text-center">
+          <div className="pt-5 [@media(max-height:700px)]:pt-3 [@media(max-height:600px)]:pt-2 sm:pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-6 w-full max-w-2xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center text-center">
               <p className="text-lg sm:text-2xl font-black font-headline text-slate-900 dark:text-white">200+</p>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 font-medium">Ready-Made Projects</p>

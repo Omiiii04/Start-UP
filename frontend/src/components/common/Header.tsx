@@ -356,10 +356,10 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Mobile Horizontal Sub-Navbar Strip - Centrally aligned with smooth scrolling */}
+        {/* Tablet Horizontal Sub-Navbar Strip - Hidden on mobile (uses bottom nav) and short landscape */}
         <nav 
           aria-label="Mobile Navigation Bar" 
-          className="lg:hidden w-full border-t border-zinc-200/80 dark:border-white/10 bg-white/95 dark:bg-zinc-950/90 backdrop-blur-xl py-2 overflow-x-auto no-scrollbar scroll-smooth"
+          className="hidden md:block lg:hidden [@media(max-height:500px)]:hidden w-full border-t border-zinc-200/80 dark:border-white/10 bg-white/95 dark:bg-zinc-950/90 backdrop-blur-xl py-2 overflow-x-auto no-scrollbar scroll-smooth"
         >
           <div className="flex items-center justify-around px-2 sm:px-4 mx-auto w-full max-w-md">
             <button
