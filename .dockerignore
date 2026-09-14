@@ -1,0 +1,38 @@
+# ── Dependency directories ──────────────────────────────────
+**/node_modules
+
+# ── Build outputs ───────────────────────────────────────────
+**/dist
+frontend/dist
+backend/dist
+
+# ── Environment files (secrets must never go into the image) ─
+**/.env
+**/.env.local
+**/.env.*.local
+
+# ── Version control ─────────────────────────────────────────
+.git
+.gitignore
+
+# ── Editor / OS artefacts ───────────────────────────────────
+.vscode
+.idea
+.DS_Store
+*.suo
+*.sw?
+
+# ── Logs ────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Test & coverage ─────────────────────────────────────────
+coverage/
+**/*.test.ts
+**/*.spec.ts
+
+# ── Misc ────────────────────────────────────────────────────
+.agents
+README.md
+PRODUCTION_READINESS.md
+TELEGRAM_SETUP.md

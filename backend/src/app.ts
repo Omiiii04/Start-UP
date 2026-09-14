@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -118,6 +119,19 @@ export function createApp() {
       },
     });
   });
+
+  // ── Serve React build & SPA catch-all (production only)
+  // In the Docker image the layout is /app/dist (backend) and /app/client (frontend).
+  // __dirname inside dist/app.js resolves to /app/dist, so ../../client → /app/client.
+  if (env.NODE_ENV === 'production') {
+    const clientPath = path.join(__dirname, '..', 'client');
+    app.use(express.static(clientPath));
+    // SPA catch-all — serve index.html for any non-/api path so
+    // client-side routing (React Router / wouter) works correctly.
+    app.get(/^(?!\/api\/).*/, (_req, res) => {
+      res.sendFile(path.join(clientPath, 'index.html'));
+    });
+  }
 
   // ── 404 handler (must be before error handler)
   app.use(notFoundHandler);

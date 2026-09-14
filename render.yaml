@@ -1,0 +1,56 @@
+# render.yaml — Render Blueprint
+# https://render.com/docs/blueprint-spec
+#
+# Deploy: connect your GitHub repo in the Render dashboard and Render will
+# automatically detect this file and provision the service below.
+# All secret env vars (DATABASE_URL, JWT_SECRET, etc.) must be set in
+# Render Dashboard → Service → Environment, NOT here.
+
+services:
+  - name: start-up
+    type: web
+    runtime: docker
+    # Render builds from the Dockerfile at the repo root
+    dockerfilePath: ./Dockerfile
+    # Render injects PORT automatically; do not set it here
+    plan: free        # change to 'starter' or higher for production SLAs
+    region: oregon    # choose the region closest to your users / database
+    healthCheckPath: /api/v1/health
+    envVars:
+      # ── Required ─────────────────────────────────────────────
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false   # set in dashboard — never commit secrets
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      # CORS_ORIGIN should be set to your Render service URL once deployed,
+      # e.g. https://start-up.onrender.com
+      - key: CORS_ORIGIN
+        sync: false
+
+      # ── Optional — Cloudinary (file uploads) ──────────────────
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+      # ── Optional — Telegram notifications ────────────────────
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_BOT_USERNAME
+        value: start_up
+      - key: TELEGRAM_ADMIN_CHAT_ID
+        sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        sync: false
