@@ -2,10 +2,13 @@ import { Pool, PoolClient } from 'pg';
 import { env } from './env';
 
 // Connection pool — reused across all requests
+// Production (Render): DATABASE_URL must point to Supabase's connection pooler
+// (port 6543, Transaction mode) — Render free tier only has IPv4, and the
+// direct Supabase host (port 5432) resolves to IPv6 which is unreachable.
 const pool = new Pool({
   connectionString: env.DATABASE_URL,
-  max: 20,                  // Max simultaneous connections
-  idleTimeoutMillis: 30000, // Close idle clients after 30s
+  max: env.NODE_ENV === 'production' ? 5 : 20, // Supabase free tier pooler limit
+  idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
   ssl: env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
