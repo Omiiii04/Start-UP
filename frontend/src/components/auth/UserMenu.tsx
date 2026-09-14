@@ -5,8 +5,7 @@ import {
   LogOut, 
   ShieldCheck, 
   LayoutDashboard, 
-  ChevronDown, 
-  Sparkles
+  ChevronDown
 } from 'lucide-react';
 
 interface UserMenuProps {

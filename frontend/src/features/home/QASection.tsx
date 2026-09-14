@@ -2,19 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { 
   HelpCircle, 
   ChevronDown, 
-  Search, 
   Send, 
   MessageSquare, 
   Sparkles, 
-  ShieldCheck, 
   Code, 
   FileText, 
   Laptop, 
   Clock, 
   CheckCircle2, 
   Plus, 
-  X, 
-  Layers,
   Award
 } from 'lucide-react';
 import { NavTab } from '../../components/common/Header';
@@ -48,46 +44,6 @@ const QA_ITEMS: QAItem[] = [
     icon: Code
   },
   {
-    id: 'qa-viva-preparation',
-    category: 'viva',
-    categoryLabel: 'Viva & Presentation',
-    question: 'Will I receive Viva Voce preparation and defense guidance?',
-    answer: 'Yes, absolutely. We know that code alone does not guarantee a top grade; your viva presentation is critical. Every project includes a dedicated Viva Defense Handbook tailored to the exact algorithms, design patterns, and database decisions used in your build.',
-    highlights: [
-      '50+ curated Viva Voce questions with model answers',
-      'Deep explanation of internal logic, algorithms, and libraries',
-      'Database normalization, query execution, and API explanation notes',
-      'Ready-to-speak pitch script for your project demonstration'
-    ],
-    icon: Award
-  },
-  {
-    id: 'qa-customization',
-    category: 'deliverables',
-    categoryLabel: 'Code & Deliverables',
-    question: 'Can the project be customized to match my college syllabus or unique guidelines?',
-    answer: 'Yes! Whether your college requires a specific tech stack (e.g., Python FastAPI instead of Flask, React instead of HTML, MongoDB instead of MySQL) or requires specific problem domain adjustments, our lead engineers can adapt any existing blueprint or build custom features to match your exact academic syllabus and professor guidelines.',
-    highlights: [
-      'Custom tech stack migration upon request',
-      'Integration of college-specific modules & unique feature sets',
-      'Alignment with IEEE / ABET / NAAC / University-specific documentation rubrics'
-    ],
-    icon: Layers
-  },
-  {
-    id: 'qa-setup-issues',
-    category: 'setup',
-    categoryLabel: 'Setup & Support',
-    question: 'What if I face issues running or setting up the code on my computer?',
-    answer: 'You will never be left stranded. We provide 24/7 dedicated engineering support. If you run into dependency conflicts, environment path errors, or database connection problems, our technical leads will assist you directly.',
-    highlights: [
-      'Direct 1-on-1 remote assistance via AnyDesk, Google Meet, or TeamViewer',
-      'Pre-configured Docker / virtualenv setups for zero-friction runs',
-      'Continuous Telegram chat assistance for instant troubleshooting'
-    ],
-    icon: Laptop
-  },
-  {
     id: 'qa-delivery-time',
     category: 'delivery',
     categoryLabel: 'Pricing & Delivery',
@@ -101,17 +57,17 @@ const QA_ITEMS: QAItem[] = [
     icon: Clock
   },
   {
-    id: 'qa-plagiarism',
-    category: 'general',
-    categoryLabel: 'Code & Deliverables',
-    question: 'Are the reports and source code checked for plagiarism and originality?',
-    answer: 'Yes. Academic integrity is our top priority. All project documentation, abstracts, and reports are written by domain specialists and verified through industry-standard plagiarism tools (Turnitin / DrillBit) to keep similarity scores strictly below university thresholds (typically under 10–15%).',
+    id: 'qa-setup-issues',
+    category: 'setup',
+    categoryLabel: 'Setup & Support',
+    question: 'What if I face issues running or setting up the code on my computer?',
+    answer: 'You will never be left stranded. We provide 24/7 dedicated engineering support. If you run into dependency conflicts, environment path errors, or database connection problems, our technical leads will assist you directly.',
     highlights: [
-      'Plagiarism verification certificate provided on request',
-      'Clean, modular code comments and original system architecture',
-      'Unique database datasets tailored to your topic'
+      'Direct 1-on-1 remote assistance via AnyDesk, Google Meet, or TeamViewer',
+      'Pre-configured Docker / virtualenv setups for zero-friction runs',
+      'Continuous Telegram chat assistance for instant troubleshooting'
     ],
-    icon: ShieldCheck
+    icon: Laptop
   },
   {
     id: 'qa-revisions',
@@ -141,19 +97,6 @@ const QA_ITEMS: QAItem[] = [
     icon: Sparkles
   },
   {
-    id: 'qa-confidentiality',
-    category: 'general',
-    categoryLabel: 'General & Security',
-    question: 'Is my project submission and personal details kept confidential?',
-    answer: '100% confidential. We operate under strict privacy protocols. Your student identity, university affiliation, and project code are never shared publicly or resold to other students in your institution.',
-    highlights: [
-      'Strict non-disclosure commitment for all student project work',
-      'Private repository links and encrypted file deliveries',
-      'No personal data published or shared with third parties'
-    ],
-    icon: ShieldCheck
-  },
-  {
     id: 'qa-payment-security',
     category: 'delivery',
     categoryLabel: 'Pricing & Delivery',
@@ -165,6 +108,20 @@ const QA_ITEMS: QAItem[] = [
       'Clear refund and revision guarantees backed by milestone verification'
     ],
     icon: CheckCircle2
+  },
+  {
+    id: 'qa-viva-preparation',
+    category: 'viva',
+    categoryLabel: 'Viva & Presentation',
+    question: 'What happens post-purchase? Will I receive Viva Voce defense guidance?',
+    answer: 'Yes, absolutely. We know that code alone does not guarantee a top grade; your viva presentation is critical. Every project includes a dedicated Viva Defense Handbook tailored to the exact algorithms, design patterns, and database decisions used in your build.',
+    highlights: [
+      '50+ curated Viva Voce questions with model answers',
+      'Deep explanation of internal logic, algorithms, and libraries',
+      'Database normalization, query execution, and API explanation notes',
+      'Ready-to-speak pitch script for your project demonstration'
+    ],
+    icon: Award
   }
 ];
 
@@ -177,39 +134,18 @@ interface QASectionProps {
 
 export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate }) => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [openItemIds, setOpenItemIds] = useState<string[]>(['qa-package-contents']);
   const { telegramBotUsername } = useConfig();
 
   const toggleItem = (id: string) => {
-    setOpenItemIds(prev => 
-      prev.includes(id) ? prev.filter(itemId => itemId !== id) : [...prev, id]
-    );
-  };
-
-  const handleExpandAll = () => {
-    setOpenItemIds(QA_ITEMS.map(item => item.id));
-  };
-
-  const handleCollapseAll = () => {
-    setOpenItemIds([]);
+    setOpenItemIds(prev => (prev.includes(id) ? [] : [id]));
   };
 
   const filteredItems = useMemo(() => {
     return QA_ITEMS.filter(item => {
-      const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-      const q = searchQuery.toLowerCase().trim();
-      if (!q) return matchesCategory;
-
-      const matchesSearch = 
-        item.question.toLowerCase().includes(q) ||
-        item.answer.toLowerCase().includes(q) ||
-        item.categoryLabel.toLowerCase().includes(q) ||
-        (item.highlights && item.highlights.some(h => h.toLowerCase().includes(q)));
-
-      return matchesCategory && matchesSearch;
+      return selectedCategory === 'all' || item.category === selectedCategory;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory]);
 
   const handleTelegramContact = () => {
     window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
@@ -245,28 +181,6 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
 
         {/* Search & Category Filter Controls */}
         <div className="space-y-4 max-w-3xl mx-auto">
-          {/* Search Bar */}
-          <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-zinc-500 pointer-events-none" />
-            <input
-              id="qa-search"
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search questions (e.g. viva, report, setup, plagiarism, delivery)..."
-              className="w-full pl-10 pr-10 py-3 rounded-2xl bg-white/80 dark:bg-zinc-900/60 border border-slate-200 dark:border-white/15 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-hidden focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 transition-all shadow-xs backdrop-blur-sm"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors p-1"
-                aria-label="Clear search"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
           {/* Category Chips & Expand/Collapse Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1">
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
@@ -294,21 +208,6 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
               })}
             </div>
 
-            <div className="flex items-center gap-2 text-xs">
-              <button
-                onClick={handleExpandAll}
-                className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium transition-colors cursor-pointer py-1 px-1.5"
-              >
-                Expand all
-              </button>
-              <span className="text-slate-300 dark:text-zinc-700">•</span>
-              <button
-                onClick={handleCollapseAll}
-                className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium transition-colors cursor-pointer py-1 px-1.5"
-              >
-                Collapse all
-              </button>
-            </div>
           </div>
         </div>
 
@@ -321,14 +220,14 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
                 No matching questions found
               </p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 max-w-sm mx-auto">
-                We could not find any FAQ matching "{searchQuery}". You can ask our team directly on Telegram or Live Chat.
+                We could not find any FAQ matching this category. You can ask our team directly on Telegram or Live Chat.
               </p>
               <div className="pt-2 flex flex-wrap justify-center gap-2">
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => setSelectedCategory('all')}
                   className="px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 border border-slate-300 dark:border-white/10 text-slate-700 dark:text-zinc-300 hover:bg-slate-50 cursor-pointer shadow-2xs"
                 >
-                  Clear search filter
+                  Clear filter
                 </button>
                 <button
                   onClick={handleTelegramContact}
@@ -411,6 +310,16 @@ export const QASection: React.FC<QASectionProps> = ({ onOpenSupport, onNavigate 
               );
             })
           )}
+        </div>
+
+        <div className="text-center pt-2 pb-6">
+          <button
+            onClick={() => setSelectedCategory('all')}
+            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            View All FAQs
+            <span aria-hidden="true">&rarr;</span>
+          </button>
         </div>
 
         {/* ── Help / Contact Callout Card ── */}

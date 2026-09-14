@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, useMotionValue } from 'framer-motion';
 import heroSpheresBackdrop from '../../assets/hero-spheres-backdrop.png';
 import ballCenterImg from '../../assets/ball-center.png';
@@ -200,7 +200,7 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
               duration: 7,
               ease: 'easeInOut',
             }}
-            className="absolute top-[14%] sm:top-[16%] left-[54%] sm:left-[56%] w-16 sm:w-24 lg:w-28 will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
+            className="absolute top-[14%] sm:top-[16%] left-[54%] sm:left-[56%] w-12 sm:w-20 lg:w-28 will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
           >
             <motion.div
               style={{
@@ -240,7 +240,7 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
               ease: 'easeInOut',
               delay: 0.5,
             }}
-            className="absolute top-[32%] sm:top-[34%] left-[44%] sm:left-[47%] w-20 sm:w-28 lg:w-36 will-change-transform drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]"
+            className="absolute top-[32%] sm:top-[34%] left-[44%] sm:left-[47%] w-16 sm:w-24 lg:w-36 will-change-transform drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]"
           >
             <motion.div
               style={{
@@ -284,7 +284,7 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
               duration: 5.5,
               ease: 'easeInOut',
             }}
-            className="absolute top-[30%] sm:top-[31%] left-[58%] sm:left-[60%] w-28 sm:w-40 lg:w-52 will-change-transform z-10 drop-shadow-[0_28px_55px_rgba(0,0,0,0.95)]"
+            className="absolute top-[30%] sm:top-[31%] left-[58%] sm:left-[60%] w-20 sm:w-40 lg:w-52 will-change-transform z-10 drop-shadow-[0_28px_55px_rgba(0,0,0,0.95)]"
           >
             <motion.div
               style={{
@@ -329,7 +329,7 @@ export const ScrollMotionBackground: React.FC<ScrollMotionBackgroundProps> = ({
               ease: 'easeInOut',
               delay: 0.8,
             }}
-            className="absolute top-[22%] sm:top-[24%] left-[72%] sm:left-[75%] w-24 sm:w-32 lg:w-44 will-change-transform drop-shadow-[0_22px_45px_rgba(0,0,0,0.85)]"
+            className="hidden sm:block absolute top-[22%] sm:top-[24%] left-[72%] sm:left-[75%] w-24 sm:w-32 lg:w-44 will-change-transform drop-shadow-[0_22px_45px_rgba(0,0,0,0.85)]"
           >
             <motion.div
               style={{

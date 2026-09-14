@@ -150,7 +150,6 @@ export const AppContent: React.FC = () => {
         {activeTab === 'home' && (
           <LandingPage 
             onNavigate={handleTabChange}
-            onSelectTemplate={handleSelectTemplate}
             onOpenSupport={handleOpenSupport}
           />
         )}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import React, { useState } from 'react';
+import {
   ArrowRight, 
   Code, 
   Zap, 
@@ -7,26 +7,15 @@ import {
   Compass, 
   Bookmark, 
   Sparkles, 
-  ShieldCheck, 
   Plus, 
-  Clock, 
-  BookOpen, 
   Database, 
   Monitor, 
   Briefcase, 
   Layers, 
-  CheckCircle2, 
   Cpu, 
-  MessageSquare,
-  Send,
   Search
 } from 'lucide-react';
-import { useConfig } from '../../context/ConfigContext';
 import { NavTab } from '../../components/common/Header';
-import { useToast } from '../../components/common/Toast';
-import { useAuth } from '../../context/AuthContext';
-import { ProjectItem } from '../browse/BrowseProjects';
-import { getProjects } from '../../api/client';
 import { InstantServiceModal, InstantServiceItem } from '../../components/common/InstantServiceModal';
 import { ProjectDetailsModal } from '../../components/common/ProjectDetailsModal';
 import { QASection } from './QASection';
@@ -88,18 +77,13 @@ const INSTANT_SERVICES: InstantServiceItem[] = [
 
 interface LandingPageProps {
   onNavigate: (tab: NavTab) => void;
-  onSelectTemplate?: (template: ProjectItem) => void;
   onOpenSupport?: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ 
   onNavigate, 
-  onSelectTemplate,
   onOpenSupport 
 }) => {
-  const { showToast } = useToast();
-  const { isAuthenticated, openAuthModal } = useAuth();
-  const [bookmarkedProjects, setBookmarkedProjects] = useState<string[]>([]);
   const [selectedInstantService, setSelectedInstantService] = useState<InstantServiceItem | null>(null);
   const [isInstantModalOpen, setIsInstantModalOpen] = useState(false);
   const [isProjectDetailsModalOpen, setIsProjectDetailsModalOpen] = useState(false);
@@ -109,57 +93,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     setIsInstantModalOpen(true);
   };
 
-  const toggleBookmark = (projectId: string, title: string) => {
-    if (!isAuthenticated) {
-      openAuthModal({
-        targetRole: 'user',
-        message: 'Sign in to save projects to your personal bookmarks.'
-      });
-      return;
-    }
-
-    setBookmarkedProjects(prev => {
-      const isSaved = prev.includes(projectId);
-      if (isSaved) {
-        showToast(`Removed "${title}" from saved projects`, 'info');
-        return prev.filter(id => id !== projectId);
-      } else {
-        showToast(`Saved "${title}" to your bookmarks`, 'success');
-        return [...prev, projectId];
-      }
-    });
-  };
-
-  const { telegramBotUsername } = useConfig();
-
-  const handleOpenTelegram = () => {
-    window.open(`https://t.me/${telegramBotUsername}`, '_blank', 'noopener,noreferrer');
-  };
-
-
-  // Featured Project Blueprints — fetched from the backend (no hardcoded/dummy listings)
-  const [featuredProjects, setFeaturedProjects] = useState<ProjectItem[]>([]);
-
-  useEffect(() => {
-    let isMounted = true;
-    getProjects()
-      .then((data) => {
-        if (isMounted) setFeaturedProjects(((data as ProjectItem[]) || []).slice(0, 3));
-      })
-      .catch(() => {
-        if (isMounted) setFeaturedProjects([]);
-      });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <>
       <div className="w-full bg-transparent flex flex-col space-y-12 sm:space-y-16 pb-0 sm:pb-2 max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6">
       
       {/* ── 1. HERO SECTION ── */}
-      <section className="w-full bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 p-5 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all text-center">
+      <section className="w-full bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl border border-white/60 dark:border-white/10 py-6 px-4 sm:p-10 lg:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-all text-center">
         <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center space-y-5 sm:space-y-6">
           
           <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/10 border border-slate-200/80 dark:border-white/15 text-slate-800 dark:text-zinc-200 text-[11px] sm:text-xs font-mono font-semibold backdrop-blur-sm shadow-2xs mx-auto max-w-full text-center">
@@ -215,8 +154,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
           </div>
 
-          {/* 4-Stat Metric Row */}
-          <div className="pt-5 sm:pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 w-full max-w-2xl mx-auto text-center">
+          {/* 3-Stat Metric Row */}
+          <div className="pt-5 sm:pt-6 border-t border-slate-200/60 dark:border-white/10 grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-6 w-full max-w-2xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center text-center">
               <p className="text-lg sm:text-2xl font-black font-headline text-slate-900 dark:text-white">200+</p>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 font-medium">Ready-Made Projects</p>
@@ -224,10 +163,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <div className="flex flex-col items-center justify-center text-center">
               <p className="text-lg sm:text-2xl font-black font-headline text-slate-900 dark:text-white">1,000+</p>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 font-medium">Happy Students</p>
-            </div>
-            <div className="flex flex-col items-center justify-center text-center">
-              <p className="text-lg sm:text-2xl font-black font-headline text-slate-900 dark:text-white">100%</p>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 font-medium">Quality Verified</p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
               <p className="text-lg sm:text-2xl font-black font-headline text-slate-900 dark:text-white">24/7</p>
@@ -240,7 +175,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* Removed Best Selling Promo and Trust Banner */}
 
       {/* ── 3. CATEGORY CATALOG ── */}
-      <section id="categories-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+      <section id="categories-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/10 dark:bg-zinc-950/10 rounded-2xl p-5 sm:p-8 border border-slate-200/50 dark:border-white/5 shadow-sm space-y-8 text-center transition-all">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
             EXPLORE CATEGORIES
@@ -293,83 +228,70 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               tags: ['Finance', 'Analytics', 'Case Studies']
             },
             {
-              title: 'Request Custom Project',
-              badge: 'Built for you',
-              desc: 'Tailor-made projects built from your exact college syllabus and requirements.',
-              icon: Sparkles,
-              tags: ['Custom', '1-on-1 Support']
+              title: 'AI / Machine Learning',
+              badge: '40+ Projects',
+              desc: 'Deep learning, neural networks, and computer vision projects.',
+              icon: Cpu,
+              tags: ['Deep Learning', 'NLP', 'Computer Vision']
             },
             {
-              title: 'View All Categories',
-              badge: '200+ Total',
-              desc: 'Explore our complete searchable library with instant code downloads.',
-              icon: ArrowRight,
-              isHighlight: true,
-              tags: ['Search All', 'Instant Download']
+              title: 'IoT / Embedded',
+              badge: '20+ Projects',
+              desc: 'Arduino, Raspberry Pi, and sensor-based smart systems.',
+              icon: Zap,
+              tags: ['Arduino', 'Raspberry Pi', 'Sensors']
             }
           ].map((c, i) => (
             <div
               key={i}
-              onClick={() => {
-                if (c.title === 'Request Custom Project') {
-                  setIsProjectDetailsModalOpen(true);
-                } else {
-                  onNavigate('browse');
-                }
-              }}
-              className={`rounded-2xl p-6 border transition-all cursor-pointer flex flex-col justify-between items-center text-center group backdrop-blur-md ${
-                c.isHighlight 
-                  ? 'bg-zinc-900/85 hover:bg-zinc-900 dark:bg-zinc-800/80 dark:hover:bg-zinc-800 border-zinc-700/50 text-white shadow-md hover:shadow-lg' 
-                  : 'bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-md'
-              }`}
+              onClick={() => onNavigate('browse')}
+              className="rounded-2xl p-6 border transition-all cursor-pointer flex flex-col justify-between items-center text-center group backdrop-blur-md bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-md"
             >
               <div className="w-full flex flex-col items-center text-center">
                 <div className="flex flex-col items-center justify-center mb-4 gap-2">
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors mx-auto ${
-                    c.isHighlight 
-                      ? 'bg-white/15 text-white' 
-                      : 'bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-white group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-950'
-                  }`}>
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors mx-auto bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-white group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-950">
                     <c.icon className="w-5 h-5" />
                   </div>
-                  <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full ${
-                    c.isHighlight 
-                      ? 'bg-white/20 text-white' 
-                      : 'bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 border border-slate-200/80 dark:border-white/15'
-                  }`}>
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 border border-slate-200/80 dark:border-white/15">
                     {c.badge}
                   </span>
                 </div>
 
-                <h3 className={`font-headline font-bold text-lg mb-1.5 transition-colors text-center ${
-                  c.isHighlight 
-                    ? 'text-white' 
-                    : 'text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300'
-                }`}>
+                <h3 className="font-headline font-bold text-lg mb-1.5 transition-colors text-center text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300">
                   {c.title}
                 </h3>
-                <p className={`text-xs leading-relaxed mb-4 text-center max-w-xs ${
-                  c.isHighlight ? 'text-zinc-300' : 'text-slate-600 dark:text-zinc-300'
-                }`}>
+                <p className="text-xs leading-relaxed mb-4 text-center max-w-xs text-slate-600 dark:text-zinc-300">
                   {c.desc}
                 </p>
               </div>
 
-              <div className={`pt-3 border-t flex items-center justify-center text-xs font-bold w-full gap-1.5 ${
-                c.isHighlight 
-                  ? 'border-white/10 text-zinc-300 group-hover:text-white' 
-                  : 'border-slate-200/60 dark:border-white/10 text-slate-900 dark:text-zinc-200 group-hover:underline'
-              }`}>
-                <span>{c.title === 'Customized Projects' ? 'Enter Project Details' : 'Browse projects'}</span>
+              <div className="pt-3 border-t flex items-center justify-center text-xs font-bold w-full gap-1.5 border-slate-200/60 dark:border-white/10 text-slate-900 dark:text-zinc-200 group-hover:underline">
+                <span>Browse projects</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}
         </div>
+
+        <div className="mt-8">
+          <div className="rounded-2xl p-6 sm:p-8 border-2 border-cyan-500/30 bg-cyan-50/50 dark:bg-cyan-950/20 backdrop-blur flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-6 shadow-sm">
+            <div className="space-y-2 max-w-lg mx-auto sm:mx-0">
+              <h3 className="font-headline font-bold text-xl text-slate-900 dark:text-white">Can't find your topic?</h3>
+              <p className="text-sm text-slate-600 dark:text-zinc-300">Request a bespoke project built from scratch according to your university syllabus and guidelines.</p>
+            </div>
+            <button
+              onClick={() => setIsProjectDetailsModalOpen(true)}
+              className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer shrink-0"
+            >
+              <Plus className="w-4 h-4" />
+              Request Custom Project
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* ── 4. FEATURED PROJECTS SHOWCASE ── */}
-      <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+      <section className="bg-white/10 dark:bg-zinc-950/10 rounded-2xl p-5 sm:p-8 border border-slate-200/50 dark:border-white/5 shadow-sm space-y-8 text-center transition-all">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
             STUDENT FAVORITES
@@ -391,78 +313,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {featuredProjects.map((project) => (
-            <div 
-              key={project.id}
-              className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between overflow-hidden transition-all group cursor-pointer"
-              onClick={() => {
-                if (onSelectTemplate) onSelectTemplate(project);
-                onNavigate('submit');
-              }}
-            >
-              <div className="w-full flex flex-col items-center">
-                <div className="w-full h-36 bg-slate-200 dark:bg-zinc-800 relative overflow-hidden">
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute top-3 right-3">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleBookmark(project.id, project.title);
-                      }}
-                      className="min-w-[44px] min-h-[44px] flex items-center justify-center p-1.5 rounded-lg bg-white/70 dark:bg-zinc-900/70 backdrop-blur hover:bg-white dark:hover:bg-zinc-800 transition-colors cursor-pointer shadow-sm"
-                      title="Bookmark project"
-                    >
-                      <Bookmark className={`w-4 h-4 transition-colors ${
-                        bookmarkedProjects.includes(project.id) 
-                          ? 'fill-zinc-900 dark:fill-white text-zinc-900 dark:text-white' 
-                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white'
-                      }`} />
-                    </button>
-                  </div>
-                  <div className="absolute bottom-3 left-3 flex gap-1.5">
-                    <span className="bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow-sm">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 flex flex-col flex-1 w-full text-left">
-                  <h3 className="font-headline text-base font-bold text-slate-900 dark:text-white mb-1.5 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors line-clamp-1">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 mb-2 mt-auto">
-                    {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100/90 dark:bg-white/10 text-slate-700 dark:text-zinc-300">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="px-5 pb-5 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs w-full mt-auto">
-                <div>
-                  <span className="font-bold text-slate-900 dark:text-white font-headline text-[15px]">₹{project.budget.toLocaleString('en-IN')}</span>
-                </div>
-
-                <div className="flex items-center gap-1 text-cyan-600 dark:text-cyan-400 font-bold group-hover:underline">
-                  <span>View Project</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col items-center justify-center py-12 px-4 rounded-2xl border border-dashed border-slate-300 dark:border-white/10 bg-white/30 dark:bg-zinc-900/10 max-w-4xl mx-auto w-full">
+          <Bookmark className="w-8 h-8 text-slate-300 dark:text-zinc-600 mb-3" />
+          <p className="text-sm font-bold text-slate-700 dark:text-zinc-300">Featured projects will appear here soon.</p>
         </div>
       </section>
 
       {/* ── 5. GET OUR INSTANT SERVICES ── */}
-      <section id="services-tiers-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
+      <section id="services-tiers-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/10 dark:bg-zinc-950/10 rounded-2xl p-5 sm:p-8 border border-slate-200/50 dark:border-white/5 shadow-sm space-y-8 text-center transition-all">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
             ACADEMIC SERVICES
@@ -618,7 +476,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ── 6. HOW IT WORKS ── */}
-      <section id="protocol-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-2xl rounded-[24px] p-6 sm:p-12 space-y-8 border border-white/60 dark:border-white/10 shadow-xl text-center transition-all">
+      <section id="protocol-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/10 dark:bg-zinc-950/10 rounded-2xl p-5 sm:p-8 border border-slate-200/50 dark:border-white/5 shadow-sm space-y-8 text-center transition-all">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center space-y-3">
           <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
             How It Works
@@ -656,37 +514,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* ── 7. CUSTOMER REVIEWS ── */}
-      <section id="reviews-section" className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
-        <div className="max-w-2xl mx-auto text-center space-y-2 flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[11px] font-mono font-semibold border border-slate-200/80 dark:border-white/10 mb-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span>VERIFIED REVIEWS PROTOCOL</span>
-          </div>
-          <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
-            Customer Reviews
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
-            Authentic student and client reviews published after verified milestone completion.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={() => onNavigate('reviews')}
-              className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs mx-auto"
-            >
-              <span>View All Reviews</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
 
-        {/* Minimal Blank Reviews State */}
-        <div className="py-4 px-6 rounded-2xl bg-white/30 dark:bg-zinc-900/20 text-center max-w-sm mx-auto border border-white/20 dark:border-white/5">
-          <p className="text-xs font-medium text-slate-600 dark:text-zinc-400">
-            Student reviews and testimonials coming soon.
-          </p>
-        </div>
-      </section>
 
       {/* ── 8. BOTTOM CALL TO ACTION BANNER ── */}
       <section className="bg-zinc-900/90 dark:bg-zinc-950/45 dark:backdrop-blur-2xl text-white rounded-3xl p-6 sm:p-12 text-center space-y-6 shadow-2xl relative overflow-hidden border border-zinc-800 dark:border-white/15 transition-all">

@@ -186,7 +186,6 @@ export const InstantServiceModal: React.FC<InstantServiceModalProps> = ({
 
       showToast('Please sign in with Google to submit your project details.', 'info');
       openAuthModal({
-        targetRole: 'user',
         message: `Sign in with Google to submit your "${service.name}" project details.`,
         onSuccessRedirectTab: 'home'
       });
