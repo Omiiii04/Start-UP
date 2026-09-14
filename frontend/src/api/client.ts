@@ -3,7 +3,11 @@
  * Centralizes all backend requests — handles auth headers, token refresh, errors.
  */
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || 'http://localhost:3001';
+// In production the React app is served by Express on the same origin,
+// so API calls must be relative (no host prefix). VITE_API_URL is only
+// needed during local dev when the frontend dev-server (port 5173) is
+// separate from the backend (port 3001).
+const API_URL = (import.meta.env.VITE_API_URL as string) ?? '';
 
 const ACCESS_TOKEN_KEY = 'pb_access_token';
 
