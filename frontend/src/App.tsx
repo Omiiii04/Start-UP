@@ -17,7 +17,7 @@ import { ScrollMotionBackground } from './components/common/ScrollMotionBackgrou
 import { WorkInProgress } from './features/download/WorkInProgress';
 import { CustomerReviews } from './features/reviews/CustomerReviews';
 import { BestSellingProjects } from './features/bestseller/BestSellingProjects';
-import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Download } from 'lucide-react';
+import { Home, Compass, ClipboardList, Lock, User, LayoutDashboard, LogIn, Layers, Zap } from 'lucide-react';
 import { parseLocation, pushNavigation, replaceNavigation } from './utils/navigation';
 
 export const AppContent: React.FC = () => {
@@ -256,29 +256,45 @@ export const AppContent: React.FC = () => {
               </div>
               <span className="font-headline font-bold text-zinc-900 dark:text-white text-base">Project Wallah</span>
             </div>
-            <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">•</span>
-            <span className="text-zinc-500 dark:text-zinc-400 text-center font-medium">Enterprise Quality Assurance &amp; 15-Step Delivery Protocol</span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-zinc-600 dark:text-zinc-400 font-medium max-w-2xl mx-auto">
             <button onClick={() => handleTabChange('home')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Home</button>
-            <button onClick={() => handleTabChange('browse')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Browse Projects</button>
-            <button onClick={() => handleTabChange('bestseller')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Best Selling</button>
-            <button onClick={() => handleTabChange('reviews')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Customer Reviews</button>
+            <button onClick={() => handleTabChange('browse')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Projects</button>
             <button 
               onClick={() => {
-                if (activeTab !== 'home') {
-                  handleTabChange('home');
-                }
-                setTimeout(() => {
-                  const el = document.getElementById('qa-section');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
               }} 
               className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
             >
-              Q&amp;A / FAQs
+              Categories
             </button>
+            <button 
+              onClick={() => {
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('services-tiers-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              Services
+            </button>
+            <button 
+              onClick={() => {
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('protocol-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              How It Works
+            </button>
+            <button 
+              onClick={() => {
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('qa-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              FAQ
+            </button>
+            <button onClick={() => handleTabChange('reviews')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Reviews</button>
             {isAuthenticated ? (
               <>
                 <button onClick={() => handleTabChange('dashboard')} className="hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">Dashboard Hub</button>
@@ -382,15 +398,26 @@ export const AppContent: React.FC = () => {
           <>
             <button
               type="button"
-              onClick={() => handleTabChange('download')}
-              className={`flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all cursor-pointer ${
-                activeTab === 'download'
-                  ? 'text-zinc-900 dark:text-white font-bold bg-zinc-100 dark:bg-zinc-800 shadow-xs'
-                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
-              }`}
+              onClick={() => {
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }}
+              className="flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 cursor-pointer"
             >
-              <Download className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0 ${activeTab === 'download' ? 'text-zinc-900 dark:text-white' : ''}`} />
-              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Download</span>
+              <Layers className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0" />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Categories</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (activeTab !== 'home') handleTabChange('home');
+                setTimeout(() => document.getElementById('services-tiers-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }}
+              className="flex flex-col items-center justify-center flex-1 min-w-0 max-w-[80px] min-h-[44px] py-1 px-0.5 sm:px-1 rounded-xl transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 cursor-pointer"
+            >
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 shrink-0" />
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight truncate max-w-full">Services</span>
             </button>
 
             <button

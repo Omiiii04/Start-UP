@@ -213,22 +213,8 @@ export const Header: React.FC<HeaderProps> = ({
                       : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-y-[-1px]'
                   }`}
                 >
-                  Explore Projects
+                  Projects
                   {activeTab === 'browse' && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900 dark:bg-white rounded-full animate-scale-in" />
-                  )}
-                </button>
-                <button
-                  onClick={() => onTabChange('bestseller')}
-                  className={`text-xs xl:text-sm font-semibold transition-all duration-200 pb-1 relative flex items-center gap-1.5 cursor-pointer ${
-                    activeTab === 'bestseller'
-                      ? 'text-zinc-900 dark:text-white font-bold'
-                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-y-[-1px]'
-                  }`}
-                >
-                  <Flame className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Best Selling</span>
-                  {activeTab === 'bestseller' && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900 dark:bg-white rounded-full animate-scale-in" />
                   )}
                 </button>
@@ -244,28 +230,21 @@ export const Header: React.FC<HeaderProps> = ({
                   className="text-xs xl:text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200 pb-1 cursor-pointer flex items-center gap-1.5"
                 >
                   <Zap className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Instant Services</span>
+                  <span>Services</span>
                 </button>
                 <button
                   onClick={() => handleScrollToSection('protocol-section')}
                   className="text-xs xl:text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200 pb-1 cursor-pointer flex items-center gap-1.5"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>15-Step Protocol</span>
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>How It Works</span>
                 </button>
                 <button
-                  onClick={() => onTabChange('reviews')}
-                  className={`text-xs xl:text-sm font-semibold transition-all duration-200 pb-1 relative flex items-center gap-1 cursor-pointer ${
-                    activeTab === 'reviews'
-                      ? 'text-zinc-900 dark:text-white font-bold'
-                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-y-[-1px]'
-                  }`}
+                  onClick={() => handleScrollToSection('qa-section')}
+                  className="text-xs xl:text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200 pb-1 cursor-pointer flex items-center gap-1.5"
                 >
-                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                  <span>Reviews</span>
-                  {activeTab === 'reviews' && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900 dark:bg-white rounded-full animate-scale-in" />
-                  )}
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>FAQ</span>
                 </button>
               </>
             )}
@@ -286,25 +265,7 @@ export const Header: React.FC<HeaderProps> = ({
               />
             </div>
 
-            {/* Download Here Button for Desktop - routes to work-in-progress page */}
-            <button
-              onClick={handleDownloadClick}
-              className="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-semibold shadow-sm transition-all hover:scale-105 active:scale-95 group cursor-pointer shrink-0"
-              title="Download Here"
-            >
-              <Download className="w-3.5 h-3.5 shrink-0" />
-              <span>Download Here</span>
-            </button>
-
-            {/* Mobile Download Here Icon Button - routes to work-in-progress page */}
-            <button
-              type="button"
-              onClick={handleDownloadClick}
-              className="p-1.5 sm:p-2 text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-all active:scale-95 hidden min-[480px]:flex sm:hidden items-center justify-center relative cursor-pointer shrink-0"
-              title="Download Here"
-            >
-              <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </button>
+            {/* Removed Download Here Button */}
 
             {/* Day / Night Theme Shift Toggle Button */}
             <button
@@ -343,10 +304,7 @@ export const Header: React.FC<HeaderProps> = ({
               <Search className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </button>
 
-            <div className="hidden 2xl:flex items-center space-x-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold shrink-0">
-              <ShieldCheck className="w-3.5 h-3.5 text-zinc-800 dark:text-zinc-200" />
-              <span>100% Quality Verified</span>
-            </div>
+            {/* Removed 100% Quality Verified badge */}
 
             {/* Bell Notifications (Authenticated Users Only) */}
             {isAuthenticated && (
@@ -482,19 +440,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
-                <span>Explore Projects</span>
-              </button>
-
-              <button
-                onClick={() => onTabChange('bestseller')}
-                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                  activeTab === 'bestseller'
-                    ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                    : 'text-zinc-600 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                <Flame className="w-3.5 h-3.5 text-amber-500" />
-                <span>Best Selling</span>
+                <span>Projects</span>
               </button>
 
               <button
@@ -510,27 +456,23 @@ export const Header: React.FC<HeaderProps> = ({
                 className="shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold text-zinc-600 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer flex items-center gap-1.5"
               >
                 <Zap className="w-3.5 h-3.5 text-amber-500" />
-                <span>Instant Services</span>
+                <span>Services</span>
               </button>
 
               <button
                 onClick={() => handleScrollToSection('protocol-section')}
                 className="shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold text-zinc-600 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer flex items-center gap-1.5"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Delivery Protocol</span>
+                <Compass className="w-3.5 h-3.5 text-emerald-500" />
+                <span>How It Works</span>
               </button>
 
               <button
-                onClick={() => onTabChange('reviews')}
-                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                  activeTab === 'reviews'
-                    ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                    : 'text-zinc-600 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white'
-                }`}
+                onClick={() => handleScrollToSection('qa-section')}
+                className="shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold text-zinc-600 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-900/60 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer flex items-center gap-1.5"
               >
-                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                <span>Reviews</span>
+                <MessageSquare className="w-3.5 h-3.5 text-amber-500" />
+                <span>FAQ</span>
               </button>
             </>
           )}
@@ -696,30 +638,9 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <Compass className="w-4 h-4" />
-                  <span>Explore 200+ Projects</span>
+                  <span>Projects</span>
                 </div>
                 <ChevronRight className="w-4 h-4 opacity-50" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  onTabChange('bestseller');
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-medium transition-colors cursor-pointer ${
-                  activeTab === 'bestseller'
-                    ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <Flame className="w-4 h-4 text-amber-500" />
-                  <span>Best Selling Projects</span>
-                </div>
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 font-bold">
-                  Hot
-                </span>
               </button>
 
               <button
@@ -729,7 +650,7 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <Layers className="w-4 h-4" />
-                  <span>Project Categories</span>
+                  <span>Categories</span>
                 </div>
                 <ChevronRight className="w-4 h-4 opacity-50" />
               </button>
@@ -741,7 +662,7 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <Zap className="w-4 h-4 text-amber-500" />
-                  <span>Instant Services (24h/48h)</span>
+                  <span>Services</span>
                 </div>
                 <ChevronRight className="w-4 h-4 opacity-50" />
               </button>
@@ -752,27 +673,20 @@ export const Header: React.FC<HeaderProps> = ({
                 className="w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                  <span>15-Step Delivery Protocol</span>
+                  <Compass className="w-4 h-4 text-emerald-500" />
+                  <span>How It Works</span>
                 </div>
                 <ChevronRight className="w-4 h-4 opacity-50" />
               </button>
 
               <button
                 type="button"
-                onClick={() => {
-                  onTabChange('reviews');
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-medium transition-colors cursor-pointer ${
-                  activeTab === 'reviews'
-                    ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold'
-                    : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900'
-                }`}
+                onClick={() => handleScrollToSection('qa-section')}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
-                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  <span>Student Reviews (1,000+)</span>
+                  <MessageSquare className="w-4 h-4 text-amber-500" />
+                  <span>FAQ</span>
                 </div>
                 <ChevronRight className="w-4 h-4 opacity-50" />
               </button>

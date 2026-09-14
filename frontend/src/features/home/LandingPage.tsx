@@ -18,7 +18,8 @@ import {
   CheckCircle2, 
   Cpu, 
   MessageSquare,
-  Send
+  Send,
+  Search
 } from 'lucide-react';
 import { useConfig } from '../../context/ConfigContext';
 import { NavTab } from '../../components/common/Header';
@@ -163,21 +164,39 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           
           <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/10 border border-slate-200/80 dark:border-white/15 text-slate-800 dark:text-zinc-200 text-[11px] sm:text-xs font-mono font-semibold backdrop-blur-sm shadow-2xs mx-auto max-w-full text-center">
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
-            <span className="text-center">Enterprise Delivery Standards • 100% Quality Guaranteed</span>
+            <span className="text-center">200+ Ready-to-Submit Academic Projects</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="font-headline font-black text-2xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.2] sm:leading-[1.15] tracking-tight text-center max-w-3xl mx-auto">
-            Turn your ideas into reality
+            Find Your College Project
           </h1>
 
           {/* Subtitle */}
           <p className="text-xs sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed max-w-2xl mx-auto text-center px-1">
-            Explore 200+ ready-to-submit college projects across Computer Science, Data Science, MBA, BCA, and more. Save time, eliminate submission stress, and focus on what matters — your grades.
+            Explore our curated marketplace of ready-to-submit college projects across Computer Science, Data Science, and more. Save time, eliminate stress, and focus on your grades.
           </p>
 
+          {/* Hero Search */}
+          <div className="w-full max-w-xl mx-auto relative pt-4 pb-2">
+            <Search className="w-5 h-5 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2 z-10 mt-1" />
+            <input
+              type="text"
+              placeholder="Search projects by keyword, tech stack, or category..."
+              className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 rounded-2xl text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 dark:focus:ring-white/20 shadow-sm"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const val = (e.target as HTMLInputElement).value;
+                  if (val.trim()) {
+                     onNavigate('browse');
+                  }
+                }
+              }}
+            />
+          </div>
+
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 pt-1 sm:pt-2 w-full max-w-md sm:max-w-xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 pt-1 w-full max-w-md sm:max-w-xl mx-auto">
             <button
               onClick={() => onNavigate('browse')}
               className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 transition-all hover:scale-[1.02] active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
@@ -188,19 +207,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
 
             <button
-              onClick={handleOpenTelegram}
-              className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm text-slate-800 dark:text-white bg-white/70 hover:bg-white/90 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-            >
-              <Send className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
-              <span>Chat on Telegram</span>
-            </button>
-
-            <button
               onClick={() => setIsProjectDetailsModalOpen(true)}
               className="w-full sm:w-auto px-5 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm text-slate-700 dark:text-white bg-white/60 hover:bg-white/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/70 dark:border-white/20 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
               <Plus className="w-4 h-4 text-slate-600 dark:text-zinc-300 shrink-0" />
-              <span>Enter Project Details</span>
+              <span>Request Custom Project</span>
             </button>
           </div>
 
@@ -223,84 +234,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 font-medium">Expert Support</p>
             </div>
           </div>
-
-          {/* Best Selling Projects Hub Showcase (Centrally Aligned Card) */}
-          <div className="w-full max-w-xl mx-auto pt-2">
-            <div className="rounded-2xl bg-white/50 dark:bg-zinc-950/30 backdrop-blur-xl border border-white/60 dark:border-white/10 p-4 sm:p-6 overflow-hidden shadow-sm text-center flex flex-col items-center space-y-3 sm:space-y-4">
-              <div className="flex flex-wrap justify-center items-center gap-2">
-                <span className="bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-slate-200/80 dark:border-white/15">
-                  BEST SELLER • TOP RANKED
-                </span>
-                <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span className="text-[11px] font-mono font-semibold">Verified Blueprints</span>
-                </div>
-              </div>
-
-              <div className="space-y-1 max-w-md mx-auto text-center">
-                <h3 className="font-headline font-bold text-base sm:text-lg text-slate-900 dark:text-white text-center">
-                  Best Selling Projects
-                </h3>
-                <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed text-center">
-                  Explore curated top-tier student and engineering projects with complete source code, synopsis, IEEE reports, and viva presentations.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 pt-1 sm:pt-2 w-full">
-                <button
-                  onClick={() => onNavigate('bestseller')}
-                  className="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl text-white dark:text-zinc-950 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-200 font-bold text-xs transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
-                >
-                  <span>View Best Selling Projects</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {/* Fast Delivery Badge */}
-              <div className="p-2.5 sm:p-3 bg-white/70 dark:bg-zinc-950/40 backdrop-blur-xl rounded-xl border border-slate-200/80 dark:border-white/10 shadow-2xs flex items-center justify-center text-center gap-2 sm:gap-2.5 max-w-md mx-auto w-full">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </div>
-                <p className="text-[10px] sm:text-[11px] text-slate-700 dark:text-zinc-300 text-center">
-                  <span className="font-bold text-slate-900 dark:text-white mr-1">Instant Delivery:</span>
-                  Full code, synopsis, IEEE report &amp; viva notes
-                </p>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      {/* ── 2. TRUST BANNER ── */}
-      <div className="bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-xl rounded-2xl py-4 px-6 border border-white/60 dark:border-white/10 shadow-md transition-all max-w-4xl mx-auto w-full">
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white text-center">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Quality Guaranteed</span>
-          </div>
-          <div className="hidden sm:block text-slate-300 dark:text-zinc-600">•</div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-slate-700 dark:text-zinc-200" />
-            <span>24/7 Support</span>
-          </div>
-          <div className="hidden sm:block text-slate-300 dark:text-zinc-600">•</div>
-          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-500 dark:text-amber-300" />
-            <span>Fast Delivery</span>
-          </div>
-          <div className="hidden sm:block text-slate-300 dark:text-zinc-600">•</div>
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-slate-700 dark:text-zinc-200" />
-            <span>Step-by-Step Guide</span>
-          </div>
-          <div className="hidden sm:block text-slate-300 dark:text-zinc-600">•</div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-slate-700 dark:text-zinc-200" />
-            <span>Best Price Guarantee</span>
-          </div>
-        </div>
-      </div>
+      {/* Removed Best Selling Promo and Trust Banner */}
 
       {/* ── 3. CATEGORY CATALOG ── */}
       <section id="categories-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
@@ -312,7 +249,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             Find Projects by Category
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
-            Browse our curated collection across every academic and engineering discipline
+            Browse our curated collection across top engineering and academic disciplines
           </p>
           <div className="pt-1">
             <button
@@ -328,44 +265,44 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             {
-              title: 'Data Science Projects',
-              badge: 'Popular',
-              desc: 'Machine learning, predictive models, NLP text classifiers, and interactive business intelligence dashboards.',
+              title: 'Data Science & AI',
+              badge: '50+ Projects',
+              desc: 'Machine learning, predictive models, NLP text classifiers, and dashboards.',
               icon: Database,
-              tags: ['Python', 'Pandas', 'Scikit-learn', 'PyTorch']
+              tags: ['Python', 'ML', 'Data']
             },
             {
               title: 'Web Development',
-              badge: 'Trending',
-              desc: 'Production-ready full-stack MERN, Next.js, and TypeScript web applications with clean REST APIs.',
+              badge: '80+ Projects',
+              desc: 'Production-ready MERN, Next.js, and TypeScript web applications.',
               icon: Monitor,
-              tags: ['React', 'Node.js', 'PostgreSQL', 'Tailwind']
+              tags: ['React', 'Node.js', 'Next.js']
             },
             {
-              title: 'Computer Science',
-              badge: 'Academic Standard',
-              desc: 'Core B.Tech, BCA, and MCA syllabus projects with complete algorithms, database schemas, and documentation.',
+              title: 'Core CS / IT',
+              badge: '40+ Projects',
+              desc: 'Core B.Tech and BCA syllabus projects with complete algorithms.',
               icon: Code,
-              tags: ['Java', 'C++', 'Python', 'MySQL']
+              tags: ['Java', 'C++', 'Python']
             },
             {
-              title: 'Business Studies',
-              badge: 'MBA & BBA',
-              desc: 'Financial forecasting models, unit economics analysis, market feasibility analysis, and strategic case studies.',
+              title: 'Business & Management',
+              badge: '30+ Projects',
+              desc: 'Financial forecasting models and strategic case studies for MBA/BBA.',
               icon: Briefcase,
-              tags: ['Financial Models', 'Analytics', 'Pro-Formas']
+              tags: ['Finance', 'Analytics', 'Case Studies']
             },
             {
-              title: 'Customized Projects',
-              badge: 'Enter Project Details',
-              desc: 'Tailor-made projects built from your exact college syllabus, custom requirements, and timeline.',
+              title: 'Request Custom Project',
+              badge: 'Built for you',
+              desc: 'Tailor-made projects built from your exact college syllabus and requirements.',
               icon: Sparkles,
-              tags: ['1-on-1 Mentorship', 'Custom Tech Stack']
+              tags: ['Custom', '1-on-1 Support']
             },
             {
-              title: 'View All Projects',
-              badge: '200+ Blueprints',
-              desc: 'Explore our complete searchable library with instant code downloads, live previews, and report templates.',
+              title: 'View All Categories',
+              badge: '200+ Total',
+              desc: 'Explore our complete searchable library with instant code downloads.',
               icon: ArrowRight,
               isHighlight: true,
               tags: ['Search All', 'Instant Download']
@@ -374,7 +311,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <div
               key={i}
               onClick={() => {
-                if (c.title === 'Customized Projects') {
+                if (c.title === 'Request Custom Project') {
                   setIsProjectDetailsModalOpen(true);
                 } else {
                   onNavigate('browse');
@@ -435,20 +372,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section className="bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
-            POPULAR BLUEPRINTS
+            STUDENT FAVORITES
           </p>
           <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
-            Featured Project Blueprints
+            Featured Projects
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
-            Pre-built, production-tested architectures with full source code and academic reports
+            Explore our most popular student projects ready for submission.
           </p>
           <div className="pt-1">
             <button
               onClick={() => onNavigate('browse')}
               className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white hover:underline cursor-pointer"
             >
-              <span>View all 200+ Blueprints</span>
+              <span>View all 200+ Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -458,59 +395,66 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {featuredProjects.map((project) => (
             <div 
               key={project.id}
-              className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between items-center text-center transition-all group"
+              className="bg-white/50 hover:bg-white/80 dark:bg-zinc-950/25 dark:hover:bg-zinc-900/40 backdrop-blur-xl rounded-2xl border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-sm hover:shadow-lg flex flex-col justify-between overflow-hidden transition-all group cursor-pointer"
+              onClick={() => {
+                if (onSelectTemplate) onSelectTemplate(project);
+                onNavigate('submit');
+              }}
             >
               <div className="w-full flex flex-col items-center">
-                <div className="flex justify-between items-center mb-3 w-full">
-                  <span className="bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-slate-200/80 dark:border-white/15">
-                    {project.tier} • {project.subsection || 'ENGINEERING'}
-                  </span>
-                  <button
-                    onClick={() => toggleBookmark(project.id, project.title)}
-                    className="p-1 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/10 transition-colors cursor-pointer"
-                    title="Bookmark project"
-                  >
-                    <Bookmark className={`w-4 h-4 transition-colors ${
-                      bookmarkedProjects.includes(project.id) 
-                        ? 'fill-zinc-900 dark:fill-white text-zinc-900 dark:text-white' 
-                        : 'text-zinc-400 hover:text-zinc-800 dark:hover:text-white'
-                    }`} />
-                  </button>
+                <div className="w-full h-36 bg-slate-200 dark:bg-zinc-800 relative overflow-hidden">
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute top-3 right-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleBookmark(project.id, project.title);
+                      }}
+                      className="min-w-[44px] min-h-[44px] flex items-center justify-center p-1.5 rounded-lg bg-white/70 dark:bg-zinc-900/70 backdrop-blur hover:bg-white dark:hover:bg-zinc-800 transition-colors cursor-pointer shadow-sm"
+                      title="Bookmark project"
+                    >
+                      <Bookmark className={`w-4 h-4 transition-colors ${
+                        bookmarkedProjects.includes(project.id) 
+                          ? 'fill-zinc-900 dark:fill-white text-zinc-900 dark:text-white' 
+                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white'
+                      }`} />
+                    </button>
+                  </div>
+                  <div className="absolute bottom-3 left-3 flex gap-1.5">
+                    <span className="bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-200 text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow-sm">
+                      {project.category}
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="font-headline text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors text-center">
-                  {project.title}
-                </h3>
+                <div className="p-5 flex flex-col flex-1 w-full text-left">
+                  <h3 className="font-headline text-base font-bold text-slate-900 dark:text-white mb-1.5 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors line-clamp-1">
+                    {project.title}
+                  </h3>
 
-                <p className="text-xs text-slate-600 dark:text-zinc-300 mb-4 leading-relaxed line-clamp-3 text-center">
-                  {project.description}
-                </p>
+                  <p className="text-xs text-slate-600 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-6 justify-center w-full">
-                  {project.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100/90 dark:bg-white/10 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-white/10">
-                      {tag}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-1.5 mb-2 mt-auto">
+                    {project.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100/90 dark:bg-white/10 text-slate-700 dark:text-zinc-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-200/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs gap-3 w-full text-center sm:text-left">
-                <div className="text-center sm:text-left">
-                  <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-400 block">Est. Budget</span>
-                  <span className="font-bold text-slate-900 dark:text-white font-headline text-sm">₹{project.budget.toLocaleString('en-IN')}</span>
+              <div className="px-5 pb-5 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs w-full mt-auto">
+                <div>
+                  <span className="font-bold text-slate-900 dark:text-white font-headline text-[15px]">₹{project.budget.toLocaleString('en-IN')}</span>
                 </div>
 
-                <button
-                  onClick={() => {
-                    if (onSelectTemplate) onSelectTemplate(project);
-                    onNavigate('submit');
-                  }}
-                  className="w-full sm:w-auto justify-center px-4 py-2 rounded-xl text-white dark:text-zinc-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm hover:opacity-95 active:scale-95 cursor-pointer bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100"
-                >
-                  <span>Order Scope</span>
+                <div className="flex items-center gap-1 text-cyan-600 dark:text-cyan-400 font-bold group-hover:underline">
+                  <span>View Project</span>
                   <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                </div>
               </div>
             </div>
           ))}
@@ -521,13 +465,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section id="services-tiers-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/40 dark:bg-zinc-950/25 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border border-white/60 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-8 text-center transition-all">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <p className="text-xs font-bold font-mono tracking-widest text-slate-600 dark:text-zinc-400 uppercase">
-            TRANSPARENT PRICING
+            ACADEMIC SERVICES
           </p>
           <h2 className="font-headline font-black text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white">
-            Get our Instant Services
+            Need Something Quickly?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 max-w-xl mx-auto">
-            Instant turnaround academic deliverables starting at just ₹100. Standardized pricing governed by verified SLA delivery guarantees.
+            Quick and affordable academic deliverables to support your project submission.
           </p>
         </div>
 
@@ -538,7 +482,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Zap className="w-5 h-5 text-amber-500 dark:text-amber-300" />
               </div>
-              <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 1</span>
               <h4 className="text-base font-headline font-bold text-slate-900 dark:text-white mt-1">Instant PPT</h4>
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹200</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 4–12 Hours</p>
@@ -576,7 +519,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-11 h-11 rounded-xl text-white dark:text-zinc-950 flex items-center justify-center mb-3 shadow-sm bg-cyan-600 dark:bg-cyan-400 mx-auto">
                 <Cpu className="w-5 h-5" />
               </div>
-              <span className="text-[11px] font-mono font-bold text-cyan-700 dark:text-cyan-300 uppercase">Tier 2</span>
               <h4 className="text-base font-headline font-bold text-slate-900 dark:text-white mt-1">Instant Mini Project</h4>
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹1,000</p>
               <p className="text-xs text-slate-500 dark:text-zinc-300 mt-1">Delivery: 24–48 Hours</p>
@@ -611,7 +553,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Code className="w-5 h-5 text-cyan-600 dark:text-cyan-300" />
               </div>
-              <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 3</span>
               <h4 className="text-base font-headline font-bold text-slate-900 dark:text-white mt-1">Instant Report</h4>
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹100</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 2–6 Hours</p>
@@ -646,7 +587,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-11 h-11 rounded-xl bg-slate-100/90 dark:bg-white/10 text-slate-800 dark:text-zinc-200 flex items-center justify-center mb-3 mx-auto">
                 <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
               </div>
-              <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">Tier 4</span>
               <h4 className="text-base font-headline font-bold text-slate-900 dark:text-white mt-1">Instant Poster</h4>
               <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-headline">₹400</p>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Delivery: 6–12 Hours</p>
@@ -677,46 +617,42 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* ── 6. 15-STEP PROTOCOL & GOVERNANCE ── */}
+      {/* ── 6. HOW IT WORKS ── */}
       <section id="protocol-section" className="scroll-mt-24 sm:scroll-mt-28 bg-white/60 dark:bg-zinc-950/30 dark:backdrop-blur-2xl rounded-[24px] p-6 sm:p-12 space-y-8 border border-white/60 dark:border-white/10 shadow-xl text-center transition-all">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center space-y-3">
-          <div className="flex items-center justify-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase">
-              Verified Engineering Delivery Standard
-            </span>
-          </div>
           <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
-            The 15-Step Verified Delivery Protocol
+            How It Works
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed max-w-xl mx-auto">
-            Every Project Wallah engagement is strictly governed by our five milestone gates, 48-point automated QA check, and live staging demo preview before handover.
+            Get your college project ready in four simple steps.
           </p>
-          <div className="pt-2">
-            <button
-              onClick={onOpenSupport}
-              className="px-6 py-3 rounded-xl text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-2 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 border border-slate-300/80 dark:border-white/20 backdrop-blur-sm transition-all cursor-pointer shadow-xs mx-auto"
-            >
-              <MessageSquare className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-              <span>Consult Lead Engineer</span>
-            </button>
-          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          {[
-            { phase: 'Phase I', title: 'Client Onboarding', desc: 'Requirement intake, technical feasibility check & discovery.' },
-            { phase: 'Phase II', title: 'Contract & Advance', desc: 'Scope baseline, GST quotation, SOW sign-off & 40% advance.' },
-            { phase: 'Phase III', title: 'Engineering & QA', desc: 'Sprint planning, full-stack dev & 48-point automated QA suite.' },
-            { phase: 'Phase IV', title: 'Demo & Payment', desc: 'Staging demo walkthrough & 30% milestone clearance.' },
-            { phase: 'Phase V', title: 'IP Handover', desc: 'Git repository transfer, final 30% clearance & 30-day bug support.' }
-          ].map((item, i) => (
-            <div key={i} className="p-4 rounded-xl border border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm space-y-1.5 shadow-xs text-center flex flex-col items-center justify-center">
-              <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-zinc-400 uppercase">{item.phase}</span>
-              <h4 className="text-xs font-bold text-slate-900 dark:text-white">{item.title}</h4>
-              <p className="text-[11px] text-slate-600 dark:text-zinc-300 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto text-left">
+           {/* Step 1 */}
+           <div className="p-6 bg-white/50 dark:bg-zinc-900/50 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-sm transition-transform hover:-translate-y-1">
+              <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold font-mono mb-4 text-lg">1</div>
+              <h4 className="font-bold font-headline text-slate-900 dark:text-white mb-2 text-base">Choose a Project</h4>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">Browse our catalog or request a custom project tailored to your syllabus.</p>
+           </div>
+           {/* Step 2 */}
+           <div className="p-6 bg-white/50 dark:bg-zinc-900/50 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-sm transition-transform hover:-translate-y-1">
+              <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold font-mono mb-4 text-lg">2</div>
+              <h4 className="font-bold font-headline text-slate-900 dark:text-white mb-2 text-base">Review Deliverables</h4>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">Check the included source code, DB scripts, and reports before proceeding.</p>
+           </div>
+           {/* Step 3 */}
+           <div className="p-6 bg-white/50 dark:bg-zinc-900/50 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-sm transition-transform hover:-translate-y-1">
+              <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold font-mono mb-4 text-lg">3</div>
+              <h4 className="font-bold font-headline text-slate-900 dark:text-white mb-2 text-base">Get Your Project</h4>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">Instantly download the complete project files and setup instructions.</p>
+           </div>
+           {/* Step 4 */}
+           <div className="p-6 bg-white/50 dark:bg-zinc-900/50 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-sm transition-transform hover:-translate-y-1">
+              <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold font-mono mb-4 text-lg">4</div>
+              <h4 className="font-bold font-headline text-slate-900 dark:text-white mb-2 text-base">Receive Support</h4>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">Need help running it? Our expert team is available to guide you.</p>
+           </div>
         </div>
       </section>
 
@@ -744,25 +680,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </div>
 
-        {/* Blank Reviews State Card */}
-        <div className="rounded-2xl p-6 sm:p-12 border border-dashed border-slate-300/80 dark:border-white/15 bg-white/30 dark:bg-zinc-900/20 text-center space-y-4 max-w-xl mx-auto">
-          <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-zinc-400 flex items-center justify-center mx-auto">
-            <MessageSquare className="w-6 h-6" />
-          </div>
-          <div className="space-y-1.5 max-w-md mx-auto">
-            <h3 className="font-headline font-bold text-base text-slate-900 dark:text-white">
-              No Customer Reviews Yet
-            </h3>
-            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Verified client testimonials will appear here once project milestones and handovers are completed.
-            </p>
-          </div>
-          <button
-            onClick={() => onNavigate('reviews')}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 transition-all cursor-pointer shadow-xs"
-          >
-            Open Reviews Hub
-          </button>
+        {/* Minimal Blank Reviews State */}
+        <div className="py-4 px-6 rounded-2xl bg-white/30 dark:bg-zinc-900/20 text-center max-w-sm mx-auto border border-white/20 dark:border-white/5">
+          <p className="text-xs font-medium text-slate-600 dark:text-zinc-400">
+            Student reviews and testimonials coming soon.
+          </p>
         </div>
       </section>
 
@@ -770,13 +692,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section className="bg-zinc-900/90 dark:bg-zinc-950/45 dark:backdrop-blur-2xl text-white rounded-3xl p-6 sm:p-12 text-center space-y-6 shadow-2xl relative overflow-hidden border border-zinc-800 dark:border-white/15 transition-all">
         <div className="max-w-2xl mx-auto space-y-3">
           <span className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
-            Ready to Ace Your College Submission?
+            Ready to Find Your Project?
           </span>
           <h2 className="font-headline font-black text-2xl sm:text-4xl text-white">
-            Get Your Complete Project Handover Today
+            Get Your Complete Project Today
           </h2>
           <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-            Choose from 200+ ready blueprints or consult with our lead engineering team for custom syllabus requirements.
+            Choose from 200+ ready projects or consult with our team for custom syllabus requirements.
           </p>
         </div>
 
@@ -786,7 +708,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm bg-white text-zinc-950 hover:bg-zinc-100 transition-all hover:scale-105 active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
           >
             <Compass className="w-4 h-4" />
-            <span>Explore Catalog</span>
+            <span>Browse Projects</span>
           </button>
 
           <button
@@ -794,7 +716,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>Enter Project Details</span>
+            <span>Request Custom Project</span>
           </button>
         </div>
       </section>
